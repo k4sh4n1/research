@@ -1,6 +1,6 @@
 The following is a brainstorm about a research proposal.
 
-# Time series forecasting
+# Timeseries forecasting
 
 ## Objective
 
@@ -21,6 +21,12 @@ The theoretical and methodological contributions can easily be tested by histori
 ## Development
 
 Code development can be done on MetaTrader 5 platform. The programming language can be MQL5 which is similar to C++. Alternatively, the Python API of MetaTrader 5 can be employed. The author has already developed multiple preliminary trading robots in MQL5 programming language.
+
+## Timeseries
+
+The FX data are essentially time series. Just like the seismic waves or structural responses. An effective FX trading algorithm would correctly forecast time series, at least most of the time. Such timeseries forecasting would be beneficial for predicting seismic waves and structural responses over time.
+
+This research can be defined in two stages. The first stage would be related to FX timeseries and the second stage would be related to seismic and structural timeseries.
 
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
