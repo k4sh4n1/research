@@ -10,9 +10,9 @@ About 92% of FX trading was performed by trading algorithms instead of humans in
 
 Tabriz and specifically University of Tabriz can be a hub for algorithmic FX trading. Considering the available talent pool for science, technology, engineering, mathematics, and the historic background of Tabriz in trade, it's an attractive idea for University of Tabriz to work on FX trading strategies and algorithms.
 
-### Revenue generation
+## Revenue generation
 
-
+Having developed an effective FX trading algorithm, the revenue generation is almost guaranteed. There are proprietary trading firms or so called _prop firms_ both globally and locally. They provide capital access for FX traders while taking a share of the final trading profit. It means, once funded, there is no need to risk capital. They use professional trading platforms like MetaTrader 5 with capabilities to develop algorithmic trading robots. University of Tabriz and its researchers can obtain risk-free profits through the global or even local _prop firms_.
 
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
