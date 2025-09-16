@@ -8,5 +8,5 @@ Bazaar of Tabriz is described as the largest covered bazaar in the world [1]. It
 
 ## References
 
-[1] https://en.wikipedia.org/wiki/Bazaar_of_Tabriz 
-[2] Mehdipour, H.R.N, "Persian Bazaar and Its Impact on Evolution of Historic Urban Cores: The Case of Isfahan," The Macrotheme Review [A multidisciplinary Journal of Global Macro Trends], Vol. 2, no. 5, 2013, p.14
+[1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
+[2]: Mehdipour, H.R.N, "Persian Bazaar and Its Impact on Evolution of Historic Urban Cores: The Case of Isfahan," The Macrotheme Review [A multidisciplinary Journal of Global Macro Trends], Vol. 2, no. 5, 2013, p.14
