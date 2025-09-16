@@ -24,7 +24,7 @@ Code development can be done on MetaTrader 5 platform. The programming language 
 
 ## Timeseries
 
-The FX data are essentially time series. Just like the seismic waves or structural responses. An effective FX trading algorithm should correctly forecast time series, at least most of the time. Forecasting FX timeseries would be beneficial for predicting seismic waves and structural responses over time.
+The FX data are essentially timeseries. Just like the seismic waves or structural responses. An effective FX trading algorithm should correctly forecast timeseries, at least most of the time. Forecasting FX timeseries would be beneficial for predicting seismic waves and structural responses over time.
 
 This research can be defined in two stages. The first stage would be related to FX timeseries and the second stage would be related to seismic and structural timeseries.
 
