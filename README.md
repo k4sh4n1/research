@@ -38,6 +38,10 @@ Another company rooted in the academia is XTX which is founded by a PhD holder [
 
 When it comes to timeseries forecasting, the statistics and probability would become critical fields. The software development in Python language would be needed for R&D and testing. The C++ language would be needed to develop the production code. Financial economics would play a key role. It's required to understand how the financial markets behave. Down the road, machine learning and other recent popular technologies would be needed to compete on the global stage.
 
+## Entrepreneurship
+
+This research feels just like building a business based on science. The scientific contributions would directly affect the amount of revenue that the business would generate. The entrepreneurial spirit of the research would make it much exciting.
+
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
 [3]: https://www.bis.org/statistics/rpfx22_fx.htm
