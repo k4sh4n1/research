@@ -12,7 +12,7 @@ Tabriz and specifically University of Tabriz can be a hub for algorithmic FX tra
 
 ## Revenue
 
-Having developed an effective FX trading algorithm, the revenue generation is almost guaranteed. There are proprietary trading firms or so called _prop firms_ both globally and locally. They provide capital access for FX traders while taking a share of the final trading profit. It means, once funded, there is no need to risk capital. _Prop firms_ use professional trading platforms like MetaTrader with capabilities to develop algorithmic trading robots. University of Tabriz and its researchers can obtain risk-free profits through the global or even local _prop firms_.
+Having developed an effective FX trading algorithm, the revenue generation is almost guaranteed. There are proprietary trading firms or so called _prop firms_ both globally and locally. They provide capital access for FX traders while taking a share of the final trading profit. It means, once funded, there is no need to risk capital. Prop firms use professional trading platforms like MetaTrader with capabilities to develop algorithmic trading robots. University of Tabriz and its researchers can obtain risk-free profits through the proprietary trading by global or even local prop firms [5].
 
 ## Validation
 
@@ -28,13 +28,18 @@ The FX data are essentially timeseries. Just like the seismic waves or structura
 
 This research can be defined in two stages. The first stage would be related to FX timeseries and the second stage would be related to seismic and structural timeseries.
 
-## Institutions
+## Competition
 
-Many institutions around the world have departments for quantitative strategies involved with sophisticated algorithmic trading. One firm with roots in academia is Hudson River Trading (HRT) [5] that is specifically noticeable since it is founded in 2002 by Harvard and MIT graduates. HRT has profited around $1 billion in a volatile first quarter in 2021 [6]. It cannot be considered a high-frequency trading (HFT) firm since its average holding time is about five minutes as opposed to the sub-second times of HFT firms. HRT team is composed of mathematicians, computer scientists, statisticians, physicists, and engineers. This diverse expertise can be provided by the talent pool available at University of Tabriz.
+Many institutions around the world have departments for quantitative strategies involved with sophisticated algorithmic trading. One firm with roots in academia is Hudson River Trading (HRT) [6] that is specifically noticeable since it is founded in 2002 by Harvard and MIT graduates. HRT has profited around $1 billion in a volatile first quarter in 2021 [7]. It is different from high-frequency trading (HFT) firms since its average holding time is about five minutes as opposed to the sub-second times of HFT firms. HRT team is composed of mathematicians, computer scientists, statisticians, physicists, and engineers.
+
+Another company rooted in the academia is XTX which is founded by a PhD holder [8]. Teams across XTX include researchers, developers and technologists with backgrounds in pure math, programming, physics, computer science and machine learning [9]. Such a diverse expertise can be gradually obtained according to our growth rate by tapping into the talent pool available at University of Tabriz.
 
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
 [3]: https://www.bis.org/statistics/rpfx22_fx.htm
 [4]: https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
-[5]: https://en.wikipedia.org/wiki/Hudson_River_Trading
-[6]: https://www.bloomberg.com/news/articles/2021-06-24/prop-trader-hudson-river-reaps-1-billion-in-frenzied-quarter
+[5]: https://en.wikipedia.org/wiki/Proprietary_trading
+[6]: https://en.wikipedia.org/wiki/Hudson_River_Trading
+[7]: https://www.bloomberg.com/news/articles/2021-06-24/prop-trader-hudson-river-reaps-1-billion-in-frenzied-quarter
+[8]: https://en.wikipedia.org/wiki/XTX_Markets
+[9]: https://www.xtxmarkets.com
