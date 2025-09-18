@@ -40,7 +40,7 @@ When it comes to timeseries forecasting, the statistics and probability would be
 
 ## Entrepreneurship
 
-This research feels just like building a business based on science. The scientific contributions would directly affect the amount of revenue that the business would generate. The entrepreneurial spirit of the research would make it much exciting.
+This research feels just like building a business based on science. The scientific contributions would directly affect the amount of revenue that the business would generate. The entrepreneurial spirit of the research would make it much exciting. It could directly be beneficial for the community around the University of Tabriz.
 
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
