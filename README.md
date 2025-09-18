@@ -12,15 +12,15 @@ Tabriz and specifically University of Tabriz can be a hub for algorithmic FX tra
 
 ## Revenue
 
-Having developed an effective FX trading algorithm, the revenue generation is almost guaranteed. There are proprietary trading firms or so called _prop firms_ both globally and locally. They provide capital access for FX traders while taking a share of the final trading profit. It means, once funded, there is no need to risk capital. _Prop firms_ use professional trading platforms like MetaTrader 5 with capabilities to develop algorithmic trading robots. University of Tabriz and its researchers can obtain risk-free profits through the global or even local _prop firms_.
+Having developed an effective FX trading algorithm, the revenue generation is almost guaranteed. There are proprietary trading firms or so called _prop firms_ both globally and locally. They provide capital access for FX traders while taking a share of the final trading profit. It means, once funded, there is no need to risk capital. _Prop firms_ use professional trading platforms like MetaTrader with capabilities to develop algorithmic trading robots. University of Tabriz and its researchers can obtain risk-free profits through the global or even local _prop firms_.
 
 ## Validation
 
-The theoretical and methodological contributions can easily be tested by historic FX data or by demo accounts using real-time market data. Specifically, the MetaTrader 5 platform provides convenient tools for back-testing with historic data or testing in real-time.
+The theoretical and methodological contributions can easily be tested by historic FX data or by demo accounts using real-time market data. Specifically, the MetaTrader platform provides convenient tools for back-testing with historic data or testing in real-time.
 
 ## Development
 
-Code development can be done on MetaTrader 5 platform. The programming language can be MQL5 which is similar to C++. Alternatively, the Python API of MetaTrader 5 can be employed. The author has already developed multiple preliminary trading robots in MQL5 programming language.
+Code development can be done on MetaTrader platform. The programming language can be MQL which is similar to C++. Alternatively, the Python API of MetaTrader can be employed. The author has already developed multiple preliminary trading robots in MQL programming language.
 
 ## Timeseries
 
