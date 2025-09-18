@@ -42,6 +42,10 @@ When it comes to timeseries forecasting, the statistics and probability would be
 
 This research feels just like building a business based on science. The scientific contributions would directly affect the amount of revenue that the business would generate. The entrepreneurial spirit of the research would make it much exciting. It could directly be beneficial for the community around the University of Tabriz.
 
+## Simplicity of components
+
+While carrying out the research, it's preferred to look for the simplest possible approach that achieves the desired outcome. Our systems need to be robust and maintainable. In academia, papers are trying to demonstrate novelty to be able to be published by reputable journals. But more novelty might usually translate into being more complex. The complexity means less chance of robustness. Timeseries forecasting has to be robust, therefore it's preferred to keep the components as simple as possible. Of course, the simple components could mount to a sophisticated system eventually.
+
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
 [3]: https://www.bis.org/statistics/rpfx22_fx.htm
