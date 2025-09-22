@@ -52,6 +52,10 @@ This research feels just like building a business based on science. The scientif
 
 While carrying out the research, it's preferred to look for the simplest possible approach that achieves the desired outcome. Our systems need to be robust and maintainable. In academia, papers are trying to demonstrate novelty to be able to be published by reputable journals. But more novelty might usually translate into being more complex. The complexity means less chance of robustness. Timeseries forecasting has to be robust, therefore it's preferred to keep the components as simple as possible. Of course, the simple components could mount to a sophisticated system eventually.
 
+## Machine learning (ML)
+
+We will start with simple methodologies, however down the road, the machine learning (ML) might be tried out to be able to compete on the global stage. Rivals like HRT and XTX are extensively using ML to predict timeseries. So far, ML has demonstrated to be an effective and robust methodology.
+
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
 [3]: https://www.bis.org/statistics/rpfx22_fx.htm
