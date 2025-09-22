@@ -54,7 +54,7 @@ While carrying out the research, it's preferred to look for the simplest possibl
 
 ## Machine learning (ML)
 
-We will start with simple methodologies, however down the road, the machine learning (ML) might be tried out to be able to compete on the global stage. Rivals like HRT and XTX are extensively using ML to predict timeseries. So far, ML has demonstrated to be an effective and robust methodology.
+At first, simple methodologies will be contributed to possibly generate the revenue in reasonable time. However, down the road, the machine learning (ML) might be tried out to be able to compete on the global stage. Rivals like HRT and XTX are extensively using ML to predict timeseries. So far, ML has demonstrated to be an effective and robust methodology.
 
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
