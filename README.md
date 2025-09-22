@@ -18,11 +18,11 @@ Modern tools like computers play an increasingly significant role on financial m
 
 ## Revenue
 
-Having developed an effective FX trading algorithm, the revenue generation is almost guaranteed. There are proprietary trading firms or so called _prop firms_ both globally and locally. They provide capital access for FX traders while taking a share of the final trading profit. It means, once funded, there is no need to risk capital. Prop firms use professional trading platforms like MetaTrader with capabilities to develop algorithmic trading robots. University of Tabriz and its researchers can obtain risk-free profits through the proprietary trading by global or even local prop firms [5].
+Having developed an effective trading algorithm, the revenue generation is almost guaranteed. There are proprietary trading firms or so called _prop firms_ both globally and locally. They provide capital access for traders while taking a share of the final trading profit. It means, once funded, there is no need to risk capital. Prop firms use professional trading platforms like MetaTrader with capabilities to develop algorithmic trading robots. University of Tabriz and its researchers can obtain risk-free profits through the proprietary trading by global or even local prop firms [5].
 
 ## Validation
 
-The theoretical and methodological contributions can easily be tested by historic FX data or by demo accounts using real-time market data. Specifically, the MetaTrader platform provides convenient tools for back-testing with historic data or testing in real-time.
+The theoretical and methodological contributions can easily be tested by historic market data or by demo accounts using real-time market data. Specifically, the MetaTrader platform provides convenient tools for back-testing with historic data or testing in real-time.
 
 ## Development
 
@@ -30,9 +30,9 @@ Code development can be done on MetaTrader platform. The programming language ca
 
 ## Timeseries
 
-The FX data are essentially timeseries. Just like the seismic waves or structural responses. An effective FX trading algorithm should correctly forecast timeseries, at least most of the time. Forecasting FX timeseries would be beneficial for predicting seismic waves and structural responses over time.
+The financial market data are essentially timeseries. Just like the seismic waves or structural responses. An effective trading algorithm should correctly forecast timeseries, at least most of the time. Forecasting timeseries would be beneficial for predicting seismic waves and structural responses over time.
 
-This research can be defined in two stages. The first stage would be related to FX timeseries and the second stage would be related to seismic and structural timeseries.
+This research can be defined in two stages. The first stage would be related to financial market timeseries and the second stage would be related to seismic and structural timeseries.
 
 ## Competition
 
