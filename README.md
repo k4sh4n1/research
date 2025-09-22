@@ -4,7 +4,7 @@ The following is a brainstorm about a research proposal.
 
 ## Objective
 
-Bazaar of Tabriz is described as the largest covered bazaar in the world and is one of the oldest bazaars in the Middle East [1]. Tabriz has been a hub for trade over the centuries and millennia. Tabriz can and should be a trading hub for modern times.
+Bazaar of Tabriz is described as the largest covered bazaar in the world and is one of the oldest bazaars in the Middle East [1]. Tabriz has been a hub for trade over the centuries and millennia. Tabriz can and should be a trading hub for modern times too.
 
 Tabriz and specifically University of Tabriz can be a hub for algorithmic trading. Considering the available talent pool for science, technology, engineering, mathematics, and the historic background of Tabriz in trade, it's an attractive idea for University of Tabriz to work on trading strategies and algorithms.
 
