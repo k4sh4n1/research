@@ -8,7 +8,7 @@ Both structural response and market price are timeseries
 
 I have civil, earthquake, and structural engineering education along with extensive software development experience.
 
-Understanding structural behavior can provides intuition for understanding financial market behavior.
+Understanding structural behavior can provide intuition for understanding financial market behavior.
 
 ## Proposed research
 
