@@ -1,4 +1,4 @@
-The following is a brainstorm about a research proposal.
+The following is a brainstorm about a research proposal authored by kashani@alum.sharif.edu
 
 # Timeseries forecasting
 
