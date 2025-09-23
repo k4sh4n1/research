@@ -64,6 +64,10 @@ Algorithmic trading is so dominant on the FX market that it is affecting the vol
 
 Generally, algorithms generate more profit when the market volatility is higher. Therefore, it might be preferred to focus on financial markets with more volatility. Down the road, the target financial markets will have to be picked thoroughly.
 
+## Disclaimer
+
+There is no guarantee that this research will achieve its objectives and goals due to inherent uncertainties. Of course, we will try our best. But there is always a chance of failure in academic research. If failure is observed, we will honestly and ethically report the failure causes and the recommendation for the future similar researches.
+
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
 [3]: https://www.bis.org/statistics/rpfx22_fx.htm
