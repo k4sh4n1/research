@@ -62,7 +62,7 @@ ML and AI are correlated. Interestingly, on a survey by Pew Research Center, the
 
 Algorithmic trading is so dominant on the FX market that it is affecting the volatility. It's reported that advancements in algorithmic trading may be lowering volatility of FX market. Consequently, a lack of dramatic price swing is observed [11]. This phenomenon has turned FX into a somehow different financial market. FX is free from the wilder swings seen in stocks and bonds, ignoring prominent economic and geopolitical risks.
 
-Generally, algorithms generate more profit when the market volatility is higher. Therefore, it might be preferred to focus on financial markets with more volatility. Down the road, the target financial markets will have to picked thoroughly.
+Generally, algorithms generate more profit when the market volatility is higher. Therefore, it might be preferred to focus on financial markets with more volatility. Down the road, the target financial markets will have to be picked thoroughly.
 
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
