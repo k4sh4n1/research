@@ -56,6 +56,8 @@ While carrying out the research, it's preferred to look for the simplest possibl
 
 At first, simple methodologies will be contributed to possibly generate the revenue in reasonable time. However, down the road, the machine learning (ML) might be tried out to be able to compete on the global stage. Rivals like HRT and XTX are extensively using ML to predict timeseries. So far, ML has demonstrated to be an effective and robust methodology.
 
+ML and AI are correlated. Interestingly, on a survey by Pew Research Center, the top role which is expected to be played by AI is "forecasting the weather" and the second top role is "searching for financial crimes" [10]. It means the top two roles of AI are expected to be related to "forecasting" and "financial" that are two keywords of this research proposal.
+
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
 [3]: https://www.bis.org/statistics/rpfx22_fx.htm
@@ -65,3 +67,4 @@ At first, simple methodologies will be contributed to possibly generate the reve
 [7]: https://www.bloomberg.com/news/articles/2021-06-24/prop-trader-hudson-river-reaps-1-billion-in-frenzied-quarter
 [8]: https://en.wikipedia.org/wiki/XTX_Markets
 [9]: https://www.xtxmarkets.com
+[10]: https://www.pewresearch.org/science/2025/09/17/how-americans-view-ai-and-its-impact-on-people-and-society/
