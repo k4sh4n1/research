@@ -6,7 +6,7 @@ The following is a brainstorm about a research proposal authored by kashani@alum
 
 Bazaar of Tabriz is described as the largest covered bazaar in the world and is one of the oldest bazaars in the Middle East [1]. Tabriz has been a hub for trade over the centuries and millennia. Tabriz can and should be a trading hub for modern times too.
 
-Tabriz and specifically University of Tabriz can be a hub for algorithmic trading. Considering the available talent pool for science, technology, engineering, mathematics, and the historic background of Tabriz in trade, it's an attractive idea for University of Tabriz to work on trading strategies and algorithms.
+Tabriz and specifically University of Tabriz can be a hub for algorithmic trading. Considering the available talent pool for science, technology, engineering, mathematics, and the historic background of Tabriz in trade, it might be an attractive idea for University of Tabriz to work on trading strategies and algorithms.
 
 ## Background
 
@@ -18,7 +18,7 @@ Modern tools like computers play an increasingly significant role on financial m
 
 ## Revenue
 
-Having developed an effective trading algorithm, the revenue generation is almost guaranteed. There are proprietary trading firms or so called _prop firms_ both globally and locally. They provide capital access for traders while taking a share of the final trading profit. It means, once funded, there is no need to risk capital. Prop firms use professional trading platforms like MetaTrader with capabilities to develop algorithmic trading robots. University of Tabriz and its researchers can obtain risk-free profits through the proprietary trading by global or even local prop firms [5].
+Having developed an effective trading algorithm, the revenue generation is almost guaranteed. There are proprietary trading firms or so called _prop firms_ both globally and locally. They provide capital access for traders while taking a share of the final trading profit. It means, once funded, there is no need to risk capital. Prop firms use professional trading platforms like MetaTrader with capabilities to develop algorithmic trading robots. University of Tabriz and its researchers can obtain risk-free profits by proprietary trading through global or even local prop firms [5].
 
 ## Validation
 
@@ -26,13 +26,13 @@ The theoretical and methodological contributions can easily be tested by histori
 
 ## Development
 
-Code development can be done on MetaTrader platform. The programming language can be MQL which is similar to C++. Alternatively, the Python API of MetaTrader can be employed. The author has already developed multiple preliminary trading robots in MQL programming language.
+Code development can be done on MetaTrader platform. The programming language can be MQL which is similar to C++. Alternatively, the Python API of MetaTrader can be employed. The author has already developed multiple preliminary trading robots in MQL programming language. The author has more than a decade of experience in professional software development.
 
 ## Timeseries
 
 The financial market data are essentially timeseries. Just like the seismic waves or structural responses. An effective trading algorithm should correctly forecast timeseries, at least most of the time. Forecasting timeseries would be beneficial for predicting seismic waves and structural responses over time.
 
-This research can be defined in two stages. The first stage would be related to financial market timeseries and the second stage would be related to seismic and structural timeseries.
+Since the author's major is structural engineering, this research can be defined in two stages. The first stage would be related to financial market timeseries and the second stage would be related to seismic and structural timeseries.
 
 ## Competition
 
