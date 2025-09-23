@@ -58,6 +58,12 @@ At first, simple methodologies will be contributed to possibly generate the reve
 
 ML and AI are correlated. Interestingly, on a survey by Pew Research Center, the top role which is expected to be played by AI is "forecasting the weather" and the second top role is "searching for financial crimes" [10]. It means the top two roles of AI are expected to be related to "forecasting" and "financial" that are two keywords of this research proposal.
 
+## Volatility
+
+Algorithmic trading is so dominant on the FX market that it is affecting the volatility. It's reported that advancements in algorithmic trading may be lowering volatility of FX market. Consequently, a lack of dramatic price swing is observed [11]. This phenomenon has turned FX into a somehow different financial market. FX is free from the wilder swings seen in stocks and bonds, ignoring prominent economic and geopolitical risks.
+
+Generally, algorithms generate more profit when the market volatility is higher. Therefore, it might be preferred to focus on financial markets with more volatility. Down the road, the target financial markets will have to picked thoroughly.
+
 [1]: https://en.wikipedia.org/wiki/Bazaar_of_Tabriz
 [2]: https://en.wikipedia.org/wiki/Foreign_exchange_market
 [3]: https://www.bis.org/statistics/rpfx22_fx.htm
@@ -68,3 +74,4 @@ ML and AI are correlated. Interestingly, on a survey by Pew Research Center, the
 [8]: https://en.wikipedia.org/wiki/XTX_Markets
 [9]: https://www.xtxmarkets.com
 [10]: https://www.pewresearch.org/science/2025/09/17/how-americans-view-ai-and-its-impact-on-people-and-society/
+[11]: https://www.bloomberg.com/news/articles/2025-09-19/currency-volatility-is-getting-crushed-in-era-of-insane-tech-advancements
