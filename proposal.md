@@ -1,6 +1,6 @@
 The following is a draft about a research proposal authored by kashani@alum.sharif.edu
 
-# Investigating the application of structural dynamics into financial timeseries prediction
+# Cross domain investigation: applying structural dynamics theory to financial market prediction and risk assessment
 
 ## Motivation
 
