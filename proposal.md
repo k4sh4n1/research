@@ -12,17 +12,21 @@ Understanding structural behavior can provide intuition for understanding financ
 
 ## Proposed research
 
-Adapt structural analysis methodologies to financial data.
+The structural analysis methodologies are adapted to financial data.
 
 ## Preliminary result
 
-A simple example of using ? analysis on stock prices.
+A simple example of using ? analysis on stock prices will be presented.
 
 ## Expected contribution
 
-New class of models for financial market analysis are expected. The model validation can be done by:
+New class of models for financial market analysis will be presented. The model validation can be done by:
 
 * Back-testing using historic market data
 * Online testing using real-time market data
 
 The new models will be applied to practical trading of financial markets.
+
+## Disclaimer
+
+There is no guarantee that this research won't fail.
