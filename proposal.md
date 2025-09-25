@@ -16,7 +16,9 @@ Structural systems and financial markets share foundational similarities:
 * Dynamic behavior under external forces
    * Financial forces of buyers against sellers
    * Financial forces of bulls against bears
-* Extreme events, structural collapse equivalent of market crashes
+* Extreme events
+   * Structural collapse
+   * Market crashes
 * Characteristic frequency and damping behavior
 * Need for real-time monitoring and anomaly detection
 * Support and resistance terminology for both structures and price action
@@ -29,6 +31,8 @@ Despite the similarities, the rich structural dynamics toolkit remains mostly un
 * Theoretical contributions to econophysics
 * Novel predictive tools based on physical systems theory
 * Improved understanding of financial markets through physical systems
+
+## Related work
 
 The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [1]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s. Financial industry has been using physical models to effectively figure out the financial behavior. There are some academic studies carried out, but systematic investigation of structural dynamics remains mostly absent.
 
@@ -119,7 +123,7 @@ A rough timeline might be outlined as follows.
 
 ## Preliminary results
 
-Some MQL code on MetaTrader platform are developed. The preliminary results indicate that systematic investigation could contribute novel multidisciplinary innovations inspired by structural engineering into financial market analysis.
+Some MQL code on MetaTrader platform are developed. The preliminary results indicate that systematic investigation could contribute multidisciplinary innovations inspired by structural engineering into financial market analysis. Novel contributions to both theory and practice are highly probable.
 
 ## References
 
