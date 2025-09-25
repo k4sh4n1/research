@@ -10,6 +10,7 @@ Structural systems and financial markets share foundational similarities:
 * Extreme events, structural collapse equivalent of market crashes
 * Characteristic frequency and damping behavior
 * Need for real-time monitoring and anomaly detection
+* Support and resistance terminology for both structures and price action
 * ...
 
 Despite the similarities, the rich structural dynamics toolkit remains mostly un-explored in quantitative finance. This gap presents opportunities for practical innovation for:
