@@ -5,7 +5,7 @@ A research proposal by kashani@alum.sharif.edu
 ## Highlights
 
 * Structural systems have similarities with financial systems
-* Structural dynamics theory is mostly un-explored in financial markets
+* Structural dynamics theory is mostly unexplored in financial markets
 * There are innovation opportunities due to the cross-domain gap
 * Novel models can be presented for financial systems based on structural dynamics
 
@@ -31,7 +31,7 @@ Structural systems and financial markets share foundational similarities:
 * Similarities between structural vibrations and market fluctuations
 * ...
 
-Despite the similarities, the rich structural dynamics toolkit remains mostly un-explored in quantitative finance. This gap presents opportunities for practical innovation for:
+Despite the similarities, the rich structural dynamics toolkit remains mostly unexplored in quantitative finance. This gap presents opportunities for practical innovation for:
 
 * Theoretical contributions to econophysics
 * Novel predictive tools based on physical systems theory
