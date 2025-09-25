@@ -43,7 +43,7 @@ This multidisciplinary background would enable to:
 
 ## Significance
 
-This research could have high significance impact due to:
+This research could have significant impact due to:
 
 * Significant academic gap between engineering fields and quantitative finance
    * Lack of enough multidisciplinary researchers in both fields
