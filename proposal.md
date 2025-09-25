@@ -76,19 +76,22 @@ This research proposal would try to answer these questions, at least:
 
 The following plan can be outlined.
 
-* Stage 1: picking structural dynamic methods
+* Stage 1: literature review
+* Stage 2: picking structural dynamic methods
    * Investigate correspondence between physical and financial systems
    * Outline mathematical mapping between physical and financial systems
-* Stage 2: applying structural dynamic methods to financial markets
+* Stage 3: applying structural dynamic methods to financial markets
    * Novel mathematical framework development
+* Stage 4: implementation
    * C++ and Python implementation on MetaTrader platform
    * Optimization
-* Stage 3: validation and testing
+* Stage 5: validation and testing
    * Back-testing with multiple decades of historic market data
    * Live testing on demo trading accounts
 
-For stage 1, the structural dynamics methods to be candidate for investigation are listed as follows, but they are not limited to this list.
+For stage 2, the structural dynamics methods to be candidate for investigation are listed as follows, but they are not limited to this list.
 
+* Mass-spring systems
 * Modal analysis
 * Natural frequency detection
 * Spectral analysis
