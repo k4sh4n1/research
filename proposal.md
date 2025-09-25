@@ -67,7 +67,7 @@ This research could have significant impact due to:
    * Currency market alone has had a `$7.5` trillion _daily_ volume in 2022 [3]
    * `92%` of trading is done by algorithms and computers in 2019 [4]
 
-## Research questions
+## General research questions
 
 This research proposal would try to answer these questions, at least:
 
