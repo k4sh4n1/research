@@ -106,8 +106,10 @@ The following plan can be outlined.
 * Stage 3: applying structural dynamic methods to financial markets
    * Novel mathematical framework development
 * Stage 4: implementation
-   * C++ and Python implementation on MetaTrader platform
-   * Optimization
+   * C++ high performance computing for live testing
+   * Python for investigation and back-testing
+   * Implementation on MetaTrader platform
+   * Efficiency optimization
 * Stage 5: validation and testing
    * Back-testing with multiple decades of historic market data
    * Live testing on demo trading accounts
