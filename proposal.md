@@ -14,7 +14,7 @@ A research proposal by kashani@alum.sharif.edu
 Structural dynamics, financial markets, econophysics, algorithmic 
 trading, cross-domain modeling, quantitative finance
 
-## Motivation
+## Research philosophy and motivation
 
 Structural systems and financial markets share foundational similarities:
 
