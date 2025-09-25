@@ -84,14 +84,14 @@ The following plan can be outlined.
 * Stage 1: literature review
 * Stage 2: investigation and selection of structural dynamic methods
    * Investigate correspondence between physical and financial systems
-   * Outline mathematical mapping between physical and financial systems
-      - Mass (m) ↔ market capitalization or liquidity
-      - Stiffness (k) ↔ mean reversion strength
-      - Damping (c) ↔ volatility decay rate
-      - Displacement (x) ↔ price deviation from equilibrium
-      - Velocity (ẋ) ↔ returns or price change rate
-      - Acceleration (ẍ) ↔ return acceleration or Volatility
-      - Force (F) ↔ order flow imbalance or buy-sell pressure
+   * Outline mathematical mapping between physical and financial systems, like:
+      - Mass (m): market capitalization or liquidity
+      - Stiffness (k): mean reversion strength
+      - Damping (c): volatility decay rate
+      - Displacement (x): price deviation from equilibrium
+      - Velocity (ẋ): returns or price change rate
+      - Acceleration (ẍ): return acceleration or volatility
+      - Force (F): order flow imbalance or buy-sell pressure
 * Stage 3: applying structural dynamic methods to financial markets
    * Novel mathematical framework development
 * Stage 4: implementation
