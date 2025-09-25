@@ -1,6 +1,9 @@
 # Cross domain investigation: applying structural dynamics theory to financial market prediction and risk assessment
 
 A research proposal by kashani@alum.sharif.edu
+PhD student at University of Tabriz
+Civil engineering department
+Structural engineering
 
 ## Highlights
 
