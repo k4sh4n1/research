@@ -21,9 +21,7 @@ Despite the similarities, the rich structural dynamics toolkit remains mostly un
 * Novel predictive tools based on physical systems theory
 * Improved understanding of financial markets through physical systems
 
-TODO: reference work of seismic scientist in predicting crash.
-
-There are studies done already, but systematic investigation of structural dynamics remains absent.
+The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [1]. There are similar studies done already, but systematic investigation of structural dynamics remains absent.
 
 ## Background
 
@@ -116,6 +114,6 @@ Some MQL code on MetaTrader platform are developed. The preliminary results indi
 
 ## References
 
-[1]: The Physics of Wall Street, James Owen Weatherall
+[1]: https://archive.org/details/ThePhysicsOfWallStreetDewey332.63209WEAWeatherallJamesOwen
 [3]: https://www.bis.org/statistics/rpfx22_fx.htm
 [4]: https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
