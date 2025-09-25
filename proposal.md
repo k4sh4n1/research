@@ -123,7 +123,11 @@ A rough timeline might be outlined as follows.
 
 ## Preliminary results
 
-Some MQL code on MetaTrader platform are developed. The preliminary results indicate that systematic investigation could contribute multidisciplinary innovations inspired by structural engineering into financial market analysis. Novel contributions to both theory and practice are highly probable.
+Some MQL code on MetaTrader platform are developed.
+
+TODO: specifics.
+
+The preliminary results indicate that systematic investigation could contribute multidisciplinary innovations inspired by structural dynamics into financial market analysis. Novel contributions to both theory and practice are highly probable.
 
 ## References
 
