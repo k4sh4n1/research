@@ -77,7 +77,7 @@ This research proposal would try to answer these questions, at least:
 The following plan can be outlined.
 
 * Stage 1: literature review
-* Stage 2: picking structural dynamic methods
+* Stage 2: investigation and selection of structural dynamic methods
    * Investigate correspondence between physical and financial systems
    * Outline mathematical mapping between physical and financial systems
 * Stage 3: applying structural dynamic methods to financial markets
