@@ -92,6 +92,17 @@ The following plan can be outlined.
       - Velocity (ẋ): returns or price change rate
       - Acceleration (ẍ): return acceleration or volatility
       - Force (F): order flow imbalance or buy-sell pressure
+      - ...
+   * Investigate candidates of investigation, like:
+      - Mass-spring systems
+      - Modal analysis
+      - Natural frequency detection
+      - Spectral analysis
+      - Fourier transform
+      - Structural health monitoring methods
+      - Damping ratio
+      - Finite element analysis, FEA
+      - ...
 * Stage 3: applying structural dynamic methods to financial markets
    * Novel mathematical framework development
 * Stage 4: implementation
@@ -100,18 +111,6 @@ The following plan can be outlined.
 * Stage 5: validation and testing
    * Back-testing with multiple decades of historic market data
    * Live testing on demo trading accounts
-
-For stage 2, the structural dynamics methods to be candidate for investigation are listed as follows, but they are not limited to this list.
-
-* Mass-spring systems
-* Modal analysis
-* Natural frequency detection
-* Spectral analysis
-* Fourier transform
-* Structural health monitoring methods
-* Damping ratio
-* Finite element analysis, FEA
-* ...
 
 ## Expected contributions
 
