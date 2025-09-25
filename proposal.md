@@ -1,6 +1,13 @@
-The following is a draft about a research proposal authored by kashani@alum.sharif.edu
-
 # Cross domain investigation: applying structural dynamics theory to financial market prediction and risk assessment
+
+A research proposal by kashani@alum.sharif.edu
+
+## Highlights
+
+* Structural systems have similarities with financial systems
+* Structural dynamics theory is mostly un-explored in financial markets
+* There are innovation opportunities due to the cross-domain gap
+* Novel models can be presented for financial systems based on structural dynamics
 
 ## Motivation
 
@@ -13,6 +20,8 @@ Structural systems and financial markets share foundational similarities:
 * Characteristic frequency and damping behavior
 * Need for real-time monitoring and anomaly detection
 * Support and resistance terminology for both structures and price action
+* Similar patterns of stress buildup and sudden release
+* Similarities between structural vibrations and market fluctuations
 * ...
 
 Despite the similarities, the rich structural dynamics toolkit remains mostly un-explored in quantitative finance. This gap presents opportunities for practical innovation for:
@@ -21,7 +30,7 @@ Despite the similarities, the rich structural dynamics toolkit remains mostly un
 * Novel predictive tools based on physical systems theory
 * Improved understanding of financial markets through physical systems
 
-The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [1]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s. Financial industry has been using physical models to effectively figure out the financial behavior. There are some academic studies carried out, but systematic investigation of structural dynamics remains absent.
+The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [1]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s. Financial industry has been using physical models to effectively figure out the financial behavior. There are some academic studies carried out, but systematic investigation of structural dynamics remains mostly absent.
 
 ## Background
 
