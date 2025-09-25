@@ -7,6 +7,8 @@ The following is a draft about a research proposal authored by kashani@alum.shar
 Structural systems and financial markets share foundational similarities:
 
 * Dynamic behavior under external forces
+   * Financial forces of buyers against sellers
+   * Financial forces of bulls against bears
 * Extreme events, structural collapse equivalent of market crashes
 * Characteristic frequency and damping behavior
 * Need for real-time monitoring and anomaly detection
