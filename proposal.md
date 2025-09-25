@@ -17,6 +17,10 @@ Structural engineering
 Structural dynamics, financial markets, econophysics, algorithmic 
 trading, cross-domain modeling, quantitative finance
 
+## Abstract
+
+Financial markets exhibit dynamic behaviors remarkably similar to structural engineering systems: oscillations, resonances, shock responses, and catastrophic failures. Yet the sophisticated mathematical toolkit developed over a century in structural dynamics remains largely unapplied to financial analysis. This research proposes a systematic framework for translating structural dynamics methods — including modal analysis, spectral decomposition, and finite element modeling - into quantitative finance applications. With algorithmic trading now comprising 92% of market volume and daily forex turnover exceeding $7.5 trillion, even marginal improvements in prediction accuracy could yield significant economic impact. Preliminary results show ?-?% improvement in forecasting accuracy over traditional technical indicators. This interdisciplinary approach promises to open new frontiers in market microstructure understanding, risk modeling, and algorithmic trading strategy development.
+
 ## Research philosophy and motivation
 
 Structural systems and financial markets share foundational similarities:
@@ -43,6 +47,10 @@ Despite the similarities, the rich structural dynamics toolkit remains mostly un
 ## Related work
 
 The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [1]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s. Financial industry has been using physical models to effectively figure out the financial behavior. There are some academic studies carried out, but systematic investigation of structural dynamics remains mostly absent.
+
+## Literature gap
+
+TODO.
 
 ## Background
 
