@@ -140,7 +140,7 @@ The following plan can be outlined.
 * Stage 4: implementation
    * C++ high performance computing for live testing
    * Python for investigation and back-testing
-   * Implementation on MetaTrader platform
+   * Implementation and visualization on MetaTrader platform
    * Efficiency optimization
 * Stage 5: validation and testing
    * Back-testing with multiple decades of historic market data
