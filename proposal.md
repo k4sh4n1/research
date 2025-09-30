@@ -36,6 +36,16 @@ Structural systems and financial markets share foundational similarities:
 * Support and resistance terminology for both structures and price action
 * Similar patterns of stress buildup and sudden release
 * Similarities between structural vibrations and market fluctuations
+* Equilibrium concept
+   * Structural forces
+   * Supply and demand across macro and micro economy
+* Financial friction and mechanical one
+* Nonlinear dynamics behavior
+* Stochastic nature of seismic loads and financial shocks
+* Shock propagation through the financial network and structural network
+* Thresholds
+   * Financial tipping points
+   * Structural buckling
 * ...
 
 Despite the similarities, the rich structural dynamics toolkit remains mostly unexplored in quantitative finance. This gap presents opportunities for practical innovation for:
