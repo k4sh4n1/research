@@ -179,6 +179,6 @@ The preliminary results indicate that systematic investigation could contribute 
 
 ## References
 
-[1]: https://archive.org/details/ThePhysicsOfWallStreetDewey332.63209WEAWeatherallJamesOwen
-[3]: https://www.bis.org/statistics/rpfx22_fx.htm
-[4]: https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
+[1]: The Physics of Wall Street by James Owen Weatherall (2013). Retrieved from https://archive.org/details/ThePhysicsOfWallStreetDewey332.63209WEAWeatherallJamesOwen
+[3]: Bank for International Settlements, BIS (2022). Retrieved from https://www.bis.org/statistics/rpfx22_fx.htm
+[4]: What Percentage of Trading Is Algorithmic? (Algo Trading Market Statistics) By Oddmund Groette (2024). Retrived from https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
