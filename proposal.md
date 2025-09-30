@@ -142,6 +142,19 @@ The following plan can be outlined.
    * Back-testing with multiple decades of historic market data
    * Live testing on demo trading accounts
 
+Mapping table:
+
+| Physics Term | Symbol | Financial Interpretation and Possible Equivalent |
+|--------------|--------|--------------------------------------------------|
+| Mass         | m      | market capitalization or liquidity               |
+| Stiffness    | k      | mean reversion strength                          |
+| Damping      | c      | volatility decay rate                            |
+| Displacement | x      | price deviation from equilibrium                 |
+| Velocity     | ẋ      | returns or price change rate                     |
+| Acceleration | ẍ      | return acceleration or volatility                |
+| Force        | F      | order flow imbalance or buy-sell pressure        |
+| ...          | ...    | ...                                              |
+
 ## Expected contributions
 
 Scientific contributions:
