@@ -180,5 +180,6 @@ The preliminary results indicate that systematic investigation could contribute 
 ## References
 
 [1]: Weatherall, James Owen. 2013. *The Physics of Wall Street*. Retrieved from https://archive.org/details/ThePhysicsOfWallStreetDewey332.63209WEAWeatherallJamesOwen
+[2]: Reference removed
 [3]: Bank for International Settlements (BIS). 2022. "Foreign Exchange Turnover Statistics." Retrieved from https://www.bis.org/statistics/rpfx22_fx.htm
 [4]: Groette, Oddmund. 2024. "What Percentage of Trading Is Algorithmic?" *Quantified Strategies*. Retrieved from https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
