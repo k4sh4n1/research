@@ -171,9 +171,13 @@ A rough timeline might be outlined as follows.
 
 ## Preliminary results
 
-Some MQL code on MetaTrader platform are developed.
+As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed to carry out the frequency spectrum analysis for EUR/USD currency pair from Jan 2025 to Sep 2025. Some specifics of the proof-of-concept code are:
 
-TODO: specifics.
+* FFT is applied to the timeseries of the currency pair
+* Any timeframe can be tried out, like M1, M5, H1 and so on
+* Dominant periods and cycles are identified and visualized
+* De-trending is optional and can possibly be done if desired
+* Number of candles to be analyzed is an adjustable parameter
 
 The preliminary results indicate that systematic investigation could contribute multidisciplinary innovations inspired by structural dynamics into financial market analysis. Novel contributions to both theory and practice are highly probable.
 
