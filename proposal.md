@@ -142,7 +142,7 @@ The following plan can be outlined.
    * Back-testing with multiple decades of historic market data
    * Live testing on demo trading accounts
 
-Mapping table:
+Potential mapping table for stage 2:
 
 | Physics Term | Symbol | Financial Interpretation and Possible Equivalent |
 |--------------|--------|--------------------------------------------------|
