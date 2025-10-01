@@ -196,6 +196,12 @@ Practical contributions:
 * Novel trading signal generation methods
 * Innovative risk detection tools
 
+Possibly and potentially, the following targets might be kept in mind.
+
+* Expected journal publications, like The Journal of Computational Finance
+* Potential industry partnerships
+* Opensource software deliverables
+
 ## Timeline
 
 A rough timeline might be approximately estimated as follows.
@@ -222,14 +228,6 @@ Some specifics of the proof-of-concept code are:
 * Number of candles to be analyzed is an adjustable parameter
 
 The preliminary results indicate that systematic investigation could contribute multidisciplinary innovations inspired by structural dynamics into financial market analysis. Novel contributions to both theory and practice are highly probable.
-
-## Expectations
-
-Possibly and potentially, some expectations are kept in mind.
-
-* Expected journal publications, like The Journal of Computational Finance
-* Potential industry partnerships
-* Opensource software deliverables
 
 ## References
 
