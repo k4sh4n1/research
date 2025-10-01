@@ -125,12 +125,17 @@ This research proposal would try to answer these questions, at least:
 
 Beyond the general questions, this research might test specific hypotheses:
 
-* Simple mass-spring systems can predict the price action with a win rate of above `50%`.
-* Damping ratios calculated from price oscillations can predict volatility regime changes `2-5` days in advance with `>70%` accuracy.
-* Modal decomposition of price series will reveal periodic components invisible to traditional technical analysis.
-* Finite element modeling will identify risk `24-48` hours before traditional methods.
-* Shock response from news announcements follow laws similar to earthquake relationships.
-* ...
+* Hypothesis statement 1:
+   * Simple mass-spring systems can predict the price action with a win rate of above `50%`.
+* Hypothesis statement 2:
+   * Damping ratios calculated from price oscillations can predict volatility regime changes `2-5` days in advance with `>70%` accuracy.
+* Hypothesis statement 3:
+   * Modal decomposition of price series will reveal periodic components invisible to traditional technical analysis.
+* Hypothesis statement 4:
+   * Finite element modeling will identify risk `24-48` hours before traditional methods.
+* Hypothesis statement 5:
+   * Shock response from news announcements follow laws similar to earthquake relationships.
+* Hypothesis statements...
 
 ## Research methodology
 
