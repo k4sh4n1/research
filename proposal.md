@@ -71,7 +71,7 @@ Some recent studies have investigated the impact of global news events on major 
 
 There is no comprehensive framework mapping structural parameters, including mass, stiffness, damping, to financial variables in a systematic way. The few attempts that exist focus on specific phenomena rather than developing a general theoretical framework [5].
 
-Traditional financial analysis relies on Fourier transforms and wavelet analysis [6]. However, the specific advantages of modal decomposition for identifying market regimes and predicting transitions remain unexplored. Modal analysis is a prominent tool of structural dynamics used to identify natural frequencies and mode shapes. It can been systematically applied to decompose financial time series.
+Traditional financial analysis relies on Fourier transforms and wavelet analysis [6]. However, the specific advantages of modal decomposition for identifying market regimes and predicting transitions remain unexplored. Modal analysis is a prominent tool of structural dynamics used to identify natural frequencies and mode shapes. It can be systematically applied to decompose financial time series.
 
 The finite element method or FEM has revolutionized structural engineering. FEM application to financial risk modeling is virtually non-existent. Discretizing the market into elements and analyzing stress distribution by FEM represents a significant potential opportunity.
 
