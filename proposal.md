@@ -186,6 +186,8 @@ A rough timeline might be approximately estimated as follows.
    * Agile sprints of implementation and validation
 * Year 4: optimization and dissertation writing
 
+The concepts of _agile_ and _sprint_ are coming from software development industry best practices.
+
 ## Preliminary results
 
 As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed. Hilbert-Huang Transform (HHT) approach is employed to carry out the frequency spectrum analysis. HHT is particularly useful for non-linear and non-stationary signals. HHT is commonly applied to seismic signals, here HHT is applied to financial timeseries.
