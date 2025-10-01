@@ -63,7 +63,44 @@ The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophy
 
 ## Literature gap
 
-TODO.
+The literature review reveals several critical gaps. While physics-inspired approaches to financial markets have gained traction, the specific application of structural dynamics theory remains underexplored.
+
+The rich mathematical framework of structural dynamics, including modal analysis, spectral decomposition, and finite element methods, has seen minimal systematic application. Although econophysics has applied concepts from mechanics and thermodynamics to financial markets:
+
+* Mantegna & Stanley, 2000
+* Bouchaud & Potters, 2003
+
+Some recent studies have explored network structures in financial markets, but without leveraging the full toolkit of structural dynamics analysis
+
+* Pagnottoni et al., 2021
+
+The oscillator models have been sporadically applied to market dynamics:
+
+* Yukalov et al., 2009
+
+However, there is no comprehensive framework mapping structural parameters, including mass, stiffness, damping, to financial variables in a systematic way. The few attempts that exist focus on specific phenomena rather than developing a general theoretical framework:
+
+* Filimonov & Sornette, 2013
+
+Traditional financial analysis relies on Fourier transforms and wavelet analysis:
+
+* Ramsey, 2002
+
+However, the specific advantages of modal decomposition for identifying market regimes and predicting transitions remain unexplored. Modal analysis is a prominent tool of structural dynamics used to identify natural frequencies and mode shapes. It can been systematically applied to decompose financial time series.
+
+The finite element method or FEM has revolutionized structural engineering. FEM application to financial risk modeling is virtually non-existent. Discretizing the market into elements and analyzing stress distribution by FEM represents a significant potential opportunity.
+
+The literature review reveals a huge gap in cross-domain expertise. Financial experts generally lack the knowledge of structural dynamics, and structural engineers rarely dive into finance. Exceptions like Didier Sornette [5] have indicated the potential, but systematic investigation remains absent.
+
+Structural health monitoring or SHM, which detect structural damage in real-time, is parallel to market surveillance and crash prediction. However, no comprehensive framework exists for adapting SHM methodologies to financial markets.
+
+Market crashes are equivalent to structural failures, however the sophisticated mathematical tools for analyzing shock response in structures, including response spectra, time-history analysis, and nonlinear dynamic analysis, have not been systematically adapted for financial shock events. Some studies have been carried out but they see the problem from a network perspective not the dynamic response characteristics central to structural analysis:
+
+* Gai & Kapadia, 2010
+
+In structural engineering the physical experiments would validate theoretical models. Frameworks for validating structural dynamics models against market data can extend to both back-testing and real-time testing. The performance metrics could be specifically developed for physics-based trading strategies.
+
+The literature lacks frameworks for validating physics-based financial models against market data. This gap presents an opportunity for academic and practical innovation. Considering the increasing dominance of algorithmic trading, there is a need for novel validated forecasting in financial markets.
 
 ## Background
 
@@ -217,3 +254,4 @@ Possibly and potentially, some expectations are kept in mind.
 [2]: Reference removed
 [3]: Bank for International Settlements (BIS). 2022. "Foreign Exchange Turnover Statistics." Retrieved from https://www.bis.org/statistics/rpfx22_fx.htm
 [4]: Groette, Oddmund. 2024. "What Percentage of Trading Is Algorithmic?" *Quantified Strategies*. Retrieved from https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
+[5]: Didier Sornette, a geophysicist working in finance, https://en.wikipedia.org/wiki/Didier_Sornette
