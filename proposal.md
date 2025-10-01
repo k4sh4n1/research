@@ -178,7 +178,7 @@ Practical contributions:
 
 ## Timeline
 
-A rough timeline might be outlined as follows.
+A rough timeline might be approximately estimated as follows.
 
 * Year 1: literature review, investigating methods to adopt
 * Year 2: mathematical framework development for methods
