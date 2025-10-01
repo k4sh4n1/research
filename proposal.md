@@ -181,8 +181,9 @@ Practical contributions:
 A rough timeline might be approximately estimated as follows.
 
 * Year 1: literature review, investigating methods to adopt
-* Year 2: mathematical framework development for methods
-* Year 3: implementation and validation
+* Year 2 and 3
+   * Agile sprints of mathematical framework development for methods
+   * Agile sprints of implementation and validation
 * Year 4: optimization and dissertation writing
 
 ## Preliminary results
