@@ -187,13 +187,15 @@ A rough timeline might be outlined as follows.
 
 ## Preliminary results
 
-As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed to carry out the frequency spectrum analysis for EUR/USD currency pair from Jan 2025 to Sep 2025. Some specifics of the proof-of-concept code are:
+As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed. Hilbert-Huang Transform (HHT) approach is employed to carry out the frequency spectrum analysis. HHT is particularly useful for non-linear and non-stationary signals. HHT is applied to seismic signals. Here HHT is applied to financial timeseries.
 
-* Hilbert-Huang Transform (HHT) approach is employed.
-* FFT is applied to the timeseries of the currency pair
+Some specifics of the proof-of-concept code are:
+
+* Multiple currency pairs like EUR/USD and USD/JPY are investigated
+* Analysis duration has been from multiple months to multiple years
+* HHT is applied to the timeseries of the currency pair
 * Any timeframe can be tried out, like M1, M5, H1 and so on
 * Dominant periods and cycles are identified and visualized
-* De-trending is optional and can possibly be done if desired
 * Number of candles to be analyzed is an adjustable parameter
 
 The preliminary results indicate that systematic investigation could contribute multidisciplinary innovations inspired by structural dynamics into financial market analysis. Novel contributions to both theory and practice are highly probable.
