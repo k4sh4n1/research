@@ -75,7 +75,7 @@ The author's educational and industrial background is:
 * 10+ years of professional software development by C++, Go, Python, JS, C#, and more
 * Experience with algorithm development
 
-This multidisciplinary background would enable to:
+This multidisciplinary background would provide the opportunity to:
 
 * Investigate mathematical similarities between physical and financial systems
 * Implement efficient algorithms
