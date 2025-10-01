@@ -19,7 +19,7 @@ trading, cross-domain modeling, quantitative finance
 
 ## Abstract
 
-Financial markets exhibit nonlinear dynamic behaviors significantly similar to structural engineering systems: oscillations, resonances, shock responses, and collapses. Nonetheless the sophisticated mathematical toolkit developed for structural dynamics remains largely unapplied to financial analysis. This research proposes a systematic investigation for applying structural dynamics methods — probably including modal analysis, spectral decomposition, and finite element modeling - into quantitative finance. With algorithmic trading now comprising `92%` of market volume and daily forex turnover exceeding `$7.5` trillion, even marginal improvements in prediction accuracy could provide significant economic impact. Preliminary results by proof-of-concept frequency spectrum analysis on financial timeseries are revealing patterns and insights not visible in the time domain. This multidisciplinary approach could provide opportunities for market understanding, risk management, and algorithmic trading strategy development.
+Financial markets exhibit nonlinear dynamic behaviors significantly similar to structural engineering systems: oscillations, resonances, shock responses, and collapses. Nonetheless the sophisticated mathematical toolkit developed for structural dynamics remains largely unapplied to financial analysis. This research proposes a systematic investigation for applying structural dynamics methods — probably including modal analysis, spectral decomposition, and finite element modeling - into quantitative finance. With algorithmic trading now comprising `92%` of market volume and daily forex turnover exceeding `$7.5` trillion, even marginal improvements in prediction accuracy could provide significant economic impact. Preliminary results by proof-of-concept implementations on financial timeseries are revealing patterns and insights not visible by traditional financial tools. This multidisciplinary approach could provide opportunities for market understanding, risk management, and algorithmic trading strategy development.
 
 ## Research philosophy and motivation
 
@@ -189,6 +189,7 @@ A rough timeline might be outlined as follows.
 
 As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed to carry out the frequency spectrum analysis for EUR/USD currency pair from Jan 2025 to Sep 2025. Some specifics of the proof-of-concept code are:
 
+* Hilbert-Huang Transform (HHT) approach is employed.
 * FFT is applied to the timeseries of the currency pair
 * Any timeframe can be tried out, like M1, M5, H1 and so on
 * Dominant periods and cycles are identified and visualized
