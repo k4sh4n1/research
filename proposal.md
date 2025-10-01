@@ -187,7 +187,7 @@ A rough timeline might be outlined as follows.
 
 ## Preliminary results
 
-As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed. Hilbert-Huang Transform (HHT) approach is employed to carry out the frequency spectrum analysis. HHT is particularly useful for non-linear and non-stationary signals. HHT is applied to seismic signals. Here HHT is applied to financial timeseries.
+As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed. Hilbert-Huang Transform (HHT) approach is employed to carry out the frequency spectrum analysis. HHT is particularly useful for non-linear and non-stationary signals. HHT is commonly applied to seismic signals, here HHT is applied to financial timeseries.
 
 Some specifics of the proof-of-concept code are:
 
