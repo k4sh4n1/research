@@ -155,7 +155,7 @@ The following plan can be outlined.
       - Acceleration (ẍ): return acceleration or volatility
       - Force (F): order flow imbalance or buy-sell pressure
       - ...
-   * Investigate candidates of investigation, like these structural dynamic methods:
+   * Investigate candidates, like these structural dynamic methods:
       - Mass-spring systems
       - Modal analysis
       - Natural frequency detection
