@@ -33,6 +33,11 @@ Structural systems and financial markets share foundational similarities:
    * Market crashes
 * Characteristic frequency and damping behavior
 * Need for real-time monitoring and anomaly detection
+   * Structural health monitoring
+   * Market surveillance
+* Forensic similarities
+   * Structural forensic analysis involves investigation and inspection of structures
+   * Technical analysis involves study of past market data for forecasting price direction
 * Support and resistance terminology for both structures and price action
 * Similar patterns of stress buildup and sudden release
 * Similarities between structural vibrations and market fluctuations
@@ -46,9 +51,6 @@ Structural systems and financial markets share foundational similarities:
 * Thresholds
    * Financial tipping points
    * Structural buckling
-* Forensic
-   * Structural forensic analysis involves investigation and inspection of structures
-   * Technical analysis involves study of past market data for forecasting price direction
 * ...
 
 Despite the similarities, the rich structural dynamics toolkit remains mostly unexplored in quantitative finance. This gap presents opportunities for practical innovation for:
