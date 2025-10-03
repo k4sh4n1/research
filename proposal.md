@@ -40,6 +40,7 @@ Structural systems and financial markets share foundational similarities:
    * Technical analysis involves study of past market data for forecasting price direction
 * Support and resistance terminology for both structures and price action
 * Similar patterns of stress buildup and sudden release
+* Structural energy and market momentum
 * Similarities between structural vibrations and market fluctuations
 * Equilibrium concept
    * Structural forces
