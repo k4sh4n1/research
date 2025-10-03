@@ -1,0 +1,1 @@
+podman restart algorithm-server
