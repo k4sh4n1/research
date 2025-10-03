@@ -1,0 +1,26 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# Install system dependencies that might be needed for scientific packages
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY server.py /app/
+COPY requirements.txt /app/
+COPY algorithm/ /app/algorithm/
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN for dir in algorithm/*/; do \
+    if [ -f "$dir/requirements.txt" ]; then \
+        echo "Installing requirements for $dir"; \
+        pip install --no-cache-dir -r "$dir/requirements.txt"; \
+    fi \
+done
+
+EXPOSE 8080
+
+CMD ["python", "-u", "server.py"]
