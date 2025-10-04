@@ -2,6 +2,7 @@ import json
 import numpy as np
 from scipy.fft import fft, fftfreq
 
+import sys
 # Add current directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 

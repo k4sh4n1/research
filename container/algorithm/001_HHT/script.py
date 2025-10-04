@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
 
+import sys
 # Add current directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 
