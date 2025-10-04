@@ -6,6 +6,9 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
 
+# Add current directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
+
 def algo(message):
     """
     Main algorithm function that must be present in every script.py
