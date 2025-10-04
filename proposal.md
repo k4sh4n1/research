@@ -54,6 +54,8 @@ Structural systems and financial markets share foundational similarities:
    * Structural buckling
 * ...
 
+For example, when a trader follows the price action methodology, it feels like they are telling a story of bulls and bears. The story of how price momentum is shaped by buyers and sellers. This story-telling remarkably resembles how dynamic forces are exerted upon a physical body to determine its momentum and behavior.
+
 Despite the similarities, the rich structural dynamics toolkit remains mostly unexplored in quantitative finance. This gap presents opportunities for practical innovation for:
 
 * Theoretical contributions to econophysics
