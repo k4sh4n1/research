@@ -1,3 +1,5 @@
+## Introduction
+
 The book "physics of wall street" quotes Warren Buffett saying: 
 
 > Beware of geeks bearing formulas
