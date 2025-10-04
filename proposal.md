@@ -242,12 +242,21 @@ The preliminary results indicate that systematic investigation could contribute 
 ## References
 
 [1]: Weatherall, James Owen (2013) "The Physics of Wall Street" https://archive.org/details/ThePhysicsOfWallStreetDewey332.63209WEAWeatherallJamesOwen
+
 [2]: Mantegna, R.N. and Stanley, H.E. (2000) "An Introduction to Econophysics: Correlations and Complexity in Finance" https://doi.org/10.1017/CBO9780511755767
+
 [3]: Bouchaud, J.-P. and Potters, M. (2003) "Theory of Financial Risk and Derivative Pricing: From Statistical Physics to Risk Management" https://doi.org/10.1017/CBO9780511753893
+
 [4]: Pagnottoni, P., Spelta, A., Pecora, N., Flori, A., & Pammolli, F. (2021) "Financial earthquakes: SARS-CoV-2 news shock propagation in stock and sovereign bond markets" https://doi.org/10.1016/j.physa.2021.126240
+
 [5]: Filimonov, V. and Sornette, D. (2013) "A stable and robust calibration scheme of the log-periodic power law model" https://doi.org/10.48550/arXiv.1108.0099
+
 [6]: Ramsey, J.B. (2002) "Wavelets in Economics and Finance: Past and Future" https://ssrn.com/abstract=1300227
+
 [7]: Didier Sornette, a geophysicist working in finance, https://en.wikipedia.org/wiki/Didier_Sornette
+
 [8]: Gai, P. and Kapadia, S. (2010) "Contagion in financial networks" https://ssrn.com/abstract=1577043
+
 [9]: Bank for International Settlements - BIS (2022) "Foreign Exchange Turnover Statistics." https://www.bis.org/statistics/rpfx22_fx.htm
+
 [10]: Groette, Oddmund (2024) "What Percentage of Trading Is Algorithmic?" https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
