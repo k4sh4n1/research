@@ -33,7 +33,7 @@ Structural systems and financial markets share foundational similarities:
    * Market crashes
 * Characteristic frequency and damping behavior
 * Need for real-time monitoring and anomaly detection
-   * Structural health monitoring
+   * Structural health monitoring or SHM
    * Market surveillance
 * Forensic similarities
    * Structural forensic analysis involves investigation and inspection of structures
