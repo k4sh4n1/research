@@ -24,6 +24,9 @@ However, trading firms like HRT, XTX, and Jane Street have been making billions 
 
 ## Price action
 
+Requires deep understanding of price behavior
+
+
 Price action is a trading methodology that is specially attractive. Since it is just focused on one criterion: price. Only price is analyzed without considering any other factor. Price is king, so to speak. The simplicity of involved parameters makes price action ideal for systematic investigation and application of structural dynamics.
 
 On the other hand, it is safe to say that structural dynamics is also reduced to remarkable simplicity in professional engineering practice. For example the earthquake design response spectrum of ASCE 7 standard [1] assumes the whole building as a single degree-of-freedom (DOF) mass-spring system. By just having the period of this single DOF system, you can get the corresponding spectral response acceleration in terms of acceleration due to gravity (9.81 m/s^2).
