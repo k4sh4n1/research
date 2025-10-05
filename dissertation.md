@@ -32,7 +32,7 @@ SHM employs sensors installed around the structure to measure its responses. By 
 
 Structural control tries to interfere with structure by various means to control its response to prevent it from becoming unstable. 
 
-Financial institutions might benefit from structural control concepts since they are at times interested in controlling markets to avoid crash.
+Financial institutions might benefit from structural control concepts since they are interested in controlling markets to avoid crash.
 
 ## reference
 
