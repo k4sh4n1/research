@@ -1,3 +1,5 @@
+# Cross domain investigation: applying structural dynamics theory to financial market prediction and risk assessment
+
 ## Terminology and notation
 
 PA: Price action methodology
