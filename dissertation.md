@@ -28,6 +28,8 @@ NEoWave is an improved version of Elliott wave theory [2]. It is more objective 
 
 SHM employs sensors installed around the structure to measure its responses. By analyzing the sensor signals, the structural characteristics are inferred. Based on structural characteristics, it is judged whether there is any structural anomaly.
 
+What price action methodology does is very similar to SHM. Price action tries to analyze timeseries for prediction. Technical analysis is basically to determine the market characteristics. The rigorous mathematical tools of SHM might be brought to financial economics to investigate their effectiveness for price forecasting.
+
 ## Structural control
 
 Structural control tries to interfere with structure by various means to control its response to prevent it from becoming unstable. 
