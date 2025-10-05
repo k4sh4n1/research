@@ -1,3 +1,9 @@
+## Terminology and notation
+
+PA == Price action methodology 
+SHM == Structural health monitoring
+DOF == Degrees of freedom
+
 ## Introduction
 
 The book "physics of wall street" quotes Warren Buffett saying: 
