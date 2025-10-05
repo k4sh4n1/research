@@ -1,10 +1,10 @@
 ## Terminology and notation
 
-PA == Price action methodology
+PA: Price action methodology
 
-SHM == Structural health monitoring
+SHM: Structural health monitoring
 
-DOF == Degrees of freedom
+DOF: Degrees of freedom
 
 ## Introduction
 
