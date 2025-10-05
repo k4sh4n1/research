@@ -20,6 +20,10 @@ On the other hand, it is safe to say that structural dynamics is also reduced to
 
 It is tempting for us to investigate and apply the simple practical concepts of structural dynamics into price action methodology. Price action resembles a story-telling about the two forces: bulls and bears. So, there are two dynamic forces being exerted on the system simultaneously: buyers and sellers.
 
+## Structural health monitoring (SHM)
+
+SHM installs sensors all around the structure to measure its responses. By analyzing the sensor signals, the structural characteristics are inferred. Based on structural characteristics, it is judged whether there is any structural anomaly.
+
 ## reference
 
 [1] Minimum Design Loads and Associated Criteria for Buildings and Other Structures (ASCE/SEI 7-22) https://www.asce.org/publications-and-news/asce-7
