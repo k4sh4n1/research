@@ -22,7 +22,7 @@ It is tempting for us to investigate and apply the simple practical concepts of 
 
 ## Structural health monitoring (SHM)
 
-SHM installs sensors all around the structure to measure its responses. By analyzing the sensor signals, the structural characteristics are inferred. Based on structural characteristics, it is judged whether there is any structural anomaly.
+SHM employs sensors installed around the structure to measure its responses. By analyzing the sensor signals, the structural characteristics are inferred. Based on structural characteristics, it is judged whether there is any structural anomaly.
 
 ## reference
 
