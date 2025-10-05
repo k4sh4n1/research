@@ -28,6 +28,12 @@ NEoWave is an improved version of Elliott wave theory [2]. It is more objective 
 
 SHM employs sensors installed around the structure to measure its responses. By analyzing the sensor signals, the structural characteristics are inferred. Based on structural characteristics, it is judged whether there is any structural anomaly.
 
+## Structural control
+
+structural control tries to interfere with structure by various means to control its response to prevent it from becoming unstable. 
+
+Institutions might benefit from structural control concepts since they are at times interested in controlling markets to avoid crash.
+
 ## reference
 
 [1]: Minimum Design Loads and Associated Criteria for Buildings and Other Structures (ASCE/SEI 7-22) https://www.asce.org/publications-and-news/asce-7
