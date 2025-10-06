@@ -259,10 +259,21 @@ string SendHTTPRequest(string jsonData)
          Print("URL not allowed. Please add ", InpServerURL, " to allowed URLs in Terminal settings");
       return "";
      }
+   else
+     {
+      if(res==200)
+        {
+         //--- Convert response to string
+         string response = CharArrayToString(result);
+         return response;
+        }
+      else
+         PrintFormat("WebRequest '%s' failed, error code %d", InpServerURL, res);
+         Alert("WebRequest failed, is server running?");
+         Alert("Returned error code by WebRequest: ", res);
+      return "";
+     }
 
-//--- Convert response to string
-   string response = CharArrayToString(result);
-   return response;
   }
 
 //+------------------------------------------------------------------+
