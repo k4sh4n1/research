@@ -49,6 +49,10 @@ Structural control tries to interfere with structure by various means to control
 
 Financial institutions might benefit from structural control concepts since they are interested in controlling markets to avoid crash.
 
+## Market fractals and wave patterns
+
+NeoWave can be considered as an evolution of Elliott Wave Theory. Some derivations of NeoWave has been extremely effective in real-time tanning. Can we apply mathematical tools of structural dynamics to fractal and wave theory in order to provide a physics-based objective perspective?
+
 ## reference
 
 [1]: Minimum Design Loads and Associated Criteria for Buildings and Other Structures (ASCE/SEI 7-22) https://www.asce.org/publications-and-news/asce-7
