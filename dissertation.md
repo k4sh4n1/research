@@ -51,7 +51,7 @@ Financial institutions might benefit from structural control concepts since they
 
 ## Market fractals and wave patterns
 
-NeoWave can be considered as an evolution of Elliott Wave Theory. Some derivations of NeoWave has been extremely effective in real-time tanning. Can we apply mathematical tools of structural dynamics to fractal and wave theory in order to provide a physics-based objective perspective?
+NeoWave can be considered as an evolution of Elliott Wave Theory. Some derivations of NeoWave has been extremely effective in real-time trading. Can we apply mathematical tools of structural dynamics to fractal and wave theory in order to provide a physics-based objective perspective?
 
 ## reference
 
