@@ -241,7 +241,7 @@ void DisplayInfo()
       ObjectSetInteger(0, bg_name, OBJPROP_YDISTANCE, InpPanelY - 5);
       ObjectSetInteger(0, bg_name, OBJPROP_XSIZE, panel_width);
       ObjectSetInteger(0, bg_name, OBJPROP_YSIZE, panel_height);
-      ObjectSetInteger(0, bg_name, OBJPROP_BGCOLOR, clrBlack);  // Solid black for maximum opacity
+      ObjectSetInteger(0, bg_name, OBJPROP_BGCOLOR, InpPanelBgColor);  // Solid black will be maximum opacity
       ObjectSetInteger(0, bg_name, OBJPROP_BORDER_TYPE, BORDER_FLAT);
       ObjectSetInteger(0, bg_name, OBJPROP_CORNER, CORNER_LEFT_UPPER);
       ObjectSetInteger(0, bg_name, OBJPROP_WIDTH, 1);
@@ -284,7 +284,7 @@ void DisplayInfo()
          ObjectSetInteger(0, obj_name, OBJPROP_YDISTANCE, InpPanelY + i * 17);
          ObjectSetString(0, obj_name, OBJPROP_TEXT, lines[i]);
          ObjectSetString(0, obj_name, OBJPROP_FONT, "Consolas");
-         ObjectSetInteger(0, obj_name, OBJPROP_FONTSIZE, 9);
+         ObjectSetInteger(0, obj_name, OBJPROP_FONTSIZE, 14);
          ObjectSetInteger(0, obj_name, OBJPROP_CORNER, CORNER_LEFT_UPPER);
          ObjectSetInteger(0, obj_name, OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
          ObjectSetInteger(0, obj_name, OBJPROP_SELECTABLE, false);
