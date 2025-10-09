@@ -9,7 +9,7 @@
 //--- Input parameters
 input string   InpServerURL = "http://localhost:8080/algorithm/001"; // Server URL
 input int      InpDataPoints = 200;          // Data points to analyze
-input int      InpUpdateSeconds = 5;         // Update interval (seconds)
+input int      InpUpdateSeconds = 2;         // Update interval (seconds)
 input bool     InpShowPanel = true;          // Show info panel
 input int      InpPanelX = 20;               // Panel X position
 input int      InpPanelY = 50;               // Panel Y position
