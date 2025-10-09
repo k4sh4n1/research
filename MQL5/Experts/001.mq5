@@ -15,7 +15,7 @@ input int      InpPanelX = 20;               // Panel X position
 input int      InpPanelY = 50;               // Panel Y position
 input color    InpPanelBgColor = clrBlack;   // Panel background color
 input color    InpTextColor = clrWhite;      // Default text color
-input int      InpFontSize = 12;             // Default text size
+input int      InpFontSize = 8;              // Default text size
 
 //--- Global variables
 datetime g_lastUpdateTime = 0;
