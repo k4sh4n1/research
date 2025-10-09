@@ -8,7 +8,7 @@ SHM: Structural health monitoring
 
 DOF: Degrees of freedom
 
-## Introduction
+## Algorithmic trading
 
 The book "physics of wall street" quotes Warren Buffett saying: 
 
@@ -21,6 +21,15 @@ It's a reference to the famous statement about the Trojan horse History:
 Some investors might not be interested in algorithms. Also some traders believe that price is king and they don't use mathematical indicators much. Like Al Brooks the best-selling writer about price action methodology for trading.
 
 However, trading firms like HRT, XTX, and Jane Street have been making billions of dollars by formulas and algorithms. Their founders are not only geeks, but also in some cases hippie geeks, as reported by Bloomberg.
+
+## Fundamental vs technical
+
+There is a distinct difference between fundamental analysis and technical one. Fundamental analysis is used extensively by long-term investors and institutions. Technical analysis is extensively used by short-term traders.
+
+There are two parts to this research:
+
+* Fundamental analysis
+* Technical analysis
 
 ## Price action
 
