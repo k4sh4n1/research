@@ -68,7 +68,7 @@ NeoWave can be considered as an evolution of Elliott Wave Theory. Some derivatio
 
 ## Partial differential equations or PDE
 
-Physical phenomena can be described as PDEs. Market price can be described by PDEs taking into account the buying and selling pressures.
+Physical phenomena can be described as PDEs. Market price can be described by PDEs taking into account the buying and selling pressures or forces.
 
 A PDE can be fitted into the recent market price timeseries, then it can be used to forecast the immediate future. Just like how a function is approximated by Taylor series around a specific point. The Taylor series are accurate near the specific point, but their accuracy decreases farther away from the point. Function derivatives are used by Taylor series. Function derivatives estimate the local behavior of the function around that specific point, but not its global behavior.
 
