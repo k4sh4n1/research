@@ -72,6 +72,10 @@ Physical phenomena can be described as PDEs. Market price can be described by PD
 
 A PDE can be fitted into the recent market price timeseries, then it can be used to forecast the immediate future. Just like how a function is approximated by Taylor series around a specific point. The Taylor series are accurate near the specific point, but their accuracy decreases farther away from the point. Function derivatives are used by Taylor series. Function derivatives estimate the local behavior of the function around that specific point, but not its global behavior.
 
+## Navier–Stokes equations
+
+Navier–Stokes PDE might be employed to simulate the price action like the water free surface. The price acts like water waves on the sea or lake surface. By having the water surface time history for the recent past, Navier–Stokes PDE might help us predict the time history for the immediate or near future.
+
 ## reference
 
 [1]: Minimum Design Loads and Associated Criteria for Buildings and Other Structures (ASCE/SEI 7-22) https://www.asce.org/publications-and-news/asce-7
