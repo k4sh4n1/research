@@ -15,6 +15,7 @@ input int      InpPanelX = 20;               // Panel X position
 input int      InpPanelY = 50;               // Panel Y position
 input color    InpPanelBgColor = clrBlack;   // Panel background color
 input color    InpTextColor = clrWhite;      // Default text color
+input int      InpFontSize = 12;             // Default text size
 
 //--- Global variables
 datetime g_lastUpdateTime = 0;
@@ -274,7 +275,7 @@ void DisplayInfo()
      }
 
 //--- Create text labels for each line (rest of the code remains the same)
-   for(int i = 0; i < line_count && i < 25; i++)  // Limit to 25 lines
+   for(int i = 0; i < line_count; i++)
      {
       string obj_name = g_prefix + "LINE_" + IntegerToString(i);
 
@@ -284,7 +285,7 @@ void DisplayInfo()
          ObjectSetInteger(0, obj_name, OBJPROP_YDISTANCE, InpPanelY + i * 17);
          ObjectSetString(0, obj_name, OBJPROP_TEXT, lines[i]);
          ObjectSetString(0, obj_name, OBJPROP_FONT, "Consolas");
-         ObjectSetInteger(0, obj_name, OBJPROP_FONTSIZE, 14);
+         ObjectSetInteger(0, obj_name, OBJPROP_FONTSIZE, InpFontSize);
          ObjectSetInteger(0, obj_name, OBJPROP_CORNER, CORNER_LEFT_UPPER);
          ObjectSetInteger(0, obj_name, OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
          ObjectSetInteger(0, obj_name, OBJPROP_SELECTABLE, false);
