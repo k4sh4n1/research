@@ -8,10 +8,18 @@ C:\Users\username\AppData\Roaming\MetaQuotes\Terminal\A_LONG_HASH\MQL5\Experts\*
 
 # MetaTrader
 
-To have access to MQL5 code on the MetaTrader platform:
+To have access to MQL5 Expert Advisor or EA code on the MetaTrader platform:
 
 ```bash
-cd C:\Users\m3\AppData\Roaming\MetaQuotes\Terminal\A_LONG_HASH\MQL5
+cd C:\Users\m3\AppData\Roaming\MetaQuotes\Terminal\HASH\MQL5\Experts\
 
-mklink /J "research-MQL5" "C:\Users\m3\repos\research-proposal\MQL5"
+mklink /J "MQL5-Experts" "C:\Users\m3\repos\research-proposal\MQL5\Experts"
+```
+
+For the MQL5 script code:
+
+```bash
+cd C:\Users\m3\AppData\Roaming\MetaQuotes\Terminal\HASH\MQL5\Scripts\
+
+mklink /J "MQL5-Scripts" "C:\Users\m3\repos\research-proposal\MQL5\Scripts"
 ```
