@@ -10,10 +10,16 @@
 input string   InpServerURL = "http://localhost:8080/algorithm/001"; // Server URL
 input int      InpDataPoints = 200;          // Data points to analyze
 input int      InpUpdateSeconds = 5;         // Update interval (seconds)
+input bool     InpShowPanel = true;          // Show info panel
+input int      InpPanelX = 20;               // Panel X position
+input int      InpPanelY = 50;               // Panel Y position
+input color    InpPanelBgColor = C'20,20,20'; // Panel background color
+input color    InpTextColor = clrWhite;      // Default text color
 
 //--- Global variables
 datetime g_lastUpdateTime = 0;
 string g_cycles_info = "Waiting for data...";
+string g_prefix = "CYCLE_";
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -38,8 +44,10 @@ void OnDeinit(const int reason)
 //--- Kill timer
    EventKillTimer();
 
-//--- Clear comment
+//--- Clear objects and comment
+   ObjectsDeleteAll(0, g_prefix);
    Comment("");
+   ChartRedraw();
   }
 
 //+------------------------------------------------------------------+
@@ -55,8 +63,7 @@ void OnTimer()
 //+------------------------------------------------------------------+
 void OnTick()
   {
-//--- Display current cycles info
-   DisplayInfo();
+//--- Display is handled by timer and UpdateCycles
   }
 
 //+------------------------------------------------------------------+
@@ -95,6 +102,7 @@ void UpdateCycles()
    if(response != "")
      {
       ParseResponse(response);
+      DisplayInfo();  // Update display after parsing
      }
   }
 
@@ -201,6 +209,117 @@ void ParseResponse(string response)
   }
 
 //+------------------------------------------------------------------+
+//| Display information as panel                                     |
+//+------------------------------------------------------------------+
+void DisplayInfo()
+  {
+   if(!InpShowPanel)
+     {
+      Comment(g_cycles_info);  // Fall back to comment if panel disabled
+      return;
+     }
+
+//--- Clear comment since we're using panel
+   Comment("");
+
+//--- Clear previous objects
+   ObjectsDeleteAll(0, g_prefix);
+
+//--- Split info into lines
+   string lines[];
+   int line_count = StringSplit(g_cycles_info, '\n', lines);
+
+//--- Calculate panel dimensions
+   int panel_width = 400;
+   int panel_height = (line_count + 1) * 17 + 10;
+
+//--- Create background rectangle
+   string bg_name = g_prefix + "BACKGROUND";
+   if(ObjectCreate(0, bg_name, OBJ_RECTANGLE_LABEL, 0, 0, 0))
+     {
+      ObjectSetInteger(0, bg_name, OBJPROP_XDISTANCE, InpPanelX - 5);
+      ObjectSetInteger(0, bg_name, OBJPROP_YDISTANCE, InpPanelY - 5);
+      ObjectSetInteger(0, bg_name, OBJPROP_XSIZE, panel_width);
+      ObjectSetInteger(0, bg_name, OBJPROP_YSIZE, panel_height);
+      ObjectSetInteger(0, bg_name, OBJPROP_BGCOLOR, InpPanelBgColor);
+      ObjectSetInteger(0, bg_name, OBJPROP_BORDER_TYPE, BORDER_FLAT);
+      ObjectSetInteger(0, bg_name, OBJPROP_CORNER, CORNER_LEFT_UPPER);
+      ObjectSetInteger(0, bg_name, OBJPROP_WIDTH, 1);
+      ObjectSetInteger(0, bg_name, OBJPROP_BACK, true);
+      ObjectSetInteger(0, bg_name, OBJPROP_SELECTABLE, false);
+      ObjectSetInteger(0, bg_name, OBJPROP_SELECTED, false);
+      ObjectSetInteger(0, bg_name, OBJPROP_HIDDEN, true);
+      ObjectSetInteger(0, bg_name, OBJPROP_ZORDER, 0);
+     }
+
+//--- Create border
+   string border_name = g_prefix + "BORDER";
+   if(ObjectCreate(0, border_name, OBJ_RECTANGLE_LABEL, 0, 0, 0))
+     {
+      ObjectSetInteger(0, border_name, OBJPROP_XDISTANCE, InpPanelX - 6);
+      ObjectSetInteger(0, border_name, OBJPROP_YDISTANCE, InpPanelY - 6);
+      ObjectSetInteger(0, border_name, OBJPROP_XSIZE, panel_width + 2);
+      ObjectSetInteger(0, border_name, OBJPROP_YSIZE, panel_height + 2);
+      ObjectSetInteger(0, border_name, OBJPROP_BGCOLOR, clrNONE);
+      ObjectSetInteger(0, border_name, OBJPROP_BORDER_TYPE, BORDER_RAISED);
+      ObjectSetInteger(0, border_name, OBJPROP_CORNER, CORNER_LEFT_UPPER);
+      ObjectSetInteger(0, border_name, OBJPROP_COLOR, clrGray);
+      ObjectSetInteger(0, border_name, OBJPROP_STYLE, STYLE_SOLID);
+      ObjectSetInteger(0, border_name, OBJPROP_WIDTH, 1);
+      ObjectSetInteger(0, border_name, OBJPROP_BACK, false);
+      ObjectSetInteger(0, border_name, OBJPROP_SELECTABLE, false);
+      ObjectSetInteger(0, border_name, OBJPROP_SELECTED, false);
+      ObjectSetInteger(0, border_name, OBJPROP_HIDDEN, true);
+      ObjectSetInteger(0, border_name, OBJPROP_ZORDER, 1);
+     }
+
+//--- Create text labels for each line
+   for(int i = 0; i < line_count && i < 25; i++)  // Limit to 25 lines
+     {
+      string obj_name = g_prefix + "LINE_" + IntegerToString(i);
+
+      if(ObjectCreate(0, obj_name, OBJ_LABEL, 0, 0, 0))
+        {
+         ObjectSetInteger(0, obj_name, OBJPROP_XDISTANCE, InpPanelX);
+         ObjectSetInteger(0, obj_name, OBJPROP_YDISTANCE, InpPanelY + i * 17);
+         ObjectSetString(0, obj_name, OBJPROP_TEXT, lines[i]);
+         ObjectSetString(0, obj_name, OBJPROP_FONT, "Consolas");
+         ObjectSetInteger(0, obj_name, OBJPROP_FONTSIZE, 9);
+         ObjectSetInteger(0, obj_name, OBJPROP_CORNER, CORNER_LEFT_UPPER);
+         ObjectSetInteger(0, obj_name, OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
+         ObjectSetInteger(0, obj_name, OBJPROP_SELECTABLE, false);
+         ObjectSetInteger(0, obj_name, OBJPROP_SELECTED, false);
+         ObjectSetInteger(0, obj_name, OBJPROP_HIDDEN, true);
+         ObjectSetInteger(0, obj_name, OBJPROP_ZORDER, 2);
+
+         //--- Color coding based on content
+         color text_color = InpTextColor;
+         if(StringFind(lines[i], "===") >= 0)
+            text_color = clrGold;
+         else
+            if(StringFind(lines[i], "Main Periods") >= 0 || StringFind(lines[i], "Frequencies") >= 0)
+               text_color = clrAqua;
+            else
+               if(StringFind(lines[i], "---") >= 0)
+                  text_color = clrSilver;
+               else
+                  if(StringFind(lines[i], "Last Update") >= 0)
+                     text_color = clrGray;
+                  else
+                     if(StringFind(lines[i], "•") >= 0)
+                        text_color = clrLightGreen;
+                     else
+                        if(StringFind(lines[i], "FFT:") >= 0 || StringFind(lines[i], "IMF:") >= 0 || StringFind(lines[i], "AutoCorr:") >= 0)
+                           text_color = clrKhaki;
+
+         ObjectSetInteger(0, obj_name, OBJPROP_COLOR, text_color);
+        }
+     }
+
+   ChartRedraw();
+  }
+
+//+------------------------------------------------------------------+
 //| Extract string value from JSON                                   |
 //+------------------------------------------------------------------+
 string ExtractString(string json, string start_marker, string end_marker)
@@ -262,13 +381,5 @@ string GetTimeframeUnit()
             return "days";
          else
             return "weeks";
-  }
-
-//+------------------------------------------------------------------+
-//| Display information on chart                                     |
-//+------------------------------------------------------------------+
-void DisplayInfo()
-  {
-   Comment(g_cycles_info);
   }
 //+------------------------------------------------------------------+
