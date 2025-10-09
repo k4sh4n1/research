@@ -22,6 +22,10 @@ Some investors might not be interested in algorithms. Also some traders believe 
 
 However, trading firms like HRT, XTX, and Jane Street have been making billions of dollars by formulas and algorithms. Their founders are not only geeks, but also in some cases hippie geeks, as reported by Bloomberg.
 
+## Target market
+
+Any market can be tried out, including stocks, bonds, currencies, commodities, options, futures, and more. Both local venues and global ones can be tried out.
+
 ## Fundamental vs technical
 
 There is a distinct difference between fundamental analysis and technical one. Fundamental analysis is used extensively by long-term investors and institutions. Technical analysis is extensively used by short-term traders.
@@ -61,6 +65,10 @@ Financial institutions might benefit from structural control concepts since they
 ## Market fractals and wave patterns
 
 NeoWave can be considered as an evolution of Elliott Wave Theory. Some derivations of NeoWave has been extremely effective in real-time trading. Can we apply mathematical tools of structural dynamics to fractal and wave theory in order to provide a physics-based objective perspective?
+
+## Partial differential equations or PDE
+
+Physical phenomena can be described as PDEs. Market price can be described by PDEs taking into account the buying and selling pressures.
 
 ## reference
 
