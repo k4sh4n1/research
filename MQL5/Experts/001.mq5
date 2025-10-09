@@ -13,7 +13,7 @@ input int      InpUpdateSeconds = 5;         // Update interval (seconds)
 input bool     InpShowPanel = true;          // Show info panel
 input int      InpPanelX = 20;               // Panel X position
 input int      InpPanelY = 50;               // Panel Y position
-input color    InpPanelBgColor = C'20,20,20'; // Panel background color
+input color    InpPanelBgColor = clrBlack;   // Panel background color
 input color    InpTextColor = clrWhite;      // Default text color
 
 //--- Global variables
@@ -233,7 +233,7 @@ void DisplayInfo()
    int panel_width = 400;
    int panel_height = (line_count + 1) * 17 + 10;
 
-//--- Create background rectangle
+//--- Create OPAQUE background rectangle
    string bg_name = g_prefix + "BACKGROUND";
    if(ObjectCreate(0, bg_name, OBJ_RECTANGLE_LABEL, 0, 0, 0))
      {
@@ -241,15 +241,15 @@ void DisplayInfo()
       ObjectSetInteger(0, bg_name, OBJPROP_YDISTANCE, InpPanelY - 5);
       ObjectSetInteger(0, bg_name, OBJPROP_XSIZE, panel_width);
       ObjectSetInteger(0, bg_name, OBJPROP_YSIZE, panel_height);
-      ObjectSetInteger(0, bg_name, OBJPROP_BGCOLOR, InpPanelBgColor);
+      ObjectSetInteger(0, bg_name, OBJPROP_BGCOLOR, clrBlack);  // Solid black for maximum opacity
       ObjectSetInteger(0, bg_name, OBJPROP_BORDER_TYPE, BORDER_FLAT);
       ObjectSetInteger(0, bg_name, OBJPROP_CORNER, CORNER_LEFT_UPPER);
       ObjectSetInteger(0, bg_name, OBJPROP_WIDTH, 1);
-      ObjectSetInteger(0, bg_name, OBJPROP_BACK, true);
+      ObjectSetInteger(0, bg_name, OBJPROP_BACK, false);  // Foreground rendering
       ObjectSetInteger(0, bg_name, OBJPROP_SELECTABLE, false);
       ObjectSetInteger(0, bg_name, OBJPROP_SELECTED, false);
-      ObjectSetInteger(0, bg_name, OBJPROP_HIDDEN, true);
-      ObjectSetInteger(0, bg_name, OBJPROP_ZORDER, 0);
+      ObjectSetInteger(0, bg_name, OBJPROP_HIDDEN, false);  // Fully visible
+      ObjectSetInteger(0, bg_name, OBJPROP_ZORDER, 1000);  // High z-order
      }
 
 //--- Create border
@@ -266,14 +266,14 @@ void DisplayInfo()
       ObjectSetInteger(0, border_name, OBJPROP_COLOR, clrGray);
       ObjectSetInteger(0, border_name, OBJPROP_STYLE, STYLE_SOLID);
       ObjectSetInteger(0, border_name, OBJPROP_WIDTH, 1);
-      ObjectSetInteger(0, border_name, OBJPROP_BACK, false);
+      ObjectSetInteger(0, border_name, OBJPROP_BACK, false);  // Also foreground
       ObjectSetInteger(0, border_name, OBJPROP_SELECTABLE, false);
       ObjectSetInteger(0, border_name, OBJPROP_SELECTED, false);
-      ObjectSetInteger(0, border_name, OBJPROP_HIDDEN, true);
-      ObjectSetInteger(0, border_name, OBJPROP_ZORDER, 1);
+      ObjectSetInteger(0, border_name, OBJPROP_HIDDEN, false);  // Fully visible
+      ObjectSetInteger(0, border_name, OBJPROP_ZORDER, 1001);  // Higher than background
      }
 
-//--- Create text labels for each line
+//--- Create text labels for each line (rest of the code remains the same)
    for(int i = 0; i < line_count && i < 25; i++)  // Limit to 25 lines
      {
       string obj_name = g_prefix + "LINE_" + IntegerToString(i);
@@ -289,8 +289,8 @@ void DisplayInfo()
          ObjectSetInteger(0, obj_name, OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
          ObjectSetInteger(0, obj_name, OBJPROP_SELECTABLE, false);
          ObjectSetInteger(0, obj_name, OBJPROP_SELECTED, false);
-         ObjectSetInteger(0, obj_name, OBJPROP_HIDDEN, true);
-         ObjectSetInteger(0, obj_name, OBJPROP_ZORDER, 2);
+         ObjectSetInteger(0, obj_name, OBJPROP_HIDDEN, false);  // Fully visible
+         ObjectSetInteger(0, obj_name, OBJPROP_ZORDER, 1002);  // Highest z-order
 
          //--- Color coding based on content
          color text_color = InpTextColor;
