@@ -70,6 +70,8 @@ NeoWave can be considered as an evolution of Elliott Wave Theory. Some derivatio
 
 Physical phenomena can be described as PDEs. Market price can be described by PDEs taking into account the buying and selling pressures.
 
+A PDE can be fitted into the recent market price timeseries, then it can be used to forecast the immediate future. Just like how a function is approximated by Taylor series around a specific point. The Taylor series are accurate near the specific point, but their accuracy decreases farther away from the point. Function derivatives are used by Taylor series. Function derivatives estimate the local behavior of the function around that specific point, but not its global behavior.
+
 ## reference
 
 [1]: Minimum Design Loads and Associated Criteria for Buildings and Other Structures (ASCE/SEI 7-22) https://www.asce.org/publications-and-news/asce-7
