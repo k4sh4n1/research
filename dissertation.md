@@ -113,6 +113,9 @@ The selection of SDE model among available models can be assisted by ML too. Acc
 
 Performance based design from structural engineering can inspire.
 
+## Stochastic Finite Element Method (SFEM)
+
+## Stochastic Structural Dynamics (SDE-based)
 
 ## Reference
 
