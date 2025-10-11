@@ -107,7 +107,12 @@ ML will provide:
 * Quick estimation of SDE parameters from observed market prices
 * Reducing optimization time
 
-The selection of SDE model among available models can be assisted by ML too. According to the market regime or other variables, it is decided which SDE model is more probably to provide the most accurate forecasts.
+The selection of SDE model among available models can be assisted by ML too. According to the market regime or other variables, it is decided which SDE model is more probable to provide the most accurate forecasts.
+
+## PBD
+
+Performance based design from structural engineering can inspire.
+
 
 ## Reference
 
