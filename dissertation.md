@@ -76,6 +76,20 @@ A PDE can be fitted into the recent market price timeseries, then it can be used
 
 Navier–Stokes PDE might be employed to simulate the price action like the water free surface. The price acts like water waves on the sea or lake surface. By having the water surface time history for the recent past, Navier–Stokes PDE might help us predict the time history for the immediate or near future.
 
+## Stochastic differential equations or SDE
+
+SDEs can model the uncertainties of the real-world phenomena like earthquakes and financial markets. SDEs are popular along with Monte Carlo simulation. SDEs are specifically essential for currency markets due to having two currencies involved in each pair, central bank interventions, complex volatility, and more.
+
+## Multi SDEs
+
+The SDE selection can depend upon the product being traded, market regime, computational resources, calibration requirements, and more.
+
+For currencies, multiple currencies might be modeled simultaneously for consistent modeling of entire currency network.
+
+## Neural SDE
+
+Machine Learning (ML) can enhance SDE models by using neural SDEs for example.
+
 ## reference
 
 [1]: Minimum Design Loads and Associated Criteria for Buildings and Other Structures (ASCE/SEI 7-22) https://www.asce.org/publications-and-news/asce-7
