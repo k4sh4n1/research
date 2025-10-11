@@ -92,10 +92,24 @@ Machine Learning (ML) can enhance SDE models by using neural SDEs for example.
 
 ## ML + SDE
 
+A combination of machine learning (ML) and stochastic differential equations (SDE) can be employed to have the best of both worlds.
 
+SDE will provide:
 
+* Interpretable models
+* Risk or sensitivity measures
+* Extrapolate to unseen scenarios
 
-## reference
+ML will provide: 
+
+* Prediction accuracy through detection of SDE parameters
+* ML‑assisted calibration
+* Quick estimation of SDE parameters from observed market prices
+* Reducing optimization time
+
+The selection of SDE model among available models can be assisted by ML too. According to the market regime or other variables, it is decided which SDE model is more probably to provide the most accurate forecasts.
+
+## Reference
 
 [1]: Minimum Design Loads and Associated Criteria for Buildings and Other Structures (ASCE/SEI 7-22) https://www.asce.org/publications-and-news/asce-7
 
