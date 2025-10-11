@@ -115,7 +115,15 @@ Performance based design from structural engineering can inspire.
 
 ## Stochastic Finite Element Method (SFEM)
 
+It can inspire us.
+
 ## Stochastic Structural Dynamics (SDE-based)
+
+It can inspire us.
+
+## Deep Learning for Structural Health Monitoring
+
+It can inspire us.
 
 ## Reference
 
