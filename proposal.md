@@ -233,14 +233,28 @@ The concepts of _agile_ and _sprint_ are coming from software development indust
 
 As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed. Hilbert-Huang Transform (HHT) approach is employed to carry out the frequency spectrum analysis. HHT is particularly useful for non-linear and non-stationary signals. HHT is commonly applied to seismic signals, here HHT is applied to financial timeseries.
 
-Some specifics of the proof-of-concept code are:
+Some specifics of the proof-of-concept test:
 
-* HHT can be applied to the timeseries of any currency pairs
-* Multiple currency pairs like EUR/USD and USD/JPY can investigated
-* Analysis duration can be from multiple months to multiple years
-* Any timeframe can be tried out, like M1, M5, H1 and so on
-* Dominant periods and cycles are identified and visualized
-* Number of candles or data points to be analyzed is an adjustable parameter
+* HHT and FFT methods are implemented to analyze the price data
+* Currency: EUR/USD pair
+* Timeframe: M1 or 1-minutes bars
+* Real-time testing is done by a demo account on MetaTrader platform
+* Data points analyzed: 200, it is an adjustable input parameter, therefore it's trivial to change
+
+Dominant periods and cycles are identified and visualized on the chart. Sample results on Oct. 9, 2025 around 6:37 PM local time:
+
+* Main periods:
+   * 3.0 bars or 3 minutes
+   * 9.2 bars or 9.2 minutes
+   * 14.3 bars or 14.3 minutes
+   * 20.0 bars or 20.0 minutes
+   * 23.0 bars or 23.0 minutes
+* Frequencies (cycles/bar):
+   * 0.3378
+   * 0.1088
+   * 0.0700
+   * 0.0500
+   * 0.0435
 
 The preliminary results indicate that systematic investigation could contribute multidisciplinary innovations inspired by structural dynamics into financial market analysis. Novel contributions to both theory and practice are highly probable.
 
