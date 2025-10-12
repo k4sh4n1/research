@@ -28,9 +28,9 @@ Financial markets exhibit stochastic behaviors similar to structural engineering
 
 Structural systems and financial markets share foundational similarities:
 
-* Dynamic behavior under external forces
-   * Financial forces of buyers against sellers
-   * Financial forces of bulls against bears
+* Stochastic behavior under external forces
+   * Financial forces of buyers against sellers or bulls against bears
+   * Stochastic nature of seismic loads and financial shocks
 * Extreme events
    * Structural collapse
    * Market crashes
@@ -50,16 +50,15 @@ Structural systems and financial markets share foundational similarities:
    * Supply and demand across macro and micro economy
 * Financial friction and mechanical one
 * Nonlinear dynamics behavior
-* Stochastic nature of seismic loads and financial shocks
 * Shock propagation through the financial network and structural network
 * Thresholds
    * Financial tipping points
    * Structural buckling
 * ...
 
-For example, when a trader follows the price action methodology, it feels like they are telling a story of bulls and bears. The story of how price momentum is shaped by buyers and sellers. This story-telling remarkably resembles how dynamic forces are exerted upon a physical body to determine its momentum and behavior.
+For example, when a trader follows the price action methodology, it feels like they are telling a story of bulls and bears. The story of how price momentum is shaped by buyers and sellers. This story-telling remarkably resembles how external forces are exerted upon a physical body to determine its momentum and behavior.
 
-Despite the similarities, the rich structural dynamics toolkit remains mostly unexplored in quantitative finance. This gap presents opportunities for practical innovation for:
+Despite the similarities, the rich structural toolkit remains mostly unexplored in quantitative finance. This gap presents opportunities for practical innovation for:
 
 * Theoretical contributions to econophysics
 * Novel predictive tools based on physical systems theory
@@ -67,15 +66,15 @@ Despite the similarities, the rich structural dynamics toolkit remains mostly un
 
 ## Related work
 
-The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [1]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s. Financial industry has been using physical models to effectively figure out the financial behavior. There are some academic studies carried out, but systematic investigation of structural dynamics remains mostly absent.
+The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [1]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s. Financial industry has been using physical models to effectively figure out the financial behavior. There are some academic studies carried out, but systematic investigation of structural methodologies remains mostly absent.
 
 ## Literature gap
 
-The literature review reveals several critical gaps. While physics-inspired approaches to financial markets have gained traction, the specific application of structural dynamics theory remains underexplored.
+The literature review reveals several critical gaps. While physics-inspired approaches to financial markets have gained traction, the specific application of structural engineering methodologies remains underexplored.
 
-The rich mathematical framework of structural dynamics, including modal analysis, spectral decomposition, and finite element methods, has seen minimal systematic application. Although econophysics has applied concepts from mechanics and thermodynamics to financial markets [2] [3].
+The rich mathematical frameworks available for structural hazard analysis, structural health monitoring, structural control, and finite element method, have seen minimal systematic application. Although econophysics has applied concepts from mechanics and thermodynamics to financial markets [2] [3].
 
-Some recent studies have investigated the impact of global news events on major equity and bond markets through the lens of seismology, but without leveraging the full toolkit of structural dynamics analysis [4].
+Some recent studies have investigated the impact of global news events on major equity and bond markets through the lens of seismology, but without leveraging the full toolkit of structural engineering [4].
 
 There is no comprehensive framework mapping structural parameters, including mass, stiffness, damping, to financial variables in a systematic way. The few attempts that exist focus on specific phenomena rather than developing a general theoretical framework [5].
 
@@ -83,15 +82,13 @@ Traditional financial analysis relies on Fourier transforms and wavelet analysis
 
 The finite element method or FEM has revolutionized structural engineering. FEM application to financial risk modeling is virtually non-existent. Discretizing the market into elements and analyzing stress distribution by FEM represents a significant potential opportunity.
 
-The literature review reveals a huge gap in cross-domain expertise. Financial experts generally lack the knowledge of structural dynamics, and structural engineers rarely dive into finance. Exceptions like Didier Sornette [7] have indicated the potential, but systematic investigation remains absent.
+The literature review reveals a huge gap in cross-domain expertise. Financial experts generally lack the knowledge of physical systems, and structural engineers rarely dive into finance. Exceptions like Didier Sornette [7] have indicated the potential, but systematic investigation remains absent.
 
-Structural health monitoring or SHM, which detect structural damage in real-time, is parallel to market surveillance and crash prediction. However, no comprehensive framework exists for adapting SHM methodologies to financial markets.
+Structural health monitoring or SHM, which is able to detect structural damage in real-time, is parallel to market surveillance and crash prediction. However, no comprehensive framework exists for adapting SHM methodologies to financial markets.
 
-Market crashes are equivalent to structural failures, however the sophisticated mathematical tools for analyzing shock response in structures, including response spectra, time-history analysis, and nonlinear dynamic analysis, have not been systematically adapted for financial shock events. Some studies have been carried out but they see the problem from a network model perspective not the dynamic response characteristics central to structural analysis [8].
+Market crashes are equivalent to structural failures, however the sophisticated mathematical tools for analyzing shock response in structures, including response spectra, time-history analysis, and stochastic dynamic analysis, have not been systematically adapted for financial shock events. Some studies have been carried out but they see the problem from a network model perspective not the dynamic response characteristics central to structural analysis [8].
 
-In structural engineering the physical experiments would validate theoretical models. Frameworks for validating structural dynamics models against market data can extend to both back-testing and real-time testing. The performance metrics could be specifically developed for physics-based trading strategies.
-
-The literature lacks frameworks for validating physics-based financial models against market data. This gap presents an opportunity for academic and practical innovation. Considering the increasing dominance of algorithmic trading, there is a need for novel validated forecasting in financial markets.
+In structural engineering the physical experiments would validate theoretical models. Frameworks for validating structural models against market data can extend to both back-testing and real-time testing. The performance metrics could be specifically developed for physics-based trading strategies. The literature lacks frameworks for validating physics-based financial models against market data. This gap presents an opportunity for academic and practical innovation. Considering the increasing dominance of algorithmic trading, there is a need for novel validated forecasting in financial markets.
 
 ## Background
 
