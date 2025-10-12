@@ -119,30 +119,36 @@ This research could have significant impact due to:
 
 ## General research questions
 
-This research proposal would try to answer these questions, at least:
+Two main general questions are to be answered:
+
+* Can structural engineering methodologies help with _technical_ analysis of financial markets?
+* Can structural engineering methodologies help with _fundamental_ analysis of financial markets?
+
+A bit more specific:
 
 * Can structural engineering methodologies identify specific characteristics of financial markets?
 * Can structural engineering methodologies help with financial timeseries forecasting?
 * Can structural engineering methodologies predict market crashes?
 * Can structural engineering methodologies detect market regime changes?
 * How do structural engineering methodologies apply to financial markets?
+* ...
 
 ## Specific research hypotheses
 
 Beyond the general questions, this research might test specific hypotheses:
 
 * Hypothesis statement 1:
-   * Traditional structural engineering methodologies can predict the price action with a win rate of above `50%`.
+   * Traditional structural engineering methods can predict the price action with a win rate of above `50%`.
 * Hypothesis statement 2:
-   * Stochastic structural engineering methodologies can predict the price action with a win rate of above `55%`.
+   * Stochastic structural engineering methods can predict the price action with a win rate of above `53%`.
 * Hypothesis statement 3:
-   * Machine learning (ML):
-   * ML-assisted structural engineering methodologies can predict the price action with a win rate of above `60%`.
+   * ML-assisted structural engineering methods can predict the price action with a win rate of above `55%`.
 * Hypothesis statement 4:
    * Finite element modeling of financial market network will identify risk `24-48` hours in advance.
 * Hypothesis statement 5:
-   * Shock response from news announcements follow laws similar to earthquake relationships.
-   * Earthquake power laws can approximate the price action after news announcements with a precision above `80%`.
+   * Earthquake power laws can approximate the price action after news announcements with a precision above `60%`.
+* Hypothesis statement 6:
+   * Structural engineering methods can provide reliable fundamental analysis `1` month in advance.
 * Hypothesis statements...
 
 ## Research methodology
@@ -150,39 +156,29 @@ Beyond the general questions, this research might test specific hypotheses:
 The following plan can be outlined.
 
 * Stage 1: literature review
-* Stage 2: investigation and selection of structural dynamic methods
-   * Investigate correspondence between physical and financial systems
-   * Outline mathematical mapping between physical and financial systems, like:
-      - Mass (m): market capitalization or liquidity
-      - Stiffness (k): mean reversion strength
-      - Damping (c): volatility decay rate
-      - Displacement (x): price deviation from equilibrium
-      - Velocity (ẋ): returns or price change rate
-      - Acceleration (ẍ): return acceleration or volatility
-      - Force (F): order flow imbalance or buy-sell pressure
-      - ...
-   * Investigate candidates, like these structural dynamic methods:
+* Stage 2: agile investigation of traditional structural engineering methods
+   * Agile approach comes from software development practices
+   * Candidates of traditional methods:
       - Mass-spring systems
       - Modal analysis
       - Natural frequency detection
       - Spectral analysis
-      - Fourier transform
+      - Fourier transform, FFT, and HHT
       - Structural health monitoring methods
       - Damping ratio
       - Finite element analysis, FEA
       - ...
-* Stage 3: applying structural dynamic methods to financial markets
-   * Novel mathematical framework development
-* Stage 4: implementation
-   * C++ high performance computing for live testing
-   * Python for investigation and back-testing
-   * Implementation and visualization on MetaTrader platform
-   * Efficiency optimization
+* Stage 3: agile investigation of stochastic and ML-assisted structural engineering methods
+   * Agile approach will be followed, coming from software development practices
+* Stage 4: Selection and optimizations of methodologies according to investigation results
+   * C++ for high performance computing
+   * Python for investigation
+   * Visualization on MetaTrader platform
 * Stage 5: validation and testing
    * Back-testing with multiple decades of historic market data
    * Live testing on demo trading accounts
 
-Potential mapping table for stage 2:
+Potential mapping table between physical and financial systems:
 
 | Physics Term | Symbol | Financial Interpretation and Possible Equivalent |
 |--------------|--------|--------------------------------------------------|
@@ -199,7 +195,7 @@ Potential mapping table for stage 2:
 
 Scientific contributions:
 
-* Novel systematic application of structural dynamics into finance
+* Novel systematic application of structural engineering methodologies into finance
 * New class of theoretical models for market behavior
 * Mathematical framework bridging physical and financial systems
 
@@ -208,6 +204,7 @@ Practical contributions:
 * Improved market prediction algorithms
 * Novel trading signal generation methods
 * Innovative risk detection tools
+* Novel financial frameworks for technical and fundamental analysis
 
 Possibly and potentially, the following targets might be kept in mind.
 
@@ -219,10 +216,15 @@ Possibly and potentially, the following targets might be kept in mind.
 
 A rough timeline might be approximately estimated as follows.
 
-* Year 1: literature review, investigating methods to adopt
+* Year 1:
+   * literature review
+   * Agile sprints for investigating traditional methods
+      * Implementation, visualization, and validation
 * Year 2 and 3
-   * Agile sprints of mathematical framework development for methods
-   * Agile sprints of implementation and validation
+   * Agile sprints for investigating stochastic methods
+      * Implementation, visualization, and validation
+   * Agile sprints for ML-assisted methods
+      * Implementation, visualization, and validation
 * Year 4: optimization and dissertation writing
 
 The concepts of _agile_ and _sprint_ are coming from software development industry best practices.
@@ -233,12 +235,12 @@ As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed. Hilber
 
 Some specifics of the proof-of-concept code are:
 
-* HHT is applied to the timeseries of the currency pairs
-* Multiple currency pairs like EUR/USD and USD/JPY are investigated
-* Analysis duration has been from multiple months to multiple years
+* HHT can be applied to the timeseries of any currency pairs
+* Multiple currency pairs like EUR/USD and USD/JPY can investigated
+* Analysis duration can be from multiple months to multiple years
 * Any timeframe can be tried out, like M1, M5, H1 and so on
 * Dominant periods and cycles are identified and visualized
-* Number of candles to be analyzed is an adjustable parameter
+* Number of candles or data points to be analyzed is an adjustable parameter
 
 The preliminary results indicate that systematic investigation could contribute multidisciplinary innovations inspired by structural dynamics into financial market analysis. Novel contributions to both theory and practice are highly probable.
 
