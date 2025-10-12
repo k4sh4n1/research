@@ -98,7 +98,7 @@ The author's educational and industrial background is:
 * Earthquake engineering, MSc
 * Structural engineering, MSc
 * 10+ years of professional software development by C++, Go, Python, JS, C#, and more
-* Experience with algorithm development
+* Experience with algorithm development on MetaTrader5 platform by MQL5 language
 
 This multidisciplinary background would provide the opportunity to:
 
