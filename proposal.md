@@ -1,25 +1,28 @@
-# Cross domain investigation: applying structural dynamics theory to financial market prediction and risk assessment
+# Cross domain investigation: applying structural engineering methodologies to financial market prediction and risk assessment
 
 A research proposal by kashani@alum.sharif.edu
+
 PhD student at University of Tabriz
+
 Civil engineering department
+
 Structural engineering
 
 ## Highlights
 
 * Structural systems have similarities with financial systems
-* Structural dynamics theory is mostly unexplored in financial markets
+* Structural engineering methodologies are mostly unexplored in financial markets
 * There are innovation opportunities due to the cross-domain gap
-* Novel models can be presented for financial systems based on structural dynamics
+* Novel models can be presented for financial systems based on structural ones
 
 ## Keywords
 
-Structural dynamics, financial markets, econophysics, algorithmic 
+Structural system, financial market, econophysics, algorithmic 
 trading, cross-domain modeling, quantitative finance
 
 ## Abstract
 
-Financial markets exhibit nonlinear dynamic behaviors significantly similar to structural engineering systems: oscillations, resonances, shock responses, and collapses. Nonetheless the sophisticated mathematical toolkit developed for structural dynamics remains largely unapplied to financial analysis. This research proposes a systematic investigation for applying structural dynamics methods — probably including modal analysis, spectral decomposition, and finite element modeling - into quantitative finance. With algorithmic trading now comprising `92%` of market volume and daily forex turnover exceeding `$7.5` trillion, even marginal improvements in prediction accuracy could provide significant economic impact. Preliminary results by proof-of-concept implementations on financial timeseries are revealing patterns and insights not visible by traditional financial tools. This multidisciplinary approach could provide opportunities for market understanding, risk management, and algorithmic trading strategy development.
+Financial markets exhibit stochastic behaviors similar to structural engineering systems e.g. oscillation, shock response, and collapse. Nonetheless the sophisticated mathematical toolkit developed for structural systems remains largely unapplied to financial analysis. This research proposes a systematic investigation for applying structural engineering methodologies — probably those derived from structural health monitoring, structural control, and finite element modeling - into quantitative finance. With algorithmic trading now comprising `92%` of market volume and foreign-exchange being a `$7.5` trillion-a-day market in 2022 and a `$9.6` trillion-a-day market in 2025, even marginal improvements in prediction accuracy could provide significant economic impact. Preliminary results by proof-of-concept implementations on financial timeseries are revealing patterns and insights not visible by traditional financial tools. This multidisciplinary approach could provide opportunities for market understanding, risk management, and algorithmic trading strategy development.
 
 ## Research philosophy and motivation
 
@@ -113,8 +116,9 @@ This research could have significant impact due to:
 * Significant academic gap between engineering fields and quantitative finance
    * Lack of enough multidisciplinary researchers in both fields
 * Significant trading volume of financial markets
-   * Currency market alone has had a `$7.5` trillion _daily_ volume in 2022 [9]
-   * `92%` of trading is done by algorithms and computers in 2019 [10]
+   * In 2022, currency market alone had a `$7.5` trillion _daily_ volume [9]
+   * In 2025, foreign exchange has become a `$9.6` trillion-a-day market [10]
+   * `92%` of trading is done by algorithms and computers in 2019 [11]
 
 ## General research questions
 
@@ -259,4 +263,6 @@ The preliminary results indicate that systematic investigation could contribute 
 
 [9]: Bank for International Settlements - BIS (2022) "Foreign Exchange Turnover Statistics." https://www.bis.org/statistics/rpfx22_fx.htm
 
-[10]: Groette, Oddmund (2024) "What Percentage of Trading Is Algorithmic?" https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
+[10]: Carter Johnson and Anya Andrianova (2025) "The Big Dollar Short Is Turning Into a Pain Trade for Investors" https://www.bloomberg.com/news/articles/2025-10-10/the-big-dollar-short-is-turning-into-a-pain-trade-for-investors
+
+[11]: Groette, Oddmund (2024) "What Percentage of Trading Is Algorithmic?" https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
