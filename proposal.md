@@ -121,26 +121,28 @@ This research could have significant impact due to:
 
 This research proposal would try to answer these questions, at least:
 
-* Can structural dynamics methods identify specific characteristics of financial markets?
-* Can structural dynamics methods help with financial timeseries forecasting?
-* Can structural dynamics methods predict market crashes?
-* Can structural dynamics methods detect market regime changes?
-* How do structural dynamics methods apply to financial markets?
+* Can structural engineering methodologies identify specific characteristics of financial markets?
+* Can structural engineering methodologies help with financial timeseries forecasting?
+* Can structural engineering methodologies predict market crashes?
+* Can structural engineering methodologies detect market regime changes?
+* How do structural engineering methodologies apply to financial markets?
 
 ## Specific research hypotheses
 
 Beyond the general questions, this research might test specific hypotheses:
 
 * Hypothesis statement 1:
-   * Simple mass-spring systems can predict the price action with a win rate of above `50%`.
+   * Traditional structural engineering methodologies can predict the price action with a win rate of above `50%`.
 * Hypothesis statement 2:
-   * Damping ratios calculated from price oscillations can predict volatility regime changes `2-5` days in advance with `>70%` accuracy.
+   * Stochastic structural engineering methodologies can predict the price action with a win rate of above `55%`.
 * Hypothesis statement 3:
-   * Modal decomposition of price series will reveal periodic components invisible to traditional technical analysis.
+   * Machine learning (ML):
+   * ML-assisted structural engineering methodologies can predict the price action with a win rate of above `60%`.
 * Hypothesis statement 4:
-   * Finite element modeling will identify risk `24-48` hours before traditional methods.
+   * Finite element modeling of financial market network will identify risk `24-48` hours in advance.
 * Hypothesis statement 5:
    * Shock response from news announcements follow laws similar to earthquake relationships.
+   * Earthquake power laws can approximate the price action after news announcements with a precision above `80%`.
 * Hypothesis statements...
 
 ## Research methodology
