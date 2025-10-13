@@ -66,27 +66,27 @@ Despite the similarities, the rich structural toolkit remains mostly unexplored 
 
 ## Related work
 
-The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [1]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s. Financial industry has been using physical models to effectively figure out the financial behavior. There are some academic studies carried out, but systematic investigation of structural methodologies remains mostly absent.
+The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [@weatherall2013]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s. Financial industry has been using physical models to effectively figure out the financial behavior. There are some academic studies carried out, but systematic investigation of structural methodologies remains mostly absent.
 
 ## Literature gap
 
 The literature review reveals several critical gaps. While physics-inspired approaches to financial markets have gained traction, the specific application of structural engineering methodologies remains underexplored.
 
-The rich mathematical frameworks available for structural hazard analysis, structural health monitoring, structural control, and finite element method, have seen minimal systematic application. Although econophysics has applied concepts from mechanics and thermodynamics to financial markets [2] [3].
+The rich mathematical frameworks available for structural hazard analysis, structural health monitoring, structural control, and finite element method, have seen minimal systematic application. Although econophysics has applied concepts from mechanics and thermodynamics to financial markets [@mantegna2000] [@bouchaud2003].
 
-Some recent studies have investigated the impact of global news events on major equity and bond markets through the lens of seismology, but without leveraging the full toolkit of structural engineering [4].
+Some recent studies have investigated the impact of global news events on major equity and bond markets through the lens of seismology, but without leveraging the full toolkit of structural engineering [@pagnottoni2021].
 
-There is no comprehensive framework mapping structural parameters, including mass, stiffness, damping, to financial variables in a systematic way. The few attempts that exist focus on specific phenomena rather than developing a general theoretical framework [5].
+There is no comprehensive framework mapping structural parameters, including mass, stiffness, damping, to financial variables in a systematic way. The few attempts that exist focus on specific phenomena rather than developing a general theoretical framework [@filimonov2013].
 
-Traditional financial analysis relies on Fourier transforms and wavelet analysis [6]. However, the specific advantages of modal decomposition for identifying market regimes and predicting transitions remain unexplored. Modal analysis is a prominent tool of structural dynamics used to identify natural frequencies and mode shapes. It can be systematically applied to decompose financial time series.
+Traditional financial analysis relies on Fourier transforms and wavelet analysis [@ramsey2002]. However, the specific advantages of structural modal analysis for identifying market regimes and predicting transitions remain unexplored. Modal analysis is a prominent tool of structural dynamics used to identify natural frequencies and mode shapes. It can be systematically applied to decompose financial time series.
 
-The finite element method or FEM has revolutionized structural engineering. FEM application to financial risk modeling is virtually non-existent. Discretizing the market into elements and analyzing stress distribution by FEM represents a significant potential opportunity.
+The finite element method or FEM has revolutionized structural engineering. FEM application to financial markets exists but is limited. Some FEM applications exist in option pricing and financial derivatives [@pironneau2011] [@topper2001]. Discretizing the market into elements and analyzing stress distribution by FEM represents a significant potential opportunity.
 
-The literature review reveals a huge gap in cross-domain expertise. Financial experts generally lack the knowledge of physical systems, and structural engineers rarely dive into finance. Exceptions like Didier Sornette [7] have indicated the potential, but systematic investigation remains absent.
+The literature review reveals a huge gap in cross-domain expertise. Financial experts generally lack the knowledge of physical systems, and structural engineers rarely dive into finance. Exceptions like Didier Sornette [@sornette_wiki] have indicated the potential, but systematic investigation remains absent.
 
-Structural health monitoring or SHM, which is able to detect structural damage in real-time, is parallel to market surveillance and crash prediction. However, no comprehensive framework exists for adapting SHM methodologies to financial markets.
+Structural health monitoring or SHM, which is able to detect structural damage in real-time, is parallel to market surveillance and crash prediction. However, no evidence of systematic SHM adaptation to finance is found.
 
-Market crashes are equivalent to structural failures, however the sophisticated mathematical tools for analyzing shock response in structures, including response spectra, time-history analysis, and stochastic dynamic analysis, have not been systematically adapted for financial shock events. Some studies have been carried out but they see the problem from a network model perspective not the dynamic response characteristics central to structural analysis [8].
+Market crashes are equivalent to structural failures, however the sophisticated mathematical tools for analyzing shock response in structures, including response spectra, time-history analysis, and stochastic dynamic analysis, have not been systematically adapted for financial shock events. Some studies have been carried out but they see the problem from a network model perspective not the dynamic response characteristics central to structural analysis [@gai2010].
 
 In structural engineering the physical experiments would validate theoretical models. Frameworks for validating structural models against market data can extend to both back-testing and real-time testing. The performance metrics could be specifically developed for physics-based trading strategies. The literature lacks frameworks for validating physics-based financial models against market data. This gap presents an opportunity for academic and practical innovation. Considering the increasing dominance of algorithmic trading, there is a need for novel validated forecasting in financial markets.
 
@@ -113,9 +113,9 @@ This research could have significant impact due to:
 * Significant academic gap between engineering fields and quantitative finance
    * Lack of enough multidisciplinary researchers in both fields
 * Significant trading volume of financial markets
-   * In 2022, currency market alone had a `$7.5` trillion _daily_ volume [9]
-   * In 2025, foreign exchange has become a `$9.6` trillion-a-day market [10]
-   * `92%` of trading is done by algorithms and computers in 2019 [11]
+   * In 2022, currency market alone had a `$7.5` trillion _daily_ volume [@bis2022]
+   * In 2025, foreign exchange has become a `$9.6` trillion-a-day market [@johnson2025]
+   * `92%` of trading is done by algorithms and computers in 2019 [@groette2024]
 
 ## General research questions
 
@@ -180,16 +180,16 @@ The following plan can be outlined.
 
 Potential mapping table between physical and financial systems:
 
-| Physics Term | Symbol | Financial Interpretation and Possible Equivalent |
-|--------------|--------|--------------------------------------------------|
-| Mass         | m      | market capitalization or liquidity               |
-| Stiffness    | k      | mean reversion strength                          |
-| Damping      | c      | volatility decay rate                            |
-| Displacement | x      | price deviation from equilibrium                 |
-| Velocity     | ẋ      | returns or price change rate                     |
-| Acceleration | ẍ      | return acceleration or volatility                |
-| Force        | F      | order flow imbalance or buy-sell pressure        |
-| ...          | ...    | ...                                              |
+| Physics Term | Symbol     | Financial Interpretation and Possible Equivalent |
+|--------------|------------|--------------------------------------------------|
+| Mass         | m          | market capitalization or liquidity               |
+| Stiffness    | k          | mean reversion strength                          |
+| Damping      | c          | volatility decay rate                            |
+| Displacement | x          | price deviation from equilibrium                 |
+| Velocity     | $\dot{x}$  | returns or price change rate                     |
+| Acceleration | $\ddot{x}$ | return acceleration or volatility                |
+| Force        | F          | order flow imbalance or buy-sell pressure        |
+| ...          | ...        | ...                                              |
 
 ## Expected contributions
 
@@ -259,25 +259,3 @@ Dominant periods and cycles are identified and visualized on the chart. Sample r
 The preliminary results indicate that systematic investigation could contribute multidisciplinary innovations inspired by structural dynamics into financial market analysis. Novel contributions to both theory and practice are highly probable.
 
 ## References
-
-[1]: Weatherall, James Owen (2013) "The Physics of Wall Street" https://archive.org/details/ThePhysicsOfWallStreetDewey332.63209WEAWeatherallJamesOwen
-
-[2]: Mantegna, R.N. and Stanley, H.E. (2000) "An Introduction to Econophysics: Correlations and Complexity in Finance" https://doi.org/10.1017/CBO9780511755767
-
-[3]: Bouchaud, J.-P. and Potters, M. (2003) "Theory of Financial Risk and Derivative Pricing: From Statistical Physics to Risk Management" https://doi.org/10.1017/CBO9780511753893
-
-[4]: Pagnottoni, P., Spelta, A., Pecora, N., Flori, A., & Pammolli, F. (2021) "Financial earthquakes: SARS-CoV-2 news shock propagation in stock and sovereign bond markets" https://doi.org/10.1016/j.physa.2021.126240
-
-[5]: Filimonov, V. and Sornette, D. (2013) "A stable and robust calibration scheme of the log-periodic power law model" https://doi.org/10.48550/arXiv.1108.0099
-
-[6]: Ramsey, J.B. (2002) "Wavelets in Economics and Finance: Past and Future" https://ssrn.com/abstract=1300227
-
-[7]: Didier Sornette, a geophysicist working in finance, https://en.wikipedia.org/wiki/Didier_Sornette
-
-[8]: Gai, P. and Kapadia, S. (2010) "Contagion in financial networks" https://ssrn.com/abstract=1577043
-
-[9]: Bank for International Settlements - BIS (2022) "Foreign Exchange Turnover Statistics." https://www.bis.org/statistics/rpfx22_fx.htm
-
-[10]: Carter Johnson and Anya Andrianova (2025) "The Big Dollar Short Is Turning Into a Pain Trade for Investors" https://www.bloomberg.com/news/articles/2025-10-10/the-big-dollar-short-is-turning-into-a-pain-trade-for-investors
-
-[11]: Groette, Oddmund (2024) "What Percentage of Trading Is Algorithmic?" https://www.quantifiedstrategies.com/what-percentage-of-trading-is-algorithmic
