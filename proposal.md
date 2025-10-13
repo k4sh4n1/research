@@ -231,7 +231,7 @@ The concepts of _agile_ and _sprint_ are coming from software development indust
 
 ## Preliminary results
 
-As a proof-of-concept, an MQL5 code on platform MetaTrader5 is developed. Hilbert-Huang Transform (HHT) approach is employed to carry out the frequency spectrum analysis. HHT is particularly useful for non-linear and non-stationary signals. HHT is commonly applied to seismic signals, here HHT is applied to financial timeseries.
+As a proof-of-concept, an MQL5 code on MetaTrader5 platform is developed. Hilbert-Huang Transform (HHT) approach is employed to carry out the frequency spectrum analysis. HHT is particularly useful for non-linear and non-stationary signals. HHT is commonly applied to seismic signals, here HHT is applied to financial timeseries.
 
 Some specifics of the proof-of-concept test:
 
