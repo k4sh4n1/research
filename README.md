@@ -10,10 +10,16 @@ https://miktex.org/download
 winget install --source winget --exact --id JohnMacFarlane.Pandoc
 ```
 
+# Citation style
+
+Different citation styles can be downloaded as `.csl` files from:
+
+https://www.zotero.org/styles 
+
 # Markdown to PDF
 
-Convert markdown file to PDF by such commands:
+Finally, markdown file can be converted to PDF by a command like:
 
 ```
-pandoc proposal.md --bibliography=references.bib --citeproc -o proposal.pdf
+pandoc proposal.md --bibliography=references.bib --citeproc --csl=ieee.csl -o proposal.pdf
 ```
