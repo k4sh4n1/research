@@ -1,0 +1,118 @@
+# Pre-proposal brainstorming notes
+
+Brainstorming by kashani@alum.sharif.edu
+
+PhD student at University of Tabriz
+
+Civil engineering department
+
+Structural engineering
+
+
+## Title
+
+The title will be decided later. It should be:
+
+* Focused
+* Clear
+* Emphasizing novelty
+* ...
+
+## Keywords
+
+Keywords could be picked among a set like:
+
+* Structural systems
+* Financial systems
+* Econophysics
+* Reliability methods
+* Hazard analysis
+* Uncertainty quantification
+* Algorithmic trading
+* Quantitative finance
+* Structural health monitoring
+* Seismic prediction
+* ...
+
+## Advisory board
+
+The advisors for the cross-domain study should be from multidisciplinary fields:
+
+* Structural and earthquake engineering
+* Financial economics
+* Financial mathematics
+
+## Research questions
+
+Algorithmic trading firms are smashing wall street trading records [@natarajan2025jane]. They are able to do so by forecasting financial market prices. They are involved with any market like currencies, commodities, stocks, bonds, cryptocurrencies, and more.
+
+The trading algorithms are so effective that they have sparked lawsuits and disputes over their ownership [@bloomberg2024jane].
+
+Effective prediction for structural and earthquake engineering can save human lives. Therefore, as structural and earthquake engineers, it might be fair to have these questions in mind:
+
+* Why does algorithmic trading look generally so effective at forecasting market prices? There are always edge case, of course.
+* Has financial forecasting been more effective than structural or seismic forecasting?
+* Can structural and earthquake engineering learn from financial forecasting?
+* If so, what can structural and earthquake engineering learn from the financial forecasting?
+
+## Humans vs nature
+
+The above questions are specially noteworthy, considering the fact that the financial behavior is affected by human psychology which is extremely hard to predict. However, structural and earthquake engineers are dealing with natural phenomena which are expected to follow specific natural rules, hence are expected to be more predictable.
+
+## Motivation
+
+There is motivation to answer the above questions. Since there are curious similarities between financial and structural systems:
+
+* They both boil down to partial differential equations or PDEs
+* They both deal with some stochastic phenomena
+* Extreme events like market crash and structural collapse
+* External physical forces and forces of market buyers and sellers
+* Similar patterns of stress buildup and sudden release
+* Structural energy and market momentum
+* Structural vibrations and market fluctuations
+* Equilibrium of physical forces and market supply and demand
+* Shock propagation through the financial network and structures
+* Thresholds of financial tipping points and structural buckling
+* Structural health monitoring and market surveillance
+* ...
+
+Despite the similarities, the algorithmic price forecasting is flourishing while the structural and seismic prediction is apparently lagging behind. Why is that?
+
+## The other way around
+
+The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [@weatherall2013]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s.
+
+Structural engineers rarely dive into finance, but when they do, they would make a real impact, like Didier Sornette [@sornette_wiki].
+
+Financial industry has been using physical models to effectively figure out the financial behavior. But now, is financial industry far ahead? If so, can structural engineers catch up and learn from financial industry?
+
+## Long-term vs short-term
+
+* Short-term phenomena:
+   * High frequency trading
+   * Realtime structural vibration prediction
+   * Earthquake forecasting
+* Long-term phenomena:
+   * Options pricing
+   * Portfolio management
+   * Structural health monitoring
+
+## Feasibility
+
+Financial data is abundantly available both historically and real-time. There are benchmark structural sensor data and earthquake timeseries available, but not as massive as financial data.
+
+The trading algorithms are proprietary and there is no access to them. Unless we develop our own algorithms.
+
+## Hypothesis
+
+* Maybe the abundance of financial data makes it easier to predict in the short term?
+* Possibly, prediction effectiveness correlates with data availability
+* Would it make sense to develop synthetic structural data by simulations?
+* Maybe the market prediction itself affects the market, it means prediction changes the system
+* ...
+
+## Notice
+
+The interdisciplinary topic is a high-risk, high-reward research.
+
+## References
