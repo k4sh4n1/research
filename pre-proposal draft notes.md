@@ -79,7 +79,7 @@ There is motivation to answer the above questions. Since there are curious simil
 
 The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [@weatherall2013]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s.
 
-Structural engineers rarely dive into finance, but when they do, they would make a real impact, like Didier Sornette [@sornette_wiki].
+Structural engineers rarely dive into finance, but when they do, they might at times make a real impact, like Didier Sornette [@sornette_wiki].
 
 Financial industry has been using physical models to effectively figure out the financial behavior. But now, can it be the other way around? Can structural engineers learn from financial industry?
 
