@@ -51,7 +51,6 @@ The trading algorithms are so effective that they have sparked lawsuits and disp
 Effective prediction for structural and earthquake engineering can save human lives. Therefore, as structural and earthquake engineers, it might be fair to have these questions in mind:
 
 * Why does algorithmic trading look generally so effective at forecasting market prices? There are always edge case, of course.
-* Has financial forecasting been more effective than structural or seismic forecasting?
 * Can structural and earthquake engineering learn from financial forecasting?
 * If so, what can structural and earthquake engineering learn from the financial forecasting?
 
@@ -75,8 +74,6 @@ There is motivation to answer the above questions. Since there are curious simil
 * Thresholds of financial tipping points and structural buckling
 * Structural health monitoring and market surveillance
 * ...
-
-Despite the similarities, the algorithmic price forecasting is flourishing while the structural and seismic prediction is apparently lagging behind. Why is that?
 
 ## The other way around
 
