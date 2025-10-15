@@ -81,7 +81,7 @@ The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophy
 
 Structural engineers rarely dive into finance, but when they do, they would make a real impact, like Didier Sornette [@sornette_wiki].
 
-Financial industry has been using physical models to effectively figure out the financial behavior. But now, is financial industry far ahead? If so, can structural engineers catch up and learn from financial industry?
+Financial industry has been using physical models to effectively figure out the financial behavior. But now, can it be the other way around? Can structural engineers learn from financial industry?
 
 ## Long-term vs short-term
 
