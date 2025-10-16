@@ -114,7 +114,7 @@ The interdisciplinary topic is a high-risk, high-reward research.
 
 ## Impact
 
-Just like the concept of _target market_ for startup ideas, our research idea will have a practical impact. Just like the startups who seek larger target markets, our research can aim for a large practical impact. Larger practical impact would indicate higher research effectiveness.
+Just like the concept of _target market_ for startup ideas, our research idea will have a practical impact. Just like the startups who seek larger target markets, our research can aim for a large practical impact. Larger practical impact might indicate higher research effect on the society overall.
 
 ## Structural forecasting
 
