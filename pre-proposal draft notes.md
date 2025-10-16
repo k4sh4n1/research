@@ -126,6 +126,14 @@ Can we find a topic with a higher practical impact within structural engineering
 
 While deterministic earthquake forecasting might be impossible, probabilistic earthquake forecasting is being actively pursued, as described by a paper published on Nature [@beroza2021machine].
 
+Earthquake forecasting is practically validated by a 30-week real-time field testing which combines Big Data with AI [@saad2023earthquake]. Therefore, continuous probabilistic earthquake forecasting is shown to be quite feasible.
+
 Feeds from global seismic stations might be employed for short-term (hours to days) probabilistic forecasting. The big data analytics and machine learning are prospective tools to be used.
+
+Earthquake probabilistic forecasting has a noticeable practical impact. It would provide early warning systems for large metropolitan cities with historic seismic disasters. It could potentially affect the human society as a whole.
+
+### Problem with earthquake probabilistic forecasting
+
+The problem is that earthquake forecasting lies more within the geophysics field. It might be far away from earthquake engineering, let alone the structural engineering field.
 
 ## References
