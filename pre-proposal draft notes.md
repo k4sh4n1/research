@@ -42,6 +42,16 @@ The advisors for the cross-domain study should be from multidisciplinary fields:
 * Financial economics
 * Financial mathematics
 
+## Personal preferences
+
+Personally, some preferences are kept in mind, not sure if I'm right, I might be wrong:
+
+* High practical impact
+   * Large target audience
+* Innovative
+* Cross-domain between financial economics and structural & earthquake engineering
+* ...
+
 ## Research questions
 
 Algorithmic trading firms are smashing wall street trading records [@natarajan2025jane]. They are able to do so by forecasting financial market prices. They are involved with any market like currencies, commodities, stocks, bonds, cryptocurrencies, and more.
