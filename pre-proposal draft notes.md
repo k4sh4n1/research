@@ -116,12 +116,16 @@ The interdisciplinary topic is a high-risk, high-reward research.
 
 Just like the concept of _target market_ for startup ideas, our research idea will have a practical impact. Just like the startups who seek larger target markets, our research can aim for a large practical impact. Larger practical impact would indicate higher research effectiveness.
 
-## Structural prediction
+## Structural forecasting
 
-To streamline the iterative design process, deep Learning is already combined with traditional FEM [@carvalho2024iterative]. The aim has been to iteratively design a truss without re-simulating the whole structure on every iteration. Therefore, the truss behavior is forecasted rather than simulated. Its theoretical basis is upon another research on neural network architecture and the calculation procedures [@Hozhabrossadati2020]. Its practical impact is to propose a more efficient truss design procedure for engineering community.
+To streamline the iterative design process, deep Learning is already combined with traditional FEM [@carvalho2024iterative]. The aim has been to iteratively design a truss without re-simulating the whole structure on every iteration. Therefore, the truss behavior is forecasted rather than simulated. Its theoretical basis is upon another research on neural network architecture and the calculation procedures [@Hozhabrossadati2020]. Its practical impact is to propose a more efficient truss design procedure for structural design community.
 
-## Earthquake prediction
+Can we find a topic with a higher practical impact within structural engineering field? I mean, a target audience larger than the structural design community.
 
+## Earthquake probabilistic forecasting
 
+While deterministic earthquake forecasting might be impossible, probabilistic earthquake forecasting is being actively pursued, as described by a paper published on Nature [@beroza2021machine].
+
+Feeds from global seismic stations might be employed for short-term (hours to days) probabilistic forecasting. The big data analytics and machine learning are prospective tools to be used.
 
 ## References
