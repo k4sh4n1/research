@@ -112,4 +112,16 @@ The trading algorithms are proprietary and there is no access to them. Unless we
 
 The interdisciplinary topic is a high-risk, high-reward research.
 
+## Impact
+
+Just like the concept of _target market_ for startup ideas, our research idea will have a practical impact. Just like the startups who seek larger target markets, our research can aim for a large practical impact. Larger practical impact would indicate higher research effectiveness.
+
+## Structural prediction
+
+To streamline the iterative design process, deep Learning is already combined with traditional FEM [@carvalho2024iterative]. The aim has been to iteratively design a truss without re-simulating the whole structure on every iteration. Therefore, the truss behavior is forecasted rather than simulated. Its theoretical basis is upon another research on neural network architecture and the calculation procedures [@Hozhabrossadati2020]. Its practical impact is to propose a more efficient truss design procedure for engineering community.
+
+## Earthquake prediction
+
+
+
 ## References
