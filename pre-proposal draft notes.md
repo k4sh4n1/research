@@ -118,7 +118,7 @@ Just like the concept of _target market_ for startup ideas, our research idea wi
 
 ## Structural forecasting
 
-To streamline the iterative design process, deep Learning is already combined with traditional FEM [@carvalho2024iterative]. The aim has been to iteratively design a truss without re-simulating the whole structure on every iteration. Therefore, the truss behavior is forecasted rather than simulated. Its theoretical basis is upon another research on neural network architecture and the calculation procedures [@Hozhabrossadati2020]. Its practical impact is to propose a more efficient truss design procedure for structural design community.
+To streamline the iterative design process, deep learning is already combined with traditional FEM [@carvalho2024iterative]. The aim has been to iteratively design a truss without re-simulating the whole structure on every iteration. Therefore, the truss behavior is forecasted rather than simulated. Its theoretical basis is upon another research on neural network architecture and the calculation procedures [@Hozhabrossadati2020]. Its practical impact is to propose a more efficient truss design procedure for structural design community.
 
 Can we find a topic with a higher practical impact within structural engineering field? I mean, a target audience larger than the structural design community.
 
