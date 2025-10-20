@@ -1,15 +1,20 @@
-# Pre-proposal brainstorming notes
+---
+title: "Pre-proposal brainstorming notes"
+author: |
+  Majid Kashani \
+  PhD Student \
+  Civil Engineering Department \
+  Structural Engineering Major \
+  University of Tabriz \
+  kashani@alum.sharif.edu
+date: "2025"
+numbersections: true
+crossref:
+  eq-prefix: "Equation"
+  eq-title: "Equation"
+---
 
-Brainstorming by kashani@alum.sharif.edu
-
-PhD student at University of Tabriz
-
-Civil engineering department
-
-Structural engineering
-
-
-## Title
+# Title
 
 The title will be decided later. It should be:
 
@@ -18,7 +23,7 @@ The title will be decided later. It should be:
 * Emphasizing novelty
 * ...
 
-## Keywords
+# Keywords
 
 Keywords could be picked among a set like:
 
@@ -34,7 +39,7 @@ Keywords could be picked among a set like:
 * Seismic prediction
 * ...
 
-## Advisory board
+# Advisory board
 
 The advisors for the cross-domain study should be from multidisciplinary fields:
 
@@ -42,7 +47,7 @@ The advisors for the cross-domain study should be from multidisciplinary fields:
 * Financial economics
 * Financial mathematics
 
-## Personal preferences
+# Personal preferences
 
 Personally, some preferences are kept in mind, not sure if I'm right, I might be wrong:
 
@@ -52,7 +57,7 @@ Personally, some preferences are kept in mind, not sure if I'm right, I might be
 * Cross-domain between financial economics and structural & earthquake engineering
 * ...
 
-## Research questions
+# Research questions
 
 Algorithmic trading firms are smashing wall street trading records [@natarajan2025jane]. They are able to do so by forecasting financial market prices. They are involved with any market like currencies, commodities, stocks, bonds, cryptocurrencies, and more.
 
@@ -64,11 +69,11 @@ Effective prediction for structural and earthquake engineering can save human li
 * Can structural and earthquake engineering learn from financial forecasting?
 * If so, what can structural and earthquake engineering learn from the financial forecasting?
 
-## Humans vs nature
+# Humans vs nature
 
 The above questions are specially noteworthy, considering the fact that the financial behavior is affected by human psychology which is extremely hard to predict. However, structural and earthquake engineers are dealing with natural phenomena which are expected to follow specific natural rules, hence are expected to be more predictable.
 
-## Motivation
+# Motivation
 
 There is motivation to answer the above questions. Since there are curious similarities between financial and structural systems:
 
@@ -85,7 +90,7 @@ There is motivation to answer the above questions. Since there are curious simil
 * Structural health monitoring and market surveillance
 * ...
 
-## The other way around
+# The other way around
 
 The book "The Physics of Wall Street" by James Owen Weatherall mentions a geophysicist who used a model designed for earthquakes to predict a massive stock market crash [@weatherall2013]. Also, it discusses about a physicist-run hedge fund that earned `2478.6%` over the course of the 1990s.
 
@@ -93,7 +98,7 @@ Structural engineers rarely dive into finance, but when they do, they might at t
 
 Financial industry has been using physical models to effectively figure out the financial behavior. But now, can it be the other way around? Can structural engineers learn from financial industry?
 
-## Long-term vs short-term
+# Long-term vs short-term
 
 * Short-term phenomena:
    * High frequency trading
@@ -104,13 +109,13 @@ Financial industry has been using physical models to effectively figure out the 
    * Portfolio management
    * Structural health monitoring
 
-## Feasibility
+# Feasibility
 
 Financial data is abundantly available both historically and real-time. There are benchmark structural sensor data and earthquake timeseries available, but not as massive as financial data.
 
 The trading algorithms are proprietary and there is no access to them. Unless we develop our own algorithms.
 
-## Hypothesis
+# Hypothesis
 
 * Maybe the abundance of financial data makes it easier to predict in the short term?
 * Possibly, prediction effectiveness correlates with data availability
@@ -118,21 +123,21 @@ The trading algorithms are proprietary and there is no access to them. Unless we
 * Maybe the market prediction itself affects the market, it means prediction changes the system
 * ...
 
-## Notice
+# Notice
 
 The interdisciplinary topic is a high-risk, high-reward research.
 
-## Impact
+# Impact
 
 Just like the concept of _target market_ for startup ideas, our research idea will have a practical impact. Just like the startups who seek larger target markets, our research can aim for a large practical impact. Larger practical impact might indicate higher research effect on the society overall.
 
-## Structural forecasting
+# Structural forecasting
 
 To streamline the iterative design process, deep learning is already combined with traditional FEM [@carvalho2024iterative]. The aim has been to iteratively design a truss without re-simulating the whole structure on every iteration. Therefore, the truss behavior is forecasted rather than simulated. Its theoretical basis is upon another research on neural network architecture and the calculation procedures [@Hozhabrossadati2020]. Its practical impact is to propose a more efficient truss design procedure for structural design community.
 
 Can we find a topic with a higher practical impact within structural engineering field? I mean, a target audience larger than the structural design community.
 
-## Earthquake probabilistic forecasting
+# Earthquake probabilistic forecasting
 
 While deterministic earthquake forecasting might be impossible, probabilistic earthquake forecasting is being actively pursued, as described by a paper published on Nature [@beroza2021machine].
 
@@ -142,11 +147,11 @@ Feeds from global seismic stations might be employed for short-term (hours to da
 
 Earthquake probabilistic forecasting has a noticeable practical impact. It would provide early warning systems for large metropolitan cities with historic seismic disasters. It could potentially affect the human society as a whole.
 
-### Problem with earthquake probabilistic forecasting
+## Problem with earthquake probabilistic forecasting
 
 The problem is that earthquake forecasting lies more within the geophysics field. It might be far away from earthquake engineering, let alone the structural engineering field.
 
-## General options
+# General options
 
 There are a few general options available:
 
@@ -159,4 +164,34 @@ There are a few general options available:
 
 Preliminary investigations could be done to find a limited and doable topic for the PhD program.
 
-## References
+# Brainstorming: a market model
+
+Let's brainstorm a market model based on Newton's second law, as shown in @eq:newton:
+
+$$
+m(t) \frac{d^2 P(t)}{dt^2} = \sum F
+$$ {#eq:newton}
+
+In @eq:newton the $m(t)$ is the market inertia.
+
+Net force (@eq:forces) is:
+
+$$
+\sum F = B(t) - S(t)
+$$ {#eq:forces}
+
+Combining @eq:newton and @eq:forces gives us the complete dynamics.
+
+The price rate (velocity) and volatility (acceleration) are defined in @eq:rate and @eq:vol respectively:
+
+$$
+R(t) = \frac{dP(t)}{dt}
+$$ {#eq:rate}
+
+$$
+V(t) = \frac{d^2 P(t)}{dt}
+$$ {#eq:vol}
+
+Equations [@eq:newton; @eq:forces; @eq:rate; @eq:vol] would describe the market model.
+
+# References

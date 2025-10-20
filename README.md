@@ -21,5 +21,9 @@ https://www.zotero.org/styles
 Finally, markdown file can be converted to PDF by a command like:
 
 ```
-pandoc proposal.md --bibliography=references.bib --citeproc --csl=ieee.csl -o proposal.pdf
+pandoc proposal.md --bibliography=references.bib --citeproc --csl=ieee.csl -o proposal.pdf --filter pandoc-crossref
+```
+
+```
+pandoc "pre-proposal draft notes.md" --bibliography=references.bib --citeproc --csl=ieee.csl -o "pre-proposal draft notes.pdf" --filter pandoc-crossref
 ```
