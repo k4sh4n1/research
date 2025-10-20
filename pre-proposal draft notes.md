@@ -185,7 +185,7 @@ Does it make sense?
 
 # Neural network (NN)
 
-It is possible to dive into the NN architectures by obtaining a solid theoretical foundation  explains the intuition behind. It's possible to combine NN with structural methodologies. I will have to study a text book explaining the NN intuitively [@hagan2014neural].
+It is possible to dive into the NN architectures by obtaining a solid theoretical foundation. We can possibly combine NN with structural methodologies. I will have to study a text book explaining the NN intuitively [@hagan2014neural].
 
 ## NN + ?
 
