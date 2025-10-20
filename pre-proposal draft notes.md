@@ -146,4 +146,17 @@ Earthquake probabilistic forecasting has a noticeable practical impact. It would
 
 The problem is that earthquake forecasting lies more within the geophysics field. It might be far away from earthquake engineering, let alone the structural engineering field.
 
+## General options
+
+There are a few general options available:
+
+* Structural control
+* Seismic hazard forecasting
+* Structural damage forecasting
+* Structural behavior forecasting
+* Earthquake emergency exit plan
+* ...
+
+Preliminary investigations could be done to find a limited and doable topic for the PhD program.
+
 ## References
