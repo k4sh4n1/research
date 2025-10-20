@@ -25,5 +25,5 @@ pandoc proposal.md --bibliography=references.bib --citeproc --csl=ieee.csl -o pr
 ```
 
 ```
-pandoc "pre-proposal draft notes.md" --bibliography=references.bib --citeproc --csl=ieee.csl -o "pre-proposal draft notes.pdf" --filter pandoc-crossref
+pandoc "pre-proposal draft notes.md" --bibliography=references.bib --citeproc --csl=ieee.csl -o "pre-proposal draft notes.pdf"
 ```

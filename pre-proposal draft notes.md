@@ -9,9 +9,8 @@ author: |
   kashani@alum.sharif.edu
 date: "2025"
 numbersections: true
-crossref:
-  eq-prefix: "Equation"
-  eq-title: "Equation"
+header-includes:
+  - \usepackage{amsmath}
 ---
 
 # Title
@@ -166,32 +165,22 @@ Preliminary investigations could be done to find a limited and doable topic for 
 
 # Brainstorming: a market model
 
-Let's brainstorm a market model based on Newton's second law, as shown in @eq:newton:
+Let's brainstorm a market model based on Newton's second law. The equation is shown in \eqref{eq:fundamental}:
 
-$$
+\begin{equation}
 m(t) \frac{d^2 P(t)}{dt^2} = \sum F
-$$ {#eq:newton}
+\label{eq:fundamental}
+\end{equation}
 
-In @eq:newton the $m(t)$ is the market inertia.
+From equation \eqref{eq:fundamental}, we can derive the force balance 
+in \eqref{eq:force}:
 
-Net force (@eq:forces) is:
-
-$$
+\begin{equation}
 \sum F = B(t) - S(t)
-$$ {#eq:forces}
+\label{eq:force}
+\end{equation}
 
-Combining @eq:newton and @eq:forces gives us the complete dynamics.
-
-The price rate (velocity) and volatility (acceleration) are defined in @eq:rate and @eq:vol respectively:
-
-$$
-R(t) = \frac{dP(t)}{dt}
-$$ {#eq:rate}
-
-$$
-V(t) = \frac{d^2 P(t)}{dt}
-$$ {#eq:vol}
-
-Equations [@eq:newton; @eq:forces; @eq:rate; @eq:vol] would describe the market model.
+As seen in equations \eqref{eq:fundamental} and \eqref{eq:force}, 
+the system assumes classical mechanics.
 
 # References
