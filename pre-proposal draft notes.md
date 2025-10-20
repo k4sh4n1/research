@@ -183,6 +183,18 @@ The stochastic differential equations are highly effective tools for financial m
 
 Does it make sense?
 
+# Neural network (NN)
+
+It is possible to dive into the NN architectures by obtaining a solid theoretical foundation  explains the intuition behind [@hagan2014neural]. It's possible to combine NN with structural methodologies.
+
+## NN + ?
+
+NN can be combined with multiple structural engineering methodologies. There are options available to do so.
+
+## NN + PBD
+
+PBD is getting into the building standards and codes. Therefore, it might be possible to combine NN with PBD. Would it make sense?
+
 # Brainstorming: a market model
 
 Let's brainstorm a market model based on Newton's second law. The equation is shown by \eqref{eq:fundamental} in which $m(t)$ is the market inertia and $P(t)$ is the price:
