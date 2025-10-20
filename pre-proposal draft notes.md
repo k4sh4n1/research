@@ -161,6 +161,7 @@ There are a few general options available:
 * Earthquake emergency exit plan
 * Performance-based design (PBD)
 * Stochastic PBD or SPBD
+* Stochastic PBD + ML
 * ...
 
 Preliminary investigations could be done to find a limited and doable topic for the PhD program.
