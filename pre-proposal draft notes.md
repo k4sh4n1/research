@@ -159,9 +159,26 @@ There are a few general options available:
 * Structural damage forecasting
 * Structural behavior forecasting
 * Earthquake emergency exit plan
+* Performance-based design (PBD)
 * ...
 
 Preliminary investigations could be done to find a limited and doable topic for the PhD program.
+
+# Structural reliability
+
+The probability theory and statistics can be applied to structural engineering [@ranganathan1999structural]. Reliability and and risk assessment are entangled with each other. For this purpose, Monte Carlo simulation is a popular tool. Monte Carlo is employed by stochastic differential equations too.
+
+Stochasticity is _not_ a central topic of structural reliability. But reliability studies would provide the probabilistic foundation to advance into the stochasticity. We might add the stochasticity to the classical reliability.
+
+## Performance-based design (PBD)
+
+Reliability concepts are increasingly important since the PBD is being adopted by building codes and is becoming the standard practice.
+
+The stochastic differential equations are highly effective tools for financial market forecasting. They can be brought into the PBD to create a new approach for structural design:
+
+* Stochastic PBD or SPBD
+
+Does it make sense?
 
 # Brainstorming: a market model
 
