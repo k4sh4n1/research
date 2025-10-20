@@ -183,7 +183,9 @@ The stochastic differential equations are highly effective tools for financial m
 
 Does it make sense?
 
-# Neural network (NN)
+Traditional PBD often uses deterministic analysis. It might be argued that the stochastic methods would complete PBD.
+
+# Neural network (NN) and machine learning (ML)
 
 It is possible to dive into the NN architectures by obtaining a solid theoretical foundation. We can possibly combine NN with structural methodologies. I will have to study a text book explaining the NN intuitively [@hagan2014neural].
 
@@ -191,9 +193,9 @@ It is possible to dive into the NN architectures by obtaining a solid theoretica
 
 NN can be combined with multiple structural engineering methodologies. There are options available to do so.
 
-## NN + PBD
+## Stochasticity + ML + PBD
 
-PBD is getting into the building standards and codes. Therefore, it might be possible to combine NN with PBD. Would it make sense?
+PBD is getting into the building standards and codes. On the other hand, high-fidelity stochastic simulations like Monte Carlo are expensive. Therefore, there might be a need to combine stochastic PBD with ML to speed up the stochastic simulations. Would it make sense?
 
 # Brainstorming: a market model
 
