@@ -243,6 +243,6 @@ the system assumes classical mechanics.
 
 ## Problem with this model
 
-The problem with the above model is that the FX market is a decentralized one that the order flows are generally _not_ available. So, this model won't work for FX market.
+The problem with the above model is that the FX market is a decentralized one that the order flows are generally _not_ available. Therefore $B(t)$ and $S(t)$ can _not_ be accessed reliably. So, this model won't work for FX market.
 
 # References
