@@ -165,22 +165,52 @@ Preliminary investigations could be done to find a limited and doable topic for 
 
 # Brainstorming: a market model
 
-Let's brainstorm a market model based on Newton's second law. The equation is shown in \eqref{eq:fundamental}:
+Let's brainstorm a market model based on Newton's second law. The equation is shown by \eqref{eq:fundamental} in which $m(t)$ is the market inertia and $P(t)$ is the price:
 
 \begin{equation}
 m(t) \frac{d^2 P(t)}{dt^2} = \sum F
 \label{eq:fundamental}
 \end{equation}
 
+The price rate would be $\frac{dP(t)}{dt}$ and the market volatility is given by $\frac{d^2 P(t)}{dt^2}$. 
+
 From equation \eqref{eq:fundamental}, we can derive the force balance 
-in \eqref{eq:force}:
+by \eqref{eq:force} in which $B(t)$ is the buying force and $S(t)$ is the selling force at time $t$:
 
 \begin{equation}
 \sum F = B(t) - S(t)
 \label{eq:force}
 \end{equation}
 
+Each force has deterministic and stochastic components as shown in \eqref{eq:stochastic_decomp}:
+
+\begin{equation}
+\begin{aligned}
+B(t) &= B_A(t) + dW(t) \\
+S(t) &= S_A(t) + dW(t)
+\end{aligned}
+\label{eq:stochastic_decomp}
+\end{equation}
+
+where:
+
+- $B_A(t)$ and $S_A(t)$ are the deterministic or average components
+- $dW(t)$ is the Brownian or stochastic noise
+
+The equation expressed by finite differences is in \eqref{eq:discrete_delta}:
+
+\begin{equation}
+M(t) \, \Delta(\Delta P(t)) = \left(\sum F\right) \Delta t^2
+\label{eq:discrete_delta}
+\end{equation}
+
+The $\Delta$ represents the discrete difference operator useful for numerical simulations.
+
 As seen in equations \eqref{eq:fundamental} and \eqref{eq:force}, 
 the system assumes classical mechanics.
+
+## Problem with this model
+
+The problem with the above model is that the FX market is a decentralized one that the order flows are generally _not_ available. So, this model won't work for FX market.
 
 # References
