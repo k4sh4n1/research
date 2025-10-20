@@ -160,7 +160,7 @@ There are a few general options available:
 * Structural behavior forecasting
 * Earthquake emergency exit plan
 * Performance-based design (PBD)
-* New concept: stochastic PBD or SPBD
+* Stochastic PBD or SPBD
 * ...
 
 Preliminary investigations could be done to find a limited and doable topic for the PhD program.
