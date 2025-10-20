@@ -167,9 +167,9 @@ Preliminary investigations could be done to find a limited and doable topic for 
 
 # Structural reliability
 
-The probability theory and statistics can be applied to structural engineering [@ranganathan1999structural]. Reliability and and risk assessment are entangled with each other. For this purpose, Monte Carlo simulation is a popular tool. Monte Carlo is employed by stochastic differential equations too.
+The probability theory and statistics can be applied to structural engineering [@ranganathan1999structural]. Reliability and and risk assessment are entangled with each other. For this purpose, Monte Carlo simulation is a popular tool.
 
-Stochasticity is _not_ a central topic of structural reliability. But reliability studies would provide the probabilistic foundation to advance into the stochasticity. We might add the stochasticity to the classical reliability.
+Stochasticity is _not_ a central topic of structural reliability. But reliability studies would provide the probabilistic foundation to advance into the stochasticity. We might add the stochasticity to the classical reliability. Monte Carlo is a tool employed for numerical analysis of stochastic differential equations (SDE) too.
 
 ## Performance-based design (PBD)
 
