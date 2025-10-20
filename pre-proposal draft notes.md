@@ -175,6 +175,8 @@ Stochasticity is _not_ a central topic of structural reliability. But reliabilit
 
 Reliability concepts are increasingly important since the PBD is being adopted by building codes and is becoming the standard practice.
 
+## Stochastic PBD
+
 The stochastic differential equations are highly effective tools for financial market forecasting. They can be brought into the PBD to create a new approach for structural design:
 
 * Stochastic PBD or SPBD
