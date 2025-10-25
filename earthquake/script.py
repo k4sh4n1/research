@@ -121,33 +121,62 @@ def visualize_waveforms(stream):
     print("=" * 60)
 
     # Create a figure with multiple subplots
-    fig = plt.figure(figsize=(14, 10))
+    fig, axes = plt.subplots(4, 1, figsize=(14, 12))
+
+    # Get the trace for direct plotting
+    tr = stream[0].copy()
+    times = np.arange(0, tr.stats.npts) / tr.stats.sampling_rate
 
     # Plot 1: Raw waveform
-    ax1 = plt.subplot(3, 1, 1)
-    stream.plot(fig=fig, ax=ax1, show=False, color='blue', linewidth=0.5)
-    ax1.set_title('Raw Seismic Waveform', fontsize=12, fontweight='bold')
-    ax1.set_ylabel('Amplitude\n(counts)')
-    ax1.grid(True, alpha=0.3)
+    axes[0].plot(times, tr.data, 'b-', linewidth=0.5)
+    axes[0].set_title(f'Raw Seismic Waveform - {tr.id}', fontsize=12, fontweight='bold')
+    axes[0].set_ylabel('Amplitude\n(counts)')
+    axes[0].set_xlabel('Time (seconds)')
+    axes[0].grid(True, alpha=0.3)
+    axes[0].set_xlim([times[0], times[-1]])
+
+    # Add statistics text
+    stats_text = f'Sampling Rate: {tr.stats.sampling_rate} Hz | Samples: {tr.stats.npts} | Duration: {tr.stats.npts/tr.stats.sampling_rate:.1f} s'
+    axes[0].text(0.02, 0.98, stats_text, transform=axes[0].transAxes,
+                 fontsize=9, verticalalignment='top',
+                 bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
 
     # Plot 2: Filtered waveform (bandpass filter)
-    ax2 = plt.subplot(3, 1, 2)
-    st_filtered = stream.copy()
-    st_filtered.filter('bandpass', freqmin=0.1, freqmax=1.0)
-    st_filtered.plot(fig=fig, ax=ax2, show=False, color='green', linewidth=0.5)
-    ax2.set_title('Filtered Waveform (0.1-1.0 Hz Bandpass)', fontsize=12, fontweight='bold')
-    ax2.set_ylabel('Amplitude\n(counts)')
-    ax2.grid(True, alpha=0.3)
+    tr_filtered = tr.copy()
+    tr_filtered.filter('bandpass', freqmin=0.1, freqmax=1.0)
+    axes[1].plot(times, tr_filtered.data, 'g-', linewidth=0.5)
+    axes[1].set_title('Filtered Waveform (0.1-1.0 Hz Bandpass)', fontsize=12, fontweight='bold')
+    axes[1].set_ylabel('Amplitude\n(counts)')
+    axes[1].set_xlabel('Time (seconds)')
+    axes[1].grid(True, alpha=0.3)
+    axes[1].set_xlim([times[0], times[-1]])
 
-    # Plot 3: Spectrogram
-    ax3 = plt.subplot(3, 1, 3)
-    tr = stream[0]
-    tr.spectrogram(log=True, axes=ax3, show=False, cmap='viridis')
-    ax3.set_title('Spectrogram (Log Scale)', fontsize=12, fontweight='bold')
-    ax3.set_ylabel('Frequency (Hz)')
-    ax3.set_xlabel('Time (s)')
+    # Plot 3: High-frequency filtered waveform
+    tr_highfreq = tr.copy()
+    tr_highfreq.filter('highpass', freq=1.0)
+    axes[2].plot(times, tr_highfreq.data, 'r-', linewidth=0.5)
+    axes[2].set_title('High-Frequency Content (>1.0 Hz)', fontsize=12, fontweight='bold')
+    axes[2].set_ylabel('Amplitude\n(counts)')
+    axes[2].set_xlabel('Time (seconds)')
+    axes[2].grid(True, alpha=0.3)
+    axes[2].set_xlim([times[0], times[-1]])
 
-    plt.suptitle(f'Seismic Data Visualization - Station: {stream[0].stats.station}',
+    # Plot 4: Spectrogram
+    # Use matplotlib's specgram for more control
+    axes[3].specgram(tr.data, Fs=tr.stats.sampling_rate, cmap='viridis',
+                     NFFT=256, noverlap=128, scale='dB')
+    axes[3].set_title('Spectrogram (Power Spectral Density)', fontsize=12, fontweight='bold')
+    axes[3].set_ylabel('Frequency (Hz)')
+    axes[3].set_xlabel('Time (seconds)')
+    axes[3].set_ylim([0, tr.stats.sampling_rate/2])
+
+    # Add colorbar for spectrogram
+    cbar = plt.colorbar(axes[3].images[0], ax=axes[3], pad=0.01)
+    cbar.set_label('Power (dB)', rotation=270, labelpad=15)
+
+    # Overall title
+    start_time = tr.stats.starttime.strftime("%Y-%m-%d %H:%M:%S UTC")
+    plt.suptitle(f'Seismic Data Visualization - Station: {tr.stats.station}\n{start_time}',
                  fontsize=14, fontweight='bold')
     plt.tight_layout()
 
@@ -156,7 +185,78 @@ def visualize_waveforms(stream):
     plt.savefig(output_file, dpi=150, bbox_inches='tight')
     print(f"\nVisualization saved to: {output_file}")
 
+    # Also create a simple ObsPy plot
+    print("\nCreating ObsPy native plot...")
+    stream.plot(outfile='obspy_plot.png', size=(1200, 600))
+    print("ObsPy plot saved to: obspy_plot.png")
+
     plt.show()
+
+def plot_frequency_analysis(stream):
+    """
+    Perform and plot frequency domain analysis
+    """
+    if not stream:
+        return
+
+    print("\n" + "=" * 60)
+    print("Performing frequency analysis...")
+    print("=" * 60)
+
+    tr = stream[0]
+
+    # Compute FFT
+    npts = tr.stats.npts
+    sampling_rate = tr.stats.sampling_rate
+
+    # Apply taper to reduce edge effects
+    tr_tapered = tr.copy()
+    tr_tapered.taper(max_percentage=0.05)
+
+    # Compute FFT
+    fft_data = np.fft.rfft(tr_tapered.data)
+    frequencies = np.fft.rfftfreq(npts, d=1.0/sampling_rate)
+
+    # Compute power spectrum
+    power = np.abs(fft_data) ** 2
+
+    # Create frequency analysis plot
+    fig, axes = plt.subplots(2, 1, figsize=(12, 8))
+
+    # Plot amplitude spectrum
+    axes[0].semilogy(frequencies, np.abs(fft_data), 'b-', linewidth=0.8)
+    axes[0].set_title('Amplitude Spectrum', fontsize=12, fontweight='bold')
+    axes[0].set_xlabel('Frequency (Hz)')
+    axes[0].set_ylabel('Amplitude')
+    axes[0].grid(True, alpha=0.3, which='both')
+    axes[0].set_xlim([0, sampling_rate/2])
+
+    # Plot power spectral density
+    axes[1].semilogy(frequencies, power, 'r-', linewidth=0.8)
+    axes[1].set_title('Power Spectral Density', fontsize=12, fontweight='bold')
+    axes[1].set_xlabel('Frequency (Hz)')
+    axes[1].set_ylabel('Power')
+    axes[1].grid(True, alpha=0.3, which='both')
+    axes[1].set_xlim([0, 10])  # Focus on 0-10 Hz range
+
+    # Find dominant frequency
+    dominant_freq_idx = np.argmax(power[1:]) + 1  # Skip DC component
+    dominant_freq = frequencies[dominant_freq_idx]
+    axes[1].axvline(dominant_freq, color='g', linestyle='--',
+                    label=f'Dominant Freq: {dominant_freq:.2f} Hz')
+    axes[1].legend()
+
+    plt.suptitle(f'Frequency Analysis - Station: {tr.stats.station}',
+                 fontsize=14, fontweight='bold')
+    plt.tight_layout()
+
+    # Save the figure
+    output_file = 'frequency_analysis.png'
+    plt.savefig(output_file, dpi=150, bbox_inches='tight')
+    print(f"Frequency analysis saved to: {output_file}")
+
+    print(f"\nDominant frequency: {dominant_freq:.2f} Hz")
+    print(f"Period: {1/dominant_freq:.2f} seconds")
 
 def test_station_availability():
     """
@@ -220,6 +320,7 @@ def main():
     # Test 3: Visualize the waveforms
     if stream:
         visualize_waveforms(stream)
+        plot_frequency_analysis(stream)
 
     # Test 4: Check station availability
     test_station_availability()
