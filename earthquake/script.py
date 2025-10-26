@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Real-time seismic waveform viewer with proper matplotlib integration
+Real-time seismic waveform viewer with improved error handling
 """
 
 from obspy.clients.fdsn import Client
@@ -8,15 +8,18 @@ from obspy import UTCDateTime
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
+from urllib.error import URLError
+import socket
 
 # Configuration
 STATION = ("IU", "ANMO", "00", "BHZ")  # Station to monitor
 UPDATE_INTERVAL = 10000  # milliseconds
 WINDOW_LENGTH = 300  # seconds (5 minutes)
 LATENCY_BUFFER = 30  # seconds
+MAX_RETRIES = 3  # Number of retries on network failure
 
-# Create client
-client = Client("IRIS")
+# Create client with timeout
+client = Client("IRIS", timeout=30)
 
 # Create figure and axis
 fig, ax = plt.subplots(figsize=(14, 6))
@@ -28,53 +31,119 @@ ax.set_ylabel('Amplitude (counts)', fontsize=11)
 ax.grid(True, alpha=0.3)
 ax.set_xlim(0, WINDOW_LENGTH)
 
+# Track consecutive errors
+error_count = 0
+last_successful_fetch = None
+
 def init():
     """Initialize animation"""
     line.set_data([], [])
     return line,
 
+def fetch_with_retry(station, starttime, endtime, max_retries=MAX_RETRIES):
+    """Fetch waveforms with retry logic"""
+    for attempt in range(max_retries):
+        try:
+            st = client.get_waveforms(*station, starttime=starttime, endtime=endtime)
+            return st, None
+        except URLError as e:
+            # Network-related errors
+            error_msg = f"Network error (attempt {attempt + 1}/{max_retries}): {str(e.reason)}"
+            if attempt < max_retries - 1:
+                print(f"{error_msg} - Retrying...")
+            else:
+                return None, error_msg
+        except socket.timeout:
+            error_msg = f"Timeout (attempt {attempt + 1}/{max_retries})"
+            if attempt < max_retries - 1:
+                print(f"{error_msg} - Retrying...")
+            else:
+                return None, error_msg
+        except Exception as e:
+            # Handle the specific ObsPy error when it tries to parse URLError
+            if "'URLError' object has no attribute" in str(e):
+                error_msg = "Network connection failed - Server unreachable"
+            else:
+                error_msg = f"Error: {type(e).__name__}: {str(e)}"
+
+            if attempt < max_retries - 1:
+                print(f"{error_msg} - Retrying...")
+            else:
+                return None, error_msg
+
+    return None, "Max retries exceeded"
+
 def fetch_and_update(frame):
     """Fetch new data and update plot"""
+    global error_count, last_successful_fetch
+
     # Calculate time window
     endtime = UTCDateTime() - LATENCY_BUFFER
     starttime = endtime - WINDOW_LENGTH
 
-    try:
-        # Fetch waveform
-        st = client.get_waveforms(*STATION, starttime=starttime, endtime=endtime)
+    # Fetch waveform with retry logic
+    st, error_msg = fetch_with_retry(STATION, starttime, endtime)
 
-        # Process data
-        st.merge(fill_value='interpolate')
-        st.detrend('linear')
+    if st is not None:
+        try:
+            # Process data
+            st.merge(fill_value='interpolate')
+            st.detrend('linear')
 
-        if len(st) > 0:
-            tr = st[0]
+            if len(st) > 0:
+                tr = st[0]
 
-            # Create time vector
-            time_vec = np.linspace(0, WINDOW_LENGTH, len(tr.data))
+                # Create time vector
+                time_vec = np.linspace(0, WINDOW_LENGTH, len(tr.data))
 
-            # Update line data
-            line.set_data(time_vec, tr.data)
+                # Update line data
+                line.set_data(time_vec, tr.data)
 
-            # Auto-scale y-axis
-            if len(tr.data) > 0:
-                data_min, data_max = tr.data.min(), tr.data.max()
-                margin = (data_max - data_min) * 0.1
-                ax.set_ylim(data_min - margin, data_max + margin)
+                # Auto-scale y-axis
+                if len(tr.data) > 0:
+                    data_min, data_max = tr.data.min(), tr.data.max()
+                    margin = (data_max - data_min) * 0.1
+                    ax.set_ylim(data_min - margin, data_max + margin)
 
-            # Update title with timestamp
-            ax.set_title(
-                f"{tr.stats.network}.{tr.stats.station}.{tr.stats.location}.{tr.stats.channel} "
-                f"- Real-time - Last Update: {UTCDateTime().ctime()}",
-                fontsize=12
-            )
-        else:
-            print("No data received")
+                # Update title with timestamp
+                status_text = "Connected"
+                if error_count > 0:
+                    status_text = f"Reconnected (after {error_count} errors)"
+                    error_count = 0
 
-    except Exception as e:
-        print(f"Error: {e}")
-        ax.set_title(f"Waiting for data... ({e})", fontsize=12)
-        line.set_data([], [])
+                ax.set_title(
+                    f"{tr.stats.network}.{tr.stats.station}.{tr.stats.location}.{tr.stats.channel} "
+                    f"- {status_text} - Last Update: {UTCDateTime().ctime()}",
+                    fontsize=12
+                )
+
+                last_successful_fetch = UTCDateTime()
+            else:
+                print("No data in stream")
+
+        except Exception as e:
+            print(f"Processing error: {e}")
+            ax.set_title(f"Processing error: {e}", fontsize=12)
+    else:
+        # Handle fetch error
+        error_count += 1
+        print(f"Fetch failed: {error_msg}")
+
+        # Update title with error info
+        time_since_last = ""
+        if last_successful_fetch:
+            seconds_ago = int(UTCDateTime() - last_successful_fetch)
+            time_since_last = f" (last success: {seconds_ago}s ago)"
+
+        ax.set_title(
+            f"Connection issues (error #{error_count}){time_since_last} - {error_msg}",
+            fontsize=12,
+            color='red'
+        )
+
+        # Keep existing data on display but maybe dim it
+        if line.get_alpha() == 1.0:
+            line.set_alpha(0.3)  # Dim the line to show it's stale
 
     return line,
 
