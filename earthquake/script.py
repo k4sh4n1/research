@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Real-time seismic waveform viewer with improved error handling
+Real-time ground displacement viewer with instrument response removal
 """
 
 from obspy.clients.fdsn import Client
@@ -12,11 +12,15 @@ from urllib.error import URLError
 import socket
 
 # Configuration
-STATION = ("IU", "ANMO", "00", "BHZ")  # Station to monitor
+STATION = ("IU", "ANMO", "00", "BHZ")  # Station to monitor (BH = broadband high-gain)
 UPDATE_INTERVAL = 10000  # milliseconds
 WINDOW_LENGTH = 300  # seconds (5 minutes)
 LATENCY_BUFFER = 30  # seconds
 MAX_RETRIES = 3  # Number of retries on network failure
+
+# Processing configuration
+OUTPUT_UNITS = "DISP"  # "DISP" for displacement, "VEL" for velocity, "ACC" for acceleration
+PRE_FILTER = (0.005, 0.01, 8.0, 10.0)  # Pre-filter corners in Hz (for stability)
 
 # Create client with timeout
 client = Client("IRIS", timeout=30)
@@ -27,18 +31,39 @@ line, = ax.plot([], [], 'b-', linewidth=0.7)
 
 # Configure axes
 ax.set_xlabel('Time (seconds)', fontsize=11)
-ax.set_ylabel('Amplitude (counts)', fontsize=11)
+ax.set_ylabel('Ground Displacement (meters)', fontsize=11)
 ax.grid(True, alpha=0.3)
 ax.set_xlim(0, WINDOW_LENGTH)
 
 # Track consecutive errors
 error_count = 0
 last_successful_fetch = None
+inventory = None  # Cache the inventory
 
 def init():
     """Initialize animation"""
     line.set_data([], [])
     return line,
+
+def get_inventory_cached(network, station, location, channel, starttime, endtime):
+    """Get and cache station inventory"""
+    global inventory
+    if inventory is None:
+        try:
+            print("Fetching station inventory (instrument response)...")
+            inventory = client.get_stations(
+                network=network,
+                station=station,
+                location=location,
+                channel=channel,
+                starttime=starttime,
+                endtime=endtime,
+                level="response"
+            )
+            print("Inventory fetched successfully")
+        except Exception as e:
+            print(f"Warning: Could not fetch inventory: {e}")
+    return inventory
 
 def fetch_with_retry(station, starttime, endtime, max_retries=MAX_RETRIES):
     """Fetch waveforms with retry logic"""
@@ -90,6 +115,30 @@ def fetch_and_update(frame):
             st.merge(fill_value='interpolate')
             st.detrend('linear')
 
+            # Remove instrument response to get ground displacement
+            inv = get_inventory_cached(
+                STATION[0], STATION[1], STATION[2], STATION[3],
+                starttime, endtime
+            )
+
+            if inv is not None:
+                try:
+                    # Remove response - converts to displacement in meters
+                    st.remove_response(
+                        inventory=inv,
+                        output=OUTPUT_UNITS,
+                        pre_filt=PRE_FILTER,
+                        water_level=60
+                    )
+                    units_label = "Ground Displacement (meters)"
+                except Exception as e:
+                    print(f"Warning: Could not remove response: {e}")
+                    print("Displaying raw counts instead")
+                    units_label = "Amplitude (counts)"
+            else:
+                # If no inventory, just detrend and show raw data
+                units_label = "Amplitude (counts)"
+
             if len(st) > 0:
                 tr = st[0]
 
@@ -98,12 +147,18 @@ def fetch_and_update(frame):
 
                 # Update line data
                 line.set_data(time_vec, tr.data)
+                line.set_alpha(1.0)  # Full opacity for fresh data
 
                 # Auto-scale y-axis
                 if len(tr.data) > 0:
                     data_min, data_max = tr.data.min(), tr.data.max()
                     margin = (data_max - data_min) * 0.1
+                    if margin == 0:  # Handle flat signal
+                        margin = abs(data_max) * 0.1 if data_max != 0 else 1e-9
                     ax.set_ylim(data_min - margin, data_max + margin)
+
+                # Update labels
+                ax.set_ylabel(units_label, fontsize=11)
 
                 # Update title with timestamp
                 status_text = "Connected"
@@ -111,9 +166,12 @@ def fetch_and_update(frame):
                     status_text = f"Reconnected (after {error_count} errors)"
                     error_count = 0
 
+                # Show if we're displaying displacement or raw data
+                data_type = "Displacement" if "meters" in units_label else "Raw Data"
+
                 ax.set_title(
                     f"{tr.stats.network}.{tr.stats.station}.{tr.stats.location}.{tr.stats.channel} "
-                    f"- {status_text} - Last Update: {UTCDateTime().ctime()}",
+                    f"- {data_type} - {status_text} - Last Update: {UTCDateTime().ctime()}",
                     fontsize=12
                 )
 
@@ -141,17 +199,18 @@ def fetch_and_update(frame):
             color='red'
         )
 
-        # Keep existing data on display but maybe dim it
+        # Keep existing data on display but dim it
         if line.get_alpha() == 1.0:
             line.set_alpha(0.3)  # Dim the line to show it's stale
 
     return line,
 
 # Print startup message
-print(f"Starting real-time monitoring of {'.'.join(STATION)}")
+print(f"Starting real-time ground displacement monitoring of {'.'.join(STATION)}")
+print(f"Output units: {OUTPUT_UNITS}")
 print(f"Window length: {WINDOW_LENGTH} seconds")
 print(f"Update interval: {UPDATE_INTERVAL/1000} seconds")
-print("\nFetching initial data...")
+print("\nFetching initial data and instrument response...")
 
 # Create animation
 ani = animation.FuncAnimation(
