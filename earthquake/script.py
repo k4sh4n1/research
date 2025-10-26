@@ -192,72 +192,6 @@ def visualize_waveforms(stream):
 
     plt.show()
 
-def plot_frequency_analysis(stream):
-    """
-    Perform and plot frequency domain analysis
-    """
-    if not stream:
-        return
-
-    print("\n" + "=" * 60)
-    print("Performing frequency analysis...")
-    print("=" * 60)
-
-    tr = stream[0]
-
-    # Compute FFT
-    npts = tr.stats.npts
-    sampling_rate = tr.stats.sampling_rate
-
-    # Apply taper to reduce edge effects
-    tr_tapered = tr.copy()
-    tr_tapered.taper(max_percentage=0.05)
-
-    # Compute FFT
-    fft_data = np.fft.rfft(tr_tapered.data)
-    frequencies = np.fft.rfftfreq(npts, d=1.0/sampling_rate)
-
-    # Compute power spectrum
-    power = np.abs(fft_data) ** 2
-
-    # Create frequency analysis plot
-    fig, axes = plt.subplots(2, 1, figsize=(12, 8))
-
-    # Plot amplitude spectrum
-    axes[0].semilogy(frequencies, np.abs(fft_data), 'b-', linewidth=0.8)
-    axes[0].set_title('Amplitude Spectrum', fontsize=12, fontweight='bold')
-    axes[0].set_xlabel('Frequency (Hz)')
-    axes[0].set_ylabel('Amplitude')
-    axes[0].grid(True, alpha=0.3, which='both')
-    axes[0].set_xlim([0, sampling_rate/2])
-
-    # Plot power spectral density
-    axes[1].semilogy(frequencies, power, 'r-', linewidth=0.8)
-    axes[1].set_title('Power Spectral Density', fontsize=12, fontweight='bold')
-    axes[1].set_xlabel('Frequency (Hz)')
-    axes[1].set_ylabel('Power')
-    axes[1].grid(True, alpha=0.3, which='both')
-    axes[1].set_xlim([0, 10])  # Focus on 0-10 Hz range
-
-    # Find dominant frequency
-    dominant_freq_idx = np.argmax(power[1:]) + 1  # Skip DC component
-    dominant_freq = frequencies[dominant_freq_idx]
-    axes[1].axvline(dominant_freq, color='g', linestyle='--',
-                    label=f'Dominant Freq: {dominant_freq:.2f} Hz')
-    axes[1].legend()
-
-    plt.suptitle(f'Frequency Analysis - Station: {tr.stats.station}',
-                 fontsize=14, fontweight='bold')
-    plt.tight_layout()
-
-    # Save the figure
-    output_file = 'frequency_analysis.png'
-    plt.savefig(output_file, dpi=150, bbox_inches='tight')
-    print(f"Frequency analysis saved to: {output_file}")
-
-    print(f"\nDominant frequency: {dominant_freq:.2f} Hz")
-    print(f"Period: {1/dominant_freq:.2f} seconds")
-
 def test_station_availability():
     """
     Test availability of different seismic stations from various networks
@@ -320,7 +254,6 @@ def main():
     # Test 3: Visualize the waveforms
     if stream:
         visualize_waveforms(stream)
-        plot_frequency_analysis(stream)
 
     # Test 4: Check station availability
     test_station_availability()
