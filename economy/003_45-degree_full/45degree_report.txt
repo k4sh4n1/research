@@ -1,0 +1,41 @@
+Loading data...
+Data loaded: 141 quarters from 1990 to 2025
+
+==================================================
+SIMPLE MODEL: Y = α + βC
+==================================================
+α (Autonomous spending): $1423.73 billion
+β (MPC): 1.3667
+Simple Multiplier: -2.727
+R²: 0.9987
+RMSE: $137.45 billion
+
+==================================================
+FULL MODEL: Y = C + I + G + NX
+==================================================
+Intercept: $-159.03 billion
+
+Coefficients:
+  PCECC96     : 0.9685
+  GPDIC1      : 1.0857
+  GCEC1       : 1.0873
+  NETEXC      : 1.0246
+
+R²: 1.0000
+RMSE: $26.11 billion
+
+==================================================
+DYNAMIC MULTIPLIER ANALYSIS
+==================================================
+Impact Multiplier: 1.277
+Persistence Parameter: -0.009
+Long-Run Multiplier: 1.266
+
+==================================================
+FORECASTING (8 quarters ahead)
+==================================================
+
+Forecast Accuracy:
+Simple Model - MAPE: 0.31%, RMSE: $103.66B
+Full Model   - MAPE: 0.07%, RMSE: $18.49B
+Press any key to continue . . .
