@@ -1,0 +1,52 @@
+
+======================================================================
+COBWEB MODEL ANALYSIS - COFFEE MARKET
+======================================================================
+
+1. DATA SUMMARY
+   - Product: Coffee (Arabica)
+   - Total Observations: 426
+   - Date Range: 1990-01-01 00:00:00 to 2025-06-01 00:00:00
+   - Mean Price: ¢ 144.91/lb
+   - Std Dev: ¢ 65.46/lb
+   - Min/Max: ¢ 50.83 / $409.52
+
+2. ESTIMATED DIFFERENCE EQUATION
+   P_t = 1.1803 + (0.9965) × P_{t-1}
+
+   Interpretation:
+   - β₀ = (c + a)/b = 1.1803 (constant term)
+   - β₁ = -d/b = 0.9965 (autoregressive coefficient)
+
+3. MODEL PERFORMANCE
+   - R² = 0.9695 (97.0% variance explained)
+   - RMSE = 11.4095
+   - This indicates good forecasting power
+
+4. STABILITY ANALYSIS
+   - |β₁| = 0.9965
+   - Model is: CONVERGENT
+   - Interpretation: Prices will converge to equilibrium
+
+5. LONG-RUN EQUILIBRIUM
+   - P* = β₀/(1-β₁) = ¢ 338.02/lb
+   - Current price: ¢ 363.16/lb
+   - Distance from equilibrium: ¢ 25.14
+
+6. THREE-PERIOD FORECASTS
+   t+1: ¢ 363.07/lb
+   t+2: ¢ 362.99/lb
+   t+3: ¢ 362.90/lb
+
+7. FORECASTING POWER ASSESSMENT
+   ✓ The model explains 97.0% of price variation
+   ✓ Good predictive accuracy
+   ✓ Stable dynamics suggest reliable forecasts
+
+8. ECONOMIC INTERPRETATION
+   - Supply elasticity (d): Negative (as expected)
+   - Demand elasticity (b): Determines price sensitivity
+   - The cobweb pattern may be weak
+   - Agricultural production lag is captured by P_{t-1} term
+
+======================================================================
