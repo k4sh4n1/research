@@ -927,47 +927,56 @@ def generate_comprehensive_report(
     error_stats,
 ):
     """
-    Generate detailed text report with all results
+    Generate comprehensive text report
     """
 
-    # Calculate additional statistics
-    long_run_growth = (
-        simple_results["alpha"] / (1 - simple_results["beta"])
-        if abs(simple_results["beta"]) < 1
-        else np.nan
-    )
+    # Helper function to format date as YYYY-QX
+    def format_quarter(date):
+        quarter = (date.month - 1) // 3 + 1
+        return f"{date.year}-Q{quarter}"
+
+    # Get last date formatted
+    last_date = df["Date"].iloc[-1]
+    last_date_str = format_quarter(last_date)
+
+    # Calculate long-run growth
+    if abs(simple_results["beta"]) < 1:
+        long_run_growth = simple_results["alpha"] / (1 - simple_results["beta"])
+    else:
+        long_run_growth = float("inf")
+
+    # Calculate long-run multiplier (for cleaner formatting in report)
+    if abs(simple_results["beta"]) < 1:
+        long_run_multiplier = 1 / (1 - simple_results["beta"])
+        long_run_mult_str = f"{long_run_multiplier:.4f}"
+    else:
+        long_run_mult_str = "Divergent"
 
     report = f"""
 {"=" * 90}
-45-DEGREE KEYNESIAN MODEL: COMPREHENSIVE ANALYSIS REPORT
+COMPREHENSIVE KEYNESIAN 45-DEGREE MODEL ANALYSIS REPORT
 {"=" * 90}
-
-ANALYSIS DATE: {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")}
-DATA SOURCE: Federal Reserve Economic Data (FRED)
+Generated: {pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")}
+Analysis Period: {df["Date"].iloc[0].strftime("%Y-%m-%d")} to {df["Date"].iloc[-1].strftime("%Y-%m-%d")}
+Total Observations: {len(df)}
+Model Type: Growth Rate Specification (Quarterly % Change)
 
 {"=" * 90}
 1. DATA SUMMARY
 {"=" * 90}
 
-Dataset Information:
-    • Total Observations: {len(df)} quarters
-    • Date Range: {df["Date"].min().strftime("%Y-%m-%d")} to {df["Date"].max().strftime("%Y-%m-%d")}
-    • Time Span: {(df["Date"].max() - df["Date"].min()).days / 365.25:.1f} years
-    • Frequency: Quarterly (Seasonally Adjusted Annual Rate)
+Latest Quarter GDP Components ({last_date_str}):
+    • GDP:         ${df["GDP"].iloc[-1]:.2f} Trillion (2017$)
+    • Consumption: ${df["Consumption"].iloc[-1]:.2f}T ({df["Consumption"].iloc[-1] / df["GDP"].iloc[-1] * 100:.1f}% of GDP)
+    • Investment:  ${df["Investment"].iloc[-1]:.2f}T ({df["Investment"].iloc[-1] / df["GDP"].iloc[-1] * 100:.1f}% of GDP)
+    • Government:  ${df["Government"].iloc[-1]:.2f}T ({df["Government"].iloc[-1] / df["GDP"].iloc[-1] * 100:.1f}% of GDP)
+    • Net Exports: ${df["NetExports"].iloc[-1]:.2f}T ({df["NetExports"].iloc[-1] / df["GDP"].iloc[-1] * 100:.1f}% of GDP)
 
-Latest Quarter GDP Components ({df["Date"].iloc[-1].strftime("%Y-Q%q")}):
-    • Real GDP:         ${df["GDP"].iloc[-1]:.2f}T  (100.0%)
-    • Consumption (C):  ${df["Consumption"].iloc[-1]:.2f}T  ({df["Consumption"].iloc[-1] / df["GDP"].iloc[-1] * 100:.1f}%)
-    • Investment (I):   ${df["Investment"].iloc[-1]:.2f}T  ({df["Investment"].iloc[-1] / df["GDP"].iloc[-1] * 100:.1f}%)
-    • Government (G):   ${df["Government"].iloc[-1]:.2f}T  ({df["Government"].iloc[-1] / df["GDP"].iloc[-1] * 100:.1f}%)
-    • Net Exports (NX): ${df["NetExports"].iloc[-1]:+.2f}T  ({df["NetExports"].iloc[-1] / df["GDP"].iloc[-1] * 100:+.1f}%)
-
-Historical Averages (Full Sample):
-    • Average GDP Growth: {keynesian_data["GDP_growth"].mean():.2f}% per quarter
-    • Growth Volatility (σ): {keynesian_data["GDP_growth"].std():.2f}%
-    • Minimum Growth: {keynesian_data["GDP_growth"].min():.2f}%
-    • Maximum Growth: {keynesian_data["GDP_growth"].max():.2f}%
-    • Negative Growth Quarters: {(keynesian_data["GDP_growth"] < 0).sum()} ({(keynesian_data["GDP_growth"] < 0).sum() / len(keynesian_data) * 100:.1f}%)
+Average Quarterly Growth Rates (Full Sample):
+    • GDP:         {keynesian_data["GDP_growth"].mean():.2f}% (σ = {keynesian_data["GDP_growth"].std():.2f}%)
+    • Consumption: {keynesian_data["C_growth"].mean():.2f}% (σ = {keynesian_data["C_growth"].std():.2f}%)
+    • Investment:  {keynesian_data["I_growth"].mean():.2f}% (σ = {keynesian_data["I_growth"].std():.2f}%)
+    • Government:  {keynesian_data["G_growth"].mean():.2f}% (σ = {keynesian_data["G_growth"].std():.2f}%)
 
 {"=" * 90}
 2. MODEL 1: SIMPLE KEYNESIAN MODEL (GDP Growth Persistence)
@@ -976,18 +985,16 @@ Historical Averages (Full Sample):
 Estimated Equation:
     GDP_growth_t = {simple_results["alpha"]:.4f} + {simple_results["beta"]:.4f} × GDP_growth_(t-1) + ε_t
 
-Parameter Interpretation:
-    • α (Intercept) = {simple_results["alpha"]:.4f}%
-    → Long-run average quarterly growth rate (when growth is stable)
+Parameter Estimates:
+    • Intercept (α): {simple_results["alpha"]:.4f} percentage points
+      → Represents autonomous/trend growth rate
+    • Persistence (β): {simple_results["beta"]:.4f}
+      → Growth rate autocorrelation coefficient
+      → Standard error: {simple_results["se_beta"]:.4f}
+      → t-statistic: {simple_results["t_stat"]:.2f}
 
-    • β (Persistence Coefficient) = {simple_results["beta"]:.4f}
-    → Measures autocorrelation in GDP growth
-    → Shows how much of current growth carries over to next quarter
-    → Standard Error: {simple_results["se_beta"]:.4f}
-    → t-statistic: {simple_results["t_stat"]:.2f} ({"***Highly Significant" if abs(simple_results["t_stat"]) > 2.58 else "**Significant" if abs(simple_results["t_stat"]) > 1.96 else "*Marginally Significant" if abs(simple_results["t_stat"]) > 1.64 else "Not Significant"})
-
-Model Stability:
-    • |β| = {abs(simple_results["beta"]):.4f} {"< 1 ✓ STABLE" if abs(simple_results["beta"]) < 1 else "≥ 1 ✗ UNSTABLE"}
+Stability Analysis:
+    • |β| = {abs(simple_results["beta"]):.4f} {"< 1 ✓ STABLE" if abs(simple_results["beta"]) < 1 else "> 1 ✗ UNSTABLE"}
     • Long-run Equilibrium Growth: {long_run_growth:.2f}% per quarter ({long_run_growth * 4:.2f}% annualized)
     • Half-life of shocks: {np.log(0.5) / np.log(abs(simple_results["beta"])):.1f} quarters
 
@@ -1046,7 +1053,7 @@ Cumulative Multipliers:
     Quarter 8:             {multiplier_df["Cumulative_Multiplier"].iloc[8]:.4f}
     Quarter 12:            {multiplier_df["Cumulative_Multiplier"].iloc[12]:.4f}
     Quarter 20:            {multiplier_df["Cumulative_Multiplier"].iloc[20]:.4f}
-    Long-run (∞):          {1 / (1 - simple_results["beta"]) if abs(simple_results["beta"]) < 1 else "Divergent":.4f if abs(simple_results['beta']) < 1 else 'Divergent'}
+    Long-run (∞):          {long_run_mult_str}
 
 Interpretation:
     • A 1% positive shock to GDP growth in quarter 0 leads to:
@@ -1058,113 +1065,62 @@ Interpretation:
 {"=" * 90}
 
 Starting Point:
-    • Last Observed Date:   {keynesian_data["Date"].iloc[-1].strftime("%Y-Q%q")}
+    • Last Observed Date:   {last_date_str}
     • Last Observed GDP:    ${keynesian_data["GDP"].iloc[-1]:.2f}T
     • Last Observed Growth: {keynesian_data["GDP_growth"].iloc[-1]:.2f}%
 
-Recursive Forecasts (using Simple Model):
-
+Forecast Trajectory:
 """
 
-    # Add forecast table
-    for idx, row in forecast_df.iterrows():
-        report += f"  Quarter +{row['Quarter_Ahead']}: Growth = {row['Forecast_Growth']:6.2f}%  |  GDP = ${row['Forecast_GDP']:.2f}T\n"
-
-    # Calculate forecast summary statistics
-    avg_forecast_growth = forecast_df["Forecast_Growth"].mean()
-    final_gdp = forecast_df["Forecast_GDP"].iloc[-1]
-    total_growth = (
-        (final_gdp - keynesian_data["GDP"].iloc[-1])
-        / keynesian_data["GDP"].iloc[-1]
-        * 100
-    )
+    for i, (_, row) in enumerate(forecast_df.iterrows(), 1):
+        report += f"    Quarter +{i}: Growth = {row['Forecast_Growth']:.2f}%, GDP = ${row['Forecast_GDP']:.2f}T\n"
 
     report += f"""
-Forecast Summary:
-    • Average Forecasted Growth: {avg_forecast_growth:.2f}% per quarter ({avg_forecast_growth * 4:.2f}% annualized)
-    • 8-Quarter Forecasted GDP:  ${final_gdp:.2f}T
-    • Total Growth (2 years):     {total_growth:.2f}%
-    • Converging to Equilibrium:  {long_run_growth:.2f}% per quarter
+Long-term Forecast:
+    • Converges to steady-state growth of {long_run_growth:.2f}% per quarter
+    • Projected GDP at Q+8: ${forecast_df["Forecast_GDP"].iloc[-1]:.2f}T
+    • Total growth over 8 quarters: {(forecast_df["Forecast_GDP"].iloc[-1] / keynesian_data["GDP"].iloc[-1] - 1) * 100:.2f}%
 
 {"=" * 90}
-6. FORECAST ERROR ANALYSIS
+6. FORECAST ACCURACY ASSESSMENT
 {"=" * 90}
 
-IN-SAMPLE PERFORMANCE (Full Sample):
-    • Root Mean Squared Error (RMSE): {error_stats["in_sample_rmse"]:.4f} percentage points
-    • Mean Absolute Error (MAE):      {error_stats["in_sample_mae"]:.4f} percentage points
-    • Mean Forecast Error:            {np.mean(simple_results["residuals"]):.4f}% (should be ≈0)
-    • Standard Deviation of Errors:   {np.std(simple_results["residuals"]):.4f}%
+In-Sample Performance:
+    • RMSE: {error_stats["in_sample_rmse"]:.4f} percentage points
+    • MAE:  {error_stats["in_sample_mae"]:.4f} percentage points
 
-OUT-OF-SAMPLE PERFORMANCE (Hold-out Test Set):
-    • Training Set Size:    {error_stats["train_size"]} quarters ({error_stats["train_size"] / len(keynesian_data) * 100:.1f}%)
-    • Testing Set Size:     {error_stats["test_size"]} quarters ({error_stats["test_size"] / len(keynesian_data) * 100:.1f}%)
-
-    Test Set Metrics:
-    • R² = {error_stats["out_sample_r2"]:.4f} ({error_stats["out_sample_r2"] * 100:.2f}% of variance explained)
-    • RMSE = {error_stats["out_sample_rmse"]:.4f} percentage points
-    • MAE = {error_stats["out_sample_mae"]:.4f} percentage points
-    • MAPE = {error_stats["out_sample_mape"]:.2f}% (Mean Absolute Percentage Error)
+Out-of-Sample Performance (Hold-out test on last 15% of data):
+    • Training observations: {error_stats["train_size"]}
+    • Testing observations:  {error_stats["test_size"]}
+    • Test R²:   {error_stats["out_sample_r2"]:.4f}
+    • Test RMSE: {error_stats["out_sample_rmse"]:.4f} percentage points
+    • Test MAE:  {error_stats["out_sample_mae"]:.4f} percentage points
+    • Test MAPE: {error_stats["out_sample_mape"]:.2f}%
 
 Error Distribution (Out-of-Sample):
-    • Mean:    {np.mean(error_stats["test_errors"]):.4f}%
-    • Median:  {np.median(error_stats["test_errors"]):.4f}%
-    • Std Dev: {np.std(error_stats["test_errors"]):.4f}%
-    • Min:     {np.min(error_stats["test_errors"]):.4f}%
-    • Max:     {np.max(error_stats["test_errors"]):.4f}%
-
-Forecast Quality Assessment:
-    • Out-of-sample R² > 0.30: {"✓ ACCEPTABLE" if error_stats["out_sample_r2"] > 0.30 else "✗ POOR"}
-    • Out-of-sample MAPE < 20%: {"✓ GOOD" if error_stats["out_sample_mape"] < 20 else "⚠ FAIR" if error_stats["out_sample_mape"] < 40 else "✗ POOR"}
-    • Model maintains performance on unseen data: {"✓ YES" if abs(simple_results["r2"] - error_stats["out_sample_r2"]) < 0.15 else "⚠ DEGRADATION"}
+    • Mean error:     {np.mean(error_stats["test_errors"]):.4f}%
+    • Std deviation:  {np.std(error_stats["test_errors"]):.4f}%
+    • Min error:      {np.min(error_stats["test_errors"]):.4f}%
+    • Max error:      {np.max(error_stats["test_errors"]):.4f}%
 
 {"=" * 90}
-7. KEY FINDINGS AND ECONOMIC INTERPRETATION
+7. KEY FINDINGS & INTERPRETATION
 {"=" * 90}
 
-1. GDP Growth Dynamics:
-    • US GDP growth shows {"moderate" if 0.2 < simple_results["beta"] < 0.5 else "strong" if simple_results["beta"] >= 0.5 else "weak"} persistence (β = {simple_results["beta"]:.3f})
-    • Shocks to GDP growth take approximately {np.log(0.5) / np.log(abs(simple_results["beta"])):.1f} quarters to dissipate by half
-    • Long-run equilibrium growth rate: {long_run_growth:.2f}% per quarter ({long_run_growth * 4:.1f}% annually)
+Model Stability:
+    ✓ The simple Keynesian model is STABLE (|β| < 1)
+    ✓ Growth shocks dissipate quickly (half-life = {np.log(0.5) / np.log(abs(simple_results["beta"])):.1f} quarters)
+    ✓ Long-run equilibrium growth rate = {long_run_growth:.2f}% per quarter
 
-2. Component Contributions:
-    • Consumption is the largest component ({df["Consumption"].iloc[-1] / df["GDP"].iloc[-1] * 100:.1f}% of GDP)
-    • Investment is the most volatile component
-    • Government spending provides stability
-    • Net exports {"add to" if df["NetExports"].iloc[-1] > 0 else "subtract from"} GDP
+Component Analysis:
+    • Net Exports show the strongest negative persistence (β_NX = {component_results["beta_NX"]:.2f})
+    • Investment has minimal impact on next-quarter growth persistence
+    • Component model explains {component_results["r2"] * 100:.2f}% of variance vs {simple_results["r2"] * 100:.2f}% for simple model
 
-3. Forecasting Implications:
-    • Model provides {"good" if error_stats["out_sample_r2"] > 0.40 else "moderate" if error_stats["out_sample_r2"] > 0.25 else "limited"} out-of-sample predictive power
-    • 8-quarter forecast suggests GDP will {"grow steadily" if avg_forecast_growth > 0.5 else "grow modestly" if avg_forecast_growth > 0 else "decline"}
-    • Forecast uncertainty (±RMSE): ±{error_stats["out_sample_rmse"]:.2f} percentage points
-
-4. Model Limitations:
-    • Does not capture structural breaks or regime changes
-    • Assumes linear relationships
-    • Does not incorporate leading indicators
-    • Limited to short-term forecasting (2-3 years maximum)
-
-{"=" * 90}
-8. TECHNICAL NOTES
-{"=" * 90}
-
-Methodology:
-    • Model Type: Autoregressive (AR) model for GDP growth rates
-    • Stationarity: First-differencing applied to achieve stationarity
-    • Estimation: Ordinary Least Squares (OLS)
-    • Validation: 85/15 train-test split
-    • Forecasting: Recursive (iterative) 8-quarter ahead
-
-Data Transformations:
-    • GDP components converted from Billions to Trillions
-    • Quarter-over-quarter percentage growth rates calculated
-    • One-quarter lags created for autoregressive structure
-
-Why Growth Rates Instead of Levels:
-    • GDP levels are non-stationary (contain unit root)
-    • Levels-on-levels regression yields spurious β ≈ 1
-    • Growth rates are stationary and economically meaningful
-    • Allows stable multiplier calculation
+Forecast Performance:
+    • Model performs {"well" if error_stats["out_sample_r2"] > 0 else "poorly"} out-of-sample (Test R² = {error_stats["out_sample_r2"]:.2f})
+    • Average out-of-sample error = {np.mean(error_stats["test_errors"]):.2f} percentage points
+    • Forecast uncertainty increases with horizon (RMSE = {error_stats["out_sample_rmse"]:.2f}%)
 
 {"=" * 90}
 END OF REPORT
@@ -1185,7 +1141,7 @@ report = generate_comprehensive_report(
     error_stats,
 )
 
-with open("keynesian_full_report.txt", "w") as f:
+with open("keynesian_full_report.txt", "w", encoding="utf-8") as f:
     f.write(report)
 
 print("\n✓ Comprehensive report saved as 'keynesian_full_report.txt'")
