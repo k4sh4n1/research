@@ -137,6 +137,23 @@ print(f"  RMSE = ${results['rmse']:.4f} trillion")
 print(f"  MAE = ${results['mae']:.4f} trillion")
 print(f"  MAPE = {results['mape']:.2f}%")
 
+# Add this after your model estimation
+print("\n" + "=" * 70)
+print("MODEL STABILITY CHECK")
+print("=" * 70)
+
+if abs(results["beta"]) >= 1:
+    print("⚠️  WARNING: UNSTABLE MODEL!")
+    print(f"   β = {results['beta']:.4f} ≥ 1")
+    print("   This suggests:")
+    print("   • MPC > 100% (economically unrealistic)")
+    print("   • GDP will grow explosively")
+    print("   • No equilibrium exists")
+    print("   • Consider first-differencing or log-transformation")
+else:
+    print("✓ STABLE MODEL")
+    print(f"   β = {results['beta']:.4f} < 1")
+
 # =============================================================================
 # STEP 4: COMPUTE DYNAMIC MULTIPLIER
 # =============================================================================
@@ -366,14 +383,12 @@ def create_keynesian_visualizations(
     Create comprehensive visualizations for the 45-degree model
     """
     fig = plt.figure(figsize=(18, 12))
-
-    # Create a 3x3 grid
     gs = fig.add_gridspec(3, 3, hspace=0.3, wspace=0.3)
 
     # Plot 1: Historical GDP Time Series (top left, spans 2 columns)
     ax1 = fig.add_subplot(gs[0, :2])
     ax1.plot(df["Date"], df["GDP"], linewidth=2, color="darkblue", label="US Real GDP")
-    ax1.set_title("US Real GDP (Quarterly, 1990-2025)", fontsize=14, fontweight="bold")
+    ax1.set_title("US Real GDP (Quarterly, 1947-2025)", fontsize=14, fontweight="bold")
     ax1.set_xlabel("Year", fontsize=11)
     ax1.set_ylabel("GDP (Trillions of 2017$)", fontsize=11)
     ax1.grid(True, alpha=0.3)
@@ -391,8 +406,6 @@ def create_keynesian_visualizations(
 
     # Plot 3: 45-Degree Diagram (middle left)
     ax3 = fig.add_subplot(gs[1, 0])
-
-    # Create the aggregate expenditure line
     gdp_range = np.linspace(
         keynesian_data["GDP_t_1"].min() * 0.95,
         keynesian_data["GDP_t_1"].max() * 1.05,
@@ -404,8 +417,6 @@ def create_keynesian_visualizations(
     ax3.plot(
         gdp_range, gdp_range, "k--", linewidth=2.5, label="45° Line (Y=AE)", alpha=0.7
     )
-
-    # Plot aggregate expenditure function
     ax3.plot(
         gdp_range,
         ae_line,
@@ -413,8 +424,6 @@ def create_keynesian_visualizations(
         linewidth=2.5,
         label=f"AE = {results['alpha']:.2f} + {results['beta']:.3f}Y",
     )
-
-    # Plot historical data points
     ax3.scatter(
         keynesian_data["GDP_t_1"],
         keynesian_data["GDP_t"],
@@ -424,16 +433,28 @@ def create_keynesian_visualizations(
         label="Historical Data",
     )
 
-    # Mark equilibrium point
-    eq_gdp = results["alpha"] / (1 - results["beta"])
-    ax3.plot(
-        eq_gdp,
-        eq_gdp,
-        "go",
-        markersize=12,
-        label=f"Equilibrium: ${eq_gdp:.2f}T",
-        zorder=5,
-    )
+    # Only show equilibrium if stable
+    if abs(results["beta"]) < 1:
+        eq_gdp = results["alpha"] / (1 - results["beta"])
+        ax3.plot(
+            eq_gdp,
+            eq_gdp,
+            "go",
+            markersize=12,
+            label=f"Equilibrium: ${eq_gdp:.2f}T",
+            zorder=5,
+        )
+    else:
+        ax3.text(
+            0.5,
+            0.5,
+            "NO EQUILIBRIUM\n(β > 1)",
+            transform=ax3.transAxes,
+            ha="center",
+            va="center",
+            fontsize=12,
+            bbox=dict(boxstyle="round", facecolor="red", alpha=0.7),
+        )
 
     ax3.set_title("45-Degree Keynesian Cross Diagram", fontsize=12, fontweight="bold")
     ax3.set_xlabel("$Y_{t-1}$ (Lagged GDP, Trillions $)", fontsize=10)
@@ -478,68 +499,76 @@ def create_keynesian_visualizations(
 
     # Plot 6: Dynamic Multiplier (bottom left)
     ax6 = fig.add_subplot(gs[2, 0])
-    ax6.plot(
-        multiplier_df["Horizon"],
-        multiplier_df["Cumulative_Multiplier"],
-        "b-o",
-        linewidth=2,
-        markersize=5,
-        label="Cumulative",
-    )
-    ax6.axhline(
-        y=1 / (1 - results["beta"]),
-        color="red",
-        linestyle="--",
-        linewidth=2,
-        label=f"Long-run: {1 / (1 - results['beta']):.2f}",
-    )
+    if abs(results["beta"]) < 1:
+        ax6.plot(
+            multiplier_df["Horizon"],
+            multiplier_df["Cumulative_Multiplier"],
+            "b-o",
+            linewidth=2,
+            markersize=5,
+            label="Cumulative",
+        )
+        ax6.axhline(
+            y=1 / (1 - results["beta"]),
+            color="red",
+            linestyle="--",
+            linewidth=2,
+            label=f"Long-run: {1 / (1 - results['beta']):.2f}",
+        )
+    else:
+        # For unstable case, just show impact multiplier
+        ax6.plot(
+            multiplier_df["Horizon"],
+            multiplier_df["Impact_Multiplier"],
+            "r-o",
+            linewidth=2,
+            markersize=5,
+            label="Impact (Divergent)",
+        )
+        ax6.text(
+            0.5,
+            0.8,
+            "DIVERGENT\n(β > 1)",
+            transform=ax6.transAxes,
+            ha="center",
+            va="center",
+            fontsize=12,
+            bbox=dict(boxstyle="round", facecolor="red", alpha=0.7),
+        )
+
     ax6.set_title("Dynamic Multiplier Path", fontsize=12, fontweight="bold")
     ax6.set_xlabel("Quarters Ahead", fontsize=10)
-    ax6.set_ylabel("Cumulative Multiplier", fontsize=10)
+    ax6.set_ylabel("Multiplier", fontsize=10)
     ax6.legend(fontsize=9)
     ax6.grid(True, alpha=0.3)
     ax6.set_xlim(0, 20)
 
-    # Plot 7: GDP Forecast (bottom center)
+    # Plot 7: GDP Forecast (bottom center) - FIXED VERSION
     ax7 = fig.add_subplot(gs[2, 1])
 
-    # Historical GDP (last 40 quarters)
-    hist_dates = df["Date"].iloc[-40:]
-    hist_gdp = df["GDP"].iloc[-40:]
+    # Historical GDP (last 20 quarters to avoid date issues)
+    hist_dates = df["Date"].iloc[-20:]
+    hist_gdp = df["GDP"].iloc[-20:]
     ax7.plot(hist_dates, hist_gdp, "b-", linewidth=2, label="Historical GDP")
 
-    # Create forecast dates (quarterly)
-    last_date = df["Date"].iloc[-1]
-    forecast_dates = pd.date_range(last_date, periods=9, freq="QS")[1:]
-
-    # Plot forecasts
+    # **SAFE FORECAST PLOTTING** - Use quarters instead of dates
+    forecast_quarters = [f"t+{i}" for i in range(1, 9)]
     forecast_gdp = forecast_df["Forecast_GDP"].values
-    forecast_line = np.concatenate([[last_gdp], forecast_gdp])
-    forecast_dates_full = np.concatenate([[last_date], forecast_dates])
-    ax7.plot(
-        forecast_dates_full,
-        forecast_line,
-        "r--o",
-        linewidth=2,
-        markersize=5,
-        label="Forecast",
-    )
 
-    # Plot equilibrium line
-    ax7.axhline(
-        y=eq_gdp,
-        color="green",
-        linestyle=":",
-        linewidth=2,
-        label=f"Equilibrium: ${eq_gdp:.2f}T",
-    )
+    # Plot forecasts as bar chart to avoid date conversion issues
+    x_pos = np.arange(len(forecast_quarters))
+    ax7_right = ax7.twinx()
+    ax7_right.bar(x_pos, forecast_gdp, alpha=0.7, color="red", label="Forecast")
+    ax7_right.set_ylabel("Forecast GDP (Trillions $)", fontsize=10)
+    ax7_right.set_xticks(x_pos)
+    ax7_right.set_xticklabels(forecast_quarters, rotation=45)
 
     ax7.set_title("GDP Forecast (8 Quarters Ahead)", fontsize=12, fontweight="bold")
-    ax7.set_xlabel("Date", fontsize=10)
-    ax7.set_ylabel("GDP (Trillions $)", fontsize=10)
-    ax7.legend(fontsize=9)
+    ax7.set_xlabel("Historical Date / Forecast Periods", fontsize=10)
+    ax7.set_ylabel("Historical GDP (Trillions $)", fontsize=10)
+    ax7.legend(loc="upper left", fontsize=9)
+    ax7_right.legend(loc="upper right", fontsize=9)
     ax7.grid(True, alpha=0.3)
-    plt.setp(ax7.xaxis.get_majorticklabels(), rotation=45)
 
     # Plot 8: Forecast Error Distribution (bottom right)
     ax8 = fig.add_subplot(gs[2, 2])
