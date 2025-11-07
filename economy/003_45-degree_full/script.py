@@ -520,240 +520,344 @@ def create_full_visualizations(
     y_test_pred,
 ):
     """
-    Create comprehensive visualization panel (9 subplots)
+    Create comprehensive 9-panel visualization for the 45-degree model
     """
-    fig = plt.figure(figsize=(20, 14))
-    from matplotlib.gridspec import GridSpec
 
-    gs = GridSpec(3, 3, figure=fig, hspace=0.35, wspace=0.3)
+    # Define color palette
+    color_gdp = "#1f77b4"
+    color_consumption = "#2ca02c"
+    color_investment = "#ff7f0e"
+    color_government = "#d62728"
+    color_netexports = "#9467bd"
+    color_fit = "#8c564b"
+    color_forecast = "#e377c2"
+    color_residual = "#7f7f7f"
 
-    # Color scheme
-    color_gdp = "#2E86AB"
-    color_fit = "#A23B72"
-    color_forecast = "#F18F01"
-    color_residual = "#C73E1D"
+    fig = plt.figure(figsize=(20, 13))
+    gs = fig.add_gridspec(3, 3, hspace=0.35, wspace=0.3)
 
     # -------------------------------------------------------------------------
-    # Plot 1: GDP Level Time Series (top left)
+    # Plot 1: Historical GDP and Components (top left, spans 2 columns)
     # -------------------------------------------------------------------------
-    ax1 = fig.add_subplot(gs[0, 0])
-    ax1.plot(df["Date"], df["GDP"], linewidth=2, color=color_gdp, label="Real GDP")
-    ax1.fill_between(df["Date"], 0, df["GDP"], alpha=0.2, color=color_gdp)
-    ax1.set_title("US Real GDP (Quarterly)", fontsize=13, fontweight="bold")
-    ax1.set_xlabel("Date", fontsize=10)
-    ax1.set_ylabel("Trillions of 2017$", fontsize=10)
-    ax1.legend(loc="upper left", fontsize=9)
+    ax1 = fig.add_subplot(gs[0, :2])
+    ax1.plot(
+        df["Date"], df["GDP"], linewidth=2.5, color=color_gdp, label="GDP", alpha=0.9
+    )
+    ax1.plot(
+        df["Date"],
+        df["Consumption"],
+        linewidth=1.5,
+        color=color_consumption,
+        label="Consumption",
+        alpha=0.7,
+        linestyle="--",
+    )
+    ax1.plot(
+        df["Date"],
+        df["Investment"],
+        linewidth=1.5,
+        color=color_investment,
+        label="Investment",
+        alpha=0.7,
+        linestyle="--",
+    )
+    ax1.plot(
+        df["Date"],
+        df["Government"],
+        linewidth=1.5,
+        color=color_government,
+        label="Government",
+        alpha=0.7,
+        linestyle="--",
+    )
+
+    ax1.set_title(
+        "US Real GDP & Components (1970-2025)", fontsize=14, fontweight="bold"
+    )
+    ax1.set_xlabel("Year", fontsize=11)
+    ax1.set_ylabel("Trillions of 2017 Dollars", fontsize=11)
+    ax1.legend(loc="upper left", fontsize=10)
     ax1.grid(True, alpha=0.3)
 
     # -------------------------------------------------------------------------
-    # Plot 2: GDP Growth Rate (top center)
+    # Plot 2: GDP Component Shares (top right) - FIXED FOR NEGATIVE VALUES
     # -------------------------------------------------------------------------
-    ax2 = fig.add_subplot(gs[0, 1])
-    ax2.plot(
-        keynesian_data["Date"],
-        keynesian_data["GDP_growth"],
-        linewidth=1.5,
-        color=color_gdp,
-        alpha=0.7,
-    )
-    ax2.axhline(
-        y=keynesian_data["GDP_growth"].mean(),
-        color="red",
-        linestyle="--",
+    ax2 = fig.add_subplot(gs[0, 2])
+
+    # Get latest values
+    latest_c = df["Consumption"].iloc[-1]
+    latest_i = df["Investment"].iloc[-1]
+    latest_g = df["Government"].iloc[-1]
+    latest_nx = df["NetExports"].iloc[-1]
+    latest_gdp = df["GDP"].iloc[-1]
+
+    # Handle negative net exports separately
+    if latest_nx < 0:
+        # Show C+I+G that sum to more than GDP
+        components = [latest_c, latest_i, latest_g]
+        labels = [
+            f"Consumption\n{latest_c / latest_gdp * 100:.1f}%",
+            f"Investment\n{latest_i / latest_gdp * 100:.1f}%",
+            f"Government\n{latest_g / latest_gdp * 100:.1f}%",
+        ]
+        colors = [color_consumption, color_investment, color_government]
+
+        wedges, texts, autotexts = ax2.pie(
+            components, labels=labels, colors=colors, autopct="%1.1f%%", startangle=90
+        )
+
+        # Add text box explaining negative NX
+        textstr = f"Net Exports:\n${latest_nx:.2f}T\n({latest_nx / latest_gdp * 100:.1f}% of GDP)\n\n(Trade Deficit\nNot Shown in Pie)"
+        props = dict(boxstyle="round", facecolor=color_netexports, alpha=0.3)
+        ax2.text(
+            1.3,
+            0.5,
+            textstr,
+            transform=ax2.transData,
+            fontsize=9,
+            verticalalignment="center",
+            bbox=props,
+            ha="left",
+        )
+    else:
+        # Positive NX - can show normally
+        components = [latest_c, latest_i, latest_g, latest_nx]
+        labels = [
+            f"Consumption\n{latest_c / latest_gdp * 100:.1f}%",
+            f"Investment\n{latest_i / latest_gdp * 100:.1f}%",
+            f"Government\n{latest_g / latest_gdp * 100:.1f}%",
+            f"Net Exports\n{latest_nx / latest_gdp * 100:.1f}%",
+        ]
+        colors = [
+            color_consumption,
+            color_investment,
+            color_government,
+            color_netexports,
+        ]
+
+        wedges, texts, autotexts = ax2.pie(
+            components, labels=labels, colors=colors, autopct="%1.1f%%", startangle=90
+        )
+
+    ax2.set_title(f"GDP Component Shares\n(Q2 2025)", fontsize=12, fontweight="bold")
+
+    # -------------------------------------------------------------------------
+    # Plot 3: Growth Rates Comparison (middle left)
+    # -------------------------------------------------------------------------
+    ax3 = fig.add_subplot(gs[1, 0])
+
+    # Plot recent growth rates (last 40 quarters)
+    recent = keynesian_data.iloc[-40:]
+    ax3.plot(
+        recent["Date"],
+        recent["GDP_growth"],
         linewidth=2,
-        label=f"Mean = {keynesian_data['GDP_growth'].mean():.2f}%",
+        color=color_gdp,
+        label="GDP Growth",
+        marker="o",
+        markersize=3,
     )
-    ax2.axhline(y=0, color="black", linestyle="-", linewidth=1, alpha=0.5)
-    ax2.fill_between(
-        keynesian_data["Date"],
-        0,
-        keynesian_data["GDP_growth"],
-        where=(keynesian_data["GDP_growth"] < 0),
-        color="red",
-        alpha=0.3,
-        label="Recession",
+    ax3.plot(
+        recent["Date"],
+        recent["C_growth"],
+        linewidth=1.5,
+        color=color_consumption,
+        label="C Growth",
+        alpha=0.7,
+        linestyle="--",
     )
-    ax2.set_title(
-        "GDP Growth Rate (Quarter-over-Quarter)", fontsize=13, fontweight="bold"
+    ax3.plot(
+        recent["Date"],
+        recent["I_growth"],
+        linewidth=1.5,
+        color=color_investment,
+        label="I Growth",
+        alpha=0.7,
+        linestyle="--",
     )
-    ax2.set_xlabel("Date", fontsize=10)
-    ax2.set_ylabel("Growth Rate (%)", fontsize=10)
-    ax2.legend(loc="best", fontsize=8)
-    ax2.grid(True, alpha=0.3)
+    ax3.axhline(y=0, color="black", linestyle="-", linewidth=0.8)
 
-    # -------------------------------------------------------------------------
-    # Plot 3: GDP Component Shares (top right)
-    # -------------------------------------------------------------------------
-    ax3 = fig.add_subplot(gs[0, 2])
-    latest_shares = {
-        "Consumption": df["Consumption"].iloc[-1] / df["GDP"].iloc[-1] * 100,
-        "Investment": df["Investment"].iloc[-1] / df["GDP"].iloc[-1] * 100,
-        "Government": df["Government"].iloc[-1] / df["GDP"].iloc[-1] * 100,
-        "Net Exports": df["NetExports"].iloc[-1] / df["GDP"].iloc[-1] * 100,
-    }
-    colors_pie = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#FFA07A"]
-    ax3.pie(
-        latest_shares.values(),
-        labels=latest_shares.keys(),
-        autopct="%1.1f%%",
-        colors=colors_pie,
-        startangle=90,
-        textprops={"fontsize": 10},
-    )
     ax3.set_title(
-        f"GDP Component Shares ({df['Date'].iloc[-1].year})",
-        fontsize=13,
-        fontweight="bold",
+        "Quarterly Growth Rates (Last 10 Years)", fontsize=12, fontweight="bold"
     )
+    ax3.set_xlabel("Date", fontsize=10)
+    ax3.set_ylabel("Growth Rate (%)", fontsize=10)
+    ax3.legend(loc="best", fontsize=9)
+    ax3.grid(True, alpha=0.3)
+    plt.setp(ax3.xaxis.get_majorticklabels(), rotation=45)
 
     # -------------------------------------------------------------------------
-    # Plot 4: Simple Model Fit (middle left)
+    # Plot 4: Simple Model Fit (middle center) - FIXED COLUMN NAME
     # -------------------------------------------------------------------------
-    ax4 = fig.add_subplot(gs[1, 0])
+    ax4 = fig.add_subplot(gs[1, 1])
+
+    # Scatter plot - CORRECTED COLUMN NAME
     ax4.scatter(
         keynesian_data["GDP_growth_lag1"],
         keynesian_data["GDP_growth"],
         alpha=0.5,
         s=30,
-        color=color_gdp,
-        label="Actual",
-    )
-    ax4.plot(
-        keynesian_data["GDP_growth_lag1"],
-        simple_results["y_pred"],
         color=color_fit,
-        linewidth=2,
-        label="Fitted",
+        edgecolors="black",
+        linewidth=0.5,
     )
-    ax4.plot([-10, 10], [-10, 10], "k--", linewidth=1, alpha=0.5, label="45° line")
+
+    # Regression line
+    x_range = np.linspace(
+        keynesian_data["GDP_growth_lag1"].min(),
+        keynesian_data["GDP_growth_lag1"].max(),
+        100,
+    )
+    y_pred = simple_results["alpha"] + simple_results["beta"] * x_range
+    ax4.plot(
+        x_range,
+        y_pred,
+        "r-",
+        linewidth=2.5,
+        label=f"Fitted Line (β={simple_results['beta']:.3f})",
+    )
+
+    # 45-degree line
+    ax4.plot(x_range, x_range, "k--", linewidth=1.5, alpha=0.5, label="45° Line (β=1)")
+
     ax4.set_title(
-        f"Simple Model Fit (R² = {simple_results['r2']:.4f})",
-        fontsize=13,
+        f"Simple Model Fit (R²={simple_results['r2']:.4f})",
+        fontsize=12,
         fontweight="bold",
     )
-    ax4.set_xlabel("GDP Growth$_{t-1}$ (%)", fontsize=10)
-    ax4.set_ylabel("GDP Growth$_t$ (%)", fontsize=10)
+    ax4.set_xlabel("GDP Growth(t-1) (%)", fontsize=10)
+    ax4.set_ylabel("GDP Growth(t) (%)", fontsize=10)
     ax4.legend(loc="best", fontsize=9)
     ax4.grid(True, alpha=0.3)
 
     # -------------------------------------------------------------------------
-    # Plot 5: Residuals Over Time (middle center)
+    # Plot 5: Component Model Coefficients (middle right)
     # -------------------------------------------------------------------------
-    ax5 = fig.add_subplot(gs[1, 1])
-    ax5.scatter(
-        range(len(simple_results["residuals"])),
-        simple_results["residuals"],
-        alpha=0.6,
-        s=25,
-        color=color_residual,
+    ax5 = fig.add_subplot(gs[1, 2])
+
+    coefficients = [
+        component_results["beta_C"],
+        component_results["beta_I"],
+        component_results["beta_G"],
+        component_results["beta_NX"],
+    ]
+    comp_labels = [
+        "Consumption\n(β_C)",
+        "Investment\n(β_I)",
+        "Government\n(β_G)",
+        "Net Exports\n(β_NX)",
+    ]
+    colors_bars = [
+        color_consumption,
+        color_investment,
+        color_government,
+        color_netexports,
+    ]
+
+    bars = ax5.barh(
+        comp_labels, coefficients, color=colors_bars, alpha=0.7, edgecolor="black"
     )
-    ax5.axhline(y=0, color="black", linestyle="--", linewidth=2)
-    ax5.axhline(
-        y=simple_results["rmse"],
-        color="orange",
-        linestyle=":",
-        linewidth=1.5,
-        label=f"±RMSE",
-    )
-    ax5.axhline(y=-simple_results["rmse"], color="orange", linestyle=":", linewidth=1.5)
-    ax5.set_title("Residuals Over Time", fontsize=13, fontweight="bold")
-    ax5.set_xlabel("Observation", fontsize=10)
-    ax5.set_ylabel("Residual (%)", fontsize=10)
-    ax5.legend(loc="best", fontsize=9)
-    ax5.grid(True, alpha=0.3, axis="y")
+    ax5.axvline(x=0, color="black", linestyle="-", linewidth=1)
+
+    # Add value labels
+    for i, (bar, val) in enumerate(zip(bars, coefficients)):
+        ax5.text(val, i, f" {val:.4f}", va="center", fontsize=9, fontweight="bold")
+
+    ax5.set_title("Component Model Coefficients", fontsize=12, fontweight="bold")
+    ax5.set_xlabel("Coefficient Value", fontsize=10)
+    ax5.grid(True, alpha=0.3, axis="x")
 
     # -------------------------------------------------------------------------
-    # Plot 6: Dynamic Multiplier Path (middle right)
+    # Plot 6: Dynamic Multiplier Path (bottom left)
     # -------------------------------------------------------------------------
-    ax6 = fig.add_subplot(gs[1, 2])
+    ax6 = fig.add_subplot(gs[2, 0])
+
     ax6.plot(
         multiplier_df["Quarter"],
         multiplier_df["Impact_Multiplier"],
+        linewidth=2.5,
+        color="blue",
         marker="o",
-        linewidth=2,
         markersize=5,
-        color=color_forecast,
         label="Impact Multiplier",
     )
     ax6.plot(
         multiplier_df["Quarter"],
         multiplier_df["Cumulative_Multiplier"],
+        linewidth=2.5,
+        color="green",
         marker="s",
-        linewidth=2,
         markersize=5,
-        color=color_fit,
-        label="Cumulative",
+        label="Cumulative Multiplier",
     )
+
+    # Long-run multiplier line
     if abs(simple_results["beta"]) < 1:
-        long_run_mult = 1 / (1 - simple_results["beta"])
+        long_run = 1 / (1 - simple_results["beta"])
         ax6.axhline(
-            y=long_run_mult,
+            y=long_run,
             color="red",
             linestyle="--",
             linewidth=2,
-            label=f"Long-run = {long_run_mult:.2f}",
+            label=f"Long-run: {long_run:.3f}",
         )
-    ax6.set_title("Dynamic Multiplier Path", fontsize=13, fontweight="bold")
+
+    ax6.axhline(y=0, color="black", linestyle="-", linewidth=0.8)
+
+    ax6.set_title("Dynamic Multiplier Path", fontsize=12, fontweight="bold")
     ax6.set_xlabel("Quarters Ahead", fontsize=10)
-    ax6.set_ylabel("Multiplier", fontsize=10)
+    ax6.set_ylabel("Multiplier Value", fontsize=10)
     ax6.legend(loc="best", fontsize=9)
     ax6.grid(True, alpha=0.3)
     ax6.set_xlim(0, 20)
 
     # -------------------------------------------------------------------------
-    # Plot 7: GDP Forecast (bottom left)
+    # Plot 7: GDP Forecast (bottom center) - BAR CHART VERSION
     # -------------------------------------------------------------------------
-    ax7 = fig.add_subplot(gs[2, 0])
+    ax7 = fig.add_subplot(gs[2, 1])
 
-    # Plot historical GDP (last 40 quarters)
-    hist_window = 40
-    hist_dates = df["Date"].iloc[-hist_window:]
-    hist_gdp = df["GDP"].iloc[-hist_window:]
-    ax7.plot(
-        hist_dates,
-        hist_gdp,
-        linewidth=2.5,
-        color=color_gdp,
-        label="Historical GDP",
-        marker="o",
-        markersize=3,
-    )
+    # Show last few historical quarters as bars
+    last_n = 8
+    hist_quarters = [f"t-{last_n - i}" for i in range(last_n)]
+    hist_gdp = df["GDP"].iloc[-last_n:].values
 
-    # Generate future dates for forecast
-    last_date = df["Date"].iloc[-1]
-    forecast_dates = pd.date_range(start=last_date, periods=9, freq="QS")[1:]
-
-    # Plot forecast with connecting line
-    last_gdp = df["GDP"].iloc[-1]
+    # Forecast quarters
+    forecast_quarters = [f"t+{i}" for i in range(1, len(forecast_df) + 1)]
     forecast_gdp = forecast_df["Forecast_GDP"].values
-    forecast_line = np.concatenate([[last_gdp], forecast_gdp])
-    forecast_dates_full = np.concatenate([[last_date], forecast_dates])
 
-    ax7.plot(
-        forecast_dates_full,
-        forecast_line,
-        linewidth=2.5,
-        color=color_forecast,
-        linestyle="--",
-        marker="s",
-        markersize=6,
-        label="8-Quarter Forecast",
+    # Combine for plotting
+    all_quarters = hist_quarters + forecast_quarters
+    all_gdp = np.concatenate([hist_gdp, forecast_gdp])
+    colors = ["blue"] * last_n + ["red"] * len(forecast_gdp)
+
+    x_pos = np.arange(len(all_quarters))
+    ax7.bar(x_pos, all_gdp, color=colors, alpha=0.7, edgecolor="black", linewidth=0.5)
+    ax7.set_xticks(x_pos)
+    ax7.set_xticklabels(all_quarters, rotation=45, ha="right")
+
+    # Add vertical line between historical and forecast
+    ax7.axvline(x=last_n - 0.5, color="black", linestyle="--", linewidth=2, alpha=0.5)
+
+    ax7.set_title(
+        "GDP: Last 8Q Historical + 8Q Forecast", fontsize=12, fontweight="bold"
     )
-
-    # Shade forecast region
-    ax7.axvspan(last_date, forecast_dates[-1], alpha=0.15, color=color_forecast)
-
-    ax7.set_title("GDP Forecast (8 Quarters Ahead)", fontsize=13, fontweight="bold")
-    ax7.set_xlabel("Date", fontsize=10)
+    ax7.set_xlabel("Quarter", fontsize=10)
     ax7.set_ylabel("GDP (Trillions $)", fontsize=10)
-    ax7.legend(loc="upper left", fontsize=9)
-    ax7.grid(True, alpha=0.3)
-    plt.setp(ax7.xaxis.get_majorticklabels(), rotation=45)
+    ax7.grid(True, alpha=0.3, axis="y")
+
+    # Add legend manually
+    from matplotlib.patches import Patch
+
+    legend_elements = [
+        Patch(facecolor="blue", alpha=0.7, label="Historical"),
+        Patch(facecolor="red", alpha=0.7, label="Forecast"),
+    ]
+    ax7.legend(handles=legend_elements, loc="upper left", fontsize=9)
 
     # -------------------------------------------------------------------------
-    # Plot 8: Out-of-Sample Test Performance (bottom center)
+    # Plot 8: Out-of-Sample Test Performance (bottom right)
     # -------------------------------------------------------------------------
-    ax8 = fig.add_subplot(gs[2, 1])
+    ax8 = fig.add_subplot(gs[2, 2])
     ax8.scatter(
         y_test, y_test_pred, alpha=0.6, s=50, color=color_fit, edgecolors="black"
     )
@@ -770,62 +874,14 @@ def create_full_visualizations(
     )
 
     ax8.set_title(
-        f"Out-of-Sample Test (R² = {error_stats['out_sample_r2']:.4f})",
-        fontsize=13,
+        f"Out-of-Sample Test\n(R²={error_stats['out_sample_r2']:.4f})",
+        fontsize=12,
         fontweight="bold",
     )
     ax8.set_xlabel("Actual Growth (%)", fontsize=10)
     ax8.set_ylabel("Predicted Growth (%)", fontsize=10)
     ax8.legend(loc="best", fontsize=9)
     ax8.grid(True, alpha=0.3)
-
-    # -------------------------------------------------------------------------
-    # Plot 9: Forecast Error Distribution (bottom right)
-    # -------------------------------------------------------------------------
-    ax9 = fig.add_subplot(gs[2, 2])
-
-    # Histogram
-    ax9.hist(
-        simple_results["residuals"],
-        bins=30,
-        color=color_residual,
-        alpha=0.7,
-        edgecolor="black",
-        label="In-Sample Errors",
-    )
-    ax9.axvline(x=0, color="red", linestyle="--", linewidth=2.5, label="Zero Error")
-
-    # Add normal distribution overlay
-    mu = np.mean(simple_results["residuals"])
-    sigma = np.std(simple_results["residuals"])
-    x = np.linspace(mu - 4 * sigma, mu + 4 * sigma, 100)
-
-    # Scale to match histogram
-    from scipy.stats import norm
-
-    ax9_twin = ax9.twinx()
-    ax9_twin.plot(x, norm.pdf(x, mu, sigma), "b-", linewidth=2, label="Normal Dist.")
-    ax9_twin.set_ylabel("Probability Density", fontsize=10, color="blue")
-    ax9_twin.tick_params(axis="y", labelcolor="blue")
-
-    ax9.set_title("Forecast Error Distribution", fontsize=13, fontweight="bold")
-    ax9.set_xlabel("Forecast Error (%)", fontsize=10)
-    ax9.set_ylabel("Frequency", fontsize=10)
-    ax9.legend(loc="upper left", fontsize=9)
-    ax9.grid(True, alpha=0.3, axis="y")
-
-    # Add text box with error statistics
-    textstr = f"Mean: {mu:.3f}%\nStd: {sigma:.3f}%\nRMSE: {simple_results['rmse']:.3f}%"
-    props = dict(boxstyle="round", facecolor="wheat", alpha=0.8)
-    ax9.text(
-        0.05,
-        0.95,
-        textstr,
-        transform=ax9.transAxes,
-        fontsize=9,
-        verticalalignment="top",
-        bbox=props,
-    )
 
     # Main title
     fig.suptitle(
