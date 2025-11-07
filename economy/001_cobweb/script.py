@@ -282,7 +282,7 @@ def create_visualizations(df, cobweb_data, results, forecasts_df):
     )
     ax1.set_title("Historical Coffee Prices", fontsize=14, fontweight="bold")
     ax1.set_xlabel("Date", fontsize=12)
-    ax1.set_ylabel("Price (U.S. Cents / lb)", fontsize=12)
+    ax1.set_ylabel("Price (¢ / lb)", fontsize=12)
     ax1.grid(True, alpha=0.3)
     ax1.legend()
 
@@ -407,9 +407,9 @@ COBWEB MODEL ANALYSIS - COFFEE MARKET
    - Product: Coffee (Arabica)
    - Total Observations: {len(df)}
    - Date Range: {df["Date"].min()} to {df["Date"].max()}
-   - Mean Price: U.S. Cents {df["Price"].mean():.2f}/lb
-   - Std Dev: U.S. Cents {df["Price"].std():.2f}/lb
-   - Min/Max: U.S. Cents {df["Price"].min():.2f} / ${df["Price"].max():.2f}
+   - Mean Price: ¢ {df["Price"].mean():.2f}/lb
+   - Std Dev: ¢ {df["Price"].std():.2f}/lb
+   - Min/Max: ¢ {df["Price"].min():.2f} / ${df["Price"].max():.2f}
 
 2. ESTIMATED DIFFERENCE EQUATION
    P_t = {results["beta_0"]:.4f} + ({results["beta_1"]:.4f}) × P_{{t-1}}
@@ -429,15 +429,15 @@ COBWEB MODEL ANALYSIS - COFFEE MARKET
    - Interpretation: Prices will {"converge to equilibrium" if stability_coef < 1 else "diverge from equilibrium" if stability_coef > 1 else "oscillate perpetually"}
 
 5. LONG-RUN EQUILIBRIUM
-   - P* = β₀/(1-β₁) = U.S. Cents {results["beta_0"] / (1 - results["beta_1"]):.2f}/lb
-   - Current price: U.S. Cents {df["Price"].iloc[-1]:.2f}/lb
-   - Distance from equilibrium: U.S. Cents {abs(df["Price"].iloc[-1] - results["beta_0"] / (1 - results["beta_1"])):.2f}
+   - P* = β₀/(1-β₁) = ¢ {results["beta_0"] / (1 - results["beta_1"]):.2f}/lb
+   - Current price: ¢ {df["Price"].iloc[-1]:.2f}/lb
+   - Distance from equilibrium: ¢ {abs(df["Price"].iloc[-1] - results["beta_0"] / (1 - results["beta_1"])):.2f}
 
 6. THREE-PERIOD FORECASTS
 """
 
     for idx, row in forecasts_df.iterrows():
-        report += f"   {row['Period']}: U.S. Cents {row['Forecast']:.2f}/lb\n"
+        report += f"   {row['Period']}: ¢ {row['Forecast']:.2f}/lb\n"
 
     report += f"""
 7. FORECASTING POWER ASSESSMENT
