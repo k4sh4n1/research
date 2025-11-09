@@ -17,24 +17,24 @@ def get_fdsn_data_centers():
     Returns a list of major FDSN data centers.
     """
     return [
-        "IRIS",
-        "GEOFON",
-        "INGV",
-        "ETH",
-        "RESIF",
-        "BGR",
-        "GFZ",
-        "USGS",
-        "NCEDC",
-        "SCEDC",
-        "ORFEUS",
-        "IPGP",
-        "GEONET",
-        "KNMI",
-        "KOERI",
-        "LMU",
-        "NOA",
-        "ISC",
+        "IRIS",  # IRIS Data Management Center (USA)
+        "GEOFON",  # GEOFON Program (Germany)
+        "INGV",  # INGV Data Centre (Italy)
+        "ETH",  # ETH Data Centre (Switzerland)
+        "RESIF",  # RESIF Data Center (France)
+        "BGR",  # BGR Data Centre (Germany)
+        "GFZ",  # GeoForschungsZentrum Potsdam (Germany)
+        "USGS",  # USGS (USA)
+        "NCEDC",  # Northern California Earthquake Data Center
+        "SCEDC",  # Southern California Earthquake Data Center
+        "ORFEUS",  # ORFEUS Data Center (Europe)
+        "IPGP",  # IPGP Data Center (France)
+        "GEONET",  # GeoNet (New Zealand)
+        "KNMI",  # Royal Netherlands Meteorological Institute
+        "KOERI",  # Bogazici University Kandilli Observatory (Turkey)
+        "LMU",  # Ludwig Maximilian University of Munich
+        "NOA",  # National Observatory of Athens (Greece)
+        "ISC",  # International Seismological Centre (UK)
     ]
 
 
