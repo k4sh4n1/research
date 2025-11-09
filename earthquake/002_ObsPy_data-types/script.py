@@ -1,311 +1,184 @@
 #!/usr/bin/env python3
-"""
-Optimized script to query FDSN data centers and catalog their available data types.
-Requires: obspy
-Install with: pip install obspy
-"""
+"""Query FDSN data centers and generate a markdown report of available data."""
 
-import datetime
 from collections import defaultdict
+from datetime import datetime, timedelta
 
 from obspy.clients.fdsn import Client
 from obspy.clients.fdsn.header import FDSNException
 
+# Configuration
+TIMEOUT = 60
+DAYS_BACK = 30
+SAMPLE_NETWORKS = 3
 
-def get_fdsn_data_centers():
-    """
-    Returns a list of major FDSN data centers.
-    """
-    return [
-        "IRIS",  # IRIS Data Management Center (USA)
-        "GEOFON",  # GEOFON Program (Germany)
-        "INGV",  # INGV Data Centre (Italy)
-        "ETH",  # ETH Data Centre (Switzerland)
-        "RESIF",  # RESIF Data Center (France)
-        "BGR",  # BGR Data Centre (Germany)
-        "GFZ",  # GeoForschungsZentrum Potsdam (Germany)
-        "USGS",  # USGS (USA)
-        "NCEDC",  # Northern California Earthquake Data Center
-        "SCEDC",  # Southern California Earthquake Data Center
-        "ORFEUS",  # ORFEUS Data Center (Europe)
-        "IPGP",  # IPGP Data Center (France)
-        "GEONET",  # GeoNet (New Zealand)
-        "KNMI",  # Royal Netherlands Meteorological Institute
-        "KOERI",  # Bogazici University Kandilli Observatory (Turkey)
-        "LMU",  # Ludwig Maximilian University of Munich
-        "NOA",  # National Observatory of Athens (Greece)
-        "ISC",  # International Seismological Centre (UK)
-    ]
+DATA_CENTERS = [
+    "IRIS",
+    "GEOFON",
+    "INGV",
+    "ETH",
+    "RESIF",
+    "BGR",
+    "GFZ",
+    "USGS",
+    "NCEDC",
+    "SCEDC",
+    "ORFEUS",
+    "IPGP",
+    "GEONET",
+    "KNMI",
+    "KOERI",
+    "LMU",
+    "NOA",
+    "ISC",
+]
 
 
-def query_data_center(data_center_name, timeout=30, days_back=30):
-    """
-    Query a single data center for available services and data types.
-
-    Parameters:
-    - data_center_name: Name of the FDSN data center
-    - timeout: Timeout in seconds for queries (default: 30)
-    - days_back: How many days back to query (default: 30 for faster queries)
-    """
+def query_center(name):
+    """Query a single data center for services, networks, and channel types."""
     result = {
-        "name": data_center_name,
+        "name": name,
         "accessible": False,
         "services": [],
         "networks": [],
-        "channel_types": set(),
+        "channels": set(),
         "error": None,
     }
 
     try:
-        print(f"Querying {data_center_name}...")
-        client = Client(data_center_name, timeout=timeout)
+        print(f"Querying {name}...")
+        client = Client(name, timeout=TIMEOUT)
         result["accessible"] = True
 
-        # Get available services
+        # Get services
         services = client.services
         if "dataselect" in services:
-            result["services"].append("dataselect (waveform data)")
+            result["services"].append("dataselect (waveforms)")
         if "station" in services:
             result["services"].append("station (metadata)")
         if "event" in services:
-            result["services"].append("event (earthquake catalogs)")
+            result["services"].append("event (catalogs)")
 
-        print(f"  Services found: {len(result['services'])}")
+        # Get networks
+        endtime = datetime.now()
+        starttime = endtime - timedelta(days=DAYS_BACK)
 
-        # Try to get a LIMITED sample of available networks
-        try:
-            # Query for recent networks (reduced time window)
-            endtime = datetime.datetime.now()
-            starttime = endtime - datetime.timedelta(days=days_back)
+        inventory = client.get_stations(
+            starttime=starttime,
+            endtime=endtime,
+            level="network",
+            includerestricted=False,
+        )
 
-            print(
-                f"  Fetching network metadata (last {days_back} days, this may take a moment)..."
-            )
+        result["networks"] = [
+            {
+                "code": net.code,
+                "description": net.description or "N/A",
+                "start": str(net.start_date) if net.start_date else "Unknown",
+                "end": str(net.end_date) if net.end_date else "Ongoing",
+            }
+            for net in inventory
+        ]
 
-            # Use a more limited query - get only network level first
-            inventory = client.get_stations(
-                starttime=starttime,
-                endtime=endtime,
-                level="network",  # Changed from 'channel' to 'network' for speed
-                includerestricted=False,
-            )
-
-            print(f"  Found {len(inventory)} networks, now getting sample channels...")
-
-            # Extract network codes
-            for network in inventory:
-                result["networks"].append(
-                    {
-                        "code": network.code,
-                        "description": network.description or "N/A",
-                        "start_date": str(network.start_date)
-                        if network.start_date
-                        else "Unknown",
-                        "end_date": str(network.end_date)
-                        if network.end_date
-                        else "Ongoing",
-                    }
+        # Sample channels from first few networks
+        for net in inventory[:SAMPLE_NETWORKS]:
+            try:
+                detailed = client.get_stations(
+                    network=net.code,
+                    starttime=starttime,
+                    endtime=endtime,
+                    level="channel",
+                    includerestricted=False,
                 )
+                for n in detailed:
+                    for sta in n:
+                        for ch in sta:
+                            result["channels"].add(ch.code)
+            except Exception:
+                continue
 
-            # Get channel types from a LIMITED sample of networks
-            sample_size = min(3, len(inventory))  # Sample only 3 networks
-            print(f"  Sampling {sample_size} networks for channel types...")
-
-            for i, network in enumerate(inventory[:sample_size]):
-                try:
-                    # Get detailed info for just this network
-                    detailed_inv = client.get_stations(
-                        network=network.code,
-                        starttime=starttime,
-                        endtime=endtime,
-                        level="channel",
-                        includerestricted=False,
-                    )
-
-                    for net in detailed_inv:
-                        for station in net:
-                            for channel in station:
-                                result["channel_types"].add(channel.code)
-
-                    print(f"    Sampled network {i + 1}/{sample_size}: {network.code}")
-                except Exception as e:
-                    print(
-                        f"    Warning: Could not sample network {network.code}: {str(e)}"
-                    )
-                    continue
-
-            print(
-                f"  ✓ Complete: {len(result['networks'])} networks, {len(result['channel_types'])} channel types"
-            )
-
-        except FDSNException as e:
-            result["error"] = f"Could not retrieve network details: {str(e)}"
-            print(f"  Warning: {result['error']}")
-        except Exception as e:
-            result["error"] = f"Unexpected error retrieving networks: {str(e)}"
-            print(f"  Warning: {result['error']}")
+        print(
+            f"  ✓ {len(result['networks'])} networks, {len(result['channels'])} channel types"
+        )
 
     except FDSNException as e:
-        result["error"] = f"FDSN Error: {str(e)}"
-        print(f"  ✗ Error: Cannot connect to {data_center_name}")
+        result["error"] = f"FDSN error: {str(e)}"
+        print(f"  ✗ {result['error']}")
     except Exception as e:
         result["error"] = f"Connection error: {str(e)}"
-        print(f"  ✗ Error: {result['error']}")
+        print(f"  ✗ {result['error']}")
 
     return result
 
 
-def write_markdown_report(results, filename="fdsn_data_centers_report.md"):
-    """
-    Write the results to a markdown file.
-    """
+def write_report(results, filename="fdsn_report.md"):
+    """Write results to markdown file."""
     with open(filename, "w", encoding="utf-8") as f:
-        f.write("# FDSN Data Centers and Available Data Types\n\n")
+        f.write("# FDSN Data Centers Report\n\n")
+        f.write(f"*Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
+
+        # Summary
+        accessible = sum(1 for r in results if r["accessible"])
+        total_nets = sum(len(r["networks"]) for r in results)
         f.write(
-            f"*Generated on: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n"
-        )
-        f.write(
-            "This report catalogs available FDSN data centers and the types of seismological data they provide.\n\n"
-        )
-        f.write(
-            "*Note: Channel types are sampled from a subset of networks for performance reasons.*\n\n"
+            f"**Accessible:** {accessible}/{len(results)} centers, {total_nets} networks\n\n---\n\n"
         )
 
-        # Summary statistics
-        accessible_centers = sum(1 for r in results if r["accessible"])
-        total_networks = sum(len(r["networks"]) for r in results)
+        # Details
+        for r in results:
+            f.write(f"## {r['name']}\n\n")
 
-        f.write("## Summary\n\n")
-        f.write(f"- **Total Data Centers Queried:** {len(results)}\n")
-        f.write(f"- **Accessible Data Centers:** {accessible_centers}\n")
-        f.write(f"- **Total Networks Found:** {total_networks}\n\n")
-
-        f.write("---\n\n")
-
-        # Detailed information for each data center
-        for result in results:
-            f.write(f"## {result['name']}\n\n")
-
-            if not result["accessible"]:
-                f.write(f"**Status:** ❌ Not accessible\n\n")
-                if result["error"]:
-                    f.write(f"**Error:** {result['error']}\n\n")
-                f.write("---\n\n")
+            if not r["accessible"]:
+                f.write(f"❌ Not accessible: {r['error']}\n\n---\n\n")
                 continue
 
-            f.write(f"**Status:** ✅ Accessible\n\n")
+            f.write("✅ Accessible\n\n")
 
             # Services
-            if result["services"]:
-                f.write("### Available Services\n\n")
-                for service in result["services"]:
-                    f.write(f"- {service}\n")
-                f.write("\n")
+            if r["services"]:
+                f.write("**Services:** " + ", ".join(r["services"]) + "\n\n")
 
-            # Networks
-            if result["networks"]:
-                f.write(f"### Networks ({len(result['networks'])} found)\n\n")
-                f.write("| Network Code | Description | Start Date | End Date |\n")
-                f.write("|--------------|-------------|------------|----------|\n")
-                for network in result["networks"][:20]:
-                    desc = (
-                        network["description"][:50] + "..."
-                        if len(network["description"]) > 50
-                        else network["description"]
-                    )
-                    f.write(
-                        f"| {network['code']} | {desc} | {network['start_date'][:10]} | {network['end_date'][:10] if network['end_date'] != 'Ongoing' else 'Ongoing'} |\n"
-                    )
-
-                if len(result["networks"]) > 20:
-                    f.write(
-                        f"\n*... and {len(result['networks']) - 20} more networks*\n"
-                    )
-                f.write("\n")
-
-            # Channel types
-            if result["channel_types"]:
-                f.write("### Channel Types (Sampled)\n\n")
+            # Networks table
+            if r["networks"]:
+                f.write(f"**Networks:** {len(r['networks'])}\n\n")
                 f.write(
-                    "Available channel codes (format: Band-Instrument-Orientation):\n\n"
+                    "| Code | Description | Start | End |\n|------|-------------|-------|-----|\n"
                 )
-
-                # Group by band code
-                channel_dict = defaultdict(list)
-                for ch in sorted(result["channel_types"]):
-                    if len(ch) >= 3:
-                        band = ch[0]
-                        channel_dict[band].append(ch)
-
-                for band, channels in sorted(channel_dict.items()):
-                    f.write(f"- **{band}-band:** {', '.join(sorted(channels))}\n")
-
+                for net in r["networks"][:15]:
+                    desc = (
+                        net["description"][:40] + "..."
+                        if len(net["description"]) > 40
+                        else net["description"]
+                    )
+                    f.write(
+                        f"| {net['code']} | {desc} | {net['start'][:10]} | {net['end'][:10]} |\n"
+                    )
+                if len(r["networks"]) > 15:
+                    f.write(f"\n*...and {len(r['networks']) - 15} more*\n")
                 f.write("\n")
-                f.write("<details>\n<summary>Channel Code Reference</summary>\n\n")
-                f.write("**Band Codes:**\n")
-                f.write("- B = Broadband (10-80 Hz)\n")
-                f.write("- H = High Broadband (≥80 Hz)\n")
-                f.write("- L = Long Period\n")
-                f.write("- V = Very Long Period\n")
-                f.write("- E = Extremely Short Period\n")
-                f.write("- S = Short Period\n\n")
-                f.write("**Instrument Codes:**\n")
-                f.write("- H = High Gain Seismometer\n")
-                f.write("- L = Low Gain Seismometer\n")
-                f.write("- N = Accelerometer\n\n")
-                f.write("**Orientation Codes:**\n")
-                f.write("- Z = Vertical\n")
-                f.write("- N = North\n")
-                f.write("- E = East\n")
-                f.write("- 1,2,3 = Orthogonal components\n")
-                f.write("</details>\n\n")
 
-            if result["error"]:
-                f.write(f"**Note:** {result['error']}\n\n")
+            # Channels
+            if r["channels"]:
+                f.write(f"**Channel Types:** {', '.join(sorted(r['channels']))}\n\n")
 
             f.write("---\n\n")
 
-    print(f"\n✓ Report written to: {filename}")
+    print(f"\n✓ Report: {filename}")
 
 
 def main():
-    """
-    Main function to query all data centers and generate report.
-    """
-    print("=" * 60)
-    print("FDSN Data Center Query Script (Optimized)")
-    print("=" * 60)
-    print()
+    """Main execution."""
+    print(
+        f"Querying {len(DATA_CENTERS)} FDSN centers (timeout={TIMEOUT}s, window={DAYS_BACK}d)\n"
+    )
 
-    data_centers = get_fdsn_data_centers()
     results = []
+    for i, center in enumerate(DATA_CENTERS, 1):
+        print(f"[{i}/{len(DATA_CENTERS)}] ", end="")
+        results.append(query_center(center))
 
-    # Configuration
-    TIMEOUT = 60  # Increase timeout to 60 seconds
-    DAYS_BACK = 30  # Query only last 30 days (instead of 365)
-
-    print(f"Configuration:")
-    print(f"  - Timeout: {TIMEOUT} seconds")
-    print(f"  - Time window: Last {DAYS_BACK} days")
-    print(f"  - Channel sampling: 3 networks per data center")
-    print()
-    print(f"Querying {len(data_centers)} FDSN data centers...")
-    print("(This may take 5-15 minutes depending on data center response times)")
-    print()
-
-    for i, dc in enumerate(data_centers, 1):
-        print(f"[{i}/{len(data_centers)}] ", end="")
-        result = query_data_center(dc, timeout=TIMEOUT, days_back=DAYS_BACK)
-        results.append(result)
-        print()
-
-    print("=" * 60)
-    print("Query complete! Generating markdown report...")
-    print("=" * 60)
-
-    write_markdown_report(results)
-
-    print("\n✓ Done!")
+    write_report(results)
+    print("✓ Done!")
 
 
 if __name__ == "__main__":
