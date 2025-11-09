@@ -161,6 +161,26 @@ def write_report(results, filename="fdsn_report.md"):
             if r["channels"]:
                 f.write(f"**Channel Types:** {', '.join(sorted(r['channels']))}\n\n")
 
+                # Channel code reference
+                f.write("<details>\n<summary>Channel Code Reference</summary>\n\n")
+                f.write("**Band Codes:**\n")
+                f.write("- B = Broadband (10-80 Hz)\n")
+                f.write("- H = High Broadband (≥80 Hz)\n")
+                f.write("- L = Long Period\n")
+                f.write("- V = Very Long Period\n")
+                f.write("- E = Extremely Short Period\n")
+                f.write("- S = Short Period\n\n")
+                f.write("**Instrument Codes:**\n")
+                f.write("- H = High Gain Seismometer\n")
+                f.write("- L = Low Gain Seismometer\n")
+                f.write("- N = Accelerometer\n\n")
+                f.write("**Orientation Codes:**\n")
+                f.write("- Z = Vertical\n")
+                f.write("- N = North\n")
+                f.write("- E = East\n")
+                f.write("- 1,2,3 = Orthogonal components\n")
+                f.write("</details>\n\n")
+
             f.write("---\n\n")
 
     print(f"\n✓ Report: {filename}")
