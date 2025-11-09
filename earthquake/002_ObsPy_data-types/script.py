@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script to query FDSN data centers and catalog their available data types.
+Optimized script to query FDSN data centers and catalog their available data types.
 Requires: obspy
 Install with: pip install obspy
 """
@@ -15,34 +15,37 @@ from obspy.clients.fdsn.header import FDSNException
 def get_fdsn_data_centers():
     """
     Returns a list of major FDSN data centers.
-    Based on the FDSN registry.
     """
     return [
-        "IRIS",  # IRIS Data Management Center (USA)
-        "GEOFON",  # GEOFON Program (Germany)
-        "INGV",  # INGV Data Centre (Italy)
-        "ETH",  # ETH Data Centre (Switzerland)
-        "RESIF",  # RESIF Data Center (France)
-        "BGR",  # BGR Data Centre (Germany)
-        "GFZ",  # GeoForschungsZentrum Potsdam (Germany)
-        "USGS",  # USGS (USA)
-        "NCEDC",  # Northern California Earthquake Data Center
-        "SCEDC",  # Southern California Earthquake Data Center
-        "ORFEUS",  # ORFEUS Data Center (Europe)
-        "IPGP",  # IPGP Data Center (France)
-        "GEONET",  # GeoNet (New Zealand)
-        "KNMI",  # Royal Netherlands Meteorological Institute
-        "KOERI",  # Bogazici University Kandilli Observatory (Turkey)
-        "LMU",  # Ludwig Maximilian University of Munich
-        "NOA",  # National Observatory of Athens (Greece)
-        "ISC",  # International Seismological Centre (UK)
+        "IRIS",
+        "GEOFON",
+        "INGV",
+        "ETH",
+        "RESIF",
+        "BGR",
+        "GFZ",
+        "USGS",
+        "NCEDC",
+        "SCEDC",
+        "ORFEUS",
+        "IPGP",
+        "GEONET",
+        "KNMI",
+        "KOERI",
+        "LMU",
+        "NOA",
+        "ISC",
     ]
 
 
-def query_data_center(data_center_name):
+def query_data_center(data_center_name, timeout=30, days_back=30):
     """
     Query a single data center for available services and data types.
-    Returns a dictionary with information about the data center.
+
+    Parameters:
+    - data_center_name: Name of the FDSN data center
+    - timeout: Timeout in seconds for queries (default: 30)
+    - days_back: How many days back to query (default: 30 for faster queries)
     """
     result = {
         "name": data_center_name,
@@ -55,7 +58,7 @@ def query_data_center(data_center_name):
 
     try:
         print(f"Querying {data_center_name}...")
-        client = Client(data_center_name)
+        client = Client(data_center_name, timeout=timeout)
         result["accessible"] = True
 
         # Get available services
@@ -67,20 +70,29 @@ def query_data_center(data_center_name):
         if "event" in services:
             result["services"].append("event (earthquake catalogs)")
 
-        # Try to get a sample of available networks (limited query)
-        try:
-            # Query for recent networks (last year)
-            endtime = datetime.datetime.now()
-            starttime = endtime - datetime.timedelta(days=365)
+        print(f"  Services found: {len(result['services'])}")
 
+        # Try to get a LIMITED sample of available networks
+        try:
+            # Query for recent networks (reduced time window)
+            endtime = datetime.datetime.now()
+            starttime = endtime - datetime.timedelta(days=days_back)
+
+            print(
+                f"  Fetching network metadata (last {days_back} days, this may take a moment)..."
+            )
+
+            # Use a more limited query - get only network level first
             inventory = client.get_stations(
                 starttime=starttime,
                 endtime=endtime,
-                level="channel",
+                level="network",  # Changed from 'channel' to 'network' for speed
                 includerestricted=False,
             )
 
-            # Extract network codes and channel types
+            print(f"  Found {len(inventory)} networks, now getting sample channels...")
+
+            # Extract network codes
             for network in inventory:
                 result["networks"].append(
                     {
@@ -95,17 +107,35 @@ def query_data_center(data_center_name):
                     }
                 )
 
-                # Get channel types from stations
-                for station in network:
-                    for channel in station:
-                        # Channel code format: BHZ, HHZ, etc.
-                        # First letter: Band code (B=broadband, H=high broadband, etc.)
-                        # Second letter: Instrument code (H=high gain, L=low gain, etc.)
-                        # Third letter: Orientation (Z=vertical, N=north, E=east, etc.)
-                        result["channel_types"].add(channel.code)
+            # Get channel types from a LIMITED sample of networks
+            sample_size = min(3, len(inventory))  # Sample only 3 networks
+            print(f"  Sampling {sample_size} networks for channel types...")
+
+            for i, network in enumerate(inventory[:sample_size]):
+                try:
+                    # Get detailed info for just this network
+                    detailed_inv = client.get_stations(
+                        network=network.code,
+                        starttime=starttime,
+                        endtime=endtime,
+                        level="channel",
+                        includerestricted=False,
+                    )
+
+                    for net in detailed_inv:
+                        for station in net:
+                            for channel in station:
+                                result["channel_types"].add(channel.code)
+
+                    print(f"    Sampled network {i + 1}/{sample_size}: {network.code}")
+                except Exception as e:
+                    print(
+                        f"    Warning: Could not sample network {network.code}: {str(e)}"
+                    )
+                    continue
 
             print(
-                f"  Found {len(result['networks'])} networks with {len(result['channel_types'])} channel types"
+                f"  ✓ Complete: {len(result['networks'])} networks, {len(result['channel_types'])} channel types"
             )
 
         except FDSNException as e:
@@ -117,10 +147,10 @@ def query_data_center(data_center_name):
 
     except FDSNException as e:
         result["error"] = f"FDSN Error: {str(e)}"
-        print(f"  Error: Cannot connect to {data_center_name}")
+        print(f"  ✗ Error: Cannot connect to {data_center_name}")
     except Exception as e:
         result["error"] = f"Connection error: {str(e)}"
-        print(f"  Error: {result['error']}")
+        print(f"  ✗ Error: {result['error']}")
 
     return result
 
@@ -136,6 +166,9 @@ def write_markdown_report(results, filename="fdsn_data_centers_report.md"):
         )
         f.write(
             "This report catalogs available FDSN data centers and the types of seismological data they provide.\n\n"
+        )
+        f.write(
+            "*Note: Channel types are sampled from a subset of networks for performance reasons.*\n\n"
         )
 
         # Summary statistics
@@ -174,9 +207,7 @@ def write_markdown_report(results, filename="fdsn_data_centers_report.md"):
                 f.write(f"### Networks ({len(result['networks'])} found)\n\n")
                 f.write("| Network Code | Description | Start Date | End Date |\n")
                 f.write("|--------------|-------------|------------|----------|\n")
-                for network in result["networks"][
-                    :20
-                ]:  # Limit to first 20 for readability
+                for network in result["networks"][:20]:
                     desc = (
                         network["description"][:50] + "..."
                         if len(network["description"]) > 50
@@ -194,7 +225,7 @@ def write_markdown_report(results, filename="fdsn_data_centers_report.md"):
 
             # Channel types
             if result["channel_types"]:
-                f.write("### Channel Types\n\n")
+                f.write("### Channel Types (Sampled)\n\n")
                 f.write(
                     "Available channel codes (format: Band-Instrument-Orientation):\n\n"
                 )
@@ -234,7 +265,7 @@ def write_markdown_report(results, filename="fdsn_data_centers_report.md"):
 
             f.write("---\n\n")
 
-    print(f"\nReport written to: {filename}")
+    print(f"\n✓ Report written to: {filename}")
 
 
 def main():
@@ -242,17 +273,29 @@ def main():
     Main function to query all data centers and generate report.
     """
     print("=" * 60)
-    print("FDSN Data Center Query Script")
+    print("FDSN Data Center Query Script (Optimized)")
     print("=" * 60)
     print()
 
     data_centers = get_fdsn_data_centers()
     results = []
 
-    print(f"Querying {len(data_centers)} FDSN data centers...\n")
+    # Configuration
+    TIMEOUT = 60  # Increase timeout to 60 seconds
+    DAYS_BACK = 30  # Query only last 30 days (instead of 365)
 
-    for dc in data_centers:
-        result = query_data_center(dc)
+    print(f"Configuration:")
+    print(f"  - Timeout: {TIMEOUT} seconds")
+    print(f"  - Time window: Last {DAYS_BACK} days")
+    print(f"  - Channel sampling: 3 networks per data center")
+    print()
+    print(f"Querying {len(data_centers)} FDSN data centers...")
+    print("(This may take 5-15 minutes depending on data center response times)")
+    print()
+
+    for i, dc in enumerate(data_centers, 1):
+        print(f"[{i}/{len(data_centers)}] ", end="")
+        result = query_data_center(dc, timeout=TIMEOUT, days_back=DAYS_BACK)
         results.append(result)
         print()
 
@@ -262,7 +305,7 @@ def main():
 
     write_markdown_report(results)
 
-    print("\nDone!")
+    print("\n✓ Done!")
 
 
 if __name__ == "__main__":
