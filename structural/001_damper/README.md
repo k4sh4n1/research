@@ -30,7 +30,7 @@ For SDOF sytesm without hysteresis mechanism and under the two attached seismic 
    * Total input energy
    * Damping energy
    * Elastic energy
-   * Inertial energy
+   * Kinetic energy
    * Chart comparison of energies, maybe by cumulative sum
 
 # System with damper
@@ -52,7 +52,7 @@ The system response and energy are needed for the system equipped with damper:
    * Total input energy
    * Damping energy
    * Elastic energy
-   * Inertial energy
+   * Kinetic energy
    * Chart comparison of energies, maybe by cumulative sum
 
 # Implications
