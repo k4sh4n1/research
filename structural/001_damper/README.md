@@ -1,10 +1,10 @@
-An SDOF system with is assumed:
+An SDOF system is assumed:
 
-* Stiffness `k`
-* Unit mass `m=1`
-* Damping coefficient `c`
-   * Damping ratio is `5%`
-* Natural period of the system is `T=0.4 sec`
+* Stiffness $k$
+* Unit mass $m=1$
+* Damping coefficient $c$
+   * Damping ratio $\zeta$ is `5%`
+* Natural period of the system $T$ is `0.4 sec`
 
 For seismic protection, an energy dissipating mechanism, i.e. damper, is added to the system with the attached hysteresis properties.
 
@@ -14,11 +14,8 @@ For seismic protection, an energy dissipating mechanism, i.e. damper, is added t
 
 The damper hysteresis properties shown on the attached figure are:
 
-* `k_bar`
-   * The stiffness
-* `F_bar`
-   * The yielding force
-
+* $\bar{k}$ is damper stiffness
+* $\bar{F}_y$ is dampler yielding force
 
 # System alone
 
@@ -27,8 +24,8 @@ For SDOF sytesm without hysteresis mechanism and under the two attached seismic 
 1. System response
    * Displacement and its max value
    * Base shear and its max value
-      * Store the lowest of max values for two seismic time history as `F_bs` variable
-      * `F_bs` value will be used later
+      * Store the lowest of max values for two seismic time history as $F_{bs}$ variable
+      * $F_{bs}$ value will be used later
 1. System energy
    * Total input energy
    * Damping energy
@@ -40,11 +37,11 @@ For SDOF sytesm without hysteresis mechanism and under the two attached seismic 
 
 Add three separate dampers with three hysteresis properties of:
 
-* `k_bar = 0.1 k`
-* `k_bar = 0.5 k`
-* `k_bar = k `
+* $\bar{k}=0.1$
+* $\bar{k}=0.5k$
+* $\bar{k}=k$
 
-Consider the `Fy` to be equal to `0.4 * F_bs` for all of the three `k_bar` cases above.
+Consider the $\bar{F}_y$ to be equal to $0.4 * F_{bs}$ for all of the three $\bar{k}$ cases above.
 
 The system response and energy are needed for the system equipped with damper:
 
