@@ -43,7 +43,7 @@ For SDOF sytesm without hysteresis mechanism and under the two seismic records, 
 
 Add three separate dampers with three hysteresis properties of:
 
-* $\bar{k}=0.1$
+* $\bar{k}=0.1k$
 * $\bar{k}=0.5k$
 * $\bar{k}=k$
 
