@@ -1,6 +1,6 @@
 # FDSN Data Centers Report
 
-*Generated: 2025-11-09 10:52:14*
+*Generated: 2025-11-09 11:04:48*
 
 **Accessible:** 18/18 centers, 451 networks
 
@@ -36,29 +36,6 @@
 
 **Channel Types:** ATU, BDF, BH1, BH2, BHZ, HDF, HH1, HH2, HHE, HHN, HHZ, HN1, HN2, HNE, HNN, HNZ, LDF, LH1, LH2, LHZ, SOH, VAN, VCE, VCO, VCQ, VDP, VDT, VE1, VE2, VEI, VEL, VGT, VLA, VLO, VM1, VM2, VM3, VM4, VNS, VPH, VPL, VPP, VPV, VST
 
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
-
 ---
 
 ## GEOFON
@@ -90,29 +67,6 @@
 *...and 21 more*
 
 **Channel Types:** BH1, BH2, BHE, BHN, BHZ, BLE, BLN, BLZ, BNE, BNN, BNZ, HH1, HH2, HHE, HHN, HHZ, HLE, HLN, HLZ, HN1, HN2, HNE, HNN, HNZ, LB1, LB2, LB3, LB4, LB5, LB6, LBC, LBO, LBP, LBR, LBS, LBT, LBX, LBY, LBZ, LDO, LH1, LH2, LHE, LHN, LHZ, LLE, LLN, LLZ, LN1, LN2, LNZ, SHE, SHN, SHZ, SLE, SLN, SLZ, SNE, SNN, SNZ, VH1, VH2, VHE, VHN, VHZ, WDI, WDO, WHA, WII, WIO, WKI, WKO, WRA, WWD, WWS
-
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
 
 ---
 
@@ -146,29 +100,6 @@
 
 **Channel Types:** EHE, EHN, EHZ, HHE, HHN, HHZ, HNE, HNN, HNZ
 
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
-
 ---
 
 ## ETH
@@ -195,29 +126,6 @@
 | ZQ | A station every 20 m. | 2023-02-03 | Ongoing |
 
 **Channel Types:** BGE, BGN, BGZ, BH1, BH2, BH3, BHE, BHN, BHZ, EH1, EH2, EH3, EHA, EHB, EHC, EHE, EHN, EHZ, HDH, HG1, HG2, HG3, HGE, HGN, HGZ, HH1, HH2, HH3, HHE, HHN, HHZ, HJ1, HJ2, HJ3, LH1, LH2, LH3, LHE, LHN, LHZ, VDT
-
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
 
 ---
 
@@ -251,29 +159,6 @@
 
 **Channel Types:** DHZ, HHE, HHN, HHZ, HNE, HNN, HNZ
 
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
-
 ---
 
 ## BGR
@@ -301,29 +186,6 @@
 | 5R | N/A | 1980-01-01 | Ongoing |
 
 **Channel Types:** BDA, BDF, BH1, BH2, BHE, BHN, BHZ, BKO, BWD, BWS, DHE, DHN, DHZ, EHE, EHN, EHZ, HDF, HH1, HH2, HHE, HHN, HHZ, LBR, LDA, LDF, LDO, LH1, LH2, LHE, LHN, LHO, LHZ, LIO, LKO, LWD, LWS, SHE, SHN, SHZ, VHE, VHN, VHZ
-
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
 
 ---
 
@@ -356,29 +218,6 @@
 *...and 21 more*
 
 **Channel Types:** BH1, BH2, BHE, BHN, BHZ, BLE, BLN, BLZ, BNE, BNN, BNZ, HH1, HH2, HHE, HHN, HHZ, HLE, HLN, HLZ, HN1, HN2, HNE, HNN, HNZ, LB1, LB2, LB3, LB4, LB5, LB6, LBC, LBO, LBP, LBR, LBS, LBT, LBX, LBY, LBZ, LDO, LH1, LH2, LHE, LHN, LHZ, LLE, LLN, LLZ, LN1, LN2, LNZ, SHE, SHN, SHZ, SLE, SLN, SLZ, SNE, SNN, SNZ, VH1, VH2, VHE, VHN, VHZ, WDI, WDO, WHA, WII, WIO, WKI, WKO, WRA, WWD, WWS
-
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
 
 ---
 
@@ -436,29 +275,6 @@
 
 **Channel Types:** HH2, HH3, HHE, HHN, HHZ, LH2, LH3, LHE, LHN, LHZ, MA1, MA2, MDO, MGZ, MK1, MK2, MK3, MK4, MXZ
 
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
-
 ---
 
 ## IPGP
@@ -480,29 +296,6 @@
 | 7J | InSight pre and post-flight test data | 2016-01-01 | 2030-12-31 |
 
 **Channel Types:** BDO, BH1, BH2, BHE, BHN, BHZ, EH1, EH2, EHE, EHN, EHZ, HH1, HH2, HHE, HHN, HHZ, HNE, HNN, HNZ, LDI, LDO, LH1, LH2, LHE, LHN, LHZ, LKI, LKO, LME, LMN, LMZ, QBC, QBD, QBL, QBO, QBR, QBU, QKO, QWS, UDO, UEB, UFN, UIO, UKD, UKO, URO, UUO, UWD, UWS, VDH, VDO, VTZ
-
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
 
 ---
 
@@ -529,29 +322,6 @@
 
 **Channel Types:** AX0, AX1, AX2, AX3, BH1, BH2, BHE, BHN, BHZ, CDF, CPU, DEG, EHE, EHN, EHZ, EPE, EPN, EPZ, HDF, HG1, HG2, HGE, HGN, HGZ, HH1, HH2, HHE, HHN, HHZ, HNE, HNN, HNZ, HUM, LCE, LCQ, LEA, LEC, LH1, LH2, LHE, LHN, LHZ, VCO, VEA, VEC, VEP, VFP, VKI, VMU, VMV, VMW, VVB
 
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
-
 ---
 
 ## KOERI
@@ -569,29 +339,6 @@
 | TL | Armutlu Local Seismic Network | 2006-01-01 | Ongoing |
 
 **Channel Types:** EHE, EHN, EHZ, HHE, HHN, HHZ, HNE, HNN, HNZ
-
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
 
 ---
 
@@ -611,29 +358,6 @@
 | X6 | 6C-component near summit of Mt. Zugspitz... | 2022-07-18 | Ongoing |
 
 **Channel Types:** BH1, BH2, BHE, BHN, BHZ, BJE, BJN, BJU, BJV, BJW, BJZ, EHE, EHN, EHZ, ELE, ELN, ELZ, HH1, HH2, HHE, HHN, HHZ, HJU, HJV, HJW, HJZ, HK1, HK2, HK3, SLE, SLN, SLZ
-
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
 
 ---
 
@@ -664,29 +388,6 @@
 | MA | Institute of Earthquake Engineering and ... | 1980-01-01 | Ongoing |
 
 **Channel Types:** EHE, EHN, EHZ, HHE, HHN, HHZ, HNE, HNN, HNZ, LHE, LHN, LHZ
-
-<details>
-<summary>Channel Code Reference</summary>
-
-**Band Codes:**
-- B = Broadband (10-80 Hz)
-- H = High Broadband (≥80 Hz)
-- L = Long Period
-- V = Very Long Period
-- E = Extremely Short Period
-- S = Short Period
-
-**Instrument Codes:**
-- H = High Gain Seismometer
-- L = Low Gain Seismometer
-- N = Accelerometer
-
-**Orientation Codes:**
-- Z = Vertical
-- N = North
-- E = East
-- 1,2,3 = Orthogonal components
-</details>
 
 ---
 
