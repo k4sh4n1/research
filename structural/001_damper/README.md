@@ -1,3 +1,5 @@
+# Description
+
 An SDOF system is assumed:
 
 * Stiffness $k$
