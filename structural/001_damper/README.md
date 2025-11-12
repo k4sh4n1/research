@@ -19,9 +19,13 @@ The damper hysteresis properties shown on the attached figure are:
 * $\bar{k}$ is damper stiffness
 * $\bar{F}_y$ is dampler yielding force
 
+# Seismic records
+
+Two attached seismic acceleration time histories are considered. Their max value should be normalized to $0.4g$ before any computation.
+
 # System alone
 
-For SDOF sytesm without hysteresis mechanism and under the two attached seismic time histories, I need:
+For SDOF sytesm without hysteresis mechanism and under the two seismic records, compute:
 
 1. System response
    * Displacement and its max value
