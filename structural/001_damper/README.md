@@ -95,3 +95,5 @@ These charts mgiht provide an acceptable visualization:
    * One sub-plot for checking energy balance
       * Input energy
       * Sum of kinetic, damping, elastic, and damper hysteresis energies
+* One chart with 3 sub-plots
+   * Each sub-plot corresponds to the hysteresis loop of one of 3 damper cases
