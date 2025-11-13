@@ -70,7 +70,7 @@ Evaluate the performance of the damper by comparing:
 
 # Charts
 
-These charts mgiht provide an acceptable visualization:
+Minimal and concise functions are developed to draw charts. The required charts are:
 
 * One chart with only one sub-plot
    * Comparing two scaled seismic records on top of each other
