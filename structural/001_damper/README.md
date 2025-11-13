@@ -115,7 +115,7 @@ This is how the simulation will be done:
    * Integrator is set to `integrator('Newmark', 0.5, 0.25)` for unconditional stability
    * Method `.reactions()` of `OpenSeesPy` is called before getting node reactions
 
-# Code requirement
+# Code requirements
 
 The code and the plotting functions are kept:
 
