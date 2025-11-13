@@ -114,11 +114,12 @@ This is how the simulation will be done:
    * Elastic-perfectly-plastic behavior of the hysteresis device will be modeled
    * Integrator is set to `integrator('Newmark', 0.5, 0.25)` for unconditional stability
    * Method `.reactions()` of `OpenSeesPy` is called before getting node reactions
-*  Balanced Rayleigh damping is used
-   * Both components equal for mass and stiffness
-   * This gives exact damping ratio at the natural frequency
-   * `alpha_M = zeta * omega`
-   * `beta_K = zeta / omega`
+*  Rayleigh damping is used
+   * Mass-proportional satisfies the energy balance, why?
+   * `alpha_M = 2 * zeta * omega`
+   * `beta_K = 0.0`
+   * `ops.rayleigh(alpha_M, beta_K, 0.0, 0.0)`
+   * Stiffness-proportional and classical Rayleigh (balanced) won't satisfy energy balance, why?
 
 # Code requirements
 

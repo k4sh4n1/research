@@ -73,8 +73,8 @@ class SeismicAnalysis:
         ops.uniaxialMaterial("Elastic", 1, self.k)
         ops.element("zeroLength", 1, 1, 2, "-mat", 1, "-dir", 1)
 
-        alpha_M = self.zeta * self.omega
-        beta_K = self.zeta / self.omega
+        alpha_M = 2 * self.zeta * self.omega
+        beta_K = 0.0
 
         # Damping
         ops.rayleigh(alpha_M, beta_K, 0.0, 0.0)
