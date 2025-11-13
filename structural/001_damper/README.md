@@ -75,7 +75,7 @@ These charts mgiht provide an acceptable visualization:
 * One chart with only one sub-plot
    * Comparing two scaled seismic records on top of each other
 * For system without damper, one chart with 2 sub-plots
-   * One sub-plot for comparing Energy components
+   * One sub-plot for comparing energy components
       * Input energy
       * Kinetic energy
       * Damping energy
