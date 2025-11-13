@@ -10,7 +10,7 @@ An SDOF system is assumed:
 
 # Device
 
-For seismic protection, an energy dissipating mechanism, i.e. supplemental device, is added to the system. The device has an elastic-perfectly-plastic behavior with the following hysteresis properties.
+For seismic protection, an energy dissipating mechanism, i.e. supplemental device, is added to the system in parallel. The device has an elastic-perfectly-plastic behavior with the following hysteresis properties.
 
 ![SDOF system with device](media/SDOF.png "SDOF system with device")
 
