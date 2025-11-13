@@ -4,20 +4,20 @@ An SDOF system is assumed:
 
 * Stiffness $k$
 * Unit mass $m=1$
-* Damping coefficient $c$
-   * Damping ratio $\zeta$ is `5%`
 * Natural period of the system $T$ is `0.4 sec`
+* Viscous damping coefficient $c$
+   * Viscous damping ratio $\zeta$ is `5%`
 
-For seismic protection, an energy dissipating mechanism, i.e. damper, is added to the system with the attached hysteresis properties.
+For seismic protection, an energy dissipating mechanism, i.e. supplemental hysteresis device, is added to the system with the attached hysteresis properties.
 
 ![SDOF system](media/SDOF.png "SDOF system")
 
-![Hysteresis damper](media/hysteresis.png "Hysteresis damper")
+![Hysteresis device](media/hysteresis.png "Hysteresis device")
 
-The damper hysteresis properties shown on the attached figure are:
+The device hysteresis properties shown on the attached figure are:
 
-* $\bar{k}$ is damper stiffness
-* $\bar{F}_y$ is dampler yielding force
+* $\bar{k}$ is device stiffness
+* $\bar{F}_y$ is device yielding force
 
 # Seismic records
 
@@ -34,14 +34,14 @@ For SDOF sytesm without hysteresis mechanism and under the two seismic records, 
       * $F_{bs}$ value will be used later
 1. System energy
    * Total input energy
-   * Damping energy
+   * Viscous damping energy
    * Elastic energy
    * Kinetic energy
    * Chart comparison of energies, maybe by cumulative sum
 
-# System with damper
+# System with device
 
-Add three separate dampers with three hysteresis properties of:
+Add three separate devices with three hysteresis properties of:
 
 * $\bar{k}=0.1k$
 * $\bar{k}=0.5k$
@@ -49,24 +49,24 @@ Add three separate dampers with three hysteresis properties of:
 
 Consider the $\bar{F}_y$ to be equal to $0.4 * F_{bs}$ for all of the three $\bar{k}$ cases above.
 
-The system response and energy are needed for the system equipped with damper:
+The system response and energy are needed for the system equipped with device:
 
 1. System response
    * Displacement and its max value
    * Base shear and its max value
 1. System energy
    * Total input energy
-   * Damping energy
+   * Viscous damping energy
    * Elastic energy
    * Kinetic energy
    * Chart comparison of energies, maybe by cumulative sum
 
 # Implications
 
-Evaluate the performance of the damper by comparing:
+Evaluate the performance of the device by comparing:
 
 * System alone
-* System with damper
+* System with device
 
 # Charts
 
@@ -74,29 +74,29 @@ Minimal and concise functions are developed to draw charts. The required charts 
 
 * One chart with only one sub-plot
    * Comparing two scaled seismic records on top of each other
-* For system without damper, one chart with 2 sub-plots
+* For system without device, one chart with 2 sub-plots
    * One sub-plot for comparing energy components
       * Input energy
       * Kinetic energy
-      * Damping energy
+      * Viscous damping energy
       * Elastic energy
    * One sub-plot for checking energy balance
       * Input energy
-      * Sum of kinetic, damping, and elastic energies
-* For each damper case, one chart with 4 sub-plots in a 2x2 arrangement
-   * One sub-plot for comparing displacement without and with damper
-   * One sub-plot for comparing base shear without and with damper
+      * Sum of kinetic, viscous damping, and elastic energies
+* For each device case, one chart with 4 sub-plots in a 2x2 arrangement
+   * One sub-plot for comparing displacement without and with device
+   * One sub-plot for comparing base shear without and with device
    * One sub-plot for comparing energy components
       * Input energy
       * Kinetic energy
-      * Damping energy
+      * Viscous damping energy
       * Elastic energy
-      * Hysteresis energy of damper
+      * Hysteresis energy of device
    * One sub-plot for checking energy balance
       * Input energy
-      * Sum of kinetic, damping, elastic, and damper hysteresis energies
+      * Sum of kinetic, viscous damping, elastic, and device hysteresis energies
 * One chart with 3 sub-plots
-   * Each sub-plot corresponds to the hysteresis loop of one of 3 damper cases
+   * Each sub-plot corresponds to the hysteresis loop of one of 3 device cases
 
 # Simulation details
 
@@ -110,7 +110,7 @@ This is how the simulation will be done:
    * They can have a variable number of data on each line
 * `OpenSeesPy` module is employed for structural analysis
    * A one-dimensional model is created by `OpenSeesPy`
-   * Elastic-perfectly-plastic behavior of the hysteresis damper will be modeled
+   * Elastic-perfectly-plastic behavior of the hysteresis device will be modeled
    * Integrator is set to `integrator('Newmark', 0.5, 0.25)` for unconditional stability
    * Method `.reactions()` of `OpenSeesPy` is called before getting node reactions
 
