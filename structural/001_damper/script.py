@@ -160,8 +160,11 @@ class SeismicAnalysis:
         ops.uniaxialMaterial("Steel01", 2, F_y_bar, k_bar, 0.001)
         ops.element("zeroLength", 2, 1, 2, "-mat", 2, "-dir", 1)
 
+        alpha_M = 2 * self.zeta * self.omega
+        beta_K = 0.0
+
         # Damping
-        ops.rayleigh(0.0, 0.0, 0.0, 2 * self.zeta / self.omega)
+        ops.rayleigh(alpha_M, beta_K, 0.0, 0.0)
 
         # Time series for ground motion
         ops.timeSeries("Path", 1, "-dt", dt, "-values", *acc)
