@@ -14,9 +14,9 @@ For seismic protection, an energy dissipating mechanism, i.e. supplemental devic
 
 ![SDOF system with device](media/SDOF.png "SDOF system with device")
 
-![Hysteresis device](media/hysteresis.png "Hysteresis device")
+![Device hysteresis behavior](media/hysteresis.png "Device hysteresis behavior")
 
-The device hysteresis properties shown on the figure are:
+The device hysteresis behavior properties shown on the figure are:
 
 * $\bar{k}$ is device stiffness
 * $\bar{F}_y$ is device yielding force
