@@ -8,7 +8,7 @@ echo Creating PDF with fixed image positions and numbered sections...
 REM Create a temporary markdown with LaTeX headers
 (
 echo ---
-echo title: "Problem Statement"
+echo title: "Problem statement"
 echo date: "November 2025"
 echo author: majid.kashani@alum.sharif.edu
 echo numbersections: true
