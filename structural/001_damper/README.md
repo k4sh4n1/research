@@ -1,4 +1,4 @@
-# Description
+# SDOF system
 
 An SDOF system is assumed:
 
@@ -8,13 +8,15 @@ An SDOF system is assumed:
 * Viscous damping coefficient $c$
    * Viscous damping ratio $\zeta$ is `5%`
 
-For seismic protection, an energy dissipating mechanism, i.e. supplemental hysteresis device, is added to the system with the attached hysteresis properties.
+# Device
+
+For seismic protection, an energy dissipating mechanism, i.e. supplemental device, is added to the system. The device has an elastic-perfectly-plastic behavior with the following hysteresis properties.
 
 ![SDOF system](media/SDOF.png "SDOF system")
 
 ![Hysteresis device](media/hysteresis.png "Hysteresis device")
 
-The device hysteresis properties shown on the attached figure are:
+The device hysteresis properties shown on the figure are:
 
 * $\bar{k}$ is device stiffness
 * $\bar{F}_y$ is device yielding force
