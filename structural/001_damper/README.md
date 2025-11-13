@@ -122,3 +122,63 @@ The code and the plotting functions are kept:
 * Concise
 * Readable
 * Maintainable
+
+# Energy calculation
+
+For an SDOF system with ground excitation and a hysteretic device in parallel:
+
+$$m\ddot{u}(t) + c\dot{u}(t) + f_s(t) + f_h(t) = -m\ddot{u}_g(t)$$
+
+Where:
+
+* $u(t)$ = relative displacement (relative to ground)
+* $\ddot{u}_g(t)$ = ground acceleration
+* $f_s(t) = ku(t)$ = elastic restoring force
+* $f_h(t)$ = hysteretic force from the device
+* $m$ = mass, $c$ = damping coefficient, $k$ = elastic stiffness
+
+## Energy Balance
+
+Multiplying the equation of motion by $\dot{u}(t)$ and integrating from 0 to time $t$:
+
+$$E_K(t) + E_D(t) + E_S(t) + E_H(t) = E_I(t)$$
+
+
+## Kinetic Energy $E_K(t)$
+The instantaneous kinetic energy:
+
+$$E_K(t) = \frac{1}{2}m\dot{u}^2(t)$$
+
+## Viscous Damping Energy $E_D(t)$
+Cumulative energy dissipated by viscous damping:
+
+$$E_D(t) = \int_0^t c\dot{u}^2(\tau) d\tau$$
+
+For discrete time steps with interval $\Delta t$:
+
+$$E_D^{i+1} = E_D^i + \frac{c}{2}(\dot{u}_i^2 + \dot{u}_{i+1}^2)\Delta t$$
+
+## Elastic Strain Energy $E_S(t)$
+Instantaneous elastic strain energy stored in the linear spring:
+
+$$E_S(t) = \frac{1}{2}ku^2(t)$$
+
+## Hysteretic Energy $E_H(t)$
+Cumulative energy dissipated by the hysteretic device:
+
+$$E_H(t) = \int_0^t f_h(\tau)\dot{u}(\tau) d\tau$$
+
+For discrete time steps:
+
+$$E_H^{i+1} = E_H^i + \frac{1}{2}(f_{h,i} + f_{h,i+1})(\Delta u_{i+1})$$
+
+where $\Delta u_{i+1} = u_{i+1} - u_i$
+
+## Input Energy $E_I(t)$
+Total energy input from ground motion:
+
+$$E_I(t) = -m\int_0^t \ddot{u}_g(\tau)\dot{u}(\tau) d\tau$$
+
+For discrete time steps:
+
+$$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i+1})$$
