@@ -19,7 +19,7 @@ For seismic protection, an energy dissipating mechanism, i.e. supplemental devic
 The device hysteresis behavior properties shown on the figure are:
 
 * $\bar{k}$ is device stiffness
-* $\bar{F}_y$ is device yielding force
+* $\bar{F}_y$ and $-\bar{F}_y$ are device yielding forces
 
 # Seismic records
 
