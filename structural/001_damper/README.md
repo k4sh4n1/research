@@ -83,7 +83,7 @@ These charts mgiht provide an acceptable visualization:
    * One sub-plot for checking energy balance
       * Input energy
       * Sum of kinetic, damping, and elastic energies
-* For each damper case, one chart with 4 sub-plots
+* For each damper case, one chart with 4 sub-plots in a 2x2 arrangement
    * One sub-plot for comparing displacement without and with damper
    * One sub-plot for comparing base shear without and with damper
    * One sub-plot for comparing energy components
