@@ -37,7 +37,6 @@ For SDOF sytesm without hysteresis mechanism and under the two seismic records, 
    * Viscous damping energy
    * Elastic energy
    * Kinetic energy
-   * Chart comparison of energies, maybe by cumulative sum
 
 # System with device
 
@@ -59,7 +58,7 @@ The system response and energy are needed for the system equipped with device:
    * Viscous damping energy
    * Elastic energy
    * Kinetic energy
-   * Chart comparison of energies, maybe by cumulative sum
+   * Hysteresis energy dissipated by device
 
 # Implications
 
@@ -91,7 +90,7 @@ Minimal and concise functions are developed to draw charts. The required charts 
       * Kinetic energy
       * Viscous damping energy
       * Elastic energy
-      * Hysteresis energy of device
+      * Hysteresis energy dissipated by device
    * One sub-plot for checking energy balance
       * Input energy
       * Sum of kinetic, viscous damping, elastic, and device hysteresis energies
