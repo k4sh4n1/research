@@ -6,20 +6,29 @@ import openseespy.opensees as ops
 def read_seismic_record(filename):
     """Read seismic record with 4 header lines and variable data per line"""
     with open(filename, "r") as f:
-        # Skip 4 header lines
+        # Skip 4 header lines; extract dt and npts
+        dt, npts = None, None
         for _ in range(4):
             header = f.readline()
             if "DT=" in header:
-                dt = float(header.split("DT=")[1].split("SEC")[0])
+                # Extract time step
+                dt_str = header.split("DT=")[1].split("SEC")[0]
+                dt = float(dt_str.strip().replace(",", ""))
             if "NPTS=" in header:
-                npts = int(header.split("NPTS=")[1].split()[0])
+                # Remove commas and take the first numeric token
+                npts_str = header.split("NPTS=")[1]
+                npts = int(npts_str.replace(",", "").split()[0])
 
-        # Read all data values
+        # Read all subsequent numeric values (variable numbers per line)
         data = []
         for line in f:
+            # Skip empty lines defensively
+            if not line.strip():
+                continue
             values = line.strip().split()
-            data.extend([float(v) for v in values])
+            data.extend(float(v) for v in values)
 
+    # Slice in case extra numbers exist after nominal length
     acc = np.array(data[:npts])
     time = np.arange(len(acc)) * dt
     return time, acc, dt
