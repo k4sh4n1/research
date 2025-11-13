@@ -97,3 +97,27 @@ These charts mgiht provide an acceptable visualization:
       * Sum of kinetic, damping, elastic, and damper hysteresis energies
 * One chart with 3 sub-plots
    * Each sub-plot corresponds to the hysteresis loop of one of 3 damper cases
+
+# Simulation details
+
+This is how the simulation will be done:
+
+* Two seismic record file names are `seismic1.txt` and `seismic2.txt`
+   * Each of the two seismic records have 4 header lines
+   * 1st seismic record file has a header line like this: `NPTS=  1192, DT= .02000 SEC`
+   * 2nd seismic record file has a header line like this: `NPTS=  4000, DT= .01000 SEC`
+   * Seismic record files have to be read line-by-line
+   * They can have a variable number of data on each line
+* `OpenSeesPy` module is employed for structural analysis
+   * A one-dimensional model is created by `OpenSeesPy`
+   * Elastic-perfectly-plastic behavior of the hysteresis damper will be modeled
+   * Integrator is set to `integrator('Newmark', 0.5, 0.25)` for unconditional stability
+   * Method `.reactions()` of `OpenSeesPy` is called before getting node reactions
+
+The code and the plotting functions are kept:
+
+* Minimal
+* Clear
+* Concise
+* Readable
+* Maintainable
