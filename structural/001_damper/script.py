@@ -73,8 +73,11 @@ class SeismicAnalysis:
         ops.uniaxialMaterial("Elastic", 1, self.k)
         ops.element("zeroLength", 1, 1, 2, "-mat", 1, "-dir", 1)
 
+        alpha_M = self.zeta * self.omega
+        beta_K = self.zeta / self.omega
+
         # Damping
-        ops.rayleigh(0.0, 0.0, 0.0, 2 * self.zeta / self.omega)
+        ops.rayleigh(alpha_M, beta_K, 0.0, 0.0)
 
         # Time series for ground motion
         ops.timeSeries("Path", 1, "-dt", dt, "-values", *acc)
