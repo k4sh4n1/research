@@ -67,3 +67,31 @@ Evaluate the performance of the damper by comparing:
 
 * System alone
 * System with damper
+
+# Charts
+
+These charts mgiht provide an acceptable visualization:
+
+* One chart with only one sub-plot
+   * Comparing two scaled seismic records on top of each other
+* For system without damper, one chart with 2 sub-plots
+   * One sub-plot for comparing Energy components
+      * Input energy
+      * Kinetic energy
+      * Damping energy
+      * Elastic energy
+   * One sub-plot for checking energy balance
+      * Input energy
+      * Sum of kinetic, damping, and elastic energies
+* For each damper case, one chart with 4 sub-plots
+   * One sub-plot for comparing displacement without and with damper
+   * One sub-plot for comparing base shear without and with damper
+   * One sub-plot for comparing Energy components
+      * Input energy
+      * Kinetic energy
+      * Damping energy
+      * Elastic energy
+      * Hysteresis energy of damper
+   * One sub-plot for checking energy balance
+      * Input energy
+      * Sum of kinetic, damping, elastic, and damper hysteresis energies
