@@ -392,6 +392,8 @@ if __name__ == "__main__":
     sa.Fbs = min(res1["max_base_shear"], res2["max_base_shear"])
     F_y_bar = 0.4 * sa.Fbs
 
+    ### device, 1st record
+
     # Device stiffness ratios
     k_ratios = [0.1, 0.5, 1.0]
     device_results = {}
@@ -400,6 +402,20 @@ if __name__ == "__main__":
         res_dev = sa.analyze_with_device(t1, acc1, dt1, r, F_y_bar)
         device_results[r] = res_dev
         sa.plot_with_device(res1, res_dev, r)
+
+    # Plot hysteresis loops
+    sa.plot_hysteresis_loops(device_results)
+
+    ### Device, 2nd record
+
+    # Device stiffness ratios
+    k_ratios = [0.1, 0.5, 1.0]
+    device_results = {}
+
+    for r in k_ratios:
+        res_dev = sa.analyze_with_device(t2, acc2, dt2, r, F_y_bar)
+        device_results[r] = res_dev
+        sa.plot_with_device(res2, res_dev, r)
 
     # Plot hysteresis loops
     sa.plot_hysteresis_loops(device_results)
