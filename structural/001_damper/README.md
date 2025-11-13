@@ -116,10 +116,10 @@ This is how the simulation will be done:
    * Method `.reactions()` of `OpenSeesPy` is called before getting node reactions
 *  Rayleigh damping is used
    * Mass-proportional satisfies the energy balance
-   * `alpha_M = 2 * zeta * omega`
-   * `beta_K = 0.0`
-   * `ops.rayleigh(alpha_M, beta_K, 0.0, 0.0)`
-   * Stiffness-proportional and classical Rayleigh (balanced) won't satisfy energy balance, why?
+      * `alpha_M = 2 * zeta * omega`
+      * `beta_K = 0.0`
+      * `ops.rayleigh(alpha_M, beta_K, 0.0, 0.0)`
+   * Stiffness-proportional and classical Rayleigh (balanced) won't satisfy energy balance
 
 # Code requirements
 
