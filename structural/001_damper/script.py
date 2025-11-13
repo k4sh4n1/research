@@ -383,6 +383,7 @@ if __name__ == "__main__":
     res1 = sa.analyze_system_alone(t1, acc1, dt1)
     res2 = sa.analyze_system_alone(t2, acc2, dt2)
     sa.plot_system_alone(res1)
+    sa.plot_system_alone(res2)
 
     # Determine F̄_y = 0.4 * F_bs (lowest max base shear)
     sa.Fbs = min(res1["max_base_shear"], res2["max_base_shear"])
