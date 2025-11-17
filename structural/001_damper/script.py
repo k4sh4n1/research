@@ -206,18 +206,21 @@ class SeismicAnalysis:
 
         # Trapezoidal integration to maintain consistency with the Newmark integrator:
         for i in range(1, n_steps):
-            # Viscous damping energy
+            # Viscous damping energy: ∫ c·u̇² dt
+            # Trapezoidal rule: (dt/2) * [f(t_i-1) + f(t_i)]
             E_damping[i] = (
                 E_damping[i - 1] + 0.5 * self.c * (vel[i - 1] ** 2 + vel[i] ** 2) * dt
             )
 
-            # Hysteretic energy
+            # Hysteretic energy: ∫ fh·u̇ dt = ∫ fh·(du/dt) dt = ∫ fh·du
+            # Trapezoidal approximation for fh over interval displacement
             du = disp[i] - disp[i - 1]
             E_hysteresis[i] = (
                 E_hysteresis[i - 1] + 0.5 * (device_force[i - 1] + device_force[i]) * du
             )
 
-            # Input energy
+            # Input energy: -∫ m·üg·u̇ dt = -∫ m·üg·(du/dt) dt = -∫ m·üg·du
+            # Trapezoidal approximation for üg over interval displacement
             E_input[i] = E_input[i - 1] - 0.5 * self.m * (acc[i - 1] + acc[i]) * du
 
         return {
