@@ -194,7 +194,7 @@ class SeismicAnalysis:
             vel[i] = ops.nodeVel(2, 1)
             ops.reactions()
             base_shear[i] = -ops.nodeReaction(1, 1)
-            device_force[i] = ops.eleForce(2, 1)
+            device_force[i] = ops.eleForce(2, 2)  # Get from second node
 
         # Calculate energies
         E_kinetic = 0.5 * self.m * vel**2
