@@ -204,6 +204,7 @@ class SeismicAnalysis:
         E_hysteresis = np.zeros(n_steps)
         E_input = np.zeros(n_steps)
 
+        # Trapezoidal integration to maintain consistency with the Newmark integrator:
         for i in range(1, n_steps):
             # Viscous damping energy
             E_damping[i] = (
