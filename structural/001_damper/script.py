@@ -157,7 +157,8 @@ class SeismicAnalysis:
 
         # Hysteretic device (elastic-perfectly-plastic)
         k_bar = k_bar_ratio * self.k
-        ops.uniaxialMaterial("Steel01", 2, F_y_bar, k_bar, 0.001)
+        eps_yP = F_y_bar / k_bar  # Yield strain
+        ops.uniaxialMaterial("ElasticPP", 2, k_bar, eps_yP)
         ops.element("zeroLength", 2, 1, 2, "-mat", 2, "-dir", 1)
 
         alpha_M = 2 * self.zeta * self.omega
