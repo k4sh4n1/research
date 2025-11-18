@@ -132,7 +132,7 @@ The code and the plotting functions are kept:
 * Readable
 * Maintainable
 
-# Energy calculation
+# Energy computation
 
 For an SDOF system with ground excitation and a hysteretic device in parallel:
 
