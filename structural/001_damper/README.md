@@ -191,3 +191,41 @@ $$E_I(t) = -m\int_0^t \ddot{u}_g(\tau)\dot{u}(\tau) d\tau$$
 For discrete time steps:
 
 $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i+1})$$
+
+# Results
+
+## Scaled records
+
+![Scaled records](results/seismic_records.png "Scaled records")
+
+## System without device
+
+## TABAS: `seismic1.txt`
+
+![System alone](results/system_alone_seismic1.png "System alone")
+
+## EL CENTRO: `seismic2.txt`
+
+![System alone](results/system_alone_seismic2.png "System alone")
+
+## System with device
+
+## TABAS: `seismic1.txt`
+
+![System with device](results/with_device_seismic1_k0.1.png "System with device")
+
+![System with device](results/with_device_seismic1_k0.5.png "System with device")
+
+![System with device](results/with_device_seismic1_k1.0.png "System with device")
+
+![Hysteresis loop](results/hysteresis_loops_seismic1.png "Hysteresis loop")
+
+## EL CENTRO: `seismic2.txt`
+
+![System with device](results/with_device_seismic2_k0.1.png "System with device")
+
+![System with device](results/with_device_seismic2_k0.5.png "System with device")
+
+![System with device](results/with_device_seismic2_k1.0.png "System with device")
+
+![Hysteresis loop](results/hysteresis_loops_seismic2.png "Hysteresis loop")
