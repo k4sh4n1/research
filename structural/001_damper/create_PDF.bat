@@ -10,11 +10,13 @@ REM Create a temporary markdown with LaTeX headers
 echo ---
 echo title: "Problem statement"
 echo date: "November 2025"
-echo author: majid.kashani@alum.sharif.edu
+echo author: "majid.kashani@alum.sharif.edu   1404 84 111 03"
 echo numbersections: true
 echo header-includes:
 echo   - \usepackage{float}
 echo   - \floatplacement{figure}{H}
+echo   - \usepackage{unicode-math}
+echo   - \setmonofont{DejaVu Sans Mono}
 echo geometry: margin=1in
 echo fontsize: 11pt
 echo ---
