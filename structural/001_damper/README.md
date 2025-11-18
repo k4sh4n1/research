@@ -198,19 +198,15 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 ![Scaled records](results/seismic_records.png "Scaled records")
 
-## System without device
-
-## TABAS: `seismic1.txt`
+## System without device: TABAS: `seismic1.txt`
 
 ![System alone](results/system_alone_seismic1.png "System alone")
 
-## EL CENTRO: `seismic2.txt`
+## System without device: EL CENTRO: `seismic2.txt`
 
 ![System alone](results/system_alone_seismic2.png "System alone")
 
-## System with device
-
-## TABAS: `seismic1.txt`
+## System with device: TABAS: `seismic1.txt`
 
 ![System with device](results/with_device_seismic1_k0.1.png "System with device")
 
@@ -220,7 +216,7 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 ![Hysteresis loop](results/hysteresis_loops_seismic1.png "Hysteresis loop")
 
-## EL CENTRO: `seismic2.txt`
+## System with device: EL CENTRO: `seismic2.txt`
 
 ![System with device](results/with_device_seismic2_k0.1.png "System with device")
 
