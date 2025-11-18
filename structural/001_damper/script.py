@@ -467,10 +467,13 @@ class SeismicAnalysis:
             axes[i].axhline(y=0, color="k", linewidth=0.5, linestyle="-", alpha=0.3)
             axes[i].axvline(x=0, color="k", linewidth=0.5, linestyle="-", alpha=0.3)
 
+        # Add super title BEFORE tight_layout
         plt.suptitle(
-            f"Hysteresis Loops - {record_name}", fontsize=12, fontweight="bold", y=0.995
+            f"Hysteresis Loops - {record_name}", fontsize=12, fontweight="bold"
         )
-        plt.tight_layout()
+
+        # Adjust layout with proper spacing for suptitle
+        plt.tight_layout(rect=[0, 0, 1, 0.97])
 
         filename = f"hysteresis_loops_{record_name.replace('.txt', '')}.png"
         plt.savefig(filename, dpi=300, bbox_inches="tight")
