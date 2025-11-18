@@ -238,141 +238,242 @@ class SeismicAnalysis:
             "max_base_shear": np.max(np.abs(base_shear)),
         }
 
-    def plot_seismic_records(self, records):
+    def plot_seismic_records(self, records, filenames):
         """Plot normalized seismic records"""
-        plt.figure(figsize=(10, 4))
-        for i, rec in enumerate(records, 1):
-            plt.plot(rec["time"], rec["acc"], label=f"Seismic Record {i}", alpha=0.7)
-        plt.xlabel("Time (s)")
-        plt.ylabel("Acceleration (m/s²)")
-        plt.title("Normalized Seismic Records (0.4g)")
-        plt.legend()
-        plt.grid(True, alpha=0.3)
+        fig, ax = plt.subplots(figsize=(10, 5))
+
+        colors = ["#1f77b4", "#ff7f0e"]
+        for i, (rec, fname) in enumerate(zip(records, filenames)):
+            ax.plot(
+                rec["time"],
+                rec["acc"],
+                label=fname,
+                color=colors[i],
+                linewidth=1.2,
+                alpha=0.8,
+            )
+
+        ax.set_xlabel("Time (s)", fontsize=11, fontweight="bold")
+        ax.set_ylabel("Acceleration (m/s²)", fontsize=11, fontweight="bold")
+        ax.set_title(
+            "Normalized Seismic Records (0.4g)", fontsize=12, fontweight="bold", pad=15
+        )
+        ax.legend(fontsize=10, framealpha=0.9)
+        ax.grid(True, alpha=0.3, linestyle="--")
+
         plt.tight_layout()
+        plt.savefig("seismic_records.png", dpi=300, bbox_inches="tight")
         plt.show()
 
-    def plot_system_alone(self, result):
+    def plot_system_alone(self, result, record_name):
         """Plot results for system without device"""
-        fig, axes = plt.subplots(2, 1, figsize=(10, 8))
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
 
         # Energy components
-        axes[0].plot(result["time"], result["E_input"], "k-", label="Input Energy")
-        axes[0].plot(result["time"], result["E_kinetic"], "b-", label="Kinetic Energy")
-        axes[0].plot(result["time"], result["E_damping"], "r-", label="Damping Energy")
-        axes[0].plot(result["time"], result["E_elastic"], "g-", label="Elastic Energy")
-        axes[0].set_xlabel("Time (s)")
-        axes[0].set_ylabel("Energy (J)")
-        axes[0].set_title("Energy Components")
-        axes[0].legend()
-        axes[0].grid(True, alpha=0.3)
+        ax1.plot(result["time"], result["E_input"], "k-", label="Input", linewidth=1.5)
+        ax1.plot(
+            result["time"],
+            result["E_kinetic"],
+            color="#1f77b4",
+            label="Kinetic",
+            linewidth=1.2,
+        )
+        ax1.plot(
+            result["time"],
+            result["E_damping"],
+            color="#d62728",
+            label="Damping",
+            linewidth=1.2,
+        )
+        ax1.plot(
+            result["time"],
+            result["E_elastic"],
+            color="#2ca02c",
+            label="Elastic",
+            linewidth=1.2,
+        )
+        ax1.set_xlabel("Time (s)", fontsize=10, fontweight="bold")
+        ax1.set_ylabel("Energy (J)", fontsize=10, fontweight="bold")
+        ax1.set_title(
+            f"Energy Components - {record_name}", fontsize=11, fontweight="bold"
+        )
+        ax1.legend(fontsize=9, loc="best", framealpha=0.9)
+        ax1.grid(True, alpha=0.3, linestyle="--")
 
         # Energy balance
         E_sum = result["E_kinetic"] + result["E_damping"] + result["E_elastic"]
-        axes[1].plot(result["time"], result["E_input"], "k-", label="Input Energy")
-        axes[1].plot(result["time"], E_sum, "r--", label="Sum of Components")
-        axes[1].set_xlabel("Time (s)")
-        axes[1].set_ylabel("Energy (J)")
-        axes[1].set_title("Energy Balance Check")
-        axes[1].legend()
-        axes[1].grid(True, alpha=0.3)
+        ax2.plot(result["time"], result["E_input"], "k-", label="Input", linewidth=1.5)
+        ax2.plot(result["time"], E_sum, "r--", label="Sum", linewidth=1.5, alpha=0.8)
+        ax2.set_xlabel("Time (s)", fontsize=10, fontweight="bold")
+        ax2.set_ylabel("Energy (J)", fontsize=10, fontweight="bold")
+        ax2.set_title(f"Energy Balance - {record_name}", fontsize=11, fontweight="bold")
+        ax2.legend(fontsize=9, loc="best", framealpha=0.9)
+        ax2.grid(True, alpha=0.3, linestyle="--")
 
         plt.tight_layout()
+        filename = f"system_alone_{record_name.replace('.txt', '')}.png"
+        plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.show()
 
-    def plot_with_device(self, result_alone, result_device, k_bar_ratio):
+    def plot_with_device(self, result_alone, result_device, k_bar_ratio, record_name):
         """Plot comparison for system with device"""
-        fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+        fig = plt.figure(figsize=(12, 10))
+        gs = fig.add_gridspec(2, 2, hspace=0.3, wspace=0.3)
 
         # Displacement comparison
-        axes[0, 0].plot(
-            result_alone["time"], result_alone["disp"], "b-", label="Without Device"
+        ax1 = fig.add_subplot(gs[0, 0])
+        ax1.plot(
+            result_alone["time"],
+            result_alone["disp"],
+            color="#1f77b4",
+            label="Without Device",
+            linewidth=1.2,
+            alpha=0.7,
         )
-        axes[0, 0].plot(
-            result_device["time"], result_device["disp"], "r-", label="With Device"
+        ax1.plot(
+            result_device["time"],
+            result_device["disp"],
+            color="#d62728",
+            label="With Device",
+            linewidth=1.2,
         )
-        axes[0, 0].set_xlabel("Time (s)")
-        axes[0, 0].set_ylabel("Displacement (m)")
-        axes[0, 0].set_title(f"Displacement Comparison (k̄/k = {k_bar_ratio})")
-        axes[0, 0].legend()
-        axes[0, 0].grid(True, alpha=0.3)
+        ax1.set_xlabel("Time (s)", fontsize=9, fontweight="bold")
+        ax1.set_ylabel("Displacement (m)", fontsize=9, fontweight="bold")
+        ax1.set_title(
+            f"Displacement (k̄/k = {k_bar_ratio})", fontsize=10, fontweight="bold"
+        )
+        ax1.legend(fontsize=8, framealpha=0.9)
+        ax1.grid(True, alpha=0.3, linestyle="--")
 
         # Base shear comparison
-        axes[0, 1].plot(
+        ax2 = fig.add_subplot(gs[0, 1])
+        ax2.plot(
             result_alone["time"],
             result_alone["base_shear"],
-            "b-",
+            color="#1f77b4",
             label="Without Device",
+            linewidth=1.2,
+            alpha=0.7,
         )
-        axes[0, 1].plot(
+        ax2.plot(
             result_device["time"],
             result_device["base_shear"],
-            "r-",
+            color="#d62728",
             label="With Device",
+            linewidth=1.2,
         )
-        axes[0, 1].set_xlabel("Time (s)")
-        axes[0, 1].set_ylabel("Base Shear (N)")
-        axes[0, 1].set_title(f"Base Shear Comparison (k̄/k = {k_bar_ratio})")
-        axes[0, 1].legend()
-        axes[0, 1].grid(True, alpha=0.3)
+        ax2.set_xlabel("Time (s)", fontsize=9, fontweight="bold")
+        ax2.set_ylabel("Base Shear (N)", fontsize=9, fontweight="bold")
+        ax2.set_title(
+            f"Base Shear (k̄/k = {k_bar_ratio})", fontsize=10, fontweight="bold"
+        )
+        ax2.legend(fontsize=8, framealpha=0.9)
+        ax2.grid(True, alpha=0.3, linestyle="--")
 
         # Energy components with device
-        axes[1, 0].plot(
-            result_device["time"], result_device["E_input"], "k-", label="Input"
+        ax3 = fig.add_subplot(gs[1, 0])
+        ax3.plot(
+            result_device["time"],
+            result_device["E_input"],
+            "k-",
+            label="Input",
+            linewidth=1.3,
         )
-        axes[1, 0].plot(
-            result_device["time"], result_device["E_kinetic"], "b-", label="Kinetic"
+        ax3.plot(
+            result_device["time"],
+            result_device["E_kinetic"],
+            color="#1f77b4",
+            label="Kinetic",
+            linewidth=1,
         )
-        axes[1, 0].plot(
-            result_device["time"], result_device["E_damping"], "r-", label="Damping"
+        ax3.plot(
+            result_device["time"],
+            result_device["E_damping"],
+            color="#d62728",
+            label="Damping",
+            linewidth=1,
         )
-        axes[1, 0].plot(
-            result_device["time"], result_device["E_elastic"], "g-", label="Elastic"
+        ax3.plot(
+            result_device["time"],
+            result_device["E_elastic"],
+            color="#2ca02c",
+            label="Elastic",
+            linewidth=1,
         )
-        axes[1, 0].plot(
+        ax3.plot(
             result_device["time"],
             result_device["E_hysteresis"],
-            "m-",
+            color="#9467bd",
             label="Hysteresis",
+            linewidth=1,
         )
-        axes[1, 0].set_xlabel("Time (s)")
-        axes[1, 0].set_ylabel("Energy (J)")
-        axes[1, 0].set_title("Energy Components")
-        axes[1, 0].legend()
-        axes[1, 0].grid(True, alpha=0.3)
+        ax3.set_xlabel("Time (s)", fontsize=9, fontweight="bold")
+        ax3.set_ylabel("Energy (J)", fontsize=9, fontweight="bold")
+        ax3.set_title("Energy Components", fontsize=10, fontweight="bold")
+        ax3.legend(fontsize=8, loc="best", framealpha=0.9, ncol=2)
+        ax3.grid(True, alpha=0.3, linestyle="--")
 
         # Energy balance with device
+        ax4 = fig.add_subplot(gs[1, 1])
         E_sum = (
             result_device["E_kinetic"]
             + result_device["E_damping"]
             + result_device["E_elastic"]
             + result_device["E_hysteresis"]
         )
-        axes[1, 1].plot(
-            result_device["time"], result_device["E_input"], "k-", label="Input Energy"
+        ax4.plot(
+            result_device["time"],
+            result_device["E_input"],
+            "k-",
+            label="Input",
+            linewidth=1.3,
         )
-        axes[1, 1].plot(result_device["time"], E_sum, "r--", label="Sum of Components")
-        axes[1, 1].set_xlabel("Time (s)")
-        axes[1, 1].set_ylabel("Energy (J)")
-        axes[1, 1].set_title("Energy Balance Check")
-        axes[1, 1].legend()
-        axes[1, 1].grid(True, alpha=0.3)
+        ax4.plot(
+            result_device["time"], E_sum, "r--", label="Sum", linewidth=1.3, alpha=0.8
+        )
+        ax4.set_xlabel("Time (s)", fontsize=9, fontweight="bold")
+        ax4.set_ylabel("Energy (J)", fontsize=9, fontweight="bold")
+        ax4.set_title("Energy Balance", fontsize=10, fontweight="bold")
+        ax4.legend(fontsize=8, framealpha=0.9)
+        ax4.grid(True, alpha=0.3, linestyle="--")
 
-        plt.tight_layout()
+        plt.suptitle(f"{record_name}", fontsize=11, fontweight="bold", y=0.995)
+
+        filename = f"with_device_{record_name.replace('.txt', '')}_k{k_bar_ratio}.png"
+        plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.show()
 
-    def plot_hysteresis_loops(self, device_results):
+    def plot_hysteresis_loops(self, device_results, record_name):
         """Plot hysteresis loops for all device cases"""
         fig, axes = plt.subplots(3, 1, figsize=(8, 10))
         ratios = [0.1, 0.5, 1.0]
+        colors = ["#9467bd", "#e377c2", "#8c564b"]
+
         for i, r in enumerate(ratios):
             res = device_results[r]
-            axes[i].plot(res["disp"], res["device_force"], "m-")
-            axes[i].set_xlabel("Displacement (m)")
-            axes[i].set_ylabel("Device Force (N)")
-            axes[i].set_title(f"Hysteresis Loop (k̄/k = {r})")
-            axes[i].grid(True, alpha=0.3)
+            axes[i].plot(
+                res["disp"],
+                res["device_force"],
+                color=colors[i],
+                linewidth=1.2,
+                alpha=0.9,
+            )
+            axes[i].set_xlabel("Displacement (m)", fontsize=10, fontweight="bold")
+            axes[i].set_ylabel("Device Force (N)", fontsize=10, fontweight="bold")
+            axes[i].set_title(
+                f"Hysteresis Loop (k̄/k = {r})", fontsize=11, fontweight="bold"
+            )
+            axes[i].grid(True, alpha=0.3, linestyle="--")
+            axes[i].axhline(y=0, color="k", linewidth=0.5, linestyle="-", alpha=0.3)
+            axes[i].axvline(x=0, color="k", linewidth=0.5, linestyle="-", alpha=0.3)
 
+        plt.suptitle(
+            f"Hysteresis Loops - {record_name}", fontsize=12, fontweight="bold", y=0.995
+        )
         plt.tight_layout()
+
+        filename = f"hysteresis_loops_{record_name.replace('.txt', '')}.png"
+        plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.show()
 
 
@@ -380,47 +481,43 @@ class SeismicAnalysis:
 if __name__ == "__main__":
     sa = SeismicAnalysis()
 
+    # Seismic record filenames
+    filenames = ["seismic1.txt", "seismic2.txt"]
+
     # Load records
-    t1, acc1, dt1 = sa.read_seismic_record("seismic1.txt")
-    t2, acc2, dt2 = sa.read_seismic_record("seismic2.txt")
+    t1, acc1, dt1 = sa.read_seismic_record(filenames[0])
+    t2, acc2, dt2 = sa.read_seismic_record(filenames[1])
 
     # Plot seismic records
-    sa.plot_seismic_records([{"time": t1, "acc": acc1}, {"time": t2, "acc": acc2}])
+    sa.plot_seismic_records(
+        [{"time": t1, "acc": acc1}, {"time": t2, "acc": acc2}], filenames
+    )
 
     # Analyze system alone for both records
     res1 = sa.analyze_system_alone(t1, acc1, dt1)
     res2 = sa.analyze_system_alone(t2, acc2, dt2)
-    sa.plot_system_alone(res1)
-    sa.plot_system_alone(res2)
+    sa.plot_system_alone(res1, filenames[0])
+    sa.plot_system_alone(res2, filenames[1])
 
     # Determine F̄_y = 0.4 * F_bs (lowest max base shear)
     sa.Fbs = min(res1["max_base_shear"], res2["max_base_shear"])
     F_y_bar = 0.4 * sa.Fbs
 
-    ### device, 1st record
-
     # Device stiffness ratios
     k_ratios = [0.1, 0.5, 1.0]
-    device_results = {}
 
+    # Analysis for seismic1.txt
+    device_results_1 = {}
     for r in k_ratios:
         res_dev = sa.analyze_with_device(t1, acc1, dt1, r, F_y_bar)
-        device_results[r] = res_dev
-        sa.plot_with_device(res1, res_dev, r)
+        device_results_1[r] = res_dev
+        sa.plot_with_device(res1, res_dev, r, filenames[0])
+    sa.plot_hysteresis_loops(device_results_1, filenames[0])
 
-    # Plot hysteresis loops
-    sa.plot_hysteresis_loops(device_results)
-
-    ### Device, 2nd record
-
-    # Device stiffness ratios
-    k_ratios = [0.1, 0.5, 1.0]
-    device_results = {}
-
+    # Analysis for seismic2.txt
+    device_results_2 = {}
     for r in k_ratios:
         res_dev = sa.analyze_with_device(t2, acc2, dt2, r, F_y_bar)
-        device_results[r] = res_dev
-        sa.plot_with_device(res2, res_dev, r)
-
-    # Plot hysteresis loops
-    sa.plot_hysteresis_loops(device_results)
+        device_results_2[r] = res_dev
+        sa.plot_with_device(res2, res_dev, r, filenames[1])
+    sa.plot_hysteresis_loops(device_results_2, filenames[1])
