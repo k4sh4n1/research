@@ -1,3 +1,5 @@
+import os  # For directory creation
+
 import matplotlib.pyplot as plt
 import numpy as np
 import openseespy.opensees as ops
@@ -19,6 +21,11 @@ class SeismicAnalysis:
 
         # Storage for results
         self.Fbs = None  # Base shear threshold for device design
+
+        # Create results directory if it doesn't exist
+        self.results_dir = "results"
+        if not os.path.exists(self.results_dir):
+            os.makedirs(self.results_dir)
 
     def read_seismic_record(self, filename):
         """Read seismic record from file and normalize to 0.4g"""
@@ -262,7 +269,8 @@ class SeismicAnalysis:
         ax.grid(True, alpha=0.3, linestyle="--")
 
         plt.tight_layout()
-        plt.savefig("seismic_records.png", dpi=300, bbox_inches="tight")
+        filename = os.path.join(self.results_dir, "seismic_records.png")
+        plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.show()
 
     def plot_system_alone(self, result, record_name):
@@ -311,7 +319,9 @@ class SeismicAnalysis:
         ax2.grid(True, alpha=0.3, linestyle="--")
 
         plt.tight_layout()
-        filename = f"system_alone_{record_name.replace('.txt', '')}.png"
+        filename = os.path.join(
+            self.results_dir, f"system_alone_{record_name.replace('.txt', '')}.png"
+        )
         plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.show()
 
@@ -439,7 +449,10 @@ class SeismicAnalysis:
 
         plt.suptitle(f"{record_name}", fontsize=11, fontweight="bold", y=0.995)
 
-        filename = f"with_device_{record_name.replace('.txt', '')}_k{k_bar_ratio}.png"
+        filename = os.path.join(
+            self.results_dir,
+            f"with_device_{record_name.replace('.txt', '')}_k{k_bar_ratio}.png",
+        )
         plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.show()
 
@@ -467,15 +480,14 @@ class SeismicAnalysis:
             axes[i].axhline(y=0, color="k", linewidth=0.5, linestyle="-", alpha=0.3)
             axes[i].axvline(x=0, color="k", linewidth=0.5, linestyle="-", alpha=0.3)
 
-        # Add super title BEFORE tight_layout
         plt.suptitle(
             f"Hysteresis Loops - {record_name}", fontsize=12, fontweight="bold"
         )
-
-        # Adjust layout with proper spacing for suptitle
         plt.tight_layout(rect=[0, 0, 1, 0.97])
 
-        filename = f"hysteresis_loops_{record_name.replace('.txt', '')}.png"
+        filename = os.path.join(
+            self.results_dir, f"hysteresis_loops_{record_name.replace('.txt', '')}.png"
+        )
         plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.show()
 
