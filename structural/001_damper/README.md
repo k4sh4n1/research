@@ -228,7 +228,7 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 # Implications
 
-Quantitative performance of device:
+Performance evaluation of device by quantitative comparisons:
 
 * For record-ELCENTRO
    * Without device
@@ -256,6 +256,8 @@ Quantitative performance of device:
    * $\bar{k}=1.0k$
       * Displacement change: `-70.07%`
       * Base shear change: `-41.74%`
+
+As indicated by the quantitative comparisons, selection of yielding force is having a significant effect on device performance. Therefore, reliable approaches to determine the device yielding force are required.
 
 # Code
 
