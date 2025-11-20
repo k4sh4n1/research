@@ -198,23 +198,13 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 ![Scaled records](results/seismic_records.png "Scaled records")
 
-## System without device: TABAS
-
-![System alone](results/system_alone_record-TABAS.png "System alone")
-
 ## System without device: EL CENTRO
 
 ![System alone](results/system_alone_record-ELCENTRO.png "System alone")
 
-## System with device: TABAS
+## System without device: TABAS
 
-![System with device](results/with_device_record-TABAS_k0.1.png "System with device")
-
-![System with device](results/with_device_record-TABAS_k0.5.png "System with device")
-
-![System with device](results/with_device_record-TABAS_k1.0.png "System with device")
-
-![Hysteresis loop](results/hysteresis_loops_record-TABAS.png "Hysteresis loop")
+![System alone](results/system_alone_record-TABAS.png "System alone")
 
 ## System with device: EL CENTRO
 
@@ -225,6 +215,16 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 ![System with device](results/with_device_record-ELCENTRO_k1.0.png "System with device")
 
 ![Hysteresis loop](results/hysteresis_loops_record-ELCENTRO.png "Hysteresis loop")
+
+## System with device: TABAS
+
+![System with device](results/with_device_record-TABAS_k0.1.png "System with device")
+
+![System with device](results/with_device_record-TABAS_k0.5.png "System with device")
+
+![System with device](results/with_device_record-TABAS_k1.0.png "System with device")
+
+![Hysteresis loop](results/hysteresis_loops_record-TABAS.png "Hysteresis loop")
 
 # Code
 
