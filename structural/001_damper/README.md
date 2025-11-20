@@ -226,6 +226,10 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 ![Hysteresis loop](results/hysteresis_loops_record-TABAS.png "Hysteresis loop")
 
+# Implications
+
+TODO.
+
 # Code
 
 ```python
