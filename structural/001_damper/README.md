@@ -228,9 +228,28 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 # Implications
 
-Quantitative difference:
+Quantitative performance of device:
 
-* 
+* For record-ELCENTRO
+   * $\bar{k}=0.1k$
+      * Displaecment change: `+1.70%`
+      * Base shear change: `+11.87%`
+   * $\bar{k}=0.5k$
+      * Displacement change: `-23.32%`
+      * Base shear change: `+15.02%`
+   * $\bar{k}=1.0k$
+      * Displacement change: `-48.86%`
+      * Base shear change: `-8.86%`
+* For record-TABAS
+   * $\bar{k}=0.1k$
+      * Displacement change: `-5.57%`
+      * Base shear change: `+3.87%`
+   * $\bar{k}=0.5k$
+      * Displacement change: `-56.43%`
+      * Base shear change: `-34.65%`
+   * $\bar{k}=1.0k$
+      * Displacement change: `-70.07%`
+      * Base shear change: `-41.74%`
 
 # Code
 
