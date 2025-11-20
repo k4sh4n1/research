@@ -662,7 +662,6 @@ class SeismicAnalysis:
         plt.show()
 
 
-# === Execution Example ===
 if __name__ == "__main__":
     sa = SeismicAnalysis()
 
@@ -691,18 +690,64 @@ if __name__ == "__main__":
     # Device stiffness ratios
     k_ratios = [0.1, 0.5, 1.0]
 
-    # Analysis for record
+    # Analysis for record 1
+    print(f"\n{'=' * 60}")
+    print(f"Results for {filenames[0]}")
+    print(f"{'=' * 60}")
+    print(f"Without device - Max Displacement: {res1['max_disp']:.6f} m")
+    print(f"Without device - Max Base Shear: {res1['max_base_shear']:.2f} N")
+    print(f"{'-' * 60}")
+
     device_results_1 = {}
     for r in k_ratios:
         res_dev = sa.analyze_with_device(t1, acc1, dt1, r, F_y_bar)
         device_results_1[r] = res_dev
+
+        # Calculate percent changes
+        disp_change = (
+            (res_dev["max_disp"] - res1["max_disp"]) / res1["max_disp"]
+        ) * 100
+        bs_change = (
+            (res_dev["max_base_shear"] - res1["max_base_shear"])
+            / res1["max_base_shear"]
+        ) * 100
+
+        print(f"\nWith device (k̄/k = {r}):")
+        print(f"  Max Displacement: {res_dev['max_disp']:.6f} m ({disp_change:+.2f}%)")
+        print(
+            f"  Max Base Shear: {res_dev['max_base_shear']:.2f} N ({bs_change:+.2f}%)"
+        )
+
         sa.plot_with_device(res1, res_dev, r, filenames[0])
     sa.plot_hysteresis_loops(device_results_1, filenames[0])
 
-    # Analysis for record
+    # Analysis for record 2
+    print(f"\n{'=' * 60}")
+    print(f"Results for {filenames[1]}")
+    print(f"{'=' * 60}")
+    print(f"Without device - Max Displacement: {res2['max_disp']:.6f} m")
+    print(f"Without device - Max Base Shear: {res2['max_base_shear']:.2f} N")
+    print(f"{'-' * 60}")
+
     device_results_2 = {}
     for r in k_ratios:
         res_dev = sa.analyze_with_device(t2, acc2, dt2, r, F_y_bar)
         device_results_2[r] = res_dev
+
+        # Calculate percent changes
+        disp_change = (
+            (res_dev["max_disp"] - res2["max_disp"]) / res2["max_disp"]
+        ) * 100
+        bs_change = (
+            (res_dev["max_base_shear"] - res2["max_base_shear"])
+            / res2["max_base_shear"]
+        ) * 100
+
+        print(f"\nWith device (k̄/k = {r}):")
+        print(f"  Max Displacement: {res_dev['max_disp']:.6f} m ({disp_change:+.2f}%)")
+        print(
+            f"  Max Base Shear: {res_dev['max_base_shear']:.2f} N ({bs_change:+.2f}%)"
+        )
+
         sa.plot_with_device(res2, res_dev, r, filenames[1])
     sa.plot_hysteresis_loops(device_results_2, filenames[1])
