@@ -103,7 +103,7 @@ Minimal and concise functions are developed to draw charts. The required charts 
 
 This is how the simulation will be done:
 
-* There are two seismic record files; `record-EL CENTRO` and `record-TABAS`
+* There are two seismic record files; `record-ELCENTRO` and `record-TABAS`
    * Each of the two seismic records have 4 header lines
    * A record file has a header line like this: `NPTS=  1192, DT= .02000 SEC`
    * A record file has a header line like this: `NPTS=  4000, DT= .01000 SEC`
@@ -198,7 +198,7 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 ![Scaled records](results/seismic_records.png "Scaled records")
 
-## System without device: EL CENTRO
+## System without device: ELCENTRO
 
 ![System alone](results/system_alone_record-ELCENTRO.png "System alone")
 
@@ -206,7 +206,7 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 ![System alone](results/system_alone_record-TABAS.png "System alone")
 
-## System with device: EL CENTRO
+## System with device: ELCENTRO
 
 ![System with device](results/with_device_record-ELCENTRO_k0.1.png "System with device")
 
@@ -228,7 +228,9 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 # Implications
 
-TODO.
+Quantitative difference:
+
+* 
 
 # Code
 
@@ -582,6 +584,91 @@ class SeismicAnalysis:
             label="With Device",
             linewidth=1.2,
         )
+
+        # Mark max/min for displacement - WITHOUT DEVICE
+        idx_max_alone = np.argmax(result_alone["disp"])
+        idx_min_alone = np.argmin(result_alone["disp"])
+        ax1.plot(
+            result_alone["time"][idx_max_alone],
+            result_alone["disp"][idx_max_alone],
+            "o",
+            color="#1f77b4",
+            markersize=8,
+            markeredgecolor="black",
+            markeredgewidth=1.5,
+            zorder=5,
+        )
+        ax1.plot(
+            result_alone["time"][idx_min_alone],
+            result_alone["disp"][idx_min_alone],
+            "o",
+            color="#1f77b4",
+            markersize=8,
+            markeredgecolor="black",
+            markeredgewidth=1.5,
+            zorder=5,
+        )
+        ax1.text(
+            result_alone["time"][idx_max_alone],
+            result_alone["disp"][idx_max_alone],
+            f"  Max: {result_alone['disp'][idx_max_alone]:.4f}m",
+            fontsize=8,
+            verticalalignment="bottom",
+            color="#1f77b4",
+            fontweight="bold",
+        )
+        ax1.text(
+            result_alone["time"][idx_min_alone],
+            result_alone["disp"][idx_min_alone],
+            f"  Min: {result_alone['disp'][idx_min_alone]:.4f}m",
+            fontsize=8,
+            verticalalignment="top",
+            color="#1f77b4",
+            fontweight="bold",
+        )
+
+        # Mark max/min for displacement - WITH DEVICE
+        idx_max_dev = np.argmax(result_device["disp"])
+        idx_min_dev = np.argmin(result_device["disp"])
+        ax1.plot(
+            result_device["time"][idx_max_dev],
+            result_device["disp"][idx_max_dev],
+            "s",
+            color="#d62728",
+            markersize=8,
+            markeredgecolor="black",
+            markeredgewidth=1.5,
+            zorder=5,
+        )
+        ax1.plot(
+            result_device["time"][idx_min_dev],
+            result_device["disp"][idx_min_dev],
+            "s",
+            color="#d62728",
+            markersize=8,
+            markeredgecolor="black",
+            markeredgewidth=1.5,
+            zorder=5,
+        )
+        ax1.text(
+            result_device["time"][idx_max_dev],
+            result_device["disp"][idx_max_dev],
+            f"  Max: {result_device['disp'][idx_max_dev]:.4f}m",
+            fontsize=8,
+            verticalalignment="bottom",
+            color="#d62728",
+            fontweight="bold",
+        )
+        ax1.text(
+            result_device["time"][idx_min_dev],
+            result_device["disp"][idx_min_dev],
+            f"  Min: {result_device['disp'][idx_min_dev]:.4f}m",
+            fontsize=8,
+            verticalalignment="top",
+            color="#d62728",
+            fontweight="bold",
+        )
+
         ax1.set_xlabel("Time (s)", fontsize=9, fontweight="bold")
         ax1.set_ylabel("Displacement (m)", fontsize=9, fontweight="bold")
         ax1.set_title(
@@ -607,6 +694,91 @@ class SeismicAnalysis:
             label="With Device",
             linewidth=1.2,
         )
+
+        # Mark max/min for base shear - WITHOUT DEVICE
+        idx_max_bs_alone = np.argmax(result_alone["base_shear"])
+        idx_min_bs_alone = np.argmin(result_alone["base_shear"])
+        ax2.plot(
+            result_alone["time"][idx_max_bs_alone],
+            result_alone["base_shear"][idx_max_bs_alone],
+            "o",
+            color="#1f77b4",
+            markersize=8,
+            markeredgecolor="black",
+            markeredgewidth=1.5,
+            zorder=5,
+        )
+        ax2.plot(
+            result_alone["time"][idx_min_bs_alone],
+            result_alone["base_shear"][idx_min_bs_alone],
+            "o",
+            color="#1f77b4",
+            markersize=8,
+            markeredgecolor="black",
+            markeredgewidth=1.5,
+            zorder=5,
+        )
+        ax2.text(
+            result_alone["time"][idx_max_bs_alone],
+            result_alone["base_shear"][idx_max_bs_alone],
+            f"  Max: {result_alone['base_shear'][idx_max_bs_alone]:.2f}N",
+            fontsize=8,
+            verticalalignment="bottom",
+            color="#1f77b4",
+            fontweight="bold",
+        )
+        ax2.text(
+            result_alone["time"][idx_min_bs_alone],
+            result_alone["base_shear"][idx_min_bs_alone],
+            f"  Min: {result_alone['base_shear'][idx_min_bs_alone]:.2f}N",
+            fontsize=8,
+            verticalalignment="top",
+            color="#1f77b4",
+            fontweight="bold",
+        )
+
+        # Mark max/min for base shear - WITH DEVICE
+        idx_max_bs_dev = np.argmax(result_device["base_shear"])
+        idx_min_bs_dev = np.argmin(result_device["base_shear"])
+        ax2.plot(
+            result_device["time"][idx_max_bs_dev],
+            result_device["base_shear"][idx_max_bs_dev],
+            "s",
+            color="#d62728",
+            markersize=8,
+            markeredgecolor="black",
+            markeredgewidth=1.5,
+            zorder=5,
+        )
+        ax2.plot(
+            result_device["time"][idx_min_bs_dev],
+            result_device["base_shear"][idx_min_bs_dev],
+            "s",
+            color="#d62728",
+            markersize=8,
+            markeredgecolor="black",
+            markeredgewidth=1.5,
+            zorder=5,
+        )
+        ax2.text(
+            result_device["time"][idx_max_bs_dev],
+            result_device["base_shear"][idx_max_bs_dev],
+            f"  Max: {result_device['base_shear'][idx_max_bs_dev]:.2f}N",
+            fontsize=8,
+            verticalalignment="bottom",
+            color="#d62728",
+            fontweight="bold",
+        )
+        ax2.text(
+            result_device["time"][idx_min_bs_dev],
+            result_device["base_shear"][idx_min_bs_dev],
+            f"  Min: {result_device['base_shear'][idx_min_bs_dev]:.2f}N",
+            fontsize=8,
+            verticalalignment="top",
+            color="#d62728",
+            fontweight="bold",
+        )
+
         ax2.set_xlabel("Time (s)", fontsize=9, fontweight="bold")
         ax2.set_ylabel("Base Shear (N)", fontsize=9, fontweight="bold")
         ax2.set_title(
@@ -732,7 +904,7 @@ if __name__ == "__main__":
     sa = SeismicAnalysis()
 
     # Seismic record filenames
-    filenames = ["record-TABAS", "record-EL CENTRO"]
+    filenames = ["record-TABAS", "record-ELCENTRO"]
 
     # Load records
     t1, acc1, dt1 = sa.read_seismic_record(filenames[0])
