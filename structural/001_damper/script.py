@@ -497,7 +497,7 @@ if __name__ == "__main__":
     sa = SeismicAnalysis()
 
     # Seismic record filenames
-    filenames = ["seismic1.txt", "seismic2.txt"]
+    filenames = ["record-TABAS", "record-EL CENTRO"]
 
     # Load records
     t1, acc1, dt1 = sa.read_seismic_record(filenames[0])
@@ -521,7 +521,7 @@ if __name__ == "__main__":
     # Device stiffness ratios
     k_ratios = [0.1, 0.5, 1.0]
 
-    # Analysis for seismic1.txt
+    # Analysis for record
     device_results_1 = {}
     for r in k_ratios:
         res_dev = sa.analyze_with_device(t1, acc1, dt1, r, F_y_bar)
@@ -529,7 +529,7 @@ if __name__ == "__main__":
         sa.plot_with_device(res1, res_dev, r, filenames[0])
     sa.plot_hysteresis_loops(device_results_1, filenames[0])
 
-    # Analysis for seismic2.txt
+    # Analysis for record
     device_results_2 = {}
     for r in k_ratios:
         res_dev = sa.analyze_with_device(t2, acc2, dt2, r, F_y_bar)
