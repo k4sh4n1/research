@@ -231,6 +231,9 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 Quantitative performance of device:
 
 * For record-ELCENTRO
+   * Without device
+      * Displacement max: `0.031014 m`
+      * Base shear max: `7.65 N`
    * $\bar{k}=0.1k$
       * Displaecment change: `+1.70%`
       * Base shear change: `+11.87%`
@@ -241,6 +244,9 @@ Quantitative performance of device:
       * Displacement change: `-48.86%`
       * Base shear change: `-8.86%`
 * For record-TABAS
+   * Without device
+      * Displacement max: `0.043794 m`
+      * Base shear max: `10.81 N`
    * $\bar{k}=0.1k$
       * Displacement change: `-5.57%`
       * Base shear change: `+3.87%`
