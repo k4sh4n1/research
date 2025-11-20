@@ -926,7 +926,6 @@ class SeismicAnalysis:
         plt.show()
 
 
-# === Execution Example ===
 if __name__ == "__main__":
     sa = SeismicAnalysis()
 
@@ -955,20 +954,58 @@ if __name__ == "__main__":
     # Device stiffness ratios
     k_ratios = [0.1, 0.5, 1.0]
 
-    # Analysis for record
-    device_results_1 = {}
-    for r in k_ratios:
-        res_dev = sa.analyze_with_device(t1, acc1, dt1, r, F_y_bar)
-        device_results_1[r] = res_dev
-        sa.plot_with_device(res1, res_dev, r, filenames[0])
-    sa.plot_hysteresis_loops(device_results_1, filenames[0])
+    # Helper functions
+    def print_results_header(filename, result):
+        """Print header and baseline results"""
+        print(f"\n{'=' * 60}")
+        print(f"Results for {filename}")
+        print(f"{'=' * 60}")
+        print(f"Without device - Max Displacement: {result['max_disp']:.6f} m")
+        print(f"Without device - Max Base Shear: {result['max_base_shear']:.2f} N")
+        print(f"{'-' * 60}")
 
-    # Analysis for record
-    device_results_2 = {}
-    for r in k_ratios:
-        res_dev = sa.analyze_with_device(t2, acc2, dt2, r, F_y_bar)
-        device_results_2[r] = res_dev
-        sa.plot_with_device(res2, res_dev, r, filenames[1])
-    sa.plot_hysteresis_loops(device_results_2, filenames[1])
+    def print_device_results(result_baseline, result_device, k_ratio):
+        """Print results for a single device configuration"""
+        disp_change = (
+            (result_device["max_disp"] - result_baseline["max_disp"])
+            / result_baseline["max_disp"]
+        ) * 100
+        bs_change = (
+            (result_device["max_base_shear"] - result_baseline["max_base_shear"])
+            / result_baseline["max_base_shear"]
+        ) * 100
+
+        print(f"\nWith device (k̄/k = {k_ratio}):")
+        print(
+            f"  Max Displacement: {result_device['max_disp']:.6f} m ({disp_change:+.2f}%)"
+        )
+        print(
+            f"  Max Base Shear: {result_device['max_base_shear']:.2f} N ({bs_change:+.2f}%)"
+        )
+
+    def analyze_with_devices(
+        sa, time, acc, dt, result_baseline, k_ratios, F_y_bar, filename
+    ):
+        """Analyze system with all device configurations"""
+        device_results = {}
+        for r in k_ratios:
+            res_dev = sa.analyze_with_device(time, acc, dt, r, F_y_bar)
+            device_results[r] = res_dev
+            print_device_results(result_baseline, res_dev, r)
+            sa.plot_with_device(result_baseline, res_dev, r, filename)
+        sa.plot_hysteresis_loops(device_results, filename)
+        return device_results
+
+    # Analysis for record 1
+    print_results_header(filenames[0], res1)
+    device_results_1 = analyze_with_devices(
+        sa, t1, acc1, dt1, res1, k_ratios, F_y_bar, filenames[0]
+    )
+
+    # Analysis for record 2
+    print_results_header(filenames[1], res2)
+    device_results_2 = analyze_with_devices(
+        sa, t2, acc2, dt2, res2, k_ratios, F_y_bar, filenames[1]
+    )
 
 ```
