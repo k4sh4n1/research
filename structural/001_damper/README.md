@@ -103,10 +103,10 @@ Minimal and concise functions are developed to draw charts. The required charts 
 
 This is how the simulation will be done:
 
-* Two seismic record file names are `seismic1.txt` and `seismic2.txt`
+* There are two seismic record files; `record-EL CENTRO` and `record-TABAS`
    * Each of the two seismic records have 4 header lines
-   * 1st seismic record file has a header line like this: `NPTS=  1192, DT= .02000 SEC`
-   * 2nd seismic record file has a header line like this: `NPTS=  4000, DT= .01000 SEC`
+   * A record file has a header line like this: `NPTS=  1192, DT= .02000 SEC`
+   * A record file has a header line like this: `NPTS=  4000, DT= .01000 SEC`
    * Seismic record files have to be read line-by-line
    * They can have a variable number of data on each line
 * `OpenSeesPy` module is employed for structural analysis
@@ -198,33 +198,33 @@ $$E_I^{i+1} = E_I^i - \frac{m}{2}(\ddot{u}_{g,i} + \ddot{u}_{g,i+1})(\Delta u_{i
 
 ![Scaled records](results/seismic_records.png "Scaled records")
 
-## System without device: TABAS: `seismic1.txt`
+## System without device: TABAS
 
-![System alone](results/system_alone_seismic1.png "System alone")
+![System alone](results/system_alone_record-TABAS.png "System alone")
 
-## System without device: EL CENTRO: `seismic2.txt`
+## System without device: EL CENTRO
 
-![System alone](results/system_alone_seismic2.png "System alone")
+![System alone](results/system_alone_record-ELCENTRO.png "System alone")
 
-## System with device: TABAS: `seismic1.txt`
+## System with device: TABAS
 
-![System with device](results/with_device_seismic1_k0.1.png "System with device")
+![System with device](results/with_device_record-TABAS_k0.1.png "System with device")
 
-![System with device](results/with_device_seismic1_k0.5.png "System with device")
+![System with device](results/with_device_record-TABAS_k0.5.png "System with device")
 
-![System with device](results/with_device_seismic1_k1.0.png "System with device")
+![System with device](results/with_device_record-TABAS_k1.0.png "System with device")
 
-![Hysteresis loop](results/hysteresis_loops_seismic1.png "Hysteresis loop")
+![Hysteresis loop](results/hysteresis_loops_record-TABAS.png "Hysteresis loop")
 
-## System with device: EL CENTRO: `seismic2.txt`
+## System with device: EL CENTRO
 
-![System with device](results/with_device_seismic2_k0.1.png "System with device")
+![System with device](results/with_device_record-ELCENTRO_k0.1.png "System with device")
 
-![System with device](results/with_device_seismic2_k0.5.png "System with device")
+![System with device](results/with_device_record-ELCENTRO_k0.5.png "System with device")
 
-![System with device](results/with_device_seismic2_k1.0.png "System with device")
+![System with device](results/with_device_record-ELCENTRO_k1.0.png "System with device")
 
-![Hysteresis loop](results/hysteresis_loops_seismic2.png "Hysteresis loop")
+![Hysteresis loop](results/hysteresis_loops_record-ELCENTRO.png "Hysteresis loop")
 
 # Code
 
@@ -728,7 +728,7 @@ if __name__ == "__main__":
     sa = SeismicAnalysis()
 
     # Seismic record filenames
-    filenames = ["seismic1.txt", "seismic2.txt"]
+    filenames = ["record-TABAS", "record-EL CENTRO"]
 
     # Load records
     t1, acc1, dt1 = sa.read_seismic_record(filenames[0])
@@ -752,7 +752,7 @@ if __name__ == "__main__":
     # Device stiffness ratios
     k_ratios = [0.1, 0.5, 1.0]
 
-    # Analysis for seismic1.txt
+    # Analysis for record
     device_results_1 = {}
     for r in k_ratios:
         res_dev = sa.analyze_with_device(t1, acc1, dt1, r, F_y_bar)
@@ -760,7 +760,7 @@ if __name__ == "__main__":
         sa.plot_with_device(res1, res_dev, r, filenames[0])
     sa.plot_hysteresis_loops(device_results_1, filenames[0])
 
-    # Analysis for seismic2.txt
+    # Analysis for record
     device_results_2 = {}
     for r in k_ratios:
         res_dev = sa.analyze_with_device(t2, acc2, dt2, r, F_y_bar)

@@ -497,7 +497,7 @@ if __name__ == "__main__":
     sa = SeismicAnalysis()
 
     # Seismic record filenames
-    filenames = ["record-TABAS", "record-EL CENTRO"]
+    filenames = ["record-TABAS", "record-ELCENTRO"]
 
     # Load records
     t1, acc1, dt1 = sa.read_seismic_record(filenames[0])
