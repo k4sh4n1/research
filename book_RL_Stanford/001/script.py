@@ -1,6 +1,8 @@
 import itertools
 from dataclasses import dataclass
 
+import numpy as np
+
 
 @dataclass
 class process:
@@ -8,8 +10,8 @@ class process:
     class state:
         price: float
 
-    def next_state(s: state):
-        new_state = state(s.price + 1.0)
+    def next_state(st: self.state):
+        new_state = process.state(st.price + 1.0)
         return new_state
 
 
@@ -22,4 +24,16 @@ def simulation(process, start_state):
 
 ps = process()
 start_st = process.state(price=0.0)
-print(itertools.islice(simulation(process=ps, start_state=start_st), 100))
+print(
+    np.array(
+        np.fromiter(
+            (
+                s.price
+                for s in itertools.islice(
+                    simulation(process=ps, start_state=start_st), 100
+                )
+            ),
+            float,
+        ),
+    )
+)
