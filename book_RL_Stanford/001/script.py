@@ -24,16 +24,14 @@ def simulation(ps: process, start_st: process.state):
 
 
 print(
-    np.array(
-        np.fromiter(
-            (
-                s.price
-                for s in itertools.islice(
-                    simulation(ps=process(), start_st=process.state(price=0.0)),
-                    100,
-                )
-            ),
-            float,
+    np.fromiter(
+        (
+            s.price
+            for s in itertools.islice(
+                simulation(ps=process(), start_st=process.state(price=0.0)),
+                100,
+            )
         ),
-    )
+        float,
+    ),
 )
