@@ -1,3 +1,4 @@
+import itertools
 from dataclasses import dataclass
 
 
@@ -17,3 +18,8 @@ def simulation(process, start_state):
     while True:
         yield state
         state = process.next_state(state)
+
+
+ps = process()
+start_st = process.state(price=0.0)
+print(itertools.islice(simulation(process=ps, start_state=start_st), 100))
