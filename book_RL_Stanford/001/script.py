@@ -34,6 +34,6 @@ print(
                 100,
             )
         ),
-        float,
+        int,
     ),
 )
