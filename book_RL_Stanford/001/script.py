@@ -7,16 +7,16 @@ import numpy as np
 @dataclass
 class process:
     @dataclass
-    class state:
+    class State:
         price: float
 
     @staticmethod
-    def next_state(st: "process.state") -> "process.state":
-        new_state = process.state(st.price + 1.0)
+    def next_state(st: State) -> State:
+        new_state = process.State(price=st.price + 1.0)
         return new_state
 
 
-def simulation(ps: process, start_st: process.state):
+def simulation(ps: process, start_st: process.State):
     state = start_st
     while True:
         yield state
@@ -28,7 +28,7 @@ print(
         (
             s.price
             for s in itertools.islice(
-                simulation(ps=process(), start_st=process.state(price=0.0)),
+                simulation(ps=process(), start_st=process.State(price=0.0)),
                 100,
             )
         ),
