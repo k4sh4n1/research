@@ -6,6 +6,9 @@ import numpy as np
 
 @dataclass
 class Process:
+    L: int
+    α: float
+
     @dataclass
     class State:
         price: int  # Could be in `pip` units
@@ -27,7 +30,7 @@ print(
         (
             s.price
             for s in itertools.islice(
-                simulation(ps=Process(), start_st=Process.State(price=0)),
+                simulation(ps=Process(50, 2.0), start_st=Process.State(price=0)),
                 100,
             )
         ),
