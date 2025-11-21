@@ -10,7 +10,8 @@ class process:
     class state:
         price: float
 
-    def next_state(st: self.state):
+    @staticmethod
+    def next_state(st: "process.state") -> "process.state":
         new_state = process.state(st.price + 1.0)
         return new_state
 
