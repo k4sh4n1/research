@@ -6,7 +6,7 @@ import numpy as np
 
 @dataclass
 class Process:
-    L: int  # Arbitrary reference level
+    L: int  # Arbitrary reference level for price
     α: float  # Pull strength >= 0
 
     @dataclass
