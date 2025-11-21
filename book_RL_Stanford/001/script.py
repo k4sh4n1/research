@@ -6,8 +6,8 @@ import numpy as np
 
 @dataclass
 class Process:
-    L: int
-    α: float
+    L: int  # Arbitrary reference level
+    α: float  # Pull strength >= 0
 
     @dataclass
     class State:
