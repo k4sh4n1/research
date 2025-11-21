@@ -8,10 +8,10 @@ import numpy as np
 class Process:
     @dataclass
     class State:
-        price: float
+        price: int  # Could be in `pip` units
 
     def next_state(self, st: State) -> State:
-        new_state = Process.State(price=st.price + 1.0)
+        new_state = Process.State(price=st.price + 1)
         return new_state
 
 
@@ -27,7 +27,7 @@ print(
         (
             s.price
             for s in itertools.islice(
-                simulation(ps=Process(), start_st=Process.State(price=0.0)),
+                simulation(ps=Process(), start_st=Process.State(price=0)),
                 100,
             )
         ),
