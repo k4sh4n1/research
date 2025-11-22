@@ -49,7 +49,7 @@ def visualize(prices, label):
     plt.plot(prices, linewidth=2)
     plt.xlabel("Time Step")
     plt.ylabel("Price")
-    plt.title(f"Price Simulation: {label}")
+    plt.title(f"price simulation: {label}")
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.show()
@@ -67,4 +67,4 @@ prices = np.fromiter(
 )
 
 print(prices)
-visualize(prices=prices, label="Logistic function")
+visualize(prices=prices, label="logistic function")
