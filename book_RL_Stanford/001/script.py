@@ -13,8 +13,20 @@ class Process:
     class State:
         price: int  # Could be in `pip` units
 
+    # Sample from probability distribution
+    # True: price will go up
+    # False: price will come down
+    def is_next_sample_up(self) -> bool:
+        return True
+
     def next_state(self, st: State) -> State:
-        new_state = Process.State(price=st.price + 1)
+        new_price: int
+        if self.is_next_sample_up():
+            new_price = st.price + 1
+        else:
+            new_price = st.price - 1
+
+        new_state = Process.State(price=new_price)
         return new_state
 
 
