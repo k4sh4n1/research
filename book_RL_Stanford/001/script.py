@@ -1,4 +1,5 @@
 import itertools
+import string
 from dataclasses import dataclass
 
 import matplotlib.pyplot as plt
@@ -43,15 +44,13 @@ def simulation(ps: Process, start_st: Process.State):
         state = ps.next_state(state)
 
 
-def visualize(prices):
+def visualize(prices, label):
     plt.figure(figsize=(10, 6))
     plt.plot(prices, linewidth=2)
-    plt.axhline(y=50, color="r", linestyle="--", label="Reference Level (L=50)")
     plt.xlabel("Time Step")
     plt.ylabel("Price")
-    plt.title("Price Simulation with Mean Reversion")
+    plt.title(f"Price Simulation: {label}")
     plt.grid(True, alpha=0.3)
-    plt.legend()
     plt.tight_layout()
     plt.show()
 
@@ -68,4 +67,4 @@ prices = np.fromiter(
 )
 
 print(prices)
-visualize(prices=prices)
+visualize(prices=prices, label="Logistic function")
