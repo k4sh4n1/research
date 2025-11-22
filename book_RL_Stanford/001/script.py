@@ -55,15 +55,20 @@ def visualize(prices, label):
     plt.show()
 
 
-prices = np.fromiter(
-    (
-        s.price
-        for s in itertools.islice(
-            simulation(ps=Process(50, 2.0), start_st=Process.State(price=0)),
-            200,
+prices = np.vstack(
+    [
+        np.fromiter(
+            (
+                s.price
+                for s in itertools.islice(
+                    simulation(ps=Process(50, 2.0), start_st=Process.State(price=0)),
+                    200,
+                )
+            ),
+            int,
         )
-    ),
-    int,
+        for _ in range(10)
+    ]
 )
 
 print(prices)
