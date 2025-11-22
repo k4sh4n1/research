@@ -43,22 +43,18 @@ def simulation(ps: Process, start_st: Process.State):
         state = ps.next_state(state)
 
 
-prices = (
-    np.fromiter(
-        (
-            s.price
-            for s in itertools.islice(
-                simulation(ps=Process(50, 2.0), start_st=Process.State(price=0)),
-                100,
-            )
-        ),
-        int,
+prices = np.fromiter(
+    (
+        s.price
+        for s in itertools.islice(
+            simulation(ps=Process(50, 2.0), start_st=Process.State(price=0)),
+            100,
+        )
     ),
+    int,
 )
 
 print(prices)
-
-prices = prices[0]
 
 plt.figure(figsize=(10, 6))
 plt.plot(prices, linewidth=2)
