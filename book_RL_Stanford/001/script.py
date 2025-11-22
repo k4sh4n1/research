@@ -13,15 +13,20 @@ class Process:
     class State:
         price: int  # Could be in `pip` units
 
+    def logistic_function(self, st: State) -> float:
+        return 1 / (1 + np.exp(-self.α * (self.L - st.price)))
+
     # Sample from probability distribution
     # True: price will go up
     # False: price will come down
-    def is_next_sample_up(self) -> bool:
-        return True
+    def is_next_sample_up(self, st: State) -> bool:
+        # Binomial: returns integer count of successes
+        sample = np.random.binomial(1, self.logistic_function(st), 1)
+        return True if sample == 1 else False
 
     def next_state(self, st: State) -> State:
         new_price: int
-        if self.is_next_sample_up():
+        if self.is_next_sample_up(st):
             new_price = st.price + 1
         else:
             new_price = st.price - 1
