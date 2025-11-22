@@ -60,7 +60,7 @@ prices = np.fromiter(
         s.price
         for s in itertools.islice(
             simulation(ps=Process(50, 2.0), start_st=Process.State(price=0)),
-            100,
+            200,
         )
     ),
     int,
