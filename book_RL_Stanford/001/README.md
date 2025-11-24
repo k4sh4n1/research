@@ -19,8 +19,8 @@ The code for the above section.
 
 #### One simulation
 
-![Process 1: one simulation]("Process1_1simulation.png" Process 1: one simulation)
+![Process 1: one simulation](Process1_1simulation.png "Process 1: one simulation")
 
 #### Ten simulations
 
-![Process 1: ten simulations]("Process1_10simulations.png" Process 1: ten simulation)
+![Process 1: ten simulations](Process1_10simulations.png "Process 1: ten simulation")
