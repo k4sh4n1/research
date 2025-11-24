@@ -4,7 +4,7 @@ The objective is to understand the _reinforcement learning_ or RL by implementin
 
 # RL book
 
-The RL book itself is available here:
+The RL book is available here:
 
 https://stanford.edu/~ashlearn/RLForFinanceBook/book.pdf
 
