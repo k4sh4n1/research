@@ -24,6 +24,6 @@ https://github.com/k4sh4n1/research/tree/master/book_RL_Stanford/001
 
 The code results are presented here.
 
-![One simulation, reference level = 50, pull strength = 2.0](Process1_1simulation.png "One simulation, reference level = 50, pull strength = 2.0")
+![One simulation, reference level = 50, pull strength = 2.0](simulation1.png "One simulation, reference level = 50, pull strength = 2.0")
 
-![Ten simulations, reference level = 50, pull strength = 2.0](Process1_10simulations.png "Ten simulations, reference level = 50, pull strength = 2.0")
+![Ten simulations, reference level = 50, pull strength = 2.0](simulation10.png "Ten simulations, reference level = 50, pull strength = 2.0")

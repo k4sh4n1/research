@@ -46,14 +46,17 @@ def simulation(ps: Process, start_st: Process.State):
 
 def visualize(prices, label):
     plt.figure(figsize=(10, 6))
-    # Expected:
-    # Rows → x-axis values (implicit indices: 0, 1, 2, …)
-    # Columns → separate lines/series to plot
-    plt.plot(prices.T, linewidth=1, alpha=0.7)  # Transpose!
+
+    for i in range(prices.shape[0]):
+        plt.plot(prices[i], linewidth=1, alpha=0.7, label=f"Sim {i + 1}")
+
     plt.xlabel("Time Step")
     plt.ylabel("Price")
     plt.title(f"price simulation: {label}")
     plt.grid(True, alpha=0.3)
+
+    plt.legend(loc="best", framealpha=0.7, fontsize=9)
+
     plt.tight_layout()
     plt.show()
 
@@ -70,7 +73,7 @@ prices = np.vstack(
             ),
             int,
         )
-        for _ in range(1)  # Number of simulations
+        for _ in range(10)  # Number of simulations
     ]
 )
 
