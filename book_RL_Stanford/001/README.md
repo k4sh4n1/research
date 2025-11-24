@@ -17,10 +17,10 @@ The code for the above section.
 
 ### Process 1: logistic function
 
-#### One simulation
+#### One simulation, reference level = 50, pull strength = 2.0
 
 ![Process 1: one simulation](Process1_1simulation.png "Process 1: one simulation")
 
-#### Ten simulations
+#### Ten simulations, reference level = 50, pull strength = 2.0
 
 ![Process 1: ten simulations](Process1_10simulations.png "Process 1: ten simulation")
