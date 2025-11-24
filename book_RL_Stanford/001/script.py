@@ -62,12 +62,12 @@ prices = np.vstack(
                 s.price
                 for s in itertools.islice(
                     simulation(ps=Process(50, 2.0), start_st=Process.State(price=0)),
-                    200,  # Time steps
+                    100,  # Time steps
                 )
             ),
             int,
         )
-        for _ in range(10)  # Number of simulations
+        for _ in range(1)  # Number of simulations
     ]
 )
 
