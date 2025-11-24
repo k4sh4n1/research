@@ -23,8 +23,8 @@ class Process:
     # False: price will come down
     def is_next_sample_up(self, st: State) -> bool:
         # Binomial: returns integer count of successes
-        sample = np.random.binomial(1, self.logistic_function(st), 1)
-        return True if sample == 1 else False
+        sample = np.random.binomial(1, self.logistic_function(st))
+        return sample == 1
 
     def next_state(self, st: State) -> State:
         new_price: int
