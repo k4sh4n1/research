@@ -46,6 +46,9 @@ def simulation(ps: Process, start_st: Process.State):
 
 def visualize(prices, label):
     plt.figure(figsize=(10, 6))
+    # Expected:
+    # Rows → x-axis values (implicit indices: 0, 1, 2, …)
+    # Columns → separate lines/series to plot
     plt.plot(prices.T, linewidth=1, alpha=0.7)  # Transpose!
     plt.xlabel("Time Step")
     plt.ylabel("Price")
