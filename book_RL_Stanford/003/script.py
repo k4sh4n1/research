@@ -66,78 +66,37 @@ def visualize(prices, label):
     plt.show()
 
 
-prices = np.vstack(
-    [
-        np.fromiter(
-            (
-                s.U - s.D  # Price: ups minus downs
-                for s in itertools.islice(
-                    simulation(ps=Process(α=2.0), start_st=Process.State(U=0, D=0)),
-                    100,  # Time steps
-                )
-            ),
-            int,
-        )
-        for _ in range(3)  # Number of simulations
-    ]
-)
+# Prevent from running when imported:
+if __name__ == "__main__":
+    prices = np.vstack(
+        [
+            np.fromiter(
+                (
+                    s.U - s.D  # Price: ups minus downs
+                    for s in itertools.islice(
+                        simulation(ps=Process(α=2.0), start_st=Process.State(U=0, D=0)),
+                        100,  # Time steps
+                    )
+                ),
+                int,
+            )
+            for _ in range(3)  # Number of simulations
+        ]
+    )
 
-print(prices)
-visualize(
-    prices=prices,
-    label="",
-)
+    print(prices)
+    visualize(
+        prices=prices,
+        label="",
+    )
 
+    import sys
+    from pathlib import Path
 
-def simulate_terminal_price(α: float, T: int, start_price: int = 100) -> int:
-    """Run one simulation and return terminal price."""
-    ps = Process(α=α)
-    state = Process.State(U=0, D=0)
-    for _ in range(T):
-        state = ps.next_state(state)
-    return start_price + (state.U - state.D)
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+    from helper import plot_terminal_distribution
 
-def get_terminal_prices(
-    α: float, T: int, traces: int, start_price: int = 100
-) -> np.ndarray:
-    """Run multiple simulations and collect terminal prices."""
-    return np.array([simulate_terminal_price(α, T, start_price) for _ in range(traces)])
-
-
-def plot_terminal_distribution(alphas: list[float], T: int = 100, traces: int = 1000):
-    """Plot terminal price distribution for multiple α values."""
-    styles = [
-        {"color": "red", "linestyle": "-", "linewidth": 1.5},
-        {"color": "blue", "linestyle": "--", "linewidth": 1.5},
-        {"color": "green", "linestyle": "-.", "linewidth": 1.5},
-        {"color": "brown", "linestyle": "-", "linewidth": 1.5},
-        {"color": "purple", "linestyle": "--", "linewidth": 1.5},
-        {"color": "pink", "linestyle": "-.", "linewidth": 1.5},
-    ]
-
-    plt.figure(figsize=(10, 6))
-
-    for i, α in enumerate(alphas):
-        prices = get_terminal_prices(α, T, traces)
-
-        # Count occurrences of each price
-        unique, counts = np.unique(prices, return_counts=True)
-
-        plt.plot(
-            unique,
-            counts,
-            label=rf"$\alpha_{i + 1} = {α}$",
-            **styles[i % len(styles)],
-        )
-
-    plt.xlabel("Terminal Stock Price")
-    plt.ylabel("Counts")
-    plt.title(f"Terminal Price Counts (T={T}, Traces={traces})")
-    plt.legend(loc="upper right")
-    plt.grid(True, alpha=0.5)
-    plt.tight_layout()
-    plt.show()
-
-
-plot_terminal_distribution(alphas=[0.25, 0.75, 1.0, 1.25, 1.5, 2.0], T=100, traces=1000)
+    plot_terminal_distribution(
+        alphas=[0.25, 0.75, 1.0, 1.25, 1.5, 2.0], T=100, traces=1000
+    )
