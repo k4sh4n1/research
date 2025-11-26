@@ -12,15 +12,15 @@ https://cme241.github.io/#learning-material
 
 # Code
 
-Code for this section of the RL book is implemented:
+Code is corresponding to this section of the RL book:
 
 > 3.2. Understanding Markov Property from Stock Price Examples
 
-Our code is available here:
+Code is available here:
 
 https://github.com/k4sh4n1/research/tree/master/book_RL_Stanford/002
 
-The code results are presented here.
+Code results are presented here.
 
 ![One simulation](simulation1.png "One simulation")
 
