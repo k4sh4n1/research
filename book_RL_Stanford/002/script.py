@@ -79,7 +79,7 @@ prices = np.vstack(
             ),
             int,
         )
-        for _ in range(1)  # Number of simulations
+        for _ in range(3)  # Number of simulations
     ]
 )
 
