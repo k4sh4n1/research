@@ -8,15 +8,17 @@ from numpy._core.numerictypes import unsignedinteger
 
 @dataclass
 class Process:
+    α: float  # α ∈ R≥0 is pull strength
+
     @dataclass
     class State:
         U: unsignedinteger  # Count of previuos ups
         D: unsignedinteger  # Count of previous downs
 
     def up_probablity(self, st: State) -> float:
-        if st.U + st.D == 0:
+        if st.U + st.D == 0 or st.D == 0:
             return 0.5
-        return st.D / (st.U + st.D)
+        return 1 / (1 + ((st.U + st.D) / st.D - 1) ** self.α)
 
     # Sample from probability distribution
     # True: price will go up
@@ -70,13 +72,13 @@ prices = np.vstack(
             (
                 s.U - s.D  # Price: ups minus downs
                 for s in itertools.islice(
-                    simulation(ps=Process(), start_st=Process.State(U=0, D=0)),
+                    simulation(ps=Process(α=2.0), start_st=Process.State(U=0, D=0)),
                     100,  # Time steps
                 )
             ),
             int,
         )
-        for _ in range(1)  # Number of simulations
+        for _ in range(3)  # Number of simulations
     ]
 )
 
