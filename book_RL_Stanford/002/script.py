@@ -14,7 +14,7 @@ class Process:
         D: unsignedinteger  # Count of previous downs
 
     def up_probablity(self, st: State) -> float:
-        if st.U == 0 and st.D == 0:
+        if st.U + st.D == 0:
             return 0.5
         return st.D / (st.U + st.D)
 
