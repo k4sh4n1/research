@@ -84,4 +84,4 @@ prices = np.vstack(
 )
 
 print(prices)
-visualize(prices=prices, label="reverse direction of previous move")
+visualize(prices=prices, label="")

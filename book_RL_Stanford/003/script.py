@@ -81,4 +81,4 @@ prices = np.vstack(
 )
 
 print(prices)
-visualize(prices=prices, label="logistic function")
+visualize(prices=prices, label="")
