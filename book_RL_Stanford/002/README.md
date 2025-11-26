@@ -22,6 +22,4 @@ https://github.com/k4sh4n1/research/tree/master/book_RL_Stanford/002
 
 Code results are presented here.
 
-![One simulation](simulation1.png "One simulation")
-
-![Ten simulations](simulation10.png "Ten simulations")
+![Simulations](simulations.png "Simulations")
