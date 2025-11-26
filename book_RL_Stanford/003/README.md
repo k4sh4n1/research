@@ -20,8 +20,12 @@ Code is available here:
 
 https://github.com/k4sh4n1/research/tree/master/book_RL_Stanford/003
 
+# Intuition
+
+ > ... the probability of next movement depends not only on the last movement but on all past movements.
+
+# Simulation
+
 Code results are presented here.
 
-![One simulation](simulation1.png "One simulation")
-
-![Ten simulations](simulation10.png "Ten simulations")
+![Simulation](simulation.png "Simulation")
