@@ -61,24 +61,36 @@ def visualize(prices, label):
     plt.show()
 
 
-prices = np.vstack(
-    [
-        np.fromiter(
-            (
-                s.X  # Price
-                for s in itertools.islice(
-                    simulation(ps=Process(α=0.5), start_st=Process.State(X=0, δ=None)),
-                    100,  # Time steps
-                )
-            ),
-            int,
-        )
-        for _ in range(3)  # Number of simulations
-    ]
-)
+if __name__ == "__main__":
+    prices = np.vstack(
+        [
+            np.fromiter(
+                (
+                    s.X  # Price
+                    for s in itertools.islice(
+                        simulation(
+                            ps=Process(α=0.5), start_st=Process.State(X=0, δ=None)
+                        ),
+                        100,  # Time steps
+                    )
+                ),
+                int,
+            )
+            for _ in range(3)  # Number of simulations
+        ]
+    )
 
-print(prices)
-visualize(
-    prices=prices,
-    label="",
-)
+    print(prices)
+    visualize(
+        prices=prices,
+        label="",
+    )
+
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+    from helper import plot_terminal_distribution
+
+    plot_terminal_distribution(alphas=[0.1, 0.25, 0.5, 0.75, 0.9], T=100, traces=1000)
