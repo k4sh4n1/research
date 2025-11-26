@@ -3,20 +3,21 @@ from dataclasses import dataclass
 
 import matplotlib.pyplot as plt
 import numpy as np
-from numpy._core.numerictypes import unsignedinteger
 
 
 @dataclass
 class Process:
+    α: float  # Pull strength parameter in the closed interval [0, 1]
+
     @dataclass
     class State:
-        U: unsignedinteger  # Count of previuos ups
-        D: unsignedinteger  # Count of previous downs
+        X: int  # Price
+        X_1: int  # Previous price
 
     def up_probablity(self, st: State) -> float:
-        if st.U + st.D == 0:
+        if st.X_1 is None:
             return 0.5
-        return st.D / (st.U + st.D)
+        return 0.5 * (1 - self.α * (st.X - st.X_1))
 
     # Sample from probability distribution
     # True: price will go up
@@ -27,16 +28,16 @@ class Process:
         return sample == 1
 
     def next_state(self, st: State) -> State:
-        D: unsignedinteger
-        U: unsignedinteger
-        if self.is_next_sample_up(st):
-            D = st.D
-            U = st.U + 1
-        else:
-            D = st.D + 1
-            U = st.U
+        X_1: int
+        X: int
 
-        new_state = Process.State(U=U, D=D)
+        X_1 = st.X
+        if self.is_next_sample_up(st):
+            X = st.X + 1
+        else:
+            X = st.X - 1
+
+        new_state = Process.State(X_1=X_1, X=X)
         return new_state
 
 
@@ -68,9 +69,11 @@ prices = np.vstack(
     [
         np.fromiter(
             (
-                s.U - s.D  # Price: ups minus downs
+                s.X  # Price
                 for s in itertools.islice(
-                    simulation(ps=Process(), start_st=Process.State(U=0, D=0)),
+                    simulation(
+                        ps=Process(α=0.5), start_st=Process.State(X_1=None, X=0)
+                    ),
                     100,  # Time steps
                 )
             ),
@@ -81,4 +84,4 @@ prices = np.vstack(
 )
 
 print(prices)
-visualize(prices=prices, label="logistic function")
+visualize(prices=prices, label="reverse direction of previous move")
