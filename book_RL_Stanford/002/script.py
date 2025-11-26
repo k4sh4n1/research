@@ -12,12 +12,12 @@ class Process:
     @dataclass
     class State:
         X: int  # Price
-        X_1: int  # Previous price
+        δ: int  # Differnce from previous price
 
     def up_probablity(self, st: State) -> float:
-        if st.X_1 is None:
+        if st.δ is None:
             return 0.5
-        return 0.5 * (1 - self.α * (st.X - st.X_1))
+        return 0.5 * (1 - self.α * (st.δ))
 
     # Sample from probability distribution
     # True: price will go up
@@ -28,16 +28,17 @@ class Process:
         return sample == 1
 
     def next_state(self, st: State) -> State:
-        X_1: int
         X: int
+        δ: int
 
-        X_1 = st.X
         if self.is_next_sample_up(st):
             X = st.X + 1
         else:
             X = st.X - 1
 
-        new_state = Process.State(X_1=X_1, X=X)
+        δ = X - st.X
+
+        new_state = Process.State(X=X, δ=δ)
         return new_state
 
 
@@ -71,9 +72,7 @@ prices = np.vstack(
             (
                 s.X  # Price
                 for s in itertools.islice(
-                    simulation(
-                        ps=Process(α=0.5), start_st=Process.State(X_1=None, X=0)
-                    ),
+                    simulation(ps=Process(α=0.5), start_st=Process.State(X=0, δ=None)),
                     100,  # Time steps
                 )
             ),
