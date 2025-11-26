@@ -51,7 +51,7 @@ def plot_terminal_distribution(alphas: list[float], T: int = 100, traces: int = 
 
     plt.xlabel("Terminal Stock Price")
     plt.ylabel("Counts")
-    plt.title(f"Terminal Price Counts (Time-steps={T}, Simulations={traces})")
+    plt.title(f"Terminal Price Counts (Timesteps={T}, Simulations={traces})")
     plt.legend(loc="upper right")
     plt.grid(True, alpha=0.5)
     plt.tight_layout()
