@@ -20,6 +20,12 @@ Code is available here:
 
 https://github.com/k4sh4n1/research/tree/master/book_RL_Stanford/002
 
+# Intuition
+
+> The intuition here is that the direction of the next move is biased in the reverse direction of the previous move, and the extent of the bias is controlled by the parameter `α`.
+
+# Simulation
+
 Code results are presented here.
 
 ![Simulations](simulations.png "Simulations")
