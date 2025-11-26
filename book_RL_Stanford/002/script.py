@@ -12,12 +12,12 @@ class Process:
     @dataclass
     class State:
         X: int  # Price
-        δ: int  # Differnce from previous price
+        δ: bool  # Is previous price movement upward?
 
     def up_probablity(self, st: State) -> float:
         if st.δ is None:
             return 0.5
-        return 0.5 * (1 - self.α * (st.δ))
+        return 0.5 * (1 - self.α * (+1 if st.δ else -1))
 
     # Sample from probability distribution
     # True: price will go up
@@ -29,14 +29,14 @@ class Process:
 
     def next_state(self, st: State) -> State:
         X: int
-        δ: int
+        δ: bool
 
         if self.is_next_sample_up(st):
-            X = st.X + 1
+            δ = True
         else:
-            X = st.X - 1
+            δ = False
 
-        δ = X - st.X
+        X = (st.X + 1) if δ else (st.X - 1)
 
         new_state = Process.State(X=X, δ=δ)
         return new_state
