@@ -3,14 +3,15 @@ from dataclasses import dataclass
 
 import matplotlib.pyplot as plt
 import numpy as np
+from numpy._core.numerictypes import unsignedinteger
 
 
 @dataclass
 class Process:
     @dataclass
     class State:
-        U: int  # Count of previuos ups
-        D: int  # Count of previous downs
+        U: unsignedinteger  # Count of previuos ups
+        D: unsignedinteger  # Count of previous downs
 
     def up_probablity(self, st: State) -> float:
         if st.U == 0 and st.D == 0:
@@ -26,8 +27,8 @@ class Process:
         return sample == 1
 
     def next_state(self, st: State) -> State:
-        D: int
-        U: int
+        D: unsignedinteger
+        U: unsignedinteger
         if self.is_next_sample_up(st):
             D = st.D
             U = st.U + 1
