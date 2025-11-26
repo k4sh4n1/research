@@ -48,7 +48,7 @@ def visualize(prices, label):
     plt.figure(figsize=(10, 6))
 
     for i in range(prices.shape[0]):
-        plt.plot(prices[i], linewidth=1, alpha=0.7, label=f"Sim {i + 1}")
+        plt.plot(prices[i], linewidth=1, alpha=0.7, label=f"Simulation {i + 1}")
 
     plt.xlabel("Time Step")
     plt.ylabel("Price")
