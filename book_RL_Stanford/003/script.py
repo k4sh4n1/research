@@ -97,4 +97,6 @@ if __name__ == "__main__":
 
     from helper import plot_terminal_distribution
 
-    plot_terminal_distribution(alphas=[0.25, 0.75, 1.0, 1.25, 1.75], T=100, traces=1000)
+    plot_terminal_distribution(
+        alphas=[0.25, 0.75, 1.0, 1.25, 1.75], T=100, traces=1000, start_price=100
+    )

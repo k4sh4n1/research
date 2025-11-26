@@ -29,3 +29,5 @@ https://github.com/k4sh4n1/research/tree/master/book_RL_Stanford/003
 Code results are presented here.
 
 ![Simulation](simulation.png "Simulation")
+
+![Terminal price](terminal-price.png "Terminal price")

@@ -47,7 +47,7 @@ def plot_terminal_distribution(
         plt.plot(
             unique,
             counts,
-            label=rf"$\alpha_{i + 1} = {α}$",
+            label=rf"$\alpha = {α}$",
             **styles[i % len(styles)],
         )
 
