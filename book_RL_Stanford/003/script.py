@@ -83,5 +83,5 @@ prices = np.vstack(
 print(prices)
 visualize(
     prices=prices,
-    label="probability of next movement depends not only on last movement but on all past movements",
+    label="",
 )
