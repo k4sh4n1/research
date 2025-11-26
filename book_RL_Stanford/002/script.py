@@ -83,4 +83,7 @@ prices = np.vstack(
 )
 
 print(prices)
-visualize(prices=prices, label="")
+visualize(
+    prices=prices,
+    label="intuition: direction of next move is biased in reverse direction of previous move",
+)
