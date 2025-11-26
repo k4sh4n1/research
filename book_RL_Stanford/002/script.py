@@ -31,15 +31,10 @@ class Process:
         X: int
         δ: bool
 
-        if self.is_next_sample_up(st):
-            δ = True
-        else:
-            δ = False
-
+        δ = True if self.is_next_sample_up(st) else False
         X = (st.X + 1) if δ else (st.X - 1)
 
-        new_state = Process.State(X=X, δ=δ)
-        return new_state
+        return Process.State(X=X, δ=δ)
 
 
 def simulation(ps: Process, start_st: Process.State):
