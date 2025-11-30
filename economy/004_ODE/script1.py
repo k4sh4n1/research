@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+# Harmonic oscillator: d²y/dt² + y = 0
 # Define the system: dy1/dt = y2, dy2/dt = -y1
 def f1(y1, y2):
     return y2
@@ -27,7 +28,7 @@ def scale_field():
     plt.xlabel("$y_1$ (position)")
     plt.ylabel("$y_2$ (velocity)")
     plt.suptitle("Phase Portrait: Harmonic Oscillator")
-    plt.title("dy1/dt = y2 \n dy2/dt = -y1")
+    plt.title("d²y/dt² + y = 0 \n converted to: \n dy1/dt = y2 \n dy2/dt = -y1")
     plt.grid(True)
     plt.axis("equal")
     plt.show()
