@@ -28,7 +28,10 @@ def scale_field():
     plt.quiver(X1, X2, U, V, alpha=0.7)
     plt.xlabel("$x_1$ (position)")
     plt.ylabel("$x_2$ (velocity)")
-    plt.title("Phase Portrait: Damped Harmonic Oscillator")
+    plt.suptitle("Phase Portrait: Damped Harmonic Oscillator")
+    plt.title(
+        "d²y/dt² + 0.5*dy/dt + y = 0 \n converted to: \n dx1/dt = x2, dx2/dt = -x1 - 0.5*x2"
+    )
     plt.grid(True)
     plt.axis("equal")
     plt.show()
