@@ -2,31 +2,32 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-# Define the system: dx1/dt = x2, dx2/dt = -x1
-def f1(x1, x2):
-    return x2
+# Define the system: dy1/dt = y2, dy2/dt = -y1
+def f1(y1, y2):
+    return y2
 
 
-def f2(x1, x2):
-    return -x1
+def f2(y1, y2):
+    return -y1
 
 
 def scale_field():
     # Create grid of points
-    x1_range = np.linspace(-3, 3, 15)  # 15 points from -3 to 3
-    x2_range = np.linspace(-3, 3, 15)
-    X1, X2 = np.meshgrid(x1_range, x2_range)
+    y1_range = np.linspace(-3, 3, 15)  # 15 points from -3 to 3
+    y2_range = np.linspace(-3, 3, 15)
+    y1, y2 = np.meshgrid(y1_range, y2_range)
 
     # Compute vector components at each grid point
-    U = f1(X1, X2)  # x-component of velocity
-    V = f2(X1, X2)  # y-component of velocity
+    U = f1(y1, y2)  # x-component of velocity
+    V = f2(y1, y2)  # y-component of velocity
 
     # Draw the vector field
     plt.figure(figsize=(8, 8))
-    plt.quiver(X1, X2, U, V, alpha=0.7)
-    plt.xlabel("$x_1$ (position)")
-    plt.ylabel("$x_2$ (velocity)")
+    plt.quiver(y1, y2, U, V, alpha=0.7)
+    plt.xlabel("$y_1$ (position)")
+    plt.ylabel("$y_2$ (velocity)")
     plt.title("Phase Portrait: Harmonic Oscillator")
+    plt.suptitle("dy1/dt = y2, dy2/dt = -y1")
     plt.grid(True)
     plt.axis("equal")
     plt.show()

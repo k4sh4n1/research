@@ -1,11 +1,11 @@
 # Harmonic Oscillator
 
-![Harmonic Oscillator](Figure1.png "Harmonic Oscillator")
+![Harmonic Oscillator](Figure_1.png "Harmonic Oscillator")
 
 # Damped Harmonic Oscillator
 
-![Damped Harmonic Oscillator](Figure2.png "Damped Harmonic Oscillator")
+![Damped Harmonic Oscillator](Figure_2.png "Damped Harmonic Oscillator")
 
-# $\frac{dy}{dt} = y$
+# dy/dt = y
 
-![$\frac{dy}{dt} = y$](Figure3.png "$\frac{dy}{dt} = y$")
+![dy/dt = y](Figure_3.png "dy/dt = y")
