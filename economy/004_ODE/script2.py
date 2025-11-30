@@ -30,7 +30,7 @@ def scale_field():
     plt.ylabel("$y_2$ (velocity)")
     plt.suptitle("Phase Portrait: Damped Harmonic Oscillator")
     plt.title(
-        "d²y/dt² + 0.5*dy/dt + y = 0 \n converted to: \n dy1/dt = y2, dy2/dt = -y1 - 0.5*y2"
+        "d²y/dt² + 0.5*dy/dt + y = 0 \n converted to: \n dy1/dt = y2 \n dy2/dt = -y1 - 0.5*y2"
     )
     plt.grid(True)
     plt.axis("equal")
