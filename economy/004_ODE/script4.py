@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Harmonic oscillator: dy/dt = y
+# dy/dt = y
 # Define the system:
 # dy1/dt = 1 (y1 = t)
 # dy2/dt = y2 (y2 = y)
