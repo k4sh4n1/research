@@ -3,4 +3,6 @@
 
 ![Damped Harmonic Oscillator](Figure_2.png "Damped Harmonic Oscillator")
 
-![dy/dt = y](Figure_3.png "dy/dt = y")
+![dy/dt = y (Slope Field)](Figure_3.png "dy/dt = y (Slope Field)")
+
+![dy/dt = y (Phase Portrait)](Figure_4.png "dy/dt = y (Phase Portrait)")

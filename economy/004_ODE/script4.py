@@ -34,7 +34,7 @@ def scale_field():
     plt.ylabel("$y_2$ (y2 = y)")
     plt.suptitle("Phase Portrait == Slope Field")
     plt.title(
-        "dy/dt = y \n converted to: \n dy2/dt = y2 (y2 = y) \n dy1/dt = 1 (y1 = t)"
+        "dy/dt = y \n converted to: \n dy2/dt = y2   it means   y2 = y \n dy1/dt = 1   it means   y1 = t"
     )
     plt.grid(True)
     plt.axis("equal")
