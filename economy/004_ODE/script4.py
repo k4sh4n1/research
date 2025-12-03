@@ -32,7 +32,7 @@ def scale_field():
     plt.quiver(y1, y2, U, V, alpha=0.7)
     plt.xlabel("$y_1$ (y1 = t)")
     plt.ylabel("$y_2$ (y2 = y)")
-    plt.suptitle("Phase Portrait")
+    plt.suptitle("Phase Portrait == Slope Field")
     plt.title(
         "dy/dt = y \n converted to: \n dy2/dt = y2 (y2 = y) \n dy1/dt = 1 (y1 = t)"
     )
