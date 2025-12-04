@@ -138,7 +138,7 @@ def main():
         omega_tmd,
         phi_tmd,
         "Mode Shapes of 8-Story Building with TMD (NumPy)",
-        "mode_shapes_with_tmd.png",
+        "mode_shapes_tmd.png",
     )
 
     # Compare first two modes (split due to TMD)

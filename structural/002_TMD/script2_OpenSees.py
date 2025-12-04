@@ -154,7 +154,7 @@ def main():
         periods,
         mode_shapes,
         "Mode Shapes of 8-Story Building + TMD (OpenSees)",
-        "mode_shapes_with_tmd--opensees.png",
+        "mode_shapes_tmd--opensees.png",
     )
     plt.show()
 
