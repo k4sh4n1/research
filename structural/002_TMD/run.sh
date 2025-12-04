@@ -12,4 +12,5 @@ python3 script1_modal.py
 python3 script1_OpenSees.py
 python3 script2_OpenSees.py
 python3 script2_num.py
+python3 script3_OpenSees.py
 read -p "Press Enter to continue..."
