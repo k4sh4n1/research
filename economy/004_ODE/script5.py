@@ -41,7 +41,7 @@ def scale_field():
     plt.quiver(y1, y2, U, V, alpha=0.7)
     plt.xlabel("$y_1$")
     plt.ylabel("$y_2$")
-    plt.suptitle("Phase Portrait")
+    plt.suptitle("Phase Portrait: Predator–Prey Systems")
     plt.title("dy1/dt = y1 ( a - b y2 ) \n dy2/dt = c y2 ( y1 - d )")
     plt.grid(True)
     plt.axis("equal")
