@@ -14,7 +14,17 @@ K[-1, -1] = k
 # Solve eigenvalue problem
 eigenvalues, eigenvectors = np.linalg.eig(np.linalg.inv(M) @ K)
 idx = np.argsort(eigenvalues)
+eigenvalues = eigenvalues[idx]
 eigenvectors = eigenvectors[:, idx]
+
+# Calculate frequencies and periods
+omega = np.sqrt(eigenvalues)  # rad/s
+periods = 2 * np.pi / omega  # seconds
+
+# Log periods
+print("Mode Periods:")
+for i in range(n):
+    print(f"  Mode {i + 1}: T = {periods[i]:.4f} s")
 
 # Normalize mode shapes (roof = 1)
 mode_shapes = eigenvectors / eigenvectors[-1, :]
@@ -28,13 +38,13 @@ axes = axes.flatten()
 
 for i in range(n):
     ax = axes[i]
-    shape = np.insert(mode_shapes[:, i], 0, 0)  # Add zero at ground
+    shape = np.insert(mode_shapes[:, i], 0, 0)
 
     ax.plot(shape, floors, "b-o", linewidth=2, markersize=6)
     ax.axvline(x=0, color="k", linestyle="--", linewidth=0.5)
     ax.set_xlabel("Amplitude")
     ax.set_ylabel("Floor")
-    ax.set_title(f"Mode {i + 1}")
+    ax.set_title(f"Mode {i + 1} (T={periods[i]:.3f}s)")
     ax.set_ylim(0, n)
     ax.set_yticks(range(n + 1))
     ax.grid(True, alpha=0.3)
