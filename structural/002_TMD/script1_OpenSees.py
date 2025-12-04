@@ -20,10 +20,7 @@ def create_shear_building(num_stories, mass, stiffness, height):
         ops.mass(i, mass)
 
     # Create uniaxial elastic material for story stiffness
-    # Material tag = story number
-    for i in range(num_stories):
-        mat_tag = i + 1
-        ops.uniaxialMaterial("Elastic", mat_tag, stiffness)
+    ops.uniaxialMaterial("Elastic", 1, stiffness)
 
     # Create zeroLength spring elements connecting floors
     # In 1D, we use zeroLength elements with spring stiffness
@@ -31,7 +28,7 @@ def create_shear_building(num_stories, mass, stiffness, height):
         ele_tag = i + 1
         node_i = i
         node_j = i + 1
-        mat_tag = i + 1
+        mat_tag = 1  # Uniaxial elastic material
         # zeroLength element connecting node_i to node_j
         # "-dir 1" means the material acts in DOF 1 (horizontal)
         ops.element("zeroLength", ele_tag, node_i, node_j, "-mat", mat_tag, "-dir", 1)
