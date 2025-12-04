@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Define the system:
+#
 # dx/dt = x(a - by)
 # dy/dt = cy(x - d)
 #
@@ -16,33 +17,36 @@ c = 2
 d = 3
 
 
-# Horizontal component of velocity
+# dy1/dt = y1 ( a - b y2 )
 def f1(y1, y2):
     return y1 * (a - b * y2)
 
 
-# Vertical component of velocity
+# dy2/dt = c y2 ( y1 - d )
 def f2(y1, y2):
     return c * y2 * (y1 - d)
 
 
 def scale_field():
-    # Create grid of points
-    y1_range = np.linspace(0, 20, 20)  # 15 points from -3 to 3
-    y2_range = np.linspace(0, 20, 20)
+    y1_range = np.linspace(0, 25, 26)
+    y2_range = np.linspace(0, 25, 26)
     y1, y2 = np.meshgrid(y1_range, y2_range)
 
-    # Compute vector components at each grid point
-    U = f1(y1, y2)  # x-component of velocity
-    V = f2(y1, y2)  # y-component of velocity
+    U = f1(y1, y2)
+    V = f2(y1, y2)
 
-    # Draw the vector field
-    plt.figure(figsize=(8, 8))
-    plt.quiver(y1, y2, U, V, alpha=0.7)
+    magnitude = np.sqrt(U**2 + V**2)
+    magnitude[magnitude == 0] = 1
+    U_norm = U / magnitude
+    V_norm = V / magnitude
+
+    plt.figure(figsize=(9, 8))
+    q = plt.quiver(y1, y2, U_norm, V_norm, magnitude, cmap="viridis", alpha=0.8)
+    plt.colorbar(q, label="Velocity Magnitude")
     plt.xlabel("$y_1$")
     plt.ylabel("$y_2$")
     plt.suptitle("Phase Portrait: Predator–Prey Systems")
-    plt.title("dy1/dt = y1 ( a - b y2 ) \n dy2/dt = c y2 ( y1 - d )")
+    plt.title("$dy_1/dt = y_1(a - by_2)$ \n $dy_2/dt = cy_2(y_1 - d)$")
     plt.grid(True)
     plt.axis("equal")
     plt.show()
