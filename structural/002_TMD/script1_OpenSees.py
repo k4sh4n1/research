@@ -3,28 +3,38 @@ import numpy as np
 import openseespy.opensees as ops
 
 
-def create_shear_building(num_stories, mass, stiffness, height):
-    """Create a shear building model in OpenSees."""
+def create_shear_building_1d(num_stories, mass, stiffness, height):
+    """Create a 1D shear building model in OpenSees."""
     ops.wipe()
-    ops.model("basic", "-ndm", 2, "-ndf", 3)
+    ops.model("basic", "-ndm", 1, "-ndf", 1)
 
-    # Create nodes
+    # Create nodes (only x-coordinate in 1D, representing floor position)
     for i in range(num_stories + 1):
-        ops.node(i, 0.0, i * height)
+        ops.node(i, i * height)  # Node tag, x-coordinate
 
-    # Boundary conditions: fix base, allow only horizontal DOF for floors
-    ops.fix(0, 1, 1, 1)
+    # Boundary conditions: fix base (node 0)
+    ops.fix(0, 1)
+
+    # Assign mass to floor nodes (only 1 DOF per node)
     for i in range(1, num_stories + 1):
-        ops.fix(i, 0, 1, 1)
-        ops.mass(i, mass, 1e-10, 1e-10)
+        ops.mass(i, mass)
 
-    # Create elements (shear beam: k = 12EI/h³)
-    ops.geomTransf("Linear", 1)
-    E = 2.1e8
-    I = stiffness * height**3 / (12 * E)
-
+    # Create uniaxial elastic material for story stiffness
+    # Material tag = story number
     for i in range(num_stories):
-        ops.element("elasticBeamColumn", i + 1, i, i + 1, 1.0, E, I, 1)
+        mat_tag = i + 1
+        ops.uniaxialMaterial("Elastic", mat_tag, stiffness)
+
+    # Create zeroLength spring elements connecting floors
+    # In 1D, we use zeroLength elements with spring stiffness
+    for i in range(num_stories):
+        ele_tag = i + 1
+        node_i = i
+        node_j = i + 1
+        mat_tag = i + 1
+        # zeroLength element connecting node_i to node_j
+        # "-dir 1" means the material acts in DOF 1 (horizontal)
+        ops.element("zeroLength", ele_tag, node_i, node_j, "-mat", mat_tag, "-dir", 1)
 
 
 def run_modal_analysis(num_modes):
@@ -32,7 +42,7 @@ def run_modal_analysis(num_modes):
     eigenvalues = ops.eigen("-fullGenLapack", num_modes)
     periods = 2 * np.pi / np.sqrt(eigenvalues)
 
-    # Extract and normalize mode shapes (roof = 1)
+    # Extract mode shapes (1 DOF per node now)
     mode_shapes = np.array(
         [
             [
@@ -42,13 +52,15 @@ def run_modal_analysis(num_modes):
             for mode in range(num_modes)
         ]
     ).T
+
+    # Normalize mode shapes (roof = 1)
     mode_shapes /= mode_shapes[-1, :]
 
     return periods, mode_shapes
 
 
 def plot_mode_shapes(
-    periods, mode_shapes, title="Mode Shapes of 8-Story Shear Building"
+    periods, mode_shapes, title="Mode Shapes of 8-Story Shear Building (1D Model)"
 ):
     """Plot all mode shapes in a 2x4 grid."""
     num_modes = len(periods)
@@ -76,20 +88,20 @@ def main():
     NUM_STORIES = 8
     MASS = 345.6  # tons
     STIFFNESS = 3.404e5  # kN/m
-    HEIGHT = 3.0  # m
+    HEIGHT = 3.0  # m (used only for node coordinate, not stiffness calculation)
 
     # Run analysis
-    create_shear_building(NUM_STORIES, MASS, STIFFNESS, HEIGHT)
+    create_shear_building_1d(NUM_STORIES, MASS, STIFFNESS, HEIGHT)
     periods, mode_shapes = run_modal_analysis(NUM_STORIES)
 
     # Print results
-    print("Modal Periods:")
+    print("Modal Periods (1D Model):")
     for i, T in enumerate(periods, 1):
         print(f"  Mode {i}: T = {T:.4f} s")
 
     # Plot and save
     fig = plot_mode_shapes(periods, mode_shapes)
-    fig.savefig("mode_shapes_opensees.png", dpi=150)
+    fig.savefig("mode_shapes_opensees_1d.png", dpi=150)
     plt.show()
 
     ops.wipe()
