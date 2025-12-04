@@ -42,7 +42,7 @@ def create_building_with_tmd(
     )
 
 
-def run_modal_analysis(num_dofs):
+def run_modal_analysis(num_dofs, roof_index):
     """Run eigenvalue analysis and return periods and mode shapes."""
     eigenvalues = ops.eigen("-fullGenLapack", num_dofs)
     periods = 2 * np.pi / np.sqrt(eigenvalues)
@@ -55,9 +55,8 @@ def run_modal_analysis(num_dofs):
         ]
     ).T
 
-    # Normalize to max absolute value = 1
-    for i in range(num_dofs):
-        mode_shapes[:, i] /= np.max(np.abs(mode_shapes[:, i]))
+    # Normalize to roof = 1 (compatible with NumPy script)
+    mode_shapes /= mode_shapes[roof_index, :]
 
     return periods, frequencies, mode_shapes
 
@@ -143,7 +142,7 @@ def main():
 
     # --- Step 3: Create building with TMD and run modal analysis ---
     create_building_with_tmd(NUM_STORIES, MASS, STIFFNESS, DAMPING, m_d, k_d, c_d)
-    periods, frequencies, mode_shapes = run_modal_analysis(NUM_STORIES + 1)
+    periods, frequencies, mode_shapes = run_modal_analysis(NUM_STORIES + 1, NUM_STORIES)
 
     # Print results
     print(f"\n--- Modal Periods (Building + TMD) ---")
