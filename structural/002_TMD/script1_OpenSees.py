@@ -3,7 +3,7 @@ import numpy as np
 import openseespy.opensees as ops
 
 
-def create_shear_building_1d(num_stories, mass, stiffness, height):
+def create_shear_building(num_stories, mass, stiffness, height):
     """Create a 1D shear building model in OpenSees."""
     ops.wipe()
     ops.model("basic", "-ndm", 1, "-ndf", 1)
@@ -60,7 +60,7 @@ def run_modal_analysis(num_modes):
 
 
 def plot_mode_shapes(
-    periods, mode_shapes, title="Mode Shapes of 8-Story Shear Building (1D Model)"
+    periods, mode_shapes, title="Mode Shapes of 8-Story Shear Building"
 ):
     """Plot all mode shapes in a 2x4 grid."""
     num_modes = len(periods)
@@ -91,17 +91,17 @@ def main():
     HEIGHT = 3.0  # m (used only for node coordinate, not stiffness calculation)
 
     # Run analysis
-    create_shear_building_1d(NUM_STORIES, MASS, STIFFNESS, HEIGHT)
+    create_shear_building(NUM_STORIES, MASS, STIFFNESS, HEIGHT)
     periods, mode_shapes = run_modal_analysis(NUM_STORIES)
 
     # Print results
-    print("Modal Periods (1D Model):")
+    print("Modal Periods:")
     for i, T in enumerate(periods, 1):
         print(f"  Mode {i}: T = {T:.4f} s")
 
     # Plot and save
     fig = plot_mode_shapes(periods, mode_shapes)
-    fig.savefig("mode_shapes_opensees_1d.png", dpi=150)
+    fig.savefig("mode_shapes_opensees.png", dpi=150)
     plt.show()
 
     ops.wipe()
