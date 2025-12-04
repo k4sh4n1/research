@@ -28,8 +28,8 @@ def f2(y1, y2):
 
 def scale_field():
     # Create grid of points
-    y1_range = np.linspace(-3, 3, 15)  # 15 points from -3 to 3
-    y2_range = np.linspace(-3, 3, 15)
+    y1_range = np.linspace(0, 20, 20)  # 15 points from -3 to 3
+    y2_range = np.linspace(0, 20, 20)
     y1, y2 = np.meshgrid(y1_range, y2_range)
 
     # Compute vector components at each grid point
