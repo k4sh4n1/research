@@ -26,3 +26,12 @@ fontsize: 11pt
 ![Results](table_001.png "Results")
 
 ![Results](table_002.png "Results")
+
+* El Centro is far-field, has broader frequency content, longer duration
+   * TMD is more effective
+   * TMDs are most effective for harmonic or narrow-band excitations
+* Tabas has impulsive, near-fault characteristics
+   * TMD is less effective
+   * TMDs are less effective for impulsive ground motions
+   * Impulsive nature of Tabas continues to challenge the TMD
+   * Mass ratio alone doesn’t solve the limitation of TMDs for near-fault records
