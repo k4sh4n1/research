@@ -22,3 +22,7 @@ fontsize: 11pt
 ![Time history analysis](task3_response_comparison.png "Time history analysis")
 
 ![Time history analysis](task4_response_comparison.png "Time history analysis")
+
+![Results](table_001.png "Results")
+
+![Results](table_002.png "Results")
