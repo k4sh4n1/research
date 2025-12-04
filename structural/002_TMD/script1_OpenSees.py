@@ -98,7 +98,7 @@ def main():
 
     # Plot and save
     fig = plot_mode_shapes(periods, mode_shapes)
-    fig.savefig("mode_shapes_opensees.png", dpi=150)
+    fig.savefig("mode_shapes--opensees.png", dpi=150)
     plt.show()
 
     ops.wipe()
