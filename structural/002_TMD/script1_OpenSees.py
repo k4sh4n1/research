@@ -57,7 +57,9 @@ def run_modal_analysis(num_modes):
 
 
 def plot_mode_shapes(
-    periods, mode_shapes, title="Mode Shapes of 8-Story Shear Building (OpenSees)"
+    periods,
+    mode_shapes,
+    title="Mode Shapes of 8-Story Shear Building (OpenSees)",
 ):
     """Plot all mode shapes in a 2x4 grid."""
     num_modes = len(periods)

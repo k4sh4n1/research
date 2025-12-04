@@ -137,7 +137,7 @@ def main():
     plot_mode_shapes(
         omega_tmd,
         phi_tmd,
-        "Mode Shapes of 8-Story Building with TMD (NumPy)",
+        "Mode Shapes of 8-Story Building with TMD $m_d = 0.01 M_1$ (NumPy)",
         "mode_shapes_tmd.png",
     )
 

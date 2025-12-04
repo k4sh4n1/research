@@ -127,7 +127,7 @@ def plot_mode_shapes(periods, mode_shapes):
             ax.legend(loc="lower right")
 
     plt.suptitle(
-        r"Mode Shapes: 8-Story Building + TMD ($m_d = 0.02 M_1$)",
+        r"Mode Shapes: 8-Story Building + TMD $m_d = 0.02 M_1$ (OpenSees)",
         fontsize=14,
         fontweight="bold",
     )

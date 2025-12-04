@@ -153,7 +153,7 @@ def main():
     fig = plot_mode_shapes(
         periods,
         mode_shapes,
-        "Mode Shapes of 8-Story Building + TMD (OpenSees)",
+        "Mode Shapes of 8-Story Building + TMD $m_d = 0.01 M_1$ (OpenSees)",
         "mode_shapes_tmd--opensees.png",
     )
     plt.show()
