@@ -23,7 +23,7 @@ def modal_analysis(M, K):
     eigenvectors = eigenvectors[:, idx].real
 
     frequencies = np.sqrt(eigenvalues)  # rad/s
-    mode_shapes = eigenvectors / eigenvectors[-1, :]  # normalize roof to 1
+    mode_shapes = eigenvectors / eigenvectors[-2, :]  # normalize roof to 1
 
     return frequencies, mode_shapes
 

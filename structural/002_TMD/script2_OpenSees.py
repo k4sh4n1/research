@@ -142,7 +142,9 @@ def main():
 
     # --- Step 3: Create building with TMD and run modal analysis ---
     create_building_with_tmd(NUM_STORIES, MASS, STIFFNESS, DAMPING, m_d, k_d, c_d)
-    periods, frequencies, mode_shapes = run_modal_analysis(NUM_STORIES + 1, NUM_STORIES)
+    periods, frequencies, mode_shapes = run_modal_analysis(
+        NUM_STORIES + 1, NUM_STORIES - 1
+    )
 
     # Print results
     print(f"\n--- Modal Periods (Building + TMD) ---")
