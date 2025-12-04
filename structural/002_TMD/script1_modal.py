@@ -31,7 +31,7 @@ def modal_analysis(M, K):
 
 
 def plot_mode_shapes(
-    periods, mode_shapes, title="Mode Shapes of 8-Story Shear Building"
+    periods, mode_shapes, title="Mode Shapes of 8-Story Shear Building (NumPy)"
 ):
     """Plot all mode shapes in a 2x4 grid."""
     num_modes = len(periods)
