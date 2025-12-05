@@ -29,9 +29,9 @@ header-includes: |
 
 ![Time history analysis](task4_response_comparison.png "Time history analysis")
 
-![Results](table_001.png "Results")
+![Results md/m=0.01](table_001.png "Results md/m =0.01")
 
-![Results](table_002.png "Results")
+![Results md/m=0.02](table_002.png "Results md/m=0.02")
 
 # Implications
 
