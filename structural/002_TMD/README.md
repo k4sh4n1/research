@@ -5,7 +5,11 @@ author: "majid.kashani@alum.sharif.edu   1404 84 111 03"
 numbersections: true
 geometry: margin=1in
 fontsize: 11pt
+header-includes: |
+  \usepackage{float}
+  \floatplacement{figure}{H}
 ---
+
 
 ![Problem statement](20251130_113320.jpg "Problem statement")
 
@@ -28,6 +32,8 @@ fontsize: 11pt
 ![Results](table_001.png "Results")
 
 ![Results](table_002.png "Results")
+
+# Implications
 
 * El Centro is far-field, has broader frequency content, longer duration
    * TMD is more effective
