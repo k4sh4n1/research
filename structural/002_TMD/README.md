@@ -10,26 +10,41 @@ header-includes: |
   \floatplacement{figure}{H}
 ---
 
+# Problem statement
 
 ![Problem statement](20251130_113320.jpg "Problem statement")
+
+# Modal analysis
 
 ![Modal analysis 8th level is normalized](mode_shapes.png "Modal analysis 8th level is normalized")
 
 ![Modal analysis 8th level is normalized](mode_shapes--opensees.png "Modal analysis 8th level is normalized")
 
+# Modal analysis md/m=0.01
+
 ![Modal analysis 8th level is normalized](mode_shapes_tmd.png "Modal analysis 8th level is normalized")
 
 ![Modal analysis 8th level is normalized](mode_shapes_tmd--opensees.png "Modal analysis 8th level is normalized")
+
+# Modal analysis md/m=0.02
 
 ![Modal analysis 8th level is normalized](mode_shapes_tmd_002.png "Modal analysis 8th level is normalized")
 
 ![Modal analysis 8th level is normalized](mode_shapes_tmd_002--opensees.png "Modal analysis 8th level is normalized")
 
+# Time history analysis md/m=0.01
+
 ![Time history analysis](task3_response_comparison.png "Time history analysis")
+
+# Time history analysis md/m=0.02
 
 ![Time history analysis](task4_response_comparison.png "Time history analysis")
 
+# Time history results md/m=0.01
+
 ![Results md/m=0.01](table_001.png "Results md/m =0.01")
+
+# Time history results md/m=0.02
 
 ![Results md/m=0.02](table_002.png "Results md/m=0.02")
 
