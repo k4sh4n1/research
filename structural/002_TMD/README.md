@@ -7,6 +7,8 @@ geometry: margin=1in
 fontsize: 11pt
 ---
 
+![Problem statement](20251130_113320.jpg "Problem statement")
+
 ![Modal analysis 8th level is normalized](mode_shapes.png "Modal analysis 8th level is normalized")
 
 ![Modal analysis 8th level is normalized](mode_shapes--opensees.png "Modal analysis 8th level is normalized")
