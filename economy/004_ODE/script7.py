@@ -3,18 +3,18 @@ import numpy as np
 
 # Define the system:
 #
-# dy1/dt = 6 y1 - y2
-# dy2/dt = y1 + 4 y2
+# dy/dt = -0.9 * y - 30 * r + 900
+# dr/dt = 2 * y - 3 * r + 50
 
 
-# dy1/dt
-def f1(y1, y2):
-    return 6 * y1 - y2
+# dy/dt
+def f1(y, r):
+    return -0.9 * y - 30 * r + 900
 
 
-# dy2/dt
-def f2(y1, y2):
-    return y1 + 4 * y2
+# dr/dt
+def f2(y, r):
+    return 2 * y - 3 * r + 50
 
 
 def A():
@@ -32,12 +32,12 @@ def A():
 
 
 def scale_field():
-    y1_range = np.linspace(-15, 15, 30)
-    y2_range = np.linspace(-15, 15, 30)
-    y1, y2 = np.meshgrid(y1_range, y2_range)
+    y_range = np.linspace(0, 60, 30)
+    r_range = np.linspace(0, 60, 30)
+    y, r = np.meshgrid(y_range, r_range)
 
-    U = f1(y1, y2)
-    V = f2(y1, y2)
+    U = f1(y, r)
+    V = f2(y, r)
 
     magnitude = np.sqrt(U**2 + V**2)
     magnitude[magnitude == 0] = 1
@@ -45,12 +45,12 @@ def scale_field():
     V_norm = V / magnitude
 
     plt.figure(figsize=(9, 8))
-    q = plt.quiver(y1, y2, U_norm, V_norm, magnitude, cmap="viridis", alpha=0.8)
-    plt.colorbar(q, label="Velocity or Rate Magnitude")
-    plt.xlabel("$y_1$")
-    plt.ylabel("$y_2$")
+    q = plt.quiver(y, r, U_norm, V_norm, magnitude, cmap="viridis", alpha=0.8)
+    plt.colorbar(q, label="Rate Magnitude")
+    plt.xlabel("$y$")
+    plt.ylabel("$r$")
     plt.suptitle("Phase Portrait")
-    plt.title("$dy_1/dt = 6 * y_1 - y_2$ \n $dy_2/dt = y_1 + 4 * y_2$")
+    plt.title("$dy/dt = -0.9 * y - 30 * r + 900$ \n $dr/dt = 2 * y - 3 * r + 50$")
     plt.grid(True)
     plt.axis("equal")
     plt.show()
