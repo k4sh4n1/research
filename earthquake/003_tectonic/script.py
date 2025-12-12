@@ -63,11 +63,11 @@ TECTONIC_STATIONS = {
     },
     "Himalaya_Collision": {
         "network": "II",
-        "station": "NIL",  # Nilore, Pakistan
+        "station": "KAPI",  # Kappang, Sulawesi, Indonesia
         "location": "*",
         "channel": "BHZ",
-        "coords": (33.650, 73.251),
-        "tectonic_setting": "Indian-Eurasian Collision",
+        "coords": (-5.014, 119.752),
+        "tectonic_setting": "Indian-Eurasian Collision Zone",
     },
 }
 
