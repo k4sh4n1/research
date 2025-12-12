@@ -21,12 +21,12 @@ warnings.filterwarnings("ignore")
 # =============================================================================
 
 TECTONIC_STATIONS = {
-    "Caucasus_Azerbaijan": {
-        "network": "GE",
-        "station": "GNI",  # Garni, Armenia (close to Azerbaijan)
+    "Turkey_Collision": {
+        "network": "II",
+        "station": "KIV",  # Kiver, Caucasus region (II network version)
         "location": "*",
         "channel": "BHZ",
-        "coords": (40.148, 44.741),
+        "coords": (43.956, 42.690),
         "tectonic_setting": "Arabian-Eurasian Collision",
     },
     "Japan_Subduction": {
@@ -37,13 +37,13 @@ TECTONIC_STATIONS = {
         "coords": (42.015, 143.157),
         "tectonic_setting": "Pacific-Eurasian Subduction",
     },
-    "Chile_Subduction": {
+    "Alaska_Subduction": {
         "network": "II",
-        "station": "LCO",  # Las Campanas Observatory, Chile
+        "station": "KDAK",  # Kodiak Island, Alaska
         "location": "*",
         "channel": "BHZ",
-        "coords": (-29.011, -70.700),
-        "tectonic_setting": "Nazca-South American Subduction",
+        "coords": (57.782, -152.583),
+        "tectonic_setting": "Pacific-North American Subduction",
     },
     "Iceland_MidAtlantic": {
         "network": "II",
@@ -70,6 +70,7 @@ TECTONIC_STATIONS = {
         "tectonic_setting": "Indian-Eurasian Collision",
     },
 }
+
 
 # =============================================================================
 # DATA ACQUISITION FUNCTIONS
