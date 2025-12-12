@@ -504,7 +504,7 @@ def main():
     # with its epicenter located 80 km (50 miles) off the coast of Aomori Prefecture
     # at a depth of 50 km.
     starttime = UTCDateTime("2025-12-08T13:00:00")
-    endtime = UTCDateTime("2025-12-08T16:00:00")  # hours of data
+    endtime = UTCDateTime("2025-12-08T17:00:00")  # hours of data
 
     print(f"\n📅 Analysis Period:")
     print(f"   Start: {starttime}")
