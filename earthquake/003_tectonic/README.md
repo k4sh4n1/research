@@ -74,3 +74,4 @@ Investigation time window a few hours before and after the following earthquake 
       * That's interesting. What's the cause?
       * Possibly, similar tectonic mechanisms — both sit on similar continental crust?
       * Possibly, comparable distances from Japan? Similar seismic wave travel?
+      * ...?
