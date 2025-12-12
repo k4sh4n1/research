@@ -71,3 +71,10 @@ Investigation time window a few hours before and after the following earthquake 
    * Negative Alaska-California correlation `-0.50`:
      * Suggests the waves arrive at these stations with opposite polarities
      * Might be due to their different angles/positions relative to the source i.e. Japan
+     * Possibly they are on opposite sides of the mechanism planes
+* Spectral coherence:
+   * Japan has a low coherence with others: expected due to near-field effect
+   * Turkey has a strong coherence with Indonesia and California
+      * That's interesting. What's the cause?
+      * Possibly, similar tectonic mechanisms — both sit on similar continental crust?
+      * Possibly, comparable distances from Japan? Similar seismic wave travel?
