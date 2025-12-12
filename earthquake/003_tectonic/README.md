@@ -44,3 +44,22 @@ Investigation time window a few hours before and after the following earthquake 
 # Spectral correlation
 
 ![Spectral coherence](spectral_coherence.png "Spectral coherence")
+
+# Implication
+
+* Station distribution for the global coverage:
+   * Tectonic diversity: major plate boundaries
+   * Geographic spread: coverage around the Pacific
+   * Tabriz proximity: a station at Turkey/Caucasus is included
+* Time hisotry delay from Japan to other stations:
+   * Indicates seismic wave propagation across the globe
+   * Wave propagation is verified
+* Cross-correlation matrix:
+   * Significant positive correlations up to more than `0.4`
+   * Why Japan shows low correlation with everyone:
+      * Japan was close to the earthquake that the signal is extremely different in character
+      * Near-field records differ from far observations
+   * Turkey-Alaska correlation (0.43) suggests similar response to events at Pacific
+   * Negative Alaska-California correlation (-0.50):
+     * Suggests the waves arrive at these stations with opposite polarities
+     * Might be due to their different angles/positions relative to the source i.e. Japan
