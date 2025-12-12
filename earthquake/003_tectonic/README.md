@@ -18,6 +18,8 @@ https://github.com/k4sh4n1/research/tree/master/earthquake/003_tectonic
 
 # Objective
 
+Just like the correlation of financial markets, the seismic time histories might be correlated to each other due to correlation of tectonic plates.
+
 Tectonic correlation is investigated between strategic stations around the globe by `ObsPy` module. Temporal and spectral correlations are investigated which could indicate:
 
 * Global wave propagation
