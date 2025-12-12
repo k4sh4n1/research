@@ -41,15 +41,11 @@ Investigation time window a few hours before and after the following earthquake 
 
 ![Station map](station_map.png "Station map")
 
-# Time history
+# Result plot
 
 ![Waveforms comparison](waveforms_comparison.png "Waveforms comparison")
 
-# Temporal correlation
-
 ![Correlation matrix](correlation_matrix.png "Correlation matrix")
-
-# Spectral correlation
 
 ![Spectral coherence](spectral_coherence.png "Spectral coherence")
 
