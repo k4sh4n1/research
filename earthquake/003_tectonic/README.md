@@ -12,11 +12,16 @@ header-includes: |
 
 # Objective
 
-Tectonic correlation is investigated by `ObsPy` module.
+Tectonic correlation is investigated between strategic stations around the globe by `ObsPy` module. Temporal and spectral correlations are investigated which could indicate:
+
+* Global wave propagation
+* Force transfer between plate boundaries
+* Common tectonic forces
+* ...?
 
 # Locations
 
-Temporal and spectral correlations are investigated between some seismic stations from strategic locations around the globe.
+Seismic signals from different tectonic plate boundaries are selected at strategic locations around the globe. They are shown on the following map.
 
 # Time window
 
