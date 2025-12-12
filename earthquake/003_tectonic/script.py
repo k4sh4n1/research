@@ -61,13 +61,13 @@ TECTONIC_STATIONS = {
         "coords": (33.611, -116.455),
         "tectonic_setting": "Pacific-North American Transform",
     },
-    "Himalaya_Collision": {
+    "Indonesia_Collision": {
         "network": "II",
         "station": "KAPI",  # Kappang, Sulawesi, Indonesia
         "location": "*",
         "channel": "BHZ",
         "coords": (-5.014, 119.752),
-        "tectonic_setting": "Indian-Eurasian Collision Zone",
+        "tectonic_setting": "Australian-Eurasian Collision/Subduction",
     },
 }
 
