@@ -10,6 +10,12 @@ header-includes: |
   \floatplacement{figure}{H}
 ---
 
+# Code
+
+Code is available here:
+
+https://github.com/k4sh4n1/research/tree/master/earthquake/003_tectonic
+
 # Objective
 
 Tectonic correlation is investigated between strategic stations around the globe by `ObsPy` module. Temporal and spectral correlations are investigated which could indicate:
@@ -59,7 +65,7 @@ Investigation time window a few hours before and after the following earthquake 
    * Why Japan shows low correlation with everyone:
       * Japan was close to the earthquake that the signal is extremely different in character
       * Near-field records differ from far observations
-   * Turkey-Alaska correlation (0.43) suggests similar response to events at Pacific
-   * Negative Alaska-California correlation (-0.50):
+   * Turkey-Alaska correlation `0.43` suggests similar response to events at Pacific
+   * Negative Alaska-California correlation `-0.50`:
      * Suggests the waves arrive at these stations with opposite polarities
      * Might be due to their different angles/positions relative to the source i.e. Japan
