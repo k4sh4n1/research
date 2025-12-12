@@ -225,17 +225,35 @@ def compute_cross_correlations(streams, stations_dict):
     return corr_matrix, lag_matrix, regions
 
 
-def compute_spectral_coherence(streams, nperseg=1024):
+def compute_spectral_coherence(
+    raw_streams, processed_streams, freq_min=0.01, freq_max=0.5, nperseg=8192
+):
     """
-    Compute spectral coherence between station pairs
+    Compute spectral coherence using RAW data (only detrended)
+    This preserves the spectral characteristics needed for coherence estimation
+
+    Parameters:
+    -----------
+    raw_streams : dict
+        Raw (unfiltered) stream data
+    processed_streams : dict
+        Processed streams (used only to identify valid regions)
+    freq_min, freq_max : float
+        Frequency range of interest (Hz)
+    nperseg : int
+        Segment length for Welch's method (larger = better freq resolution)
     """
-    regions = [r for r, s in streams.items() if s is not None]
-    n_regions = len(regions)
+    # Get regions that have valid data in both raw and processed
+    regions = [
+        r
+        for r in processed_streams.keys()
+        if processed_streams[r] is not None and raw_streams.get(r) is not None
+    ]
 
     coherence_results = {}
 
     print(f"\n{'=' * 60}")
-    print("Computing Spectral Coherence")
+    print("Computing Spectral Coherence (from raw data)")
     print(f"{'=' * 60}\n")
 
     for i, region1 in enumerate(regions):
@@ -244,8 +262,26 @@ def compute_spectral_coherence(streams, nperseg=1024):
                 continue
 
             try:
-                tr1 = streams[region1][0]
-                tr2 = streams[region2][0]
+                # Use RAW streams, only detrend
+                tr1 = raw_streams[region1][0].copy()
+                tr2 = raw_streams[region2][0].copy()
+
+                # Minimal preprocessing - just remove trend
+                tr1.detrend("demean")
+                tr1.detrend("linear")
+                tr2.detrend("demean")
+                tr2.detrend("linear")
+
+                # Resample to common rate if needed
+                fs1 = tr1.stats.sampling_rate
+                fs2 = tr2.stats.sampling_rate
+
+                if fs1 != fs2:
+                    target_fs = min(fs1, fs2)
+                    if fs1 > target_fs:
+                        tr1.resample(target_fs)
+                    if fs2 > target_fs:
+                        tr2.resample(target_fs)
 
                 fs = tr1.stats.sampling_rate
 
@@ -254,24 +290,46 @@ def compute_spectral_coherence(streams, nperseg=1024):
                 data1 = tr1.data[:min_len]
                 data2 = tr2.data[:min_len]
 
-                # Compute coherence
+                # Use large nperseg for good low-frequency resolution
+                # For 0.01 Hz resolution at 20 Hz sampling, need nperseg >= 2000
+                actual_nperseg = min(nperseg, min_len // 8)
+                actual_nperseg = max(actual_nperseg, 256)  # Minimum viable
+
+                # Compute coherence with 50% overlap (default)
                 f, Cxy = signal.coherence(
-                    data1, data2, fs=fs, nperseg=min(nperseg, min_len // 4)
+                    data1,
+                    data2,
+                    fs=fs,
+                    nperseg=actual_nperseg,
+                    noverlap=actual_nperseg // 2,
                 )
 
+                # Filter to frequency range of interest
+                mask = (f >= freq_min) & (f <= freq_max)
+                f_filtered = f[mask]
+                Cxy_filtered = Cxy[mask]
+
+                # Calculate statistics in the band of interest
+                mean_coh = np.mean(Cxy_filtered) if len(Cxy_filtered) > 0 else 0
+                max_coh = np.max(Cxy_filtered) if len(Cxy_filtered) > 0 else 0
+
                 coherence_results[(region1, region2)] = {
-                    "frequency": f,
-                    "coherence": Cxy,
-                    "mean_coherence": np.mean(Cxy),
+                    "frequency": f_filtered,
+                    "coherence": Cxy_filtered,
+                    "frequency_full": f,
+                    "coherence_full": Cxy,
+                    "mean_coherence": mean_coh,
+                    "max_coherence": max_coh,
+                    "nperseg_used": actual_nperseg,
                 }
 
                 print(
                     f"   {region1[:15]:15} ↔ {region2[:15]:15}: "
-                    f"mean coherence = {np.mean(Cxy):.3f}"
+                    f"mean={mean_coh:.3f}, max={max_coh:.3f}"
                 )
 
             except Exception as e:
-                print(f"   Error: {str(e)[:40]}")
+                print(f"   Error {region1} ↔ {region2}: {str(e)[:40]}")
 
     return coherence_results
 
@@ -368,44 +426,99 @@ def plot_correlation_matrix(corr_matrix, regions, title="Cross-Correlation Matri
     plt.show()
 
 
-def plot_spectral_coherence(coherence_results, title="Spectral Coherence"):
+def plot_spectral_coherence(coherence_results, title="Spectral Coherence Analysis"):
     """
-    Plot spectral coherence between station pairs
+    Plot spectral coherence with proper formatting
     """
     n_pairs = len(coherence_results)
     if n_pairs == 0:
         print("No coherence results to plot!")
         return
 
-    fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+    # Calculate grid dimensions
+    n_cols = 3
+    n_rows = (n_pairs + n_cols - 1) // n_cols
+
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(14, 3.5 * n_rows))
+
+    if n_rows == 1 and n_cols == 1:
+        axes = np.array([axes])
     axes = axes.flatten()
 
-    colors = plt.cm.viridis(np.linspace(0.2, 0.8, n_pairs))
+    # Color palette
+    colors = plt.cm.tab10(np.linspace(0, 1, n_pairs))
 
     for idx, ((r1, r2), data) in enumerate(coherence_results.items()):
         if idx >= len(axes):
             break
 
         ax = axes[idx]
-        ax.semilogy(
-            data["frequency"], data["coherence"], color=colors[idx], linewidth=1.5
+        freq = data["frequency"]
+        coh = data["coherence"]
+
+        if len(freq) == 0:
+            ax.text(
+                0.5, 0.5, "No data", ha="center", va="center", transform=ax.transAxes
+            )
+            ax.set_title(f"{r1.split('_')[0]} ↔ {r2.split('_')[0]}")
+            continue
+
+        # Plot coherence
+        ax.plot(freq, coh, color=colors[idx], linewidth=1.2, label="Coherence")
+        ax.fill_between(freq, 0, coh, color=colors[idx], alpha=0.3)
+
+        # Add significance threshold line
+        ax.axhline(
+            y=0.5,
+            color="red",
+            linestyle="--",
+            linewidth=1,
+            alpha=0.7,
+            label="0.5 threshold",
         )
-        ax.set_xlabel("Frequency (Hz)", fontsize=10)
-        ax.set_ylabel("Coherence", fontsize=10)
-        ax.set_title(f"{r1.split('_')[0]} ↔ {r2.split('_')[0]}", fontsize=11)
-        ax.set_ylim([0.01, 1])
-        ax.grid(True, alpha=0.3)
-        ax.axhline(y=0.5, color="r", linestyle="--", alpha=0.5, label="0.5 threshold")
-        ax.legend(fontsize=8)
+
+        # Formatting
+        ax.set_xlabel("Frequency (Hz)", fontsize=9)
+        ax.set_ylabel("Coherence", fontsize=9)
+        ax.set_title(
+            f"{r1.split('_')[0]} ↔ {r2.split('_')[0]}", fontsize=10, fontweight="bold"
+        )
+        ax.set_xlim([freq.min(), freq.max()])
+        ax.set_ylim([0, 1.0])
+        ax.grid(True, alpha=0.3, linestyle=":")
+
+        # Add statistics annotation
+        mean_coh = data["mean_coherence"]
+        max_coh = data["max_coherence"]
+        stats_text = f"Mean: {mean_coh:.3f}\nMax: {max_coh:.3f}"
+        ax.text(
+            0.97,
+            0.97,
+            stats_text,
+            transform=ax.transAxes,
+            fontsize=8,
+            verticalalignment="top",
+            horizontalalignment="right",
+            bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8),
+        )
+
+        # Highlight frequency bands
+        # Teleseismic P-wave: ~0.5-2 Hz (mostly filtered out)
+        # Surface waves: 0.01-0.1 Hz
+        ax.axvspan(
+            0.01, 0.05, alpha=0.1, color="blue", label="Long-period surface waves"
+        )
+        ax.axvspan(0.05, 0.15, alpha=0.1, color="green", label="Surface waves")
 
     # Hide unused subplots
-    for idx in range(len(coherence_results), len(axes)):
+    for idx in range(n_pairs, len(axes)):
         axes[idx].set_visible(False)
 
-    fig.suptitle(title, fontsize=14, fontweight="bold")
+    fig.suptitle(title, fontsize=13, fontweight="bold", y=1.02)
     plt.tight_layout()
     plt.savefig("spectral_coherence.png", dpi=150, bbox_inches="tight")
-    plt.show()
+    plt.close()
+    print("   ✓ Saved: spectral_coherence.png")
 
 
 def plot_station_map(stations_dict):
@@ -488,23 +601,10 @@ def main():
     print("   Investigating seismic correlations across plate boundaries")
     print("=" * 70)
 
-    # =================================================================
-    # STEP 1: Define time window
-    # =================================================================
-    # Choose a period with known significant seismic activity
-    # Example: After a major earthquake for teleseismic correlation
-
-    # Option A: Recent quiet period (background correlation)
-    # starttime = UTCDateTime("2024-01-15T00:00:00")
-    # endtime = UTCDateTime("2024-01-15T01:00:00")
-
-    # Option B: After a significant earthquake (teleseismic signals)
-    # A powerful 7.6-magnitude earthquake struck off the northeastern coast of Japan
-    # on December 8, 2025, at 11:15 p.m. local time (1415 GMT),
-    # with its epicenter located 80 km (50 miles) off the coast of Aomori Prefecture
-    # at a depth of 50 km.
+    # 7.6-magnitude earthquake in Japan on December 8, 2025, at 11:15 p.m. local time (1415 GMT)
+    # Time window for the 2025-12-08 Japan earthquake
     starttime = UTCDateTime("2025-12-08T13:00:00")
-    endtime = UTCDateTime("2025-12-08T17:00:00")  # hours of data
+    endtime = UTCDateTime("2025-12-08T17:00:00")
 
     print(f"\n📅 Analysis Period:")
     print(f"   Start: {starttime}")
@@ -517,9 +617,8 @@ def main():
     raw_streams = fetch_seismic_data(TECTONIC_STATIONS, starttime, endtime)
 
     # =================================================================
-    # STEP 3: Preprocess data
+    # STEP 3: Preprocess data (for correlation and waveform plots)
     # =================================================================
-    # Use long-period filter for teleseismic signals
     processed_streams = preprocess_streams(raw_streams, freqmin=0.01, freqmax=0.5)
 
     # =================================================================
@@ -539,7 +638,7 @@ def main():
     )
 
     # =================================================================
-    # STEP 6: Compute cross-correlations
+    # STEP 6: Compute cross-correlations (uses processed/filtered data)
     # =================================================================
     corr_matrix, lag_matrix, regions = compute_cross_correlations(
         processed_streams, TECTONIC_STATIONS
@@ -554,9 +653,12 @@ def main():
     )
 
     # =================================================================
-    # STEP 8: Compute spectral coherence
+    # STEP 8: Compute spectral coherence (uses RAW data)
     # =================================================================
-    coherence_results = compute_spectral_coherence(processed_streams)
+    print("\n📊 Computing spectral coherence from raw data...")
+    coherence_results = compute_spectral_coherence(
+        raw_streams, processed_streams, freq_min=0.01, freq_max=0.5, nperseg=8192
+    )
 
     # =================================================================
     # STEP 9: Plot spectral coherence
@@ -574,7 +676,8 @@ def main():
     print("=" * 70)
 
     print(
-        f"\n📊 Stations successfully processed: {len([s for s in processed_streams.values() if s])}/{len(TECTONIC_STATIONS)}"
+        f"\n📊 Stations successfully processed: "
+        f"{len([s for s in processed_streams.values() if s])}/{len(TECTONIC_STATIONS)}"
     )
 
     print(f"\n📈 Correlation Statistics:")
@@ -588,7 +691,9 @@ def main():
     print(f"\n📐 Coherence Statistics:")
     if coherence_results:
         mean_coherences = [d["mean_coherence"] for d in coherence_results.values()]
+        max_coherences = [d["max_coherence"] for d in coherence_results.values()]
         print(f"   • Maximum mean coherence: {np.max(mean_coherences):.3f}")
+        print(f"   • Maximum peak coherence: {np.max(max_coherences):.3f}")
         print(f"   • Minimum mean coherence: {np.min(mean_coherences):.3f}")
 
     print("\n" + "=" * 70)
