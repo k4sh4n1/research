@@ -21,7 +21,7 @@ Tectonic correlation is investigated between strategic stations around the globe
 
 # Locations
 
-Seismic signals from different tectonic plate boundaries are selected at strategic locations around the globe. They are shown on the following map.
+Seismic signals from different tectonic plate boundaries are selected at strategic locations around the globe. Station locations are at major plate boundary intersections, shown on the following map.
 
 # Time window
 
