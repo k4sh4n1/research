@@ -29,12 +29,18 @@ Investigation time window a few hours before and after the following earthquake 
 
 > A powerful 7.6-magnitude earthquake struck off the northeastern coast of Japan on December 8, 2025, at 11:15 p.m. local time (1415 GMT), with its epicenter located 80 km (50 miles) off the coast of Aomori Prefecture at a depth of 50 km.
 
-# Result
+# Map
 
 ![Station map](station_map.png "Station map")
 
+# Time history
+
 ![Waveforms comparison](waveforms_comparison.png "Waveforms comparison")
 
+# Temporal correlation
+
 ![Correlation matrix](correlation_matrix.png "Correlation matrix")
+
+# Spectral correlation
 
 ![Spectral coherence](spectral_coherence.png "Spectral coherence")
