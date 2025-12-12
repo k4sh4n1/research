@@ -499,9 +499,12 @@ def main():
     # endtime = UTCDateTime("2024-01-15T01:00:00")
 
     # Option B: After a significant earthquake (teleseismic signals)
-    # Noto Peninsula Earthquake, Japan - 2024-01-01
-    starttime = UTCDateTime("2024-01-01T07:00:00")
-    endtime = UTCDateTime("2024-01-01T09:00:00")  # 2 hours of data
+    # A powerful 7.6-magnitude earthquake struck off the northeastern coast of Japan
+    # on December 8, 2025, at 11:15 p.m. local time (1415 GMT),
+    # with its epicenter located 80 km (50 miles) off the coast of Aomori Prefecture
+    # at a depth of 50 km.
+    starttime = UTCDateTime("2025-12-08T13:00:00")
+    endtime = UTCDateTime("2025-12-08T16:00:00")  # hours of data
 
     print(f"\n📅 Analysis Period:")
     print(f"   Start: {starttime}")
