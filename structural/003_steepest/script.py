@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from fractions import Fraction
-from typing import Optional
 
 import numpy as np
 
@@ -86,10 +85,21 @@ def print_fractional(x: np.ndarray) -> None:
         print(f"  x{i + 1} ≈ {frac} = {float(frac):.10f}")
 
 
+def quadratic_function(
+    X1: np.ndarray, X2: np.ndarray, H: np.ndarray, c: np.ndarray
+) -> np.ndarray:
+    """Evaluate f(x) = 0.5 * x'Hx + c'x over a meshgrid."""
+    return (
+        0.5 * (H[0, 0] * X1**2 + 2 * H[0, 1] * X1 * X2 + H[1, 1] * X2**2)
+        + c[0, 0] * X1
+        + c[1, 0] * X2
+    )
+
+
 def plot_convergence(
     history: list[IterationData], H: np.ndarray, c: np.ndarray
 ) -> None:
-    """Generate convergence visualization plots."""
+    """Generate 2D convergence visualization plots."""
     try:
         import matplotlib.pyplot as plt
     except ImportError:
@@ -126,11 +136,7 @@ def plot_convergence(
     # Contour with trajectory
     r = np.linspace(-2, 3, 100)
     X1, X2 = np.meshgrid(r, r)
-    Z = (
-        0.5 * (H[0, 0] * X1**2 + 2 * H[0, 1] * X1 * X2 + H[1, 1] * X2**2)
-        + c[0, 0] * X1
-        + c[1, 0] * X2
-    )
+    Z = quadratic_function(X1, X2, H, c)
 
     axes[1, 1].contour(X1, X2, Z, levels=30, cmap="viridis")
     axes[1, 1].plot(x1, x2, "r-o", lw=2, ms=5)
@@ -142,8 +148,60 @@ def plot_convergence(
 
     plt.tight_layout()
     plt.savefig("steepest_descent_convergence.png", dpi=150)
-    plt.show()
-    print("✓ Plot saved to 'steepest_descent_convergence.png'")
+    print("✓ 2D plots saved to 'steepest_descent_convergence.png'")
+
+
+def plot_3d_surface(history: list[IterationData], H: np.ndarray, c: np.ndarray) -> None:
+    """Generate interactive 3D surface plot with optimization trajectory."""
+    try:
+        import matplotlib.pyplot as plt
+    except ImportError:
+        print("Install matplotlib for plots: pip install matplotlib")
+        return
+
+    # Extract trajectory data
+    x1 = np.array([h.x[0, 0] for h in history])
+    x2 = np.array([h.x[1, 0] for h in history])
+    fvals = np.array([h.f_value for h in history])
+
+    # Create surface mesh
+    r = np.linspace(-2, 3, 80)
+    X1, X2 = np.meshgrid(r, r)
+    Z = quadratic_function(X1, X2, H, c)
+
+    # Create 3D figure
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111, projection="3d")
+
+    # Plot surface
+    ax.plot_surface(X1, X2, Z, cmap="viridis", alpha=0.7, edgecolor="none")
+
+    # Plot trajectory on surface
+    ax.plot(x1, x2, fvals, "r-o", lw=3, ms=6, label="Trajectory", zorder=10)
+    ax.scatter(
+        x1[0], x2[0], fvals[0], c="black", s=100, marker="o", label="Start", zorder=11
+    )
+    ax.scatter(
+        x1[-1],
+        x2[-1],
+        fvals[-1],
+        c="red",
+        s=200,
+        marker="*",
+        label="Optimal",
+        zorder=11,
+    )
+
+    # Labels and styling
+    ax.set(xlabel="$x_1$", ylabel="$x_2$", zlabel="$f(x)$")
+    ax.set_title(
+        "3D Surface with Optimization Trajectory\n(drag to rotate, scroll to zoom)"
+    )
+    ax.legend()
+
+    plt.tight_layout()
+    plt.savefig("steepest_descent_3d.png", dpi=150)
+    print("✓ 3D plot saved to 'steepest_descent_3d.png'")
 
 
 if __name__ == "__main__":
@@ -157,3 +215,9 @@ if __name__ == "__main__":
 
     # Visualize
     plot_convergence(history, H, c)
+    plot_3d_surface(history, H, c)
+
+    # Show all plots (interactive)
+    import matplotlib.pyplot as plt
+
+    plt.show()
