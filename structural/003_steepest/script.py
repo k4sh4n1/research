@@ -1,206 +1,159 @@
+from dataclasses import dataclass
+from fractions import Fraction
+from typing import Optional
+
 import numpy as np
 
 
-def steepest_descent(H, c, x0, tol=1e-8, max_iter=100):
+@dataclass
+class IterationData:
+    """Stores data for a single iteration."""
+
+    iteration: int
+    x: np.ndarray
+    gradient: np.ndarray
+    grad_norm: float
+    f_value: float
+
+
+def steepest_descent(
+    H: np.ndarray,
+    c: np.ndarray,
+    x0: np.ndarray,
+    tol: float = 1e-8,
+    max_iter: int = 100,
+    verbose: bool = True,
+) -> tuple[np.ndarray, list[IterationData]]:
     """
-    Steepest Descent Method for Quadratic Functions
+    Steepest Descent for quadratic functions: f(x) = 0.5 * x'Hx + c'x
 
-    Minimizes: f(x) = (1/2) * x^T * H * x + c^T * x
-    Gradient:  g(x) = H * x + c
-
-    Parameters:
-    -----------
-    H : numpy.ndarray
-        Hessian matrix (symmetric positive definite)
-    c : numpy.ndarray
-        Linear term coefficient vector
-    x0 : numpy.ndarray
-        Initial starting point
-    tol : float
-        Convergence tolerance (based on gradient norm)
-    max_iter : int
-        Maximum number of iterations
+    Args:
+        H: Symmetric positive definite Hessian matrix
+        c: Linear term coefficient vector
+        x0: Initial starting point
+        tol: Convergence tolerance (gradient norm)
+        max_iter: Maximum iterations
+        verbose: Print iteration details
 
     Returns:
-    --------
-    x : numpy.ndarray
-        Optimal solution
-    history : list
-        History of all iterations
+        Optimal solution and iteration history
     """
-
-    x = x0.copy().astype(float)
+    x = x0.astype(float).copy()
     history = []
 
-    print("=" * 70)
-    print("STEEPEST DESCENT OPTIMIZATION")
-    print("=" * 70)
-    print(f"\nHessian Matrix H:\n{H}")
-    print(f"\nLinear term c: {c.flatten()}")
-    print(f"\nStarting point x0: {x0.flatten()}")
-    print(f"Tolerance: {tol}")
-    print("\n" + "=" * 70)
+    if verbose:
+        print(f"{'=' * 60}\nSTEEPEST DESCENT\n{'=' * 60}")
+        print(f"H:\n{H}\nc: {c.flatten()}\nx0: {x0.flatten()}\n{'=' * 60}")
 
     for k in range(max_iter):
-        # Compute gradient: g = H*x + c
         g = H @ x + c
         grad_norm = np.linalg.norm(g)
+        f_val = float(0.5 * x.T @ H @ x + c.T @ x)
 
-        # Compute function value: f = 0.5 * x^T * H * x + c^T * x
-        f_val = 0.5 * x.T @ H @ x + c.T @ x
+        history.append(IterationData(k, x.copy(), g.copy(), grad_norm, f_val))
 
-        # Store iteration data
-        history.append(
-            {
-                "iteration": k,
-                "x": x.copy(),
-                "gradient": g.copy(),
-                "grad_norm": grad_norm,
-                "f_value": float(f_val),
-            }
-        )
+        if verbose:
+            print(
+                f"Iter {k}: x=[{x[0, 0]:.8f}, {x[1, 0]:.8f}], "
+                f"||g||={grad_norm:.2e}, f={f_val:.8f}"
+            )
 
-        # Print iteration info
-        print(f"\n--- Iteration {k} ---")
-        print(f"x = [{x[0, 0]:12.8f}, {x[1, 0]:12.8f}]")
-        print(f"g = [{g[0, 0]:12.8f}, {g[1, 0]:12.8f}]")
-        print(f"||g|| = {grad_norm:.10f}")
-        print(f"f(x) = {float(f_val):.10f}")
-
-        # Check convergence
         if grad_norm < tol:
-            print("\n" + "=" * 70)
-            print("CONVERGED!")
-            print("=" * 70)
+            if verbose:
+                print(f"{'=' * 60}\nCONVERGED at iteration {k}\n{'=' * 60}")
             break
 
-        # Compute step size: alpha = (g^T * g) / (g^T * H * g)
-        gTg = float(g.T @ g)
-        gTHg = float(g.T @ H @ g)
-        alpha = gTg / gTHg
-
-        print(f"α = (g^T g) / (g^T H g) = {gTg:.8f} / {gTHg:.8f} = {alpha:.10f}")
-
-        # Update: x_new = x - alpha * g
+        alpha = float(g.T @ g) / float(g.T @ H @ g)
         x = x - alpha * g
-
     else:
-        print("\n" + "=" * 70)
-        print(f"WARNING: Maximum iterations ({max_iter}) reached!")
-        print("=" * 70)
+        if verbose:
+            print(f"WARNING: Max iterations ({max_iter}) reached!")
 
-    # Final summary
-    print(f"\n{'=' * 70}")
-    print("FINAL RESULTS")
-    print("=" * 70)
-    print(f"Optimal x* = [{x[0, 0]:.10f}, {x[1, 0]:.10f}]")
-    print(f"Final gradient norm: {grad_norm:.2e}")
-    print(f"Total iterations: {len(history)}")
-    print(f"Final f(x*) = {float(0.5 * x.T @ H @ x + c.T @ x):.10f}")
-
-    # Compute analytical solution for comparison
-    x_analytical = -np.linalg.inv(H) @ c
-    print(f"\nAnalytical solution: x* = {x_analytical.flatten()}")
+    if verbose:
+        x_analytical = -np.linalg.solve(H, c)
+        print(f"\nResult: x*=[{x[0, 0]:.10f}, {x[1, 0]:.10f}]")
+        print(f"Analytical: {x_analytical.flatten()}")
+        print_fractional(x)
 
     return x, history
 
 
-def print_fraction_form(x):
-    """Display approximate fractional representation"""
-    from fractions import Fraction
-
-    print("\nApproximate Fractional Form:")
+def print_fractional(x: np.ndarray) -> None:
+    """Display approximate fractional representation of solution."""
+    print("\nFractional approximation:")
     for i, val in enumerate(x.flatten()):
         frac = Fraction(val).limit_denominator(1000)
         print(f"  x{i + 1} ≈ {frac} = {float(frac):.10f}")
 
 
-# =============================================================================
-# MAIN EXECUTION
-# =============================================================================
-
-if __name__ == "__main__":
-    # Define the problem (from your handwritten notes)
-    # Hessian matrix
-    H = np.array([[2, 1], [1, 2]], dtype=float)
-
-    # Linear term (gradient = Hx + c, so c = [-1, 1]^T)
-    c = np.array([[-1], [1]], dtype=float)
-
-    # Starting point
-    x0 = np.array([[2], [2]], dtype=float)
-
-    # Run steepest descent
-    x_opt, history = steepest_descent(H, c, x0, tol=1e-10, max_iter=50)
-
-    # Show fractional approximation
-    print_fraction_form(x_opt)
-
-    # ==========================================================================
-    # OPTIONAL: Plot convergence
-    # ==========================================================================
+def plot_convergence(
+    history: list[IterationData], H: np.ndarray, c: np.ndarray
+) -> None:
+    """Generate convergence visualization plots."""
     try:
         import matplotlib.pyplot as plt
-
-        # Extract data for plotting
-        iterations = [h["iteration"] for h in history]
-        grad_norms = [h["grad_norm"] for h in history]
-        f_values = [h["f_value"] for h in history]
-        x1_vals = [h["x"][0, 0] for h in history]
-        x2_vals = [h["x"][1, 0] for h in history]
-
-        fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-
-        # Plot 1: Gradient norm convergence
-        axes[0, 0].semilogy(iterations, grad_norms, "b-o", linewidth=2, markersize=6)
-        axes[0, 0].set_xlabel("Iteration")
-        axes[0, 0].set_ylabel("||∇f(x)||")
-        axes[0, 0].set_title("Gradient Norm Convergence")
-        axes[0, 0].grid(True)
-
-        # Plot 2: Function value convergence
-        axes[0, 1].plot(iterations, f_values, "r-o", linewidth=2, markersize=6)
-        axes[0, 1].set_xlabel("Iteration")
-        axes[0, 1].set_ylabel("f(x)")
-        axes[0, 1].set_title("Objective Function Value")
-        axes[0, 1].grid(True)
-
-        # Plot 3: Trajectory in x-space
-        axes[1, 0].plot(x1_vals, x2_vals, "g-o", linewidth=2, markersize=8)
-        axes[1, 0].plot(x1_vals[0], x2_vals[0], "ko", markersize=12, label="Start")
-        axes[1, 0].plot(x1_vals[-1], x2_vals[-1], "r*", markersize=15, label="End")
-        axes[1, 0].set_xlabel("x₁")
-        axes[1, 0].set_ylabel("x₂")
-        axes[1, 0].set_title("Optimization Trajectory")
-        axes[1, 0].legend()
-        axes[1, 0].grid(True)
-        axes[1, 0].axis("equal")
-
-        # Plot 4: Contour plot with trajectory
-        x1_range = np.linspace(-2, 3, 100)
-        x2_range = np.linspace(-2, 3, 100)
-        X1, X2 = np.meshgrid(x1_range, x2_range)
-        Z = (
-            0.5 * (H[0, 0] * X1**2 + 2 * H[0, 1] * X1 * X2 + H[1, 1] * X2**2)
-            + c[0, 0] * X1
-            + c[1, 0] * X2
-        )
-
-        axes[1, 1].contour(X1, X2, Z, levels=30, cmap="viridis")
-        axes[1, 1].plot(x1_vals, x2_vals, "r-o", linewidth=2, markersize=6)
-        axes[1, 1].plot(x1_vals[0], x2_vals[0], "ko", markersize=12, label="Start")
-        axes[1, 1].plot(x1_vals[-1], x2_vals[-1], "r*", markersize=15, label="Optimal")
-        axes[1, 1].set_xlabel("x₁")
-        axes[1, 1].set_ylabel("x₂")
-        axes[1, 1].set_title("Contour Plot with Trajectory")
-        axes[1, 1].legend()
-        axes[1, 1].axis("equal")
-
-        plt.tight_layout()
-        plt.savefig("steepest_descent_convergence.png", dpi=150)
-        plt.show()
-
-        print("\n✓ Plots saved to 'steepest_descent_convergence.png'")
-
     except ImportError:
-        print("\n(Install matplotlib to see convergence plots)")
+        print("Install matplotlib for plots: pip install matplotlib")
+        return
+
+    iters = [h.iteration for h in history]
+    norms = [h.grad_norm for h in history]
+    fvals = [h.f_value for h in history]
+    x1 = [h.x[0, 0] for h in history]
+    x2 = [h.x[1, 0] for h in history]
+
+    fig, axes = plt.subplots(2, 2, figsize=(11, 9))
+
+    # Gradient norm (log scale)
+    axes[0, 0].semilogy(iters, norms, "b-o", lw=2, ms=5)
+    axes[0, 0].set(xlabel="Iteration", ylabel="||∇f(x)||", title="Gradient Norm")
+    axes[0, 0].grid(True)
+
+    # Function value
+    axes[0, 1].plot(iters, fvals, "r-o", lw=2, ms=5)
+    axes[0, 1].set(xlabel="Iteration", ylabel="f(x)", title="Objective Value")
+    axes[0, 1].grid(True)
+
+    # Trajectory
+    axes[1, 0].plot(x1, x2, "g-o", lw=2, ms=6)
+    axes[1, 0].plot(x1[0], x2[0], "ko", ms=10, label="Start")
+    axes[1, 0].plot(x1[-1], x2[-1], "r*", ms=14, label="End")
+    axes[1, 0].set(xlabel="$x_1$", ylabel="$x_2$", title="Trajectory")
+    axes[1, 0].legend()
+    axes[1, 0].grid(True)
+    axes[1, 0].axis("equal")
+
+    # Contour with trajectory
+    r = np.linspace(-2, 3, 100)
+    X1, X2 = np.meshgrid(r, r)
+    Z = (
+        0.5 * (H[0, 0] * X1**2 + 2 * H[0, 1] * X1 * X2 + H[1, 1] * X2**2)
+        + c[0, 0] * X1
+        + c[1, 0] * X2
+    )
+
+    axes[1, 1].contour(X1, X2, Z, levels=30, cmap="viridis")
+    axes[1, 1].plot(x1, x2, "r-o", lw=2, ms=5)
+    axes[1, 1].plot(x1[0], x2[0], "ko", ms=10, label="Start")
+    axes[1, 1].plot(x1[-1], x2[-1], "r*", ms=14, label="Optimal")
+    axes[1, 1].set(xlabel="$x_1$", ylabel="$x_2$", title="Contour + Trajectory")
+    axes[1, 1].legend()
+    axes[1, 1].axis("equal")
+
+    plt.tight_layout()
+    plt.savefig("steepest_descent_convergence.png", dpi=150)
+    plt.show()
+    print("✓ Plot saved to 'steepest_descent_convergence.png'")
+
+
+if __name__ == "__main__":
+    # Problem definition
+    H = np.array([[2, 1], [1, 2]], dtype=float)
+    c = np.array([[-1], [1]], dtype=float)
+    x0 = np.array([[2], [2]], dtype=float)
+
+    # Run optimization
+    x_opt, history = steepest_descent(H, c, x0, tol=1e-10, max_iter=50)
+
+    # Visualize
+    plot_convergence(history, H, c)
