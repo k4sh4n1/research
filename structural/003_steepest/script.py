@@ -25,17 +25,6 @@ def steepest_descent(
 ) -> tuple[np.ndarray, list[IterationData]]:
     """
     Steepest Descent for quadratic functions: f(x) = 0.5 * x'Hx + c'x
-
-    Args:
-        H: Symmetric positive definite Hessian matrix
-        c: Linear term coefficient vector
-        x0: Initial starting point
-        tol: Convergence tolerance (gradient norm)
-        max_iter: Maximum iterations
-        verbose: Print iteration details
-
-    Returns:
-        Optimal solution and iteration history
     """
     x = x0.astype(float).copy()
     history = []
@@ -159,24 +148,18 @@ def plot_3d_surface(history: list[IterationData], H: np.ndarray, c: np.ndarray) 
         print("Install matplotlib for plots: pip install matplotlib")
         return
 
-    # Extract trajectory data
     x1 = np.array([h.x[0, 0] for h in history])
     x2 = np.array([h.x[1, 0] for h in history])
     fvals = np.array([h.f_value for h in history])
 
-    # Create surface mesh
     r = np.linspace(-2, 3, 80)
     X1, X2 = np.meshgrid(r, r)
     Z = quadratic_function(X1, X2, H, c)
 
-    # Create 3D figure
     fig = plt.figure(figsize=(10, 8))
     ax = fig.add_subplot(111, projection="3d")
 
-    # Plot surface
     ax.plot_surface(X1, X2, Z, cmap="viridis", alpha=0.7, edgecolor="none")
-
-    # Plot trajectory on surface
     ax.plot(x1, x2, fvals, "r-o", lw=3, ms=6, label="Trajectory", zorder=10)
     ax.scatter(
         x1[0], x2[0], fvals[0], c="black", s=100, marker="o", label="Start", zorder=11
@@ -192,7 +175,6 @@ def plot_3d_surface(history: list[IterationData], H: np.ndarray, c: np.ndarray) 
         zorder=11,
     )
 
-    # Labels and styling
     ax.set(xlabel="$x_1$", ylabel="$x_2$", zlabel="$f(x)$")
     ax.set_title(
         "3D Surface with Optimization Trajectory\n(drag to rotate, scroll to zoom)"
@@ -202,6 +184,52 @@ def plot_3d_surface(history: list[IterationData], H: np.ndarray, c: np.ndarray) 
     plt.tight_layout()
     plt.savefig("steepest_descent_3d.png", dpi=150)
     print("✓ 3D plot saved to 'steepest_descent_3d.png'")
+
+
+def plot_path_profile(history: list[IterationData]) -> None:
+    """Plot function value vs cumulative distance along trajectory (elevation profile)."""
+    try:
+        import matplotlib.pyplot as plt
+    except ImportError:
+        print("Install matplotlib for plots: pip install matplotlib")
+        return
+
+    # Extract positions and function values
+    positions = np.array([h.x.flatten() for h in history])
+    fvals = np.array([h.f_value for h in history])
+
+    # Compute cumulative path length
+    steps = np.diff(positions, axis=0)
+    distances = np.linalg.norm(steps, axis=1)
+    cumulative_dist = np.concatenate([[0], np.cumsum(distances)])
+
+    # Create plot
+    fig, ax = plt.subplots(figsize=(9, 5))
+
+    ax.plot(cumulative_dist, fvals, "b-o", lw=2, ms=7)
+    ax.fill_between(cumulative_dist, fvals, alpha=0.3)
+    ax.scatter(cumulative_dist[0], fvals[0], c="black", s=120, zorder=5, label="Start")
+    ax.scatter(
+        cumulative_dist[-1],
+        fvals[-1],
+        c="red",
+        s=180,
+        marker="*",
+        zorder=5,
+        label="Optimal",
+    )
+
+    ax.set(
+        xlabel="Cumulative Path Distance",
+        ylabel="$f(x)$",
+        title="Function Value Along Trajectory (Elevation Profile)",
+    )
+    ax.legend()
+    ax.grid(True, alpha=0.5)
+
+    plt.tight_layout()
+    plt.savefig("steepest_descent_path_profile.png", dpi=150)
+    print("✓ Path profile saved to 'steepest_descent_path_profile.png'")
 
 
 if __name__ == "__main__":
@@ -216,8 +244,9 @@ if __name__ == "__main__":
     # Visualize
     plot_convergence(history, H, c)
     plot_3d_surface(history, H, c)
+    plot_path_profile(history)
 
-    # Show all plots (interactive)
+    # Show all plots
     import matplotlib.pyplot as plt
 
     plt.show()
