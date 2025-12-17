@@ -232,6 +232,83 @@ def plot_path_profile(history: list[IterationData]) -> None:
     print("✓ Path profile saved to 'steepest_descent_path_profile.png'")
 
 
+def plot_path_profile_detailed(
+    history: list[IterationData], H: np.ndarray, c: np.ndarray
+) -> None:
+    """Plot function value with interpolated points showing true quadratic behavior."""
+    try:
+        import matplotlib.pyplot as plt
+    except ImportError:
+        print("Install matplotlib for plots: pip install matplotlib")
+        return
+
+    # Build detailed path with intermediate samples
+    all_positions = []
+    all_fvals = []
+
+    for i in range(len(history) - 1):
+        x_start = history[i].x.flatten()
+        x_end = history[i + 1].x.flatten()
+
+        # Sample 50 points along each segment
+        for t in np.linspace(0, 1, 50, endpoint=(i == len(history) - 2)):
+            x_interp = (1 - t) * x_start + t * x_end
+            x_col = x_interp.reshape(-1, 1)
+            f_val = float(0.5 * x_col.T @ H @ x_col + c.T @ x_col)
+            all_positions.append(x_interp)
+            all_fvals.append(f_val)
+
+    all_positions = np.array(all_positions)
+    all_fvals = np.array(all_fvals)
+
+    # Compute cumulative distance
+    steps = np.diff(all_positions, axis=0)
+    distances = np.linalg.norm(steps, axis=1)
+    cumulative_dist = np.concatenate([[0], np.cumsum(distances)])
+
+    # Also get iteration points for markers
+    iter_positions = np.array([h.x.flatten() for h in history])
+    iter_fvals = np.array([h.f_value for h in history])
+    iter_steps = np.diff(iter_positions, axis=0)
+    iter_distances = np.linalg.norm(iter_steps, axis=1)
+    iter_cumulative = np.concatenate([[0], np.cumsum(iter_distances)])
+
+    # Create plot
+    fig, ax = plt.subplots(figsize=(9, 5))
+
+    ax.plot(cumulative_dist, all_fvals, "b-", lw=2, label="True path (quadratic)")
+    ax.scatter(
+        iter_cumulative, iter_fvals, c="blue", s=60, zorder=5, label="Iteration points"
+    )
+    ax.fill_between(cumulative_dist, all_fvals, alpha=0.3)
+    ax.scatter(
+        iter_cumulative[0], iter_fvals[0], c="black", s=120, zorder=6, label="Start"
+    )
+    ax.scatter(
+        iter_cumulative[-1],
+        iter_fvals[-1],
+        c="red",
+        s=180,
+        marker="*",
+        zorder=6,
+        label="Optimal",
+    )
+
+    ax.set(
+        xlabel="Cumulative Path Distance",
+        ylabel="$f(x)$",
+        title="Function Value Along Trajectory (True Quadratic Shape)",
+    )
+    ax.legend()
+    ax.grid(True, alpha=0.5)
+
+    plt.tight_layout()
+    plt.savefig("steepest_descent_path_profile_detailed.png", dpi=150)
+    print(
+        "✓ Detailed path profile saved to 'steepest_descent_path_profile_detailed.png'"
+    )
+
+
 if __name__ == "__main__":
     # Problem definition
     H = np.array([[2, 1], [1, 2]], dtype=float)
@@ -245,6 +322,7 @@ if __name__ == "__main__":
     plot_convergence(history, H, c)
     plot_3d_surface(history, H, c)
     plot_path_profile(history)
+    plot_path_profile_detailed(history, H, c)
 
     # Show all plots
     import matplotlib.pyplot as plt
