@@ -21,6 +21,6 @@ header-includes: |
 # Implications
 
 * El Centro is far-field
-   * ...
+   * Near-fault performance is excellent
 * Tabas has impulsive, near-fault characteristics
    * ...
