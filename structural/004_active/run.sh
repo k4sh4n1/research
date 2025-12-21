@@ -8,5 +8,5 @@ else
     source virtual_env/bin/activate
 fi
 
-python3 main.py
+python3 script.py
 read -p "Press Enter to continue..."
