@@ -391,61 +391,84 @@ def main():
 
 
 def plot_results(results):
-    """Generate comprehensive time history plots."""
+    """Generate separate time history plots for each response type."""
     n = NUM_STORIES
-    fig, axes = plt.subplots(5, 2, figsize=(14, 14))
+
+    plot_configs = [
+        (
+            "roof_displacement",
+            "Roof Displacement (m)",
+            lambda r: r["z_unc"][:, n - 1],
+            lambda r: r["z_lqr"][:, n - 1],
+            lambda r: r["z_inst"][:, n - 1],
+        ),
+        (
+            "floor1_displacement",
+            "Floor 1 Displacement (m)",
+            lambda r: r["z_unc"][:, 0],
+            lambda r: r["z_lqr"][:, 0],
+            lambda r: r["z_inst"][:, 0],
+        ),
+        (
+            "roof_acceleration",
+            "Roof Acceleration (m/s²)",
+            lambda r: r["accel_unc"],
+            lambda r: r["accel_lqr"],
+            lambda r: r["accel_inst"],
+        ),
+        (
+            "base_shear",
+            "Base Shear (MN)",
+            lambda r: r["shear_unc"] / 1000,
+            lambda r: r["shear_lqr"] / 1000,
+            lambda r: r["shear_inst"] / 1000,
+        ),
+    ]
+
+    # Plot response comparisons (Uncontrolled vs LQR vs Instantaneous)
+    for filename, ylabel, get_unc, get_lqr, get_inst in plot_configs:
+        fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=True)
+
+        for col, (name, r) in enumerate(results.items()):
+            t = r["t"]
+            axes[col].plot(t, get_unc(r), "b-", lw=0.8, label="Uncontrolled")
+            axes[col].plot(t, get_lqr(r), "r-", lw=0.8, label="LQR")
+            axes[col].plot(t, get_inst(r), "g--", lw=0.8, label="Instantaneous")
+            axes[col].set_xlabel("Time (s)")
+            axes[col].set_title(name)
+            axes[col].legend(fontsize=8)
+            axes[col].grid(True, alpha=0.3)
+
+        axes[0].set_ylabel(ylabel)
+        fig.suptitle(
+            ylabel.replace(" (m)", "").replace(" (m/s²)", "").replace(" (MN)", ""),
+            fontsize=12,
+            fontweight="bold",
+        )
+        plt.tight_layout()
+        plt.savefig(f"{filename}.png", dpi=150)
+        plt.close()
+
+    # Plot control forces separately
+    fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=True)
 
     for col, (name, r) in enumerate(results.items()):
         t = r["t"]
+        axes[col].plot(t, r["u_lqr"][:, -1], "r-", lw=0.8, label="LQR")
+        axes[col].plot(t, r["u_inst"][:, -1], "g--", lw=0.8, label="Instantaneous")
+        axes[col].set_xlabel("Time (s)")
+        axes[col].set_title(name)
+        axes[col].legend(fontsize=8)
+        axes[col].grid(True, alpha=0.3)
 
-        # Row 0: Roof displacement
-        axes[0, col].plot(t, r["z_unc"][:, n - 1], "b-", lw=0.7, label="Uncontrolled")
-        axes[0, col].plot(t, r["z_lqr"][:, n - 1], "r-", lw=0.7, label="LQR")
-        axes[0, col].plot(
-            t, r["z_inst"][:, n - 1], "g--", lw=0.7, label="Instantaneous"
-        )
-        axes[0, col].set_ylabel("Roof Disp (m)")
-        axes[0, col].set_title(f"{name}")
-        axes[0, col].legend(fontsize=7)
-        axes[0, col].grid(True, alpha=0.3)
-
-        # Row 1: Floor 1 displacement
-        axes[1, col].plot(t, r["z_unc"][:, 0], "b-", lw=0.7)
-        axes[1, col].plot(t, r["z_lqr"][:, 0], "r-", lw=0.7)
-        axes[1, col].plot(t, r["z_inst"][:, 0], "g--", lw=0.7)
-        axes[1, col].set_ylabel("Floor 1 Disp (m)")
-        axes[1, col].grid(True, alpha=0.3)
-
-        # Row 2: Roof acceleration
-        axes[2, col].plot(t, r["accel_unc"], "b-", lw=0.7)
-        axes[2, col].plot(t, r["accel_lqr"], "r-", lw=0.7)
-        axes[2, col].plot(t, r["accel_inst"], "g--", lw=0.7)
-        axes[2, col].set_ylabel("Roof Accel (m/s²)")
-        axes[2, col].grid(True, alpha=0.3)
-
-        # Row 3: Base shear
-        axes[3, col].plot(t, r["shear_unc"] / 1000, "b-", lw=0.7)
-        axes[3, col].plot(t, r["shear_lqr"] / 1000, "r-", lw=0.7)
-        axes[3, col].plot(t, r["shear_inst"] / 1000, "g--", lw=0.7)
-        axes[3, col].set_ylabel("Base Shear (MN)")
-        axes[3, col].grid(True, alpha=0.3)
-
-        # Row 4: Control forces (roof)
-        axes[4, col].plot(t, r["u_lqr"][:, -1], "r-", lw=0.7, label="LQR")
-        axes[4, col].plot(t, r["u_inst"][:, -1], "g--", lw=0.7, label="Instantaneous")
-        axes[4, col].set_ylabel("Roof Ctrl Force (kN)")
-        axes[4, col].set_xlabel("Time (s)")
-        axes[4, col].legend(fontsize=7)
-        axes[4, col].grid(True, alpha=0.3)
-
-    plt.suptitle(
-        "Active Control: Uncontrolled vs LQR vs Instantaneous (Target: 25%)",
-        fontsize=13,
-        fontweight="bold",
-    )
+    axes[0].set_ylabel("Roof Control Force (kN)")
+    fig.suptitle("Control Forces", fontsize=12, fontweight="bold")
     plt.tight_layout()
-    plt.savefig("active_control_results.png", dpi=150)
-    plt.show()
+    plt.savefig("control_forces.png", dpi=150)
+    plt.close()
+
+    print("\nPlots saved: roof_displacement.png, floor1_displacement.png,")
+    print("             roof_acceleration.png, base_shear.png, control_forces.png")
 
 
 def print_full_table(results):
