@@ -243,7 +243,7 @@ def make_Q_inst(alpha, n):
 def tune_instantaneous(Ad, Bd, Ed, z0, accel_g, dt, target_ratio, max_unc):
     """Find Q scaling for Instantaneous to achieve target reduction."""
     n = NUM_STORIES
-    R = np.eye(n) * 1e-6  # Very small R to allow large control
+    R = np.eye(n)  # R = I as required by assignment
 
     alpha_low, alpha_high = 1e0, 1e20
     best_alpha, best_Q, best_ratio = alpha_low, None, 1.0
@@ -449,20 +449,30 @@ def plot_results(results):
         plt.savefig(f"{filename}.png", dpi=150)
         plt.close()
 
-    # Plot control forces separately
-    fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=True)
+    # Plot control forces for BOTH Floor 1 and Floor 8 (Roof)
+    fig, axes = plt.subplots(2, 2, figsize=(14, 8))
 
     for col, (name, r) in enumerate(results.items()):
         t = r["t"]
-        axes[col].plot(t, r["u_lqr"][:, -1], "r-", lw=0.8, label="LQR")
-        axes[col].plot(t, r["u_inst"][:, -1], "g--", lw=0.8, label="Instantaneous")
-        axes[col].set_xlabel("Time (s)")
-        axes[col].set_title(name)
-        axes[col].legend(fontsize=8)
-        axes[col].grid(True, alpha=0.3)
 
-    axes[0].set_ylabel("Roof Control Force (kN)")
-    fig.suptitle("Control Forces", fontsize=12, fontweight="bold")
+        # Floor 1 Control Force
+        axes[0, col].plot(t, r["u_lqr"][:, 0], "r-", lw=0.8, label="LQR")
+        axes[0, col].plot(t, r["u_inst"][:, 0], "g--", lw=0.8, label="Instantaneous")
+        axes[0, col].set_title(f"{name} - Floor 1")
+        axes[0, col].set_ylabel("Control Force (kN)")
+        axes[0, col].legend(fontsize=8)
+        axes[0, col].grid(True, alpha=0.3)
+
+        # Floor 8 (Roof) Control Force
+        axes[1, col].plot(t, r["u_lqr"][:, -1], "r-", lw=0.8, label="LQR")
+        axes[1, col].plot(t, r["u_inst"][:, -1], "g--", lw=0.8, label="Instantaneous")
+        axes[1, col].set_title(f"{name} - Floor 8 (Roof)")
+        axes[1, col].set_xlabel("Time (s)")
+        axes[1, col].set_ylabel("Control Force (kN)")
+        axes[1, col].legend(fontsize=8)
+        axes[1, col].grid(True, alpha=0.3)
+
+    fig.suptitle("Control Forces - Floor 1 and Floor 8", fontsize=12, fontweight="bold")
     plt.tight_layout()
     plt.savefig("control_forces.png", dpi=150)
     plt.close()
@@ -501,8 +511,11 @@ def print_full_table(results):
         v_lqr = np.max(np.abs(r["shear_lqr"]))
         v_inst = np.nanmax(np.abs(r["shear_inst"]))
 
-        f_lqr = np.max(np.abs(r["u_lqr"]))
-        f_inst = np.nanmax(np.abs(r["u_inst"]))
+        # Add floor-specific control forces
+        f1_lqr = np.max(np.abs(r["u_lqr"][:, 0]))  # Floor 1
+        f1_inst = np.nanmax(np.abs(r["u_inst"][:, 0]))
+        f8_lqr = np.max(np.abs(r["u_lqr"][:, -1]))  # Floor 8
+        f8_inst = np.nanmax(np.abs(r["u_inst"][:, -1]))
 
         print(
             f"{name:<12} {'Max Roof Disp (m)':<28} {d8_unc:>16.4f} {d8_lqr:>16.4f} {d8_inst:>16.4f}"
@@ -517,7 +530,10 @@ def print_full_table(results):
             f"{'':<12} {'Max Base Shear (kN)':<28} {v_unc:>16.1f} {v_lqr:>16.1f} {v_inst:>16.1f}"
         )
         print(
-            f"{'':<12} {'Max Control Force (kN)':<28} {'N/A':>16} {f_lqr:>16.1f} {f_inst:>16.1f}"
+            f"{'':<12} {'Max Floor 1 Ctrl Force (kN)':<28} {'N/A':>16} {f1_lqr:>16.1f} {f1_inst:>16.1f}"
+        )
+        print(
+            f"{'':<12} {'Max Floor 8 Ctrl Force (kN)':<28} {'N/A':>16} {f8_lqr:>16.1f} {f8_inst:>16.1f}"
         )
         print(
             f"{'':<12} {'Roof Disp Reduction':<28} {'—':>16} {(1 - d8_lqr / d8_unc) * 100:>15.1f}% {(1 - d8_inst / d8_unc) * 100:>15.1f}%"
