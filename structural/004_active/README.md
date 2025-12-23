@@ -14,13 +14,14 @@ header-includes: |
 
 ![Problem statement](20251221_112818.jpg "Problem statement")
 
-# Uncontrolled response
+# Result
 
-![Uncontrolled Response](?.png "Uncontrolled Response")
+![Roof displacement](roof_displacement.png "Roof displacement")
 
-# Implications
+![Roof acceleration](roof_acceleration.png "Roof acceleration")
 
-* El Centro is far-field
-   * Near-fault performance is excellent
-* Tabas has impulsive, near-fault characteristics
-   * ...
+![Base shear](base_shear.png "Base shear")
+
+![Control forces](control_forces.png "Control forces")
+
+# Table

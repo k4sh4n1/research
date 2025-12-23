@@ -403,13 +403,6 @@ def plot_results(results):
             lambda r: r["z_inst"][:, n - 1],
         ),
         (
-            "floor1_displacement",
-            "Floor 1 Displacement (m)",
-            lambda r: r["z_unc"][:, 0],
-            lambda r: r["z_lqr"][:, 0],
-            lambda r: r["z_inst"][:, 0],
-        ),
-        (
             "roof_acceleration",
             "Roof Acceleration (m/s²)",
             lambda r: r["accel_unc"],
@@ -499,10 +492,6 @@ def print_full_table(results):
         d8_lqr = np.max(np.abs(r["z_lqr"][:, n - 1]))
         d8_inst = np.nanmax(np.abs(r["z_inst"][:, n - 1]))
 
-        d1_unc = np.max(np.abs(r["z_unc"][:, 0]))
-        d1_lqr = np.max(np.abs(r["z_lqr"][:, 0]))
-        d1_inst = np.nanmax(np.abs(r["z_inst"][:, 0]))
-
         a8_unc = np.max(np.abs(r["accel_unc"]))
         a8_lqr = np.max(np.abs(r["accel_lqr"]))
         a8_inst = np.nanmax(np.abs(r["accel_inst"]))
@@ -519,9 +508,6 @@ def print_full_table(results):
 
         print(
             f"{name:<12} {'Max Roof Disp (m)':<28} {d8_unc:>16.4f} {d8_lqr:>16.4f} {d8_inst:>16.4f}"
-        )
-        print(
-            f"{'':<12} {'Max Floor 1 Disp (m)':<28} {d1_unc:>16.4f} {d1_lqr:>16.4f} {d1_inst:>16.4f}"
         )
         print(
             f"{'':<12} {'Max Roof Accel (m/s²)':<28} {a8_unc:>16.2f} {a8_lqr:>16.2f} {a8_inst:>16.2f}"
