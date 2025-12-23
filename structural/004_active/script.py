@@ -475,16 +475,12 @@ def plot_results(results):
 
 
 def print_full_table(results):
-    """Print comprehensive results table."""
+    """Print comprehensive results table in Markdown format."""
     n = NUM_STORIES
 
-    print("\n" + "=" * 95)
-    print("COMPLETE RESULTS TABLE")
-    print("=" * 95)
-    print(
-        f"{'Earthquake':<12} {'Response':<28} {'Uncontrolled':>16} {'LQR':>16} {'Instant':>16}"
-    )
-    print("-" * 95)
+    print("\n## Complete Results Table\n")
+    print("| Earthquake | Response | Uncontrolled | LQR | Instantaneous |")
+    print("|:-----------|:---------|-------------:|----:|--------------:|")
 
     for name, r in results.items():
         # Peak values
@@ -500,31 +496,23 @@ def print_full_table(results):
         v_lqr = np.max(np.abs(r["shear_lqr"]))
         v_inst = np.nanmax(np.abs(r["shear_inst"]))
 
-        # Add floor-specific control forces
-        f1_lqr = np.max(np.abs(r["u_lqr"][:, 0]))  # Floor 1
+        f1_lqr = np.max(np.abs(r["u_lqr"][:, 0]))
         f1_inst = np.nanmax(np.abs(r["u_inst"][:, 0]))
-        f8_lqr = np.max(np.abs(r["u_lqr"][:, -1]))  # Floor 8
+        f8_lqr = np.max(np.abs(r["u_lqr"][:, -1]))
         f8_inst = np.nanmax(np.abs(r["u_inst"][:, -1]))
 
         print(
-            f"{name:<12} {'Max Roof Disp (m)':<28} {d8_unc:>16.4f} {d8_lqr:>16.4f} {d8_inst:>16.4f}"
+            f"| **{name}** | Max Roof Disp (m) | {d8_unc:.4f} | {d8_lqr:.4f} | {d8_inst:.4f} |"
         )
         print(
-            f"{'':<12} {'Max Roof Accel (m/s²)':<28} {a8_unc:>16.2f} {a8_lqr:>16.2f} {a8_inst:>16.2f}"
+            f"| | Max Roof Accel (m/s²) | {a8_unc:.2f} | {a8_lqr:.2f} | {a8_inst:.2f} |"
         )
+        print(f"| | Max Base Shear (kN) | {v_unc:.1f} | {v_lqr:.1f} | {v_inst:.1f} |")
+        print(f"| | Max Floor 1 Ctrl Force (kN) | N/A | {f1_lqr:.1f} | {f1_inst:.1f} |")
+        print(f"| | Max Floor 8 Ctrl Force (kN) | N/A | {f8_lqr:.1f} | {f8_inst:.1f} |")
         print(
-            f"{'':<12} {'Max Base Shear (kN)':<28} {v_unc:>16.1f} {v_lqr:>16.1f} {v_inst:>16.1f}"
+            f"| | Roof Disp Reduction | — | {(1 - d8_lqr / d8_unc) * 100:.1f}% | {(1 - d8_inst / d8_unc) * 100:.1f}% |"
         )
-        print(
-            f"{'':<12} {'Max Floor 1 Ctrl Force (kN)':<28} {'N/A':>16} {f1_lqr:>16.1f} {f1_inst:>16.1f}"
-        )
-        print(
-            f"{'':<12} {'Max Floor 8 Ctrl Force (kN)':<28} {'N/A':>16} {f8_lqr:>16.1f} {f8_inst:>16.1f}"
-        )
-        print(
-            f"{'':<12} {'Roof Disp Reduction':<28} {'—':>16} {(1 - d8_lqr / d8_unc) * 100:>15.1f}% {(1 - d8_inst / d8_unc) * 100:>15.1f}%"
-        )
-        print("-" * 95)
 
 
 if __name__ == "__main__":
