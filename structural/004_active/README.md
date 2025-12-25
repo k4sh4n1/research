@@ -40,3 +40,24 @@ header-includes: |
 | | Max Floor 1 Ctrl Force (kN) | N/A | 5544.1 | 3670.9 |
 | | Max Floor 8 Ctrl Force (kN) | N/A | 771.3 | 5920.9 |
 | | Roof Disp Reduction | — | 74.7% | 74.5% |
+
+# Implication
+
+- LQR:
+   * Looks ahead
+   * Is considering the future
+   * Balances displacement & acceleration naturally
+   * Result: Reduces both displacement and acceleration
+- IOC:
+   * Is greedy
+   * Only sees one step ahead
+   * Applies sudden, large forces to minimize next-step disp
+   * Result: Low displacement, but high acceleration
+
+IOC essentially “jerks” the building to reduce displacement, but causes acceleration spikes.
+
+# Note
+
+It should be noted how Q matrices are selected for LQR and IOC approaches.
+
+IOC heavily penalizes roof displacement, due to its Q matrix selection. It applies large forces directly at the roof to minimize roof displacement immediately, regardless of the acceleration cost.
