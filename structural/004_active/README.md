@@ -58,6 +58,6 @@ IOC essentially “jerks” the building to reduce displacement, but causes acce
 
 # Note
 
-It should be noted how Q matrices are selected for LQR and IOC approaches.
+It should be noted how Q matrices are selected for LQR and IOC approaches. It's referred to the attached Python code.
 
 IOC heavily penalizes roof displacement, due to its Q matrix selection. It applies large forces directly at the roof to minimize roof displacement immediately, regardless of the acceleration cost.
