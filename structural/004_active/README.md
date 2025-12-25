@@ -63,3 +63,5 @@ The R matrix is picked as identity matrix for both LQR and IOC approaches.
 The Q matrix is diagonal, but different for LQR and IOC approaches. It is referred to the attached Python code to observe how Q matrix is selected differently for LQR and IOC.
 
 IOC heavily penalizes roof displacement, due to its Q matrix selection. It applies large forces directly at the roof to minimize roof displacement immediately, regardless of the acceleration cost.
+
+It should be noted that the actuators are simulated as inter-story to consider coupling through reaction forces.
