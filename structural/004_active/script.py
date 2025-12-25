@@ -45,6 +45,9 @@ def build_state_space(n, m, k, c):
     """
     Build state-space matrices for n-story shear building.
     State: z = [x1, ..., xn, ẋ1, ..., ẋn]^T
+
+    Uses inter-story actuators: actuator i connects floor i-1 to floor i
+    (floor 0 = ground).
     """
     M = m * np.eye(n)
 
@@ -64,8 +67,13 @@ def build_state_space(n, m, k, c):
     A[n:, :n] = -M_inv @ K
     A[n:, n:] = -M_inv @ C
 
+    # Inter-story actuator influence matrix
+    # Actuator i acts between floor i-1 and floor i
+    # Net force on floor i: +u_i - u_{i+1} (Newton's 3rd law)
+    D = np.eye(n) - np.diag(np.ones(n - 1), k=1)
+
     Bu = np.zeros((2 * n, n))
-    Bu[n:, :] = M_inv
+    Bu[n:, :] = M_inv @ D
 
     Br = np.zeros((2 * n, 1))
     Br[n:, 0] = -np.ones(n)
