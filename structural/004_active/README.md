@@ -47,17 +47,19 @@ header-includes: |
    * Looks ahead
    * Is considering the future
    * Balances displacement & acceleration naturally
-   * Result: Reduces both displacement and acceleration
+   * Result: reduces both displacement and acceleration
 - IOC:
    * Is greedy
    * Only sees one step ahead
    * Applies sudden, large forces to minimize next-step disp
-   * Result: Low displacement, but high acceleration
+   * Result: low displacement, but high acceleration
 
 IOC essentially “jerks” the building to reduce displacement, but causes acceleration spikes.
 
 # Note
 
-It should be noted how Q matrices are selected for LQR and IOC approaches. It's referred to the attached Python code.
+The R matrix is picked as identity matrix for both LQR and IOC approaches.
+
+It should be noted how Q matrix is selected differently for LQR and IOC approaches. It's referred to the attached Python code.
 
 IOC heavily penalizes roof displacement, due to its Q matrix selection. It applies large forces directly at the roof to minimize roof displacement immediately, regardless of the acceleration cost.
