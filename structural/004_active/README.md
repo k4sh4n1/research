@@ -42,27 +42,16 @@ header-includes: |
 | | Roof Disp Reduction | — | 74.7% | 74.2% |
 
 
-# Implication
+# Implications
 
-- LQR:
-   * Looks ahead
-   * Is considering the future
-   * Balances displacement & acceleration naturally
-   * Result: reduces both displacement and acceleration
-- IOC:
-   * Is greedy
-   * Only sees one step ahead
-   * Applies sudden, large forces to minimize next-step disp
-   * Result: low displacement, but high acceleration
+For LQR and IOC approaches, when Q matrix has the same diagonal weights with different alpha factors, the results of LQR and IOC are comparable and similar.
 
-IOC essentially “jerks” the building to reduce displacement, but causes acceleration spikes.
+On the other hand, when Q matrix has different diagonal weights between LQR and IOC approaches, the results of LQR and IOC are not close. Tests on Q matrix weights are _not_ reported here.
 
-# Note
+# Notes
 
 The R matrix is picked as identity matrix for both LQR and IOC approaches.
 
-The Q matrix is diagonal, but different for LQR and IOC approaches. It is referred to the attached Python code to observe how Q matrix is selected differently for LQR and IOC.
-
-IOC heavily penalizes roof displacement, due to its Q matrix selection. It applies large forces at the roof to minimize roof displacement immediately, regardless of the acceleration cost.
+The Q matrix is diagonal and has the same diagonal weights for LQR and IOC approaches. However, the alpha factor is tuned separately for LQR and IOC. It is referred to the attached Python code to observe how alpha factor is tuned for LQR and IOC.
 
 It should be noted that the actuators are simulated as inter-story to consider coupling through reaction forces.
