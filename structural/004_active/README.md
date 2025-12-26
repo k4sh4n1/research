@@ -50,7 +50,7 @@ header-includes: |
 
 # Implications
 
-For LQR and IOC approaches, when Q matrix has the same diagonal weights with different alpha factors, the results of LQR and IOC are comparable and similar.
+For LQR and IOC approaches, when Q matrix has the same diagonal weights with different alpha factors, the results of LQR and IOC are comparable, if the alpha is tuned separately for the same target.
 
 On the other hand, when Q matrix has different diagonal weights between LQR and IOC approaches, the results of LQR and IOC are not close. Tests on Q matrix weights are _not_ reported here.
 
