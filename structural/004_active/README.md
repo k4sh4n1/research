@@ -48,6 +48,10 @@ header-includes: |
 
 ![Tuning alpha](tuning-alpha-elcentro.png "Tuning alpha")
 
+# Implication
+
+Results confirm that using consistent Q matrices will generate almost identical performance between LQR and IOC.
+
 # Notes
 
 The R matrix is picked as identity matrix for both LQR and IOC approaches.
