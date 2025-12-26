@@ -48,16 +48,12 @@ header-includes: |
 
 ![Tuning alpha](tuning-alpha-elcentro.png "Tuning alpha")
 
-# Implications
-
-For LQR and IOC approaches, when Q matrix has the same diagonal weights with different alpha factors, the results of LQR and IOC are comparable, if the alpha is tuned separately for the same target.
-
-On the other hand, when Q matrix has different diagonal weights between LQR and IOC approaches, the results of LQR and IOC are not close. Tests on Q matrix weights are _not_ reported here.
-
 # Notes
 
 The R matrix is picked as identity matrix for both LQR and IOC approaches.
 
 The Q matrix is diagonal and has the same diagonal weights for LQR and IOC approaches. However, the alpha factor is tuned separately for LQR and IOC. It is referred to the attached Python code to observe how alpha factor is tuned for LQR and IOC.
+
+As far as tested, when Q matrix has different diagonal weights between LQR and IOC approaches, the results of LQR and IOC are totally different. Tests on Q matrix weights are _not_ reported here.
 
 It should be noted that the actuators are simulated as inter-story to consider coupling through reaction forces.
