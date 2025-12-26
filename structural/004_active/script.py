@@ -134,8 +134,9 @@ def simulate_lqr(A, Bu, Br, K, z0, accel_g, dt):
 # =============================================================================
 def simulate_instantaneous(Ad, Bd, Ed, Q, R, z0, accel_g, dt):
     """
-    Instantaneous optimal control with proper tuning.
+    Instantaneous optimal control - Pure Feedback Version.
     Minimizes: J = z_{k+1}^T Q z_{k+1} + u_k^T R u_k
+    Control law: u_k = -K1 @ z_k (feedback only, no feedforward)
     """
     n_steps = len(accel_g)
     n_states = Ad.shape[0]
@@ -146,14 +147,16 @@ def simulate_instantaneous(Ad, Bd, Ed, Q, R, z0, accel_g, dt):
     u = np.zeros((n_steps, n_control))
     z[0] = z0
 
+    # Feedback gain only (removed K2 feedforward gain)
     BQB_R = Bd.T @ Q @ Bd + R
-    BQB_R_inv = np.linalg.inv(BQB_R)
-    K1 = BQB_R_inv @ Bd.T @ Q @ Ad  # Feedback gain
-    K2 = BQB_R_inv @ Bd.T @ Q @ Ed  # Feedforward gain
+    K1 = np.linalg.solve(BQB_R, Bd.T @ Q @ Ad)
 
     for i in range(n_steps - 1):
         w_k = accel_g[i] * G
-        u[i] = -K1 @ z[i] - K2.flatten() * w_k
+
+        # Pure feedback control (removed -K2 @ w_k term)
+        u[i] = -K1 @ z[i]
+
         z[i + 1] = Ad @ z[i] + Bd @ u[i] + Ed.flatten() * w_k
 
         if np.any(np.abs(z[i + 1]) > 1e10):
