@@ -52,7 +52,7 @@ header-includes: |
 
 The R matrix is picked as identity matrix for both LQR and IOC approaches.
 
-The Q matrix is diagonal and has the same diagonal weights for LQR and IOC approaches. However, the alpha factor is tuned separately for LQR and IOC. It is referred to the attached Python code to observe how alpha factor is tuned for LQR and IOC.
+The Q matrix is diagonal and has the same _relative_ diagonal weights for LQR and IOC approaches. However, the alpha factor is tuned separately for LQR and IOC. It is referred to the attached Python code to observe how alpha factor is tuned for LQR and IOC.
 
 As far as tested, when Q matrix has different diagonal weights between LQR and IOC approaches, the results of LQR and IOC are totally different. Tests on Q matrix weights are _not_ reported here.
 
