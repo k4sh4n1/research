@@ -42,6 +42,12 @@ header-includes: |
 | | Roof Disp Reduction | — | 74.7% | 74.2% |
 
 
+# Tuning alpha for Q matrix
+
+![Tuning alpha](tuning-alpha-tabas.png "Tuning alpha")
+
+![Tuning alpha](tuning-alpha-elcentro.png "Tuning alpha")
+
 # Implications
 
 For LQR and IOC approaches, when Q matrix has the same diagonal weights with different alpha factors, the results of LQR and IOC are comparable and similar.
