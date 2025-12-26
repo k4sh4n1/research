@@ -241,13 +241,10 @@ def tune_lqr(A, Bu, Br, z0, accel_g, dt, target_ratio):
 # Q-MATRIX TUNING FOR INSTANTANEOUS
 # =============================================================================
 def make_Q_inst(alpha, n):
-    """Q matrix for Instantaneous: must be much larger due to myopic nature."""
+    """Q matrix for Instantaneous: same structure as LQR."""
     Q = np.zeros((2 * n, 2 * n))
-    # Focus heavily on roof displacement for instantaneous
-    Q[n - 1, n - 1] = alpha  # Roof displacement
-    for i in range(n - 1):
-        Q[i, i] = alpha * 0.1  # Other displacements
-    Q[n:, n:] = alpha * 0.001 * np.eye(n)  # Velocities
+    Q[:n, :n] = alpha * np.eye(n)
+    Q[n:, n:] = alpha * 0.01 * np.eye(n)
     return Q
 
 
