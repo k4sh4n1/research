@@ -28,18 +28,19 @@ header-includes: |
 
 | Earthquake | Response | Uncontrolled | LQR | Instantaneous |
 |:-----------|:---------|-------------:|----:|--------------:|
-| **El Centro** | Max Roof Disp (m) | 0.1821 | 0.0460 | 0.0464 |
-| | Max Roof Accel (m/s²) | 6.33 | 3.50 | 14.01 |
-| | Max Base Shear (kN) | 16033.9 | 9462.7 | 8621.6 |
-| | Max Floor 1 Ctrl Force (kN) | N/A | 3597.8 | 2940.7 |
-| | Max Floor 8 Ctrl Force (kN) | N/A | 652.0 | 4866.7 |
-| | Roof Disp Reduction | — | 74.8% | 74.5% |
-| **Tabas** | Max Roof Disp (m) | 0.0895 | 0.0227 | 0.0228 |
-| | Max Roof Accel (m/s²) | 4.68 | 3.63 | 17.17 |
-| | Max Base Shear (kN) | 11242.9 | 11323.1 | 10343.8 |
-| | Max Floor 1 Ctrl Force (kN) | N/A | 5544.1 | 3670.9 |
-| | Max Floor 8 Ctrl Force (kN) | N/A | 771.3 | 5920.9 |
-| | Roof Disp Reduction | — | 74.7% | 74.5% |
+| **El Centro** | Max Roof Disp (m) | 0.1821 | 0.0460 | 0.0446 |
+| | Max Roof Accel (m/s²) | 6.33 | 3.50 | 14.44 |
+| | Max Base Shear (kN) | 16033.9 | 9462.7 | 8830.1 |
+| | Max Floor 1 Ctrl Force (kN) | N/A | 3597.8 | 2707.4 |
+| | Max Floor 8 Ctrl Force (kN) | N/A | 652.0 | 5012.8 |
+| | Roof Disp Reduction | — | 74.8% | 75.5% |
+| **Tabas** | Max Roof Disp (m) | 0.0895 | 0.0227 | 0.0221 |
+| | Max Roof Accel (m/s²) | 4.68 | 3.63 | 18.11 |
+| | Max Base Shear (kN) | 11242.9 | 11323.1 | 10682.6 |
+| | Max Floor 1 Ctrl Force (kN) | N/A | 5544.1 | 3373.5 |
+| | Max Floor 8 Ctrl Force (kN) | N/A | 771.3 | 6230.9 |
+| | Roof Disp Reduction | — | 74.7% | 75.3% |
+
 
 # Implication
 
