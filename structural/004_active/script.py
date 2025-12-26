@@ -148,8 +148,8 @@ def simulate_instantaneous(Ad, Bd, Ed, Q, R, z0, accel_g, dt):
 
     BQB_R = Bd.T @ Q @ Bd + R
     BQB_R_inv = np.linalg.inv(BQB_R)
-    K1 = BQB_R_inv @ Bd.T @ Q @ Ad
-    K2 = BQB_R_inv @ Bd.T @ Q @ Ed
+    K1 = BQB_R_inv @ Bd.T @ Q @ Ad  # Feedback gain
+    K2 = BQB_R_inv @ Bd.T @ Q @ Ed  # Feedforward gain
 
     for i in range(n_steps - 1):
         w_k = accel_g[i] * G
