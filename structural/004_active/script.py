@@ -97,9 +97,9 @@ def discretize_system(A, Bu, Br, dt):
 
     exp_M = expm(M_aug)
 
-    Ad = exp_M[:n, :n]
-    Bd = exp_M[:n, n : n + n_u]
-    Ed = exp_M[:n, n + n_u :]
+    Ad = exp_M[:n, :n]  # = e^(A*dt)
+    Bd = exp_M[:n, n : n + n_u]  # = ∫ e^(A(dt-τ)) Bu dτ
+    Ed = exp_M[:n, n + n_u :]  # = ∫ e^(A(dt-τ)) Br dτ
 
     return Ad, Bd, Ed
 
