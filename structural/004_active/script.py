@@ -173,11 +173,87 @@ def simulate_instantaneous_textbook(A, Bu, Br, Q, R, z0, accel_g, dt):
     return t, z, u
 
 
+# =============================================================================
+# INSTANTANEOUS OPTIMAL CONTROL - DERIVATION
+# =============================================================================
+#
+# DISCRETE-TIME STATE EQUATION:
+# -----------------------------
+# Using exact discretization (matrix exponential), the state equation is:
+#
+#   z_{k+1} = A_d * z_k + B_d * u_k + E_d * w_k
+#
+# where:
+#   z_k     = state vector [displacements; velocities] at step k
+#   u_k     = control force vector at step k
+#   w_k     = ground acceleration at step k (disturbance)
+#   A_d     = discrete state matrix (= e^{A*dt})
+#   B_d     = discrete control input matrix
+#   E_d     = discrete disturbance input matrix
+#
+# COST FUNCTION:
+# --------------
+# At each time step, minimize the instantaneous cost:
+#
+#   J_k = z_{k+1}^T * Q * z_{k+1} + u_k^T * R * u_k
+#
+# where:
+#   Q = state weighting matrix (penalizes displacements/velocities)
+#   R = control weighting matrix (penalizes control effort)
+#
+# OPTIMIZATION:
+# -------------
+# Substitute the state equation into J_k:
+#
+#   J_k = (A_d*z_k + B_d*u_k + E_d*w_k)^T * Q * (A_d*z_k + B_d*u_k + E_d*w_k)
+#         + u_k^T * R * u_k
+#
+# Take the derivative with respect to u_k and set equal to zero:
+#
+#   dJ_k/du_k = 2 * B_d^T * Q * (A_d*z_k + B_d*u_k + E_d*w_k) + 2 * R * u_k = 0
+#
+# Rearranging:
+#
+#   B_d^T * Q * B_d * u_k + R * u_k = -B_d^T * Q * A_d * z_k - B_d^T * Q * E_d * w_k
+#
+#   (B_d^T * Q * B_d + R) * u_k = -B_d^T * Q * A_d * z_k - B_d^T * Q * E_d * w_k
+#
+# OPTIMAL CONTROL LAW:
+# --------------------
+# Solving for u_k:
+#
+#   u_k = -(B_d^T * Q * B_d + R)^{-1} * B_d^T * Q * A_d * z_k
+#         -(B_d^T * Q * B_d + R)^{-1} * B_d^T * Q * E_d * w_k
+#
+# Define the gain matrices:
+#
+#   K_1 = (B_d^T * Q * B_d + R)^{-1} * B_d^T * Q * A_d    (feedback gain)
+#   K_2 = (B_d^T * Q * B_d + R)^{-1} * B_d^T * Q * E_d    (feedforward gain)
+#
+# Full control law:
+#
+#   u_k = -K_1 * z_k - K_2 * w_k
+#
+# PURE FEEDBACK VERSION:
+# ----------------------
+# If ground acceleration w_k is unknown or unreliable, use feedback only:
+#
+#   u_k = -K_1 * z_k
+#
+# This is the version implemented below.
+#
+# =============================================================================
+
+
 def simulate_instantaneous(Ad, Bd, Ed, Q, R, z0, accel_g, dt):
     """
-    Instantaneous optimal control - Pure Feedback Version.
-    Minimizes: J = z_{k+1}^T Q z_{k+1} + u_k^T R u_k
-    Control law: u_k = -K1 @ z_k (feedback only, no feedforward)
+    Instantaneous Optimal Control (Discrete-Time Formulation).
+
+    Minimizes at each step:  J_k = z_{k+1}^T Q z_{k+1} + u_k^T R u_k
+
+    Optimal control law:     u_k = -K_1 @ z_k
+
+    where: K_1 = (B_d^T Q B_d + R)^{-1} B_d^T Q A_d
     """
     n_steps = len(accel_g)
     n_states = Ad.shape[0]
@@ -188,18 +264,21 @@ def simulate_instantaneous(Ad, Bd, Ed, Q, R, z0, accel_g, dt):
     u = np.zeros((n_steps, n_control))
     z[0] = z0
 
-    # Feedback gain only (removed K2 feedforward gain)
-    BQB_R = Bd.T @ Q @ Bd + R
-    K1 = np.linalg.solve(BQB_R, Bd.T @ Q @ Ad)
+    # Compute feedback gain K_1
+    # K_1 = (B_d^T Q B_d + R)^{-1} * B_d^T Q A_d
+    BQB_R = Bd.T @ Q @ Bd + R  # (B_d^T Q B_d + R)
+    K1 = np.linalg.solve(BQB_R, Bd.T @ Q @ Ad)  # More stable than explicit inverse
 
     for i in range(n_steps - 1):
         w_k = accel_g[i] * G
 
-        # Pure feedback control (removed -K2 @ w_k term)
+        # Optimal control (feedback only)
         u[i] = -K1 @ z[i]
 
+        # State update
         z[i + 1] = Ad @ z[i] + Bd @ u[i] + Ed.flatten() * w_k
 
+        # Check for numerical instability
         if np.any(np.abs(z[i + 1]) > 1e10):
             print(f"  Warning: Instability at step {i}")
             z[i + 1 :] = np.nan
