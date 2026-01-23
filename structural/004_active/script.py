@@ -132,6 +132,47 @@ def simulate_lqr(A, Bu, Br, K, z0, accel_g, dt):
 # =============================================================================
 # INSTANTANEOUS OPTIMAL CONTROL
 # =============================================================================
+
+
+# Instability is caused by this method, so we won't use it.
+def simulate_instantaneous_textbook(A, Bu, Br, Q, R, z0, accel_g, dt):
+    """
+    Instantaneous optimal control - Textbook Version.
+    Control law: u = -(dt/2) * R^(-1) * B^T * Q * z
+    """
+    n_steps = len(accel_g)
+    n_states = A.shape[0]
+    n_control = Bu.shape[1]
+
+    t = np.arange(n_steps) * dt
+    z = np.zeros((n_steps, n_states))
+    u = np.zeros((n_steps, n_control))
+    z[0] = z0
+
+    # Textbook gain: K = (dt/2) * R^(-1) * B^T * Q
+    R_inv = np.linalg.inv(R)
+    K_textbook = (dt / 2) * R_inv @ Bu.T @ Q
+
+    # Use continuous dynamics for simulation (Euler integration)
+    for i in range(n_steps - 1):
+        w_k = accel_g[i] * G
+
+        # Textbook control law
+        u[i] = -K_textbook @ z[i]
+
+        # Euler integration: z_{k+1} = z_k + dt * (A*z + Bu*u + Br*w)
+        dz = A @ z[i] + Bu @ u[i] + Br.flatten() * w_k
+        z[i + 1] = z[i] + dt * dz
+
+        if np.any(np.abs(z[i + 1]) > 1e10):
+            print(f"  Warning: Instability at step {i}")
+            z[i + 1 :] = np.nan
+            u[i + 1 :] = np.nan
+            break
+
+    return t, z, u
+
+
 def simulate_instantaneous(Ad, Bd, Ed, Q, R, z0, accel_g, dt):
     """
     Instantaneous optimal control - Pure Feedback Version.
