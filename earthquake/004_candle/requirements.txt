@@ -1,5 +1,5 @@
 obspy
-numpy
+numpy<2.0
 scipy
 matplotlib
 pandas
